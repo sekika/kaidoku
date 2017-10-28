@@ -275,7 +275,7 @@ def pointing(s, p, pb, verbose):
                            logic = 'Pointing '+ ['','','pair', 'triple'][sum]
                            message = ''
                            if verbose > 2: message = logic + ' in box '+str(b+1)
-                           if verbose > 3: message = message + " removed "+str(n)+" from "
+                           if verbose > 3: message = message + " removed "+str(n+1)+" from "
                            if (sum2 ==0):
                                 for a in pb [(b,i)]:
                                    if s[a] == 0 and p[a][n] == 1:
