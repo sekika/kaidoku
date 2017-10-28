@@ -10,7 +10,7 @@ from .help import (welcommessage)
 def main(argv=sys.argv[1:]):    
 
     # Hard-coded configuration
-    version = '0.0.1'
+    version = '0.0.2'
     ConfFile = os.path.expanduser('~/.kaidoku') # Filename of the config file
 
     # Read configuration from the config file

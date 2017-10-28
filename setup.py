@@ -11,7 +11,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='kaidoku',
-    version='0.0.1',
+    version='0.0.2',
     description='Player, solver and creater of sudoku puzzles',
     long_description=long_description,
     url='https://github.com/sekika/kaidoku',
@@ -27,7 +27,7 @@ setup(
         'Topic :: Games/Entertainment :: Puzzle Games'
     ],
     packages=['kaidoku'],
-#    install_requires=['numpy', 'scipy'],
+    package_data={'kaidoku': ['data/*']},
     entry_points={  
         'console_scripts':  
             'kaidoku = kaidoku.main:main'  
