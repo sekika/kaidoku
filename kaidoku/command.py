@@ -486,24 +486,23 @@ def show(file, move, level, n, bookmark, type, maxtime):
         print (s)
         print ('This problem is not valid. Going to next problem.')
         return n+1, move
+
+    if level == 0:
+        if 'comment' in bookmark[n]:
+            label = bookmark[n]['comment']
+        else:
+            label = str(n)
+    else:
+        label = 'Level '+str(level)+' No. '+str(n)
     if len(move) > 0:
         s, move, message, err = current(s, move)
         if err:
             print (message)
-        status = 'move '+str(len(move))
-    else:
-        status = 'initial position'
+        label += ': move '+str(len(move))
     if blank(s) == 0:
-        status = 'Final position'
+        label += 'solution'
     if type == 0: # show
-        if level == 0:
-            if 'comment' in bookmark[n]:
-                comment = bookmark[n]['comment']
-            else:
-                comment = ''
-            print ('Bookmark {0} {1} : {2}'.format(n, comment, status))
-        else:
-            print ('Level {0} No. {1}: {2}'.format(level, n, status))
+        print (label)
         print (output(s))
         if blank(s) == 0:
             print ('Now this problem is solved !')
@@ -515,7 +514,6 @@ def show(file, move, level, n, bookmark, type, maxtime):
     if type == 6: # url
         print (url(s))
     if type == 7 or type == 8: # jpg
-        label = 'Level '+str(level)+' No. '+str(n)
         p = possible(s)
         textcolor = 'black'
         imgfile = os.path.abspath(os.path.dirname(file))+'/current.jpg'
@@ -528,7 +526,7 @@ def show(file, move, level, n, bookmark, type, maxtime):
             print ('Already solved.')
             return n, move
         s2 = copy.copy(s)
-        s2, message, level, solved, err = solve(s2, 0, blank(s), maxtime)
+        s2, message, level2, solved, err = solve(s2, 0, blank(s), maxtime)
         if err:
             if solved:
                 print ('This position has multiple solutions.')
@@ -551,7 +549,6 @@ def show(file, move, level, n, bookmark, type, maxtime):
         else:
             if type == 11:
                 print ('Think candidates of the cells.')
-                label = 'Level '+str(level)+' No. '+str(n)
                 textcolor = 'black'
                 imgfile = os.path.abspath(os.path.dirname(file))+'/current.jpg'
                 p = possible(s)
