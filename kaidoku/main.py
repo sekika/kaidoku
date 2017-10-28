@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys, os.path, warnings
+import sys, os.path, warnings, configparser
 from configobj import ConfigObj
 from .command import (command)
 from .misc import (openappend)
@@ -9,11 +9,14 @@ from .help import (welcommessage)
 
 def main(argv=sys.argv[1:]):    
 
-    # Hard-coded configuration
-    version = '0.0.2'
-    ConfFile = os.path.expanduser('~/.kaidoku') # Filename of the config file
+    # Read system configuration from data/system.ini
+    inifile = configparser.ConfigParser()
+    here = os.path.abspath(os.path.dirname(__file__))
+    inifile.read(os.path.join(here, 'data/system.ini'))
+    version = inifile.get('system', 'version')
+    ConfFile = os.path.expanduser(inifile.get('file', 'config'))
 
-    # Read configuration from the config file
+    # Read user configuration
     config = readconfig(ConfFile)
     
     # Kaidoku command line

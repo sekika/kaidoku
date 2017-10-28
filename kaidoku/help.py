@@ -35,6 +35,8 @@ def advancedhelp():
     message += 'config          : show configuration\n'
     message += 'create [numbers]: create new problems and append to book\n'
     message += 'giveup [sec]    : reanalyze giveup positions\n'
+    message += 'jpg             : draw jpeg image\n'
+    message += 'jm              : draw jpeg image with mark\n'
     message += 'import          : import file2\n'
     message += 'initial         : go back to initial position\n'
     message += 'maxtime [sec]   : set maximum time for analyzing a position (todo)\n'

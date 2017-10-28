@@ -3,6 +3,7 @@ import sys, os.path, copy, datetime, warnings
 from .create import (append_database, show_status, analyze, reanalyze, merge, reanalyze_giveup)
 from .calc import (solve, solveone, possible)
 from .help import (helpmessage, advancedhelp)
+from .image import (drawimage)
 from .misc import (conv, check, cell, blank, lev, duplicate, current, box, pbox)
 from .output import (output, short, url, listup)
 
@@ -46,14 +47,18 @@ def command(arg, config):
         pointer[level] = n
         config['move'] = move
         return config
-    if c == 'c':
+    if c == 'c' or c == 'u' or c == 'jpg' or c == 'jm':
         file =  os.path.expanduser(config["file"])
         level = int(config["level"])
         pointer = config['pointer']
         move = config["move"]
         bookmark = config["bookmark"]
         n = pointer[level]
-        n, move = show (file, move, level, n, bookmark, 0, 0)
+        if c == 'c': type = 0
+        if c == 'u': type = 6
+        if c == 'jpg': type = 7
+        if c == 'jm': type = 8
+        n, move = show (file, move, level, n, bookmark, type, 0)
         if n == -1:
             print ('Going back to problem No. 1.')
             n = 1
@@ -124,16 +129,6 @@ def command(arg, config):
         pointer[level] = n
         config['pointer'] = pointer
         config['move'] = move
-        return config
-    if c == 'u':
-        file =  os.path.expanduser(config["file"])
-        level = int(config["level"])
-        pointer = config['pointer']
-        move = config["move"]
-        bookmark = config["bookmark"]
-        n = pointer[level]
-        n, move = show (file, move, level, n, bookmark, 10, 0)
-        pointer[level] = n
         return config
     if c.isdigit(): # move
         file =  os.path.expanduser(config["file"])
@@ -392,7 +387,6 @@ def command(arg, config):
         pointer = config['pointer']
         pointer[level] = n
         return config
-                
     if c == 'giveup':
         if len(arg) > 1:
             t = int(arg[1])
@@ -451,7 +445,7 @@ def command(arg, config):
     print ('Invalid command. Type h for help.')
     return config
 
-# Show current position (from a, s, n, p, i, u commands)
+# Show current position (from a, s, n, p, i, u, jpg commands)
 
 def show(file, move, level, n, bookmark, type, maxtime):
     infile = open(file, 'r')
@@ -517,9 +511,18 @@ def show(file, move, level, n, bookmark, type, maxtime):
             print ('Type 3 digits (row, column, number) to put a number. i for hint.')
     if type > 0 and type < 6:
         print ('\nLevel {0} No. {1}: {2}'.format(level, n, status))
-        solveprint(s, type, blank(s), maxtime)                   
-    if type == 10: # url
+        solveprint(s, type, blank(s), maxtime)
+    if type == 6: # url
         print (url(s))
+    if type == 7 or type == 8: # jpg
+        label = 'Level '+str(level)+' No. '+str(n)
+        p = possible(s)
+        textcolor = 'black'
+        imgfile = os.path.abspath(os.path.dirname(file))+'/current.jpg'
+        if type == 7: mark = False
+        if type == 8: mark = True
+        drawimage(s, p, label, textcolor, imgfile, mark)
+        print ('Image file created: '+imgfile)
     if type == 11 or type == 12 or type == 13 or type == 20: # prepare solving
         if blank(s) == 0:
             print ('Already solved.')
@@ -547,8 +550,12 @@ def show(file, move, level, n, bookmark, type, maxtime):
                 print (message[:message.index(':')]+'can be found.')
         else:
             if type == 11:
-                print ('Think candidates of the cells.\nYou can manipulate candidates of this position at')
-                print (url(s))
+                print ('Think candidates of the cells.')
+                label = 'Level '+str(level)+' No. '+str(n)
+                textcolor = 'black'
+                imgfile = os.path.abspath(os.path.dirname(file))+'/current.jpg'
+                drawimage(s, p, label, textcolor, imgfile, True)
+                print ('Image file: '+str(imgfile))
                 print ('For more hints, type ii.')
             if type == 12 or type == 13:
                 logi= [logic]; mes = [message]

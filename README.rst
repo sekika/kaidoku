@@ -54,7 +54,6 @@ To do, or not to do?
 - Implement additional logics
 - Export bookmark
 - Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
-- Draw diagram with PyX - http://pyx.sourceforge.net/
 - Write document
 
 External great sudoku sites
