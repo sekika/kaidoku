@@ -554,6 +554,7 @@ def show(file, move, level, n, bookmark, type, maxtime):
                 label = 'Level '+str(level)+' No. '+str(n)
                 textcolor = 'black'
                 imgfile = os.path.abspath(os.path.dirname(file))+'/current.jpg'
+                p = possible(s)
                 drawimage(s, p, label, textcolor, imgfile, True)
                 print ('Image file: '+str(imgfile))
                 print ('For more hints, type ii.')
