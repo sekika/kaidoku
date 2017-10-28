@@ -9,6 +9,15 @@ Kaidoku can solve sudoku puzzles, play with the puzzles and create sudoku puzzle
 
 This is a program in development. Document is not written yet. Design of the program can change drastically.
 
+Install
+---------------
+
+Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
+
+.. code-block:: bash
+
+ pip3 install kaidoku
+
 How to use
 -----------------
 
