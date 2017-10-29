@@ -17,12 +17,9 @@ def drawimage(s, p, label, size, textcolor, imgfile, mark):
         blankimage(blankfile, scale)
     c = Image.open(blankfile + '.eps')
     draw = ImageDraw.Draw(c)
-    tfont = ImageFont.truetype(
-        '/Library/Fonts/' + font + '.ttf', int(16 * scale))
-    nfont = ImageFont.truetype(
-        '/Library/Fonts/' + font + '.ttf', int(24 * scale))
-    sfont = ImageFont.truetype(
-        '/Library/Fonts/' + font + '.ttf', int(9 * scale))
+    tfont = ImageFont.truetype(font, int(16 * scale))
+    nfont = ImageFont.truetype(font, int(24 * scale))
+    sfont = ImageFont.truetype(font, int(9 * scale))
     draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
     for i in range(9):
         for j in range(9):
