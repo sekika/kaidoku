@@ -1,22 +1,37 @@
 # -*- coding: utf-8 -*-
-import sys
-import os.path
+"""Modules for commandline interpretation."""
 import copy
 import datetime
-import warnings
-from .create import (append_database, show_status, analyze,
-                     reanalyze, merge, reanalyze_giveup)
-from .calc import (solve, solveone, possible)
-from .help import (helpmessage, advancedhelp)
-from .image import (drawimage)
-from .misc import (conv, check, cell, blank, lev,
-                   duplicate, current, box, pbox)
-from .output import (output, short, url, listup)
-
-# Command interpretation
+from kaidoku.calc import possible
+from kaidoku.calc import solve
+from kaidoku.calc import solveone
+from kaidoku.create import analyze
+from kaidoku.create import append_database
+from kaidoku.create import merge
+from kaidoku.create import reanalyze
+from kaidoku.create import reanalyze_giveup
+from kaidoku.create import show_status
+from kaidoku.help import advancedhelp
+from kaidoku.help import helpmessage
+from kaidoku.image import drawimage
+from kaidoku.misc import blank
+from kaidoku.misc import box
+from kaidoku.misc import check
+from kaidoku.misc import conv
+from kaidoku.misc import current
+from kaidoku.misc import duplicate
+from kaidoku.misc import lev
+from kaidoku.misc import openappend
+from kaidoku.misc import pbox
+from kaidoku.output import output
+from kaidoku.output import short
+from kaidoku.output import url
+import os.path
+import sys
 
 
 def command(arg, config):
+    """Interpret command."""
     c = arg[0]
     if c == 'a' or c == 'ac':
         bookmark = config["bookmark"]
@@ -27,7 +42,7 @@ def command(arg, config):
         if len(arg) > 1:
             try:
                 verbose = int(arg[1])
-            except:
+            except Exception:
                 verbose = 1
         else:
             verbose = 1
@@ -113,7 +128,7 @@ def command(arg, config):
         level = int(config["level"])
         try:
             l = int(arg[1])
-        except:
+        except Exception:
             return config
         if l > 0 and l < 10:
             level = l
@@ -145,7 +160,7 @@ def command(arg, config):
                 return config
             try:
                 n = int(arg[1])
-            except:
+            except Exception:
                 return config
         move = []
         n, move, datadir = show(file, move, level, n, bookmark, datadir, 0, 0)
@@ -196,7 +211,7 @@ def command(arg, config):
             return(config)
         try:
             s, err = conv(arg[1])
-        except:
+        except Exception:
             print('Invalid position.')
             return config
         if err:
@@ -236,7 +251,7 @@ def command(arg, config):
                             num += 1
                         label = 'b' + str(num)
                         for lab in bookmark:
-                            if bookmark[lab]['problem'] == problem and bookmark[lab]['move'] == mo:
+                            if bookmark[lab]['problem'] == problem:
                                 label = lab
                                 print('Already labeled as {0}'.format(label))
                                 if 'comment' in bookmark[label]:
@@ -247,7 +262,7 @@ def command(arg, config):
                                     bookmark = {}
                     try:
                         com = input('Comment on this position: ')
-                    except:
+                    except Exception:
                         com = ''
                         print('')
                     if com != '':
@@ -361,7 +376,7 @@ def command(arg, config):
             bookmark = {}
         try:
             com = input('Comment on this position: ')
-        except:
+        except Exception:
             com = ''
             print('')
         if com != '':
@@ -449,7 +464,7 @@ def command(arg, config):
             return(config)
         try:
             s, err = conv(arg[1])
-        except:
+        except Exception:
             print('Invalid position.')
             return config
         if err:
@@ -480,23 +495,18 @@ def command(arg, config):
     print('Invalid command. Type h for help.')
     return config
 
-# Show current position (from a, s, n, p, i, u, jpg commands)
-
 
 def show(file, move, level, n, bookmark, datadir, type, maxtime):
+    """Show current position."""
     infile = open(file, 'r')
     no = 0
     if level == 0:  # bookmark
         if n not in bookmark:
             print('Label {0} not found in bookmark.')
-            print('Going to level 3.')
-            config['level'] = 3
-            return config
+            return n, move, datadir
         if 'problem' not in bookmark[n]:
             print('Label {0} broken.')
-            print('Going to level 3.')
-            config['level'] = 3
-            return config
+            return n, move, datadir
         problem = bookmark[n]['problem']
     else:
         n = int(n)
@@ -574,7 +584,8 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
                 print('This position has multiple solutions.')
             else:
                 print(
-                    'There is no solution for this position. You can take back one move with b.')
+                    'There is no solution for this position.'
+                    + 'You can take back one move with b.')
             return n, move, datadir
         p = possible(s)
         b = box()
@@ -637,6 +648,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
 
 
 def checkdatadir(datadir):
+    """Check data directory."""
     if datadir == '':
         print('Data directory does not exist.')
         while True:
@@ -649,18 +661,16 @@ def checkdatadir(datadir):
                 try:
                     os.mkdir(datadir)
                     break
-                except:
+                except Exception:
                     print('Error: directory cannot be created.', datadir)
                 datadir = ''
             else:
                 break
     return datadir
 
-# Analyze a problem (from a command through show)
-
 
 def solveprint(s, verbose, maxdepth, maxtime):
-
+    """Analyze a problem (from a command through show)."""
     s, message, level, solved, err = solve(s, verbose, maxdepth, maxtime)
     if err:
         if verbose > 0:
