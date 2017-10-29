@@ -2,47 +2,60 @@
 import os.path
 from PIL import Image, ImageDraw, ImageFont
 
+
 def drawimage(s, p, label, size, textcolor, imgfile, mark):
     scalelist = {'small': 1, 'medium': 1.5, 'large': 2, 'x-large': 3}
     if size in scalelist:
         scale = scalelist[size]
     else:
-        size='medium'
+        size = 'medium'
         scale = 1.5
     font = 'Arial'
-    blankfile = os.path.abspath(os.path.dirname(__file__))+'/data/blank-'+size
-    if not os.path.isfile(blankfile+'.eps'):
+    blankfile = os.path.abspath(
+        os.path.dirname(__file__)) + '/data/blank-' + size
+    if not os.path.isfile(blankfile + '.eps'):
         blankimage(blankfile, scale)
-    c = Image.open(blankfile+'.eps')
+    c = Image.open(blankfile + '.eps')
     draw = ImageDraw.Draw(c)
-    tfont = ImageFont.truetype('/Library/Fonts/'+font+'.ttf', int(16*scale))
-    nfont = ImageFont.truetype('/Library/Fonts/'+font+'.ttf', int(24*scale))
-    sfont = ImageFont.truetype('/Library/Fonts/'+font+'.ttf', int(9*scale))
-    draw.text((20*scale, 10*scale), label, font=tfont, fill='#000')
+    tfont = ImageFont.truetype(
+        '/Library/Fonts/' + font + '.ttf', int(16 * scale))
+    nfont = ImageFont.truetype(
+        '/Library/Fonts/' + font + '.ttf', int(24 * scale))
+    sfont = ImageFont.truetype(
+        '/Library/Fonts/' + font + '.ttf', int(9 * scale))
+    draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
     for i in range(9):
         for j in range(9):
-            n = int(s[i*9+j])
+            n = int(s[i * 9 + j])
             if n == 0 and mark:
                 for m in range(9):
-                    if p[i*9+j][m] == 1:
-                        draw.text(((16+j*28.3+(m%3)*8)*scale, (36+i*28.3+(m//3)*8)*scale), str(m+1), font=sfont, fill=textcolor)
+                    if p[i * 9 + j][m] == 1:
+                        draw.text(((16 + j * 28.3 + (m % 3) * 8) * scale, (36 + i * 28.3 +
+                                                                           (m // 3) * 8) * scale), str(m + 1), font=sfont, fill=textcolor)
             if n > 0:
-                draw.text(((20+j*28.3)*scale, (36+i*28.3)*scale), str(n), font=nfont, fill=textcolor)
+                draw.text(((20 + j * 28.3) * scale, (36 + i * 28.3)
+                           * scale), str(n), font=nfont, fill=textcolor)
     c.save(imgfile, 'JPEG', quality=100, optimize=True)
 
 # make sudoku.eps
 
+
 def blankimage(file, scale):
     import pyx
-    m = 0.4 # margin
-    tm = 1.2 # top margin
+    m = 0.4  # margin
+    tm = 1.2  # top margin
     c = pyx.canvas.canvas()
-    c.stroke(pyx.path.rect(0, 0, (9+2*m)*scale, (9+m+tm)*scale), [pyx.color.grey(1)])
+    c.stroke(pyx.path.rect(0, 0, (9 + 2 * m) * scale,
+                           (9 + m + tm) * scale), [pyx.color.grey(1)])
     for i in range(10):
         if i % 3 == 0:
-            c.stroke(pyx.path.line((i+m)*scale, m*scale, (i+m)*scale, (9+m)*scale), [pyx.style.linewidth.THIck])
-            c.stroke(pyx.path.line(m*scale, (i+m)*scale, (9+m)*scale, (i+m)*scale), [pyx.style.linewidth.THIck])
+            c.stroke(pyx.path.line((i + m) * scale, m * scale, (i + m)
+                                   * scale, (9 + m) * scale), [pyx.style.linewidth.THIck])
+            c.stroke(pyx.path.line(m * scale, (i + m) * scale, (9 + m)
+                                   * scale, (i + m) * scale), [pyx.style.linewidth.THIck])
         else:
-            c.stroke(pyx.path.line((i+m)*scale, m*scale, (i+m)*scale, (9+m)*scale))
-            c.stroke(pyx.path.line(m*scale, (i+m)*scale, (9+m)*scale, (i+m)*scale))
+            c.stroke(pyx.path.line((i + m) * scale, m *
+                                   scale, (i + m) * scale, (9 + m) * scale))
+            c.stroke(pyx.path.line(m * scale, (i + m) *
+                                   scale, (9 + m) * scale, (i + m) * scale))
     c.writeEPSfile(file)
