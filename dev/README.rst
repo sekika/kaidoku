@@ -16,6 +16,7 @@ Logics to be hopefully implemented
 To do, or not to do?
 -----------------
 
+- Check system font
 - Implement additional logics
 - Export bookmark
 - Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
