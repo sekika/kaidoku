@@ -11,6 +11,8 @@ This is a program in development. Document is not written yet. Design of the pro
 
 .. image:: doc/image/3-1.jpg
 
+.. image:: doc/image/8-1p.jpg
+
 Install
 ---------------
 
