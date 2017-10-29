@@ -1,20 +1,25 @@
 # -*- coding: utf-8 -*-
+"""Calculation modules.
+
+Modules for solving sudoku problems.
+"""
 import copy
 import datetime
 import itertools
-from .misc import (box, pbox, boxlist, combmir, pairs, check, cell, blank)
-from .output import (output, short)
-from .wing import (xwing, xywing)
-from .chain import (pairchain)
-from .search import (trial, search)
+from kaidoku.misc import blank
+from kaidoku.misc import cell
+from kaidoku.misc import check
+from kaidoku.output import output
 
 
 def solve(s, verbose, maxdepth, maxtime):
+    """Solve a problem."""
+    from kaidoku.misc import box
+    from kaidoku.misc import pbox
     solved = False
     p = possible(s)
     b = box()
     pb = pbox()
-    search = []
     start = datetime.datetime.now()
     endtime = start + datetime.timedelta(seconds=maxtime)
     LevelPoint = int((blank(s) / 15.0)**3)  # 30 -> 8, 64 -> 77
@@ -52,7 +57,7 @@ def solve(s, verbose, maxdepth, maxtime):
                 "Bowman's Bingo": 100,  # not sure
                 'Naked quad': 100,  # not implemented yet
                 'Hidden quad': 100,  # not implemented yet
-                'Remote pairs': 100,  # not implemented yet http://www.sudokuwiki.org/Remote_Pairs
+                'Remote pairs': 100,  # not implemented yet
                 'Chain of pairs': 200,
                 'Chain of pairs (long)': 300,
                 'Trial': 500,
@@ -71,13 +76,17 @@ def solve(s, verbose, maxdepth, maxtime):
             level = i + 1
     return (s, 'Solved', level, True, False)
 
-############################################
-#                               Solve one move
-############################################
-
 
 def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
-
+    """Solve one move."""
+    from kaidoku.chain import pairchain
+    from kaidoku.misc import boxlist
+    from kaidoku.misc import combmir
+    from kaidoku.misc import pairs
+    from kaidoku.search import search
+    from kaidoku.search import trial
+    from kaidoku.wing import xwing
+    from kaidoku.wing import xywing
     # Check validity
     message, err = check(s)
     if verbose == 0:
@@ -132,7 +141,8 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
                 return (s, p, message, logic, depth, found, err)
 
     # Trial
-    maxstep = 15  # Maximum steps of scan distinguished from full search of 1 depth
+    # Maximum steps of scan distinguished from full search of 1 depth
+    maxstep = 15
     if depth == 0 and maxdepth < 999:
         s, p, step, message, found, err = trial(
             s, p, maxstep, verbose, b, pair)
@@ -177,6 +187,8 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
 
 
 def possible(s):
+    """Make possibility array."""
+    from kaidoku.misc import box
     p = [[]] * 81
     b = box()
     for i in range(81):
@@ -190,11 +202,9 @@ def possible(s):
             p[i][s[i] - 1] = 1
     return (p)
 
-# Naked single
-
 
 def naksing(s, p, b, verbose):
-
+    """Naked single."""
     for i in range(81):
         if s[i] == 0:
             for i2 in b[i]:
@@ -232,11 +242,9 @@ def naksing(s, p, b, verbose):
 
     return (s, p, message, found, False)
 
-# Hidden single
-
 
 def hidsing(s, p, verbose):
-
+    """Hidden single."""
     for b in range(9):
         begin = [0, 3, 6, 27, 30, 33, 54, 57, 60][b]
         for n in range(9):
@@ -294,11 +302,9 @@ def hidsing(s, p, verbose):
 
     return (s, p, '', False, False)
 
-# Pointing pair or triple
-
 
 def pointing(s, p, pb, verbose):
-
+    """Pointing pair or triple."""
     for b in range(9):
         begin = [0, 3, 6, 27, 30, 33, 54, 57, 60][b]
         blank = set()
@@ -368,13 +374,9 @@ def pointing(s, p, pb, verbose):
 
     return (s, p, '', '', False, False)
 
-###########################
-# Naked and hidden pair or triple
-###########################
-
 
 def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
-
+    """Naked and hidden pair or triple."""
     # Naked pair
     for i in range(len(comb)):
         list = comb[i]
@@ -436,8 +438,10 @@ def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
             if hp:
                 p1 = mirror[i][0][position[0]]
                 p2 = mirror[i][0][position[1]]
-                message = 'Hidden pair of (' + str(p1) + ', ' + str(p2) + ') in ' + ['box ', 'row ', 'column '][i // 9] + str(
-                    i % 9 + 1) + ': ' + cell(boxl[i][pa[0]]) + ' ' + cell(boxl[i][pa[1]])
+                message = 'Hidden pair of (' + str(p1) + ', ' + str(
+                    p2) + ') in ' + ['box ', 'row ', 'column '][i // 9] + str(
+                    i % 9 + 1) + ': ' + cell(boxl[i][pa[0]]) + ' ' + cell(
+                    boxl[i][pa[1]])
                 r = [0] * 9
                 r[p1 - 1] = 1
                 r[p2 - 1] = 1
@@ -449,7 +453,7 @@ def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
                         ['box ', 'row ', 'column '][i // 9] + str(i % 9 + 1)
                 return (s, p, 'Hidden pair', message, True, False)
 
-     # Hidden triple
+    # Hidden triple
     if not onlypair:
         for i in range(len(mirror)):
             list2 = mirror[i][1]
@@ -459,8 +463,10 @@ def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
                     rem = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
                     for k in range(3):
                         rem.remove(mirror[i][0][position[k]])
-                    message = 'Hidden triple of ' + str(tri) + ' in ' + ['box ', 'row ', 'column '][i // 9] + str(
-                        i % 9 + 1) + ': ' + cell(boxl[i][tri[0]]) + ' ' + cell(boxl[i][tri[1]]) + ' ' + cell(boxl[i][tri[2]])
+                    message = 'Hidden triple of ' + str(tri) + ' in ' + [
+                        'box ', 'row ', 'column '][i // 9] + str(
+                        i % 9 + 1) + ': ' + cell(boxl[i][tri[0]]) + ' ' + cell(
+                        boxl[i][tri[1]]) + ' ' + cell(boxl[i][tri[2]])
                     for k in range(3):
                         for m in rem:
                             p[boxl[i][tri[k]]][m - 1] = 0
@@ -476,6 +482,7 @@ def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
 
 
 def nakpair(list):
+    """Naked pair."""
     pair = []
     for i in list:
         if len(i) == 2:
@@ -500,6 +507,7 @@ def nakpair(list):
 
 
 def naktriple(list):
+    """Naked triple."""
     triple = []
     num = set()
     for i in list:
