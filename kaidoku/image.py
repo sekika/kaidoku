@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
 """Modules for generating sudoku figures."""
 import os.path
+import sys
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
 
 def drawimage(s, p, label, size, textcolor, imgfile, mark):
+    import configparser
+    # Read font information from system.ini
+    inifile = configparser.ConfigParser()
+    here = os.path.abspath(os.path.dirname(__file__))
+    inifile.read(os.path.join(here, 'data/system.ini'))
+    font = inifile.get('file', 'font')
+
     """Draw sudoku image."""
     scalelist = {'small': 1, 'medium': 1.5, 'large': 2, 'x-large': 3}
     if size in scalelist:
@@ -14,16 +22,22 @@ def drawimage(s, p, label, size, textcolor, imgfile, mark):
     else:
         size = 'medium'
         scale = 1.5
-    font = 'Arial'
+
     blankfile = os.path.abspath(
         os.path.dirname(__file__)) + '/data/blank-' + size
     if not os.path.isfile(blankfile + '.eps'):
         blankimage(blankfile, scale)
     c = Image.open(blankfile + '.eps')
     draw = ImageDraw.Draw(c)
-    tfont = ImageFont.truetype(font, int(16 * scale))
+    try:
+        tfont = ImageFont.truetype(font, int(16 * scale))
+    except Exception:
+        print ('Font file cannot be loaded: ', font)
+        print ('Rewrite [file] section of font variable in the following file.')
+        print (os.path.join(here, 'data/system.ini'))
+        sys.exit()
     nfont = ImageFont.truetype(font, int(24 * scale))
-    sfont = ImageFont.truetype(font, int(9 * scale))
+    sfont = ImageFont.truetype(font, int(9 * scale))   
     draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
     for i in range(9):
         for j in range(9):
