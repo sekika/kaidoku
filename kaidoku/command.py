@@ -528,9 +528,13 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
         textcolor = 'black'
         datadir = checkdatadir(datadir)
         imgfile = datadir + '/current.jpg'
-        if type == 7: mark = False
-        if type == 8: mark = True
-        drawimage(s, p, label, textcolor, imgfile, mark)
+        if type == 7:
+            size = 'small'
+            mark = False
+        if type == 8:
+            size = 'medium'
+            mark = True
+        drawimage(s, p, label, size, textcolor, imgfile, mark)
         print ('Image file created: '+imgfile)
     if type == 11 or type == 12 or type == 13 or type == 20: # prepare solving
         if blank(s) == 0:
@@ -560,10 +564,11 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
         else:
             if type == 11:
                 print ('Think candidates of the cells.')
+                size = 'medium'
                 textcolor = 'black'
                 imgfile = os.path.abspath(os.path.dirname(file))+'/current.jpg'
                 p = possible(s)
-                drawimage(s, p, label, textcolor, imgfile, True)
+                drawimage(s, p, label, size, textcolor, imgfile, True)
                 print ('Image file: '+str(imgfile))
                 print ('For more hints, type ii.')
             if type == 12 or type == 13:
