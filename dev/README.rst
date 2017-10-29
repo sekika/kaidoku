@@ -22,6 +22,11 @@ To do, or not to do?
 - Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
 - Write document
 
+Lint
+---------------
+- autopep8 -i *.py
+- flake8 *.py
+
 Reference
 ---------------
 
