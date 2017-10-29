@@ -519,7 +519,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
         else:
             print ('Type 3 digits (row, column, number) to put a number. i for hint.')
     if type > 0 and type < 6:
-        print ('\nLevel {0} No. {1}: {2}'.format(level, n, status))
+        print ('\n'+label)
         solveprint(s, type, blank(s), maxtime)
     if type == 6: # url
         print (url(s))
