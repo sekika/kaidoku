@@ -508,9 +508,10 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
         s, move, message, err = current(s, move)
         if err:
             print (message)
-        label += ': move '+str(len(move))
-    if blank(s) == 0:
-        label += 'solution'
+        if blank(s) == 0:
+            label += ': solution'
+        else:
+            label += ': move '+str(len(move))
     if type == 0: # show
         print (label)
         print (output(s))
