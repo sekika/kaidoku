@@ -43,7 +43,17 @@ def main(argv=sys.argv[1:]):
 
 def readconfig(ConfFile):
     config = ConfigObj(os.path.expanduser(ConfFile), encoding='utf-8')
-    
+    if 'datadir' in config:
+        datadir = os.path.expanduser(config['datadir'])
+        if not os.path.isdir('datadir'):
+            try:
+                os.mkdir('datadir')
+            except:
+                print ('Error: directory cannot be created.', datadir)
+                datadir = ''
+    else:
+        datadir = ''
+    config['datadir'] = datadir
     if 'file' in config:
         file =  os.path.expanduser(config["file"])
         try:

@@ -29,7 +29,8 @@ def command(arg, config):
         pointer = config['pointer']
         maxtime = int(config['maxtime'])
         n = pointer[level]
-        n, move = show(file, move, level, n, bookmark, verbose, maxtime)
+        datadir = config["datadir"]
+        n, move, datadir = show(file, move, level, n, bookmark, datadir, verbose, maxtime)
         pointer[level] = n
         return config
     if c == 'b':
@@ -38,12 +39,13 @@ def command(arg, config):
         pointer = config['pointer']
         move = config["move"]
         bookmark = config["bookmark"]
+        datadir = config["datadir"]
         if move == []:
             print ('Take back unavaillable because we are at initial position.')
             return config
         move = move[:len(move)-1]
         n = pointer[level]
-        n, move = show (file, move, level, n, bookmark, 0, 0)
+        n, move, datadir = show (file, move, level, n, bookmark, datadir, 0, 0)
         pointer[level] = n
         config['move'] = move
         return config
@@ -53,22 +55,24 @@ def command(arg, config):
         pointer = config['pointer']
         move = config["move"]
         bookmark = config["bookmark"]
+        datadir = config["datadir"]
         n = pointer[level]
         if c == 'c': type = 0
         if c == 'u': type = 6
         if c == 'jpg': type = 7
         if c == 'jm': type = 8
-        n, move = show (file, move, level, n, bookmark, type, 0)
+        n, move, datadir = show (file, move, level, n, bookmark, datadir, type, 0)
         if n == -1:
             print ('Going back to problem No. 1.')
             n = 1
-            n, move = show (file, move, level, n, bookmark, 0, 0)
+            n, move, datadir = show (file, move, level, n, bookmark, datadir, 0, 0)
             if n == -1:
                 print ('There is no problem in level {0}. Change level with l command.'.format(level))
                 return config
         pointer[level] = n
         config['pointer'] = pointer
         config['move'] = move
+        config['datadir'] = datadir
         return config
     if c == 'h':
         print (helpmessage())
@@ -84,8 +88,10 @@ def command(arg, config):
         bookmark = config["bookmark"]
         maxtime = int(config['maxtime'])
         n = pointer[level]
+        datadir = config["datadir"]
         type = len(c)+10
-        n, move = show (file, move, level, n, bookmark, type, maxtime)
+        n, move, datadir = show (file, move, level, n, bookmark, datadir, type, maxtime)
+        config['datadir'] = datadir
         return config
     if c == 'l':
         level = int(config["level"])
@@ -104,6 +110,7 @@ def command(arg, config):
         pointer = config['pointer']
         bookmark = config["bookmark"]
         n = pointer[level]
+        datadir = config["datadir"]
         if level == 0:
             if c == 'n' or c == 'p': return config
         else:
@@ -123,7 +130,7 @@ def command(arg, config):
             except:
                 return config
         move = []
-        n, move = show (file, move, level, n, bookmark, 0, 0)
+        n, move, datadir = show (file, move, level, n, bookmark, datadir, 0, 0)
         if n == -1:
             return config
         pointer[level] = n
@@ -138,6 +145,7 @@ def command(arg, config):
         move = config["move"]
         bookmark = config["bookmark"]
         row = int(c) // 100
+        datadir = config["datadir"]
         if row < 1 or row > 9:
             print ('Invalid move. If you want to fill Row 3 Column 5 with 7, type 357.')
             return config
@@ -145,7 +153,7 @@ def command(arg, config):
         num = int(c) % 10
         i = (row-1) * 9 + column-1
         move.append (int(c))
-        n, move = show (file, move, level, n, bookmark, 0, 0)
+        n, move, datadir = show (file, move, level, n, bookmark, datadir, 0, 0)
         config['move'] = move
         return config
     if c == 'all':
@@ -361,6 +369,7 @@ def command(arg, config):
         return config
     if c == 'br':
         file =  os.path.expanduser(config["file"])
+        datadir = config["datadir"]
         if 'bookmark' in config:
             bookmark = config['bookmark']
         else:
@@ -381,7 +390,7 @@ def command(arg, config):
         while len(mo) > 2:
             move.append (int(mo[:3]))
             mo = mo[3:]
-        n, move = show (file, move, level, n, bookmark, 0, 0)
+        n, move, datadir = show (file, move, level, n, bookmark, datadir, 0, 0)
         config['level'] = level
         config['move'] = move
         pointer = config['pointer']
@@ -436,9 +445,10 @@ def command(arg, config):
         move = config["move"]
         bookmark = config["bookmark"]
         maxtime = int(config['maxtime'])
+        datadir = config["datadir"]
         n = pointer[level]
         type = 20
-        n, move = show(file, move, level, n, bookmark, type, maxtime)
+        n, move, datadir = show(file, move, level, n, bookmark, datadir, type, maxtime)
         config['move'] = move
         pointer[level] = n
         return config
@@ -447,7 +457,7 @@ def command(arg, config):
 
 # Show current position (from a, s, n, p, i, u, jpg commands)
 
-def show(file, move, level, n, bookmark, type, maxtime):
+def show(file, move, level, n, bookmark, datadir, type, maxtime):
     infile = open(file, 'r')
     no = 0
     if level == 0: # bookmark
@@ -478,14 +488,14 @@ def show(file, move, level, n, bookmark, type, maxtime):
         infile.close
         if problem == '':
             print ('Level {0} no. {1} not found.'.format(level, n))
-            return -1, move # not found
+            return -1, move, datadir # not found
 
     s, err = conv(problem)
 
     if err:
         print (s)
         print ('This problem is not valid. Going to next problem.')
-        return n+1, move
+        return n+1, move, datadir
 
     if level == 0:
         if 'comment' in bookmark[n]:
@@ -516,7 +526,8 @@ def show(file, move, level, n, bookmark, type, maxtime):
     if type == 7 or type == 8: # jpg
         p = possible(s)
         textcolor = 'black'
-        imgfile = os.path.abspath(os.path.dirname(file))+'/current.jpg'
+        datadir = checkdatadir(datadir)
+        imgfile = datadir + '/current.jpg'
         if type == 7: mark = False
         if type == 8: mark = True
         drawimage(s, p, label, textcolor, imgfile, mark)
@@ -524,7 +535,7 @@ def show(file, move, level, n, bookmark, type, maxtime):
     if type == 11 or type == 12 or type == 13 or type == 20: # prepare solving
         if blank(s) == 0:
             print ('Already solved.')
-            return n, move
+            return n, move, datadir
         s2 = copy.copy(s)
         s2, message, level2, solved, err = solve(s2, 0, blank(s), maxtime)
         if err:
@@ -532,7 +543,7 @@ def show(file, move, level, n, bookmark, type, maxtime):
                 print ('This position has multiple solutions.')
             else:
                 print ('There is no solution for this position. You can take back one move with b.')
-            return n, move
+            return n, move, datadir
         p = possible(s)
         b = box()
         pb = pbox()
@@ -580,8 +591,27 @@ def show(file, move, level, n, bookmark, type, maxtime):
                     m = j * 10 + s[i]
                     move.append (m)
         print ('\n' + output(s))
-    return n, move
+    return n, move, datadir
 
+def checkdatadir(datadir):
+    if datadir == '':
+        print ('Data directory does not exist.')
+        while True:
+            datadir = input ('Input name of the data directory (default: ~/kaidoku): ')
+            if datadir == '':
+                datadir = os.path.expanduser('~/kaidoku')
+            datadir = os.path.expanduser(datadir)
+            if not os.path.isdir(datadir):
+                try:
+                    os.mkdir(datadir)
+                    break
+                except:
+                    print ('Error: directory cannot be created.', datadir)
+                datadir = ''
+            else:
+                break
+    return datadir
+    
 # Analyze a problem (from a command through show)
 
 def solveprint(s, verbose, maxdepth, maxtime):
