@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+"""Miscellaneous modules."""
 import copy
-import warnings
 
 
 def conv(problem):
-
+    """Convert problem to array."""
     s = []
     if problem.find(',') == -1:
         for i in problem:
@@ -32,16 +32,20 @@ def conv(problem):
 
 
 def check(s):
+    """Check if there is no duplicate numbers in same row, column and box."""
     b = box()
     for i in range(81):
         if s[i] > 0:
             for j in b[i]:
                 if s[i] == s[j]:
-                    return ('Both ' + cell(i) + ' and ' + cell(j) + ' have the same value of ' + str(s[i]) + '.', True)
+                    return ('Both ' + cell(i) + ' and ' + cell(j)
+                            + ' have the same value of ' + str(
+                            s[i]) + '.', True)
     return ('', False)
 
 
 def box():
+    """Define the effective cells."""
     box = []
     for i in range(9):
         for j in range(9):
@@ -64,6 +68,7 @@ def box():
 
 
 def pbox():
+    """List for use in calculating pointing pair and triple."""
     pbox = {}
     for b in range(9):
         begin = [0, 3, 6, 27, 30, 33, 54, 57, 60][b]
@@ -86,6 +91,7 @@ def pbox():
 
 
 def boxlist(s):
+    """Boxes, row, and columns to scan."""
     boxlist = []
     for b in range(9):
         begin = [0, 3, 6, 27, 30, 33, 54, 57, 60][b]
@@ -111,6 +117,7 @@ def boxlist(s):
 
 
 def combmir(p, boxl):
+    """Make lists for calculating naked and hidden combination."""
     comb = []
     mirror = []
     for bo in boxl:
@@ -126,7 +133,7 @@ def combmir(p, boxl):
         n = []
         for i in co:
             for j in i:
-                if not j in n:
+                if j not in n:
                     n.append(j)
         n = sorted(n)
         for i in n:
@@ -140,6 +147,7 @@ def combmir(p, boxl):
 
 
 def pairs(s, p):
+    """Extract pair."""
     pair = []
     paircomb = []
     for i in range(81):
@@ -154,10 +162,12 @@ def pairs(s, p):
 
 
 def cell(i):
+    """Address of the cell."""
     return ('R' + str(i // 9 + 1) + 'C' + str(i % 9 + 1))
 
 
 def blank(s):
+    """Count numbers of blank cells."""
     blank = 0
     for i in range(81):
         if s[i] == 0:
@@ -166,10 +176,13 @@ def blank(s):
 
 
 def lev(i):
-    return (['undefined', 'trivial', 'very easy', 'easy', 'normal', 'hard', 'very hard', 'evil', 'extreme', 'ultimate'][i])
+    """Description of levels."""
+    return (['undefined', 'trivial', 'very easy', 'easy', 'normal', 'hard',
+             'very hard', 'evil', 'extreme', 'ultimate'][i])
 
 
 def duplicate(s1, s2):
+    """Find different cells."""
     s = []
     for i in range(81):
         if s1[i] == s2[i]:
@@ -180,6 +193,7 @@ def duplicate(s1, s2):
 
 
 def status(level, solved, err):
+    """Calculate status from status and err."""
     if solved:
         if err:
             status = 'multiple solution'
@@ -194,6 +208,7 @@ def status(level, solved, err):
 
 
 def current(s, move):
+    """Move to current position."""
     pos = 0
     for m in move:
         m = int(m)
@@ -223,11 +238,12 @@ def current(s, move):
 
 
 def openappend(file):
+    """Open as append if exists, write if not."""
     try:
         output = open(file, 'a')
-    except:
+    except Exception:
         try:
             output = open(file, 'w')
-        except:
+        except Exception:
             return 'error'
     return output
