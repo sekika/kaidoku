@@ -45,9 +45,9 @@ def readconfig(ConfFile):
     config = ConfigObj(os.path.expanduser(ConfFile), encoding='utf-8')
     if 'datadir' in config:
         datadir = os.path.expanduser(config['datadir'])
-        if not os.path.isdir('datadir'):
+        if not os.path.isdir(datadir):
             try:
-                os.mkdir('datadir')
+                os.mkdir(datadir)
             except:
                 print ('Error: directory cannot be created.', datadir)
                 datadir = ''
