@@ -7,48 +7,16 @@ Kaidoku can solve sudoku puzzles, play with the puzzles and create sudoku puzzle
 - solver of sudoku. It can solve sudoku puzzles. It evaluates if a given puzzle is valid sudoku with unique solution, or invalid sudoku with no solution or multiple solutions. It can show the procedure of solving a sudoku puzzle with various logics. Based on the logics required to solve a sudoku puzzle, it identifies the difficulty of the sudoku puzzles for humans to solve.
 - creater of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself.
 
-This is a program in development. Document is not written yet. Design of the program can change drastically.
-
 Following sudoku puzzles were made by this program, and drawn by this program.
 
 .. image:: doc/image/3-1.jpg
 
 .. image:: doc/image/8-1p.jpg
 
-Install
+Document
 ---------------
 
-Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
+This is a program in development. Document is to be written at:
 
-.. code-block:: bash
+https://github.com/sekika/kaidoku/blob/master/doc/README.rst
 
- pip3 install kaidoku
-
-How to use
------------------
-
-By invoking kaidoku, you get into kaidoku command prompt. You can get help of the command by typing 'h'.
-
-Logics
------------------
-- Naked single
-- Hidden single
-- Pointing pair
-- Pointing triple
-- Naked pair
-- Naked triple
-- Hidden pair
-- Hidden triple
-- X-wing
-- XY-wing (Y-Wing)
-- Chain of pairs
-- Trial and search
-
-More logics to be implemented.
-
-External great sudoku sites
------------------
-
-- https://www.websudoku.com/
-- http://www.sudoku-solutions.com/
-- http://www.sudokuwiki.org
