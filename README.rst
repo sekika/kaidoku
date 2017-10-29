@@ -9,6 +9,8 @@ Kaidoku can solve sudoku puzzles, play with the puzzles and create sudoku puzzle
 
 This is a program in development. Document is not written yet. Design of the program can change drastically.
 
+.. image:: doc/image/3-1.jpg
+
 Install
 ---------------
 
