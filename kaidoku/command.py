@@ -555,6 +555,14 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
             print('Now this problem is solved !')
         else:
             print('Type 3 digits (row, column, number) to put a number. i for hint.')
+        if datadir != '':
+            size = 'small'
+            textcolor = 'black'
+            datadir = checkdatadir(datadir)
+            imgfile = datadir + '/current.jpg'
+            drawimage(s, '', label, size, textcolor, imgfile, False)
+            print('Image file created: ' + str(imgfile))
+
     if type > 0 and type < 6:
         print('\n' + label)
         solveprint(s, type, blank(s), maxtime)
@@ -605,13 +613,16 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
         else:
             if type == 11:
                 print('Think candidates of the cells.')
-                size = 'medium'
-                textcolor = 'black'
-                imgfile = os.path.abspath(
-                    os.path.dirname(file)) + '/current.jpg'
-                p = possible(s)
-                drawimage(s, p, label, size, textcolor, imgfile, True)
-                print('Image file: ' + str(imgfile))
+                if datadir == '':
+                    print ('Use jm command to see the diagram of candidates.')
+                else:
+                    size = 'medium'
+                    textcolor = 'black'
+                    datadir = checkdatadir(datadir)
+                    imgfile = datadir + '/current.jpg'
+                    p = possible(s)
+                    drawimage(s, p, label, size, textcolor, imgfile, True)
+                    print('Image file: ' + str(imgfile))
                 print('For more hints, type ii.')
             if type == 12 or type == 13:
                 logi = [logic]
