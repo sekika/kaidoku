@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+"""Modules for generating sudoku figures."""
 import os.path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
 
 
 def drawimage(s, p, label, size, textcolor, imgfile, mark):
+    """Draw sudoku image."""
     scalelist = {'small': 1, 'medium': 1.5, 'large': 2, 'x-large': 3}
     if size in scalelist:
         scale = scalelist[size]
@@ -27,8 +31,10 @@ def drawimage(s, p, label, size, textcolor, imgfile, mark):
             if n == 0 and mark:
                 for m in range(9):
                     if p[i * 9 + j][m] == 1:
-                        draw.text(((16 + j * 28.3 + (m % 3) * 8) * scale, (36 + i * 28.3 +
-                                                                           (m // 3) * 8) * scale), str(m + 1), font=sfont, fill=textcolor)
+                        draw.text(((16 + j * 28.3 + (m % 3) * 8) * scale,
+                                   (36 + i * 28.3 +
+                                    (m // 3) * 8) * scale), str(m + 1),
+                                  font=sfont, fill=textcolor)
             if n > 0:
                 draw.text(((20 + j * 28.3) * scale, (36 + i * 28.3)
                            * scale), str(n), font=nfont, fill=textcolor)
@@ -38,6 +44,7 @@ def drawimage(s, p, label, size, textcolor, imgfile, mark):
 
 
 def blankimage(file, scale):
+    """Draw blank image."""
     import pyx
     m = 0.4  # margin
     tm = 1.2  # top margin
@@ -46,10 +53,12 @@ def blankimage(file, scale):
                            (9 + m + tm) * scale), [pyx.color.grey(1)])
     for i in range(10):
         if i % 3 == 0:
-            c.stroke(pyx.path.line((i + m) * scale, m * scale, (i + m)
-                                   * scale, (9 + m) * scale), [pyx.style.linewidth.THIck])
+            c.stroke(pyx.path.line((i + m) * scale, m * scale,
+                                   (i + m) * scale, (9 + m) * scale),
+                     [pyx.style.linewidth.THIck])
             c.stroke(pyx.path.line(m * scale, (i + m) * scale, (9 + m)
-                                   * scale, (i + m) * scale), [pyx.style.linewidth.THIck])
+                                   * scale, (i + m) * scale),
+                     [pyx.style.linewidth.THIck])
         else:
             c.stroke(pyx.path.line((i + m) * scale, m *
                                    scale, (i + m) * scale, (9 + m) * scale))
