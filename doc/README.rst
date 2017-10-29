@@ -15,6 +15,8 @@ Python 3 is required. Install Python at https://www.python.org/ . After that, in
 .. code-block:: bash
 
  pip3 install kaidoku
+ 
+ You can check the `latest version <https://pypi.python.org/pypi/kaidoku>`_ by **pip3 search kaidoku** and update to the latest version by **pip3 install -U kaidoku**.
 
 How to use
 -----------------
