@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
-import sys
-import os.path
-import warnings
-import configparser
+"""Main modules.
+
+Start from main()
+"""
 from configobj import ConfigObj
-from .command import (command)
-from .misc import (openappend)
-from .help import (welcommessage)
+import configparser
+from kaidoku.command import command
+from kaidoku.help import welcommessage
+from kaidoku.misc import openappend
+import os.path
+import sys
 
 # Kaidoku starts here
 
 
 def main(argv=sys.argv[1:]):
-
+    """Main module."""
     # Read system configuration from data/system.ini
     inifile = configparser.ConfigParser()
     here = os.path.abspath(os.path.dirname(__file__))
@@ -29,7 +32,7 @@ def main(argv=sys.argv[1:]):
         while True:
             try:
                 arg = input('kaidoku-' + version + '> ').strip().split()
-            except:
+            except Exception:
                 print('\nQuitting kaidoku.')
                 return
             if arg[0] == 'q':
@@ -43,17 +46,16 @@ def main(argv=sys.argv[1:]):
         config.write()
         return
 
-# Read configuration
-
 
 def readconfig(ConfFile):
+    """Read configuration."""
     config = ConfigObj(os.path.expanduser(ConfFile), encoding='utf-8')
     if 'datadir' in config:
         datadir = os.path.expanduser(config['datadir'])
         if not os.path.isdir(datadir):
             try:
                 os.mkdir(datadir)
-            except:
+            except Exception:
                 print('Error: directory cannot be created.', datadir)
                 datadir = ''
     else:
@@ -64,7 +66,7 @@ def readconfig(ConfFile):
         try:
             input = open(file, 'r')
             input.close()
-        except:
+        except Exception:
             out = openappend(file)
             if out == '':
                 print('Cannot open file:', file)
@@ -103,9 +105,7 @@ def readconfig(ConfFile):
     else:
         pointer = [''] + [1] * 9
         config["pointer"] = pointer
-    if 'move' in config:
-        move = config["move"]
-    else:
+    if 'move' not in config:
         config["move"] = []
     if 'bookmark' in config:
         bookmark = config["bookmark"]
