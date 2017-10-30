@@ -46,3 +46,8 @@ External great sudoku sites
 - https://www.websudoku.com/
 - http://www.sudoku-solutions.com/
 - http://www.sudokuwiki.org
+
+Author
+---------------
+
+`Katsutoshi Seki <https://github.com/sekika>`_ wrote this software and published it with the `MIT license <../LICENSE.txt>`_. The email address of the author is available at `this paper <https://dx.doi.org/10.1016/j.geoderma.2015.02.013>`_. Questions and bug reports can be sent to the issue of the GitHub repository here.
