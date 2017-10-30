@@ -2,52 +2,38 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+Kaidoku can solve sudoku puzzles, play with the puzzles and create sudoku puzzles from command-line interface. Kaidoku is a
+
+* **player** of sudoku. You can play original sudoku puzzles in various level of difficulty with command line interface. You can get hints when you want.
+* **solver** of sudoku. It can solve sudoku puzzles. It evaluates if a given puzzle is valid sudoku with unique solution, or invalid sudoku with no solution or multiple solutions. It can show the procedure of solving a sudoku puzzle with various logics. Based on the logics required to solve a sudoku puzzle, it identifies the difficulty of the sudoku puzzles for humans to solve.
+* **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself.
+
+Following sudoku puzzles were made by this program, and drawn by this program.
+
+![](img/3-1.jpg)
 
 [Link to another page](another-page).
 
-There should be whitespace between paragraphs.
+This is a program in development. Document is to be written in this page.
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+# [](#header-1)Install
 
-# [](#header-1)Header 1
+Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+```
+pip3 install kaidoku
+```
 
-## [](#header-2)Header 2
+You can check the [latest version](https://pypi.python.org/pypi/kaidoku) by **pip3 search kaidoku** and update to the latest version by **pip3 install -U kaidoku**.
+ 
+
+## [](#header-2)How to use
+
+By invoking kaidoku, you get into kaidoku command prompt. You can get help of the command by typing 'h'.
 
 > This is a blockquote following a header.
 >
 > When something is important enough, you do it even if the odds are not in your favor.
-
-### [](#header-3)Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### [](#header-4)Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### [](#header-5)Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
 
 ###### [](#header-6)Header 6
 
@@ -76,47 +62,28 @@ end
 1.  Item three
 1.  Item four
 
-### And a nested list:
+### Logics
 
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
+- Naked single
+- Hidden single
+- Pointing pair
+- Pointing triple
+- Naked pair
+- Naked triple
+- Hidden pair
+- Hidden triple
+- X-wing
+- XY-wing (Y-Wing)
+- Chain of pairs
+- Trial and search
 
-### Small image
+More logics to be implemented.
 
-![](https://assets-cdn.github.com/images/icons/emoji/octocat.png)
+### External great sudoku sites
 
-### Large image
-
-![](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
+- https://www.websudoku.com/
+- http://www.sudoku-solutions.com/
+- http://www.sudokuwiki.org
 
 ```
 The final element.
