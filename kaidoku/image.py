@@ -26,6 +26,7 @@ def drawimage(s, p, label, size, imgfile, textcolor, font, mark):
     except Exception:
         print('Font file cannot be loaded: ', font)
         print('Rewrite font variable in the configuration file.')
+        return True
     nfont = ImageFont.truetype(font, int(24 * scale))
     sfont = ImageFont.truetype(font, int(9 * scale))
     draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
@@ -43,6 +44,7 @@ def drawimage(s, p, label, size, imgfile, textcolor, font, mark):
                 draw.text(((20 + j * 28.3) * scale, (36 + i * 28.3)
                            * scale), str(n), font=nfont, fill=textcolor)
     c.save(imgfile, 'JPEG', quality=100, optimize=True)
+    return False
 
 
 def blankimage(file, scale):
@@ -67,3 +69,4 @@ def blankimage(file, scale):
             c.stroke(pyx.path.line(m * scale, (i + m) *
                                    scale, (9 + m) * scale, (i + m) * scale))
     c.writeEPSfile(file)
+    return

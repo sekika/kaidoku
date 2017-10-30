@@ -523,8 +523,9 @@ def show(c, verbose, config):
             imgfile = datadir + '/current.jpg'
             font = config['font']
             textcolor = config['color']
-            drawimage(s, '', label, size, imgfile, textcolor, font, False)
-            print('Image file created: ' + str(imgfile))
+            err = drawimage(s, '', label, size, imgfile, textcolor, font, False)
+            if not err:
+                print('Image file created: ' + str(imgfile))
 
     if c == 'a' or c == 'ac':
         print('\n' + label)
@@ -543,8 +544,9 @@ def show(c, verbose, config):
             mark = True
         font = config['font']
         textcolor = config['color']
-        drawimage(s, p, label, size, imgfile, textcolor, font, mark)
-        print('Image file created: ' + imgfile)
+        err = drawimage(s, p, label, size, imgfile, textcolor, font, mark)
+        if not err:
+            print('Image file created: ' + imgfile)
     if c[0] == 'i' or c == 'sp':  # prepare solving
         if blank(s) == 0:
             print('Already solved.')
@@ -586,8 +588,9 @@ def show(c, verbose, config):
                     p = possible(s)
                     font = config['font']
                     textcolor = config['color']
-                    drawimage(s, p, label, size, imgfile, textcolor, font, True)
-                    print('Image file: ' + str(imgfile))
+                    err = drawimage(s, p, label, size, imgfile, textcolor, font, True)
+                    if not err:
+                        print('Image file: ' + str(imgfile))
                 print('For more hints, type ii.')
             if c == 'ii' or c == 'iii':
                 logi = [logic]
