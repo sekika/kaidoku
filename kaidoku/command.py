@@ -35,10 +35,9 @@ def command(arg, config):
     c = arg[0]
     if c == 'a' or c == 'ac':
         bookmark = config["bookmark"]
+        move2 = config["move"]
         if c == 'a':
-            move = []
-        else:
-            move = config["move"]
+            config["move"] = []
         if len(arg) > 1:
             try:
                 verbose = int(arg[1])
@@ -46,63 +45,31 @@ def command(arg, config):
                 verbose = 1
         else:
             verbose = 1
-        file = os.path.expanduser(config["file"])
-        level = int(config["level"])
-        pointer = config['pointer']
-        maxtime = int(config['maxtime'])
-        n = pointer[level]
-        datadir = config["datadir"]
-        n, move, datadir = show(file, move, level, n,
-                                bookmark, datadir, verbose, maxtime)
-        pointer[level] = n
+        config, err = show(c, verbose, config)
+        config["move"] = move2
         return config
     if c == 'b':
-        file = os.path.expanduser(config["file"])
-        level = int(config["level"])
-        pointer = config['pointer']
         move = config["move"]
-        bookmark = config["bookmark"]
-        datadir = config["datadir"]
         if move == []:
             print('Take back unavaillable because we are at initial position.')
             return config
-        move = move[:len(move) - 1]
-        n = pointer[level]
-        n, move, datadir = show(file, move, level, n, bookmark, datadir, 0, 0)
-        pointer[level] = n
-        config['move'] = move
+        config["move"] = move[:len(move) - 1]
+        config, err = show(c, 0, config)
         return config
     if c == 'c' or c == 'u' or c == 'jpg' or c == 'jm':
-        file = os.path.expanduser(config["file"])
-        level = int(config["level"])
-        pointer = config['pointer']
-        move = config["move"]
-        bookmark = config["bookmark"]
-        datadir = config["datadir"]
-        n = pointer[level]
-        if c == 'c':
-            type = 0
-        if c == 'u':
-            type = 6
-        if c == 'jpg':
-            type = 7
-        if c == 'jm':
-            type = 8
-        n, move, datadir = show(file, move, level, n,
-                                bookmark, datadir, type, 0)
-        if n == -1:
+        config, err = show(c, 0, config)
+        if err:
             print('Going back to problem No. 1.')
-            n = 1
-            n, move, datadir = show(
-                file, move, level, n, bookmark, datadir, 0, 0)
-            if n == -1:
+            level = config['level']
+            pointer = config['pointer']
+            pointer[level] = 1
+            config['pointer'] = pointer
+            config, err = show(c, 0, config)
+            if err:
                 print(
-                    'There is no problem in level {0}. Change level with l command.'.format(level))
+                    'There is no problem in level ' + config['level'] +
+                    '. Change level with l command.')
                 return config
-        pointer[level] = n
-        config['pointer'] = pointer
-        config['move'] = move
-        config['datadir'] = datadir
         return config
     if c == 'h':
         print(helpmessage())
@@ -111,18 +78,7 @@ def command(arg, config):
         print(advancedhelp())
         return config
     if c == 'i' or c == 'ii' or c == 'iii':
-        file = os.path.expanduser(config["file"])
-        level = int(config["level"])
-        pointer = config['pointer']
-        move = config["move"]
-        bookmark = config["bookmark"]
-        maxtime = int(config['maxtime'])
-        n = pointer[level]
-        datadir = config["datadir"]
-        type = len(c) + 10
-        n, move, datadir = show(file, move, level, n,
-                                bookmark, datadir, type, maxtime)
-        config['datadir'] = datadir
+        config, err = show(c, 0, config)
         return config
     if c == 'l':
         level = int(config["level"])
@@ -133,20 +89,19 @@ def command(arg, config):
         if l > 0 and l < 10:
             level = l
             config['level'] = level
+        config['move'] = []
         config = command(['c'], config)
         return config
     if c == 'n' or c == 'p' or c == 'j' or c == 'initial':
-        file = os.path.expanduser(config["file"])
-        level = int(config["level"])
         pointer = config['pointer']
-        bookmark = config["bookmark"]
+        level = int(config['level'])
         n = pointer[level]
-        datadir = config["datadir"]
-        if level == 0:
+        if int(config["level"]) == 0:
             if c == 'n' or c == 'p':
                 return config
         else:
             n = int(n)
+        n2 = n
         if c == 'p':
             n -= 1
             if n == 0:
@@ -162,32 +117,28 @@ def command(arg, config):
                 n = int(arg[1])
             except Exception:
                 return config
-        move = []
-        n, move, datadir = show(file, move, level, n, bookmark, datadir, 0, 0)
-        if n == -1:
-            return config
+        pointer = config['pointer']
         pointer[level] = n
         config['pointer'] = pointer
-        config['move'] = move
+        config['move'] = []
+        config, err = show(c, 0, config)
+        if err:
+            pointer[level] = n2
+            config['pointer'] = pointer
         return config
     if c.isdigit():  # move
-        file = os.path.expanduser(config["file"])
-        level = int(config["level"])
-        pointer = config['pointer']
-        n = pointer[level]
         move = config["move"]
-        bookmark = config["bookmark"]
         row = int(c) // 100
-        datadir = config["datadir"]
         if row < 1 or row > 9:
-            print('Invalid move. If you want to fill Row 3 Column 5 with 7, type 357.')
+            print('Invalid move. If you want to fill Row 3' +
+                  'Column 5 with 7, type 357.')
             return config
         column = int(int(c) - row * 100) // 10
         num = int(c) % 10
         i = (row - 1) * 9 + column - 1
         move.append(int(c))
-        n, move, datadir = show(file, move, level, n, bookmark, datadir, 0, 0)
         config['move'] = move
+        config, err = show(c, 0, config)
         return config
     if c == 'all':
         if len(arg) > 1:
@@ -240,7 +191,8 @@ def command(arg, config):
                     out.write(str(level) + ' ' + short(s2) + '\n')
                     out.close
                     print(
-                        'Valid sudoku. Appended to the book by level {0}.'.format(level))
+                        'Valid sudoku. Appended to the book by level' +
+                        +str(level))
                 else:  # Add to bookmark
                     problem = short(s2)
                     comment = ''
@@ -280,7 +232,8 @@ def command(arg, config):
                 print('This sudoku has no solution.')
             else:
                 print(
-                    'This sudoku cannot be solved in {0} seconds.'.format(maxtime))
+                    'This sudoku cannot be solved in ' +
+                    str(maxtime) + ' seconds.')
         return config
     if c == 'book':
         file = os.path.expanduser(config["file"])
@@ -336,7 +289,8 @@ def command(arg, config):
             if problem == '':
                 pointer[level] = 1
                 print(
-                    'Level {0} no. {1} not found. Going back to no. 1'.format(level, n))
+                    'Level {0} no. {1} not found. ' +
+                    'Going back to no. 1'.format(level, n))
                 return config
         s, err = conv(problem)
         if err:
@@ -407,8 +361,6 @@ def command(arg, config):
             print('{0}   {1}   {2}'.format(added, label, comment))
         return config
     if c == 'br':
-        file = os.path.expanduser(config["file"])
-        datadir = config["datadir"]
         if 'bookmark' in config:
             bookmark = config['bookmark']
         else:
@@ -429,11 +381,13 @@ def command(arg, config):
         while len(mo) > 2:
             move.append(int(mo[:3]))
             mo = mo[3:]
-        n, move, datadir = show(file, move, level, n, bookmark, datadir, 0, 0)
-        config['level'] = level
-        config['move'] = move
+        config['level'] = 0
         pointer = config['pointer']
-        pointer[level] = n
+        pointer[0] = n
+        config['pointer'] = pointer
+        config['bookmark'] = bookmark
+        config['move'] = move
+        config, err = show(c, 0, config)
         return config
     if c == 'giveup':
         if len(arg) > 1:
@@ -478,35 +432,43 @@ def command(arg, config):
         solveprint(s, verbose, blank(s), maxtime)
         return config
     if c == 'sp':
-        file = os.path.expanduser(config["file"])
-        level = int(config["level"])
-        pointer = config['pointer']
-        move = config["move"]
-        bookmark = config["bookmark"]
-        maxtime = int(config['maxtime'])
-        datadir = config["datadir"]
-        n = pointer[level]
-        type = 20
-        n, move, datadir = show(file, move, level, n,
-                                bookmark, datadir, type, maxtime)
-        config['move'] = move
-        pointer[level] = n
+        config, err = show(c, 0, config)
         return config
+    if c == 'test': # Test code for debugging
+        config2 = copy.copy(config)
+        print ('Start testing commands.')
+        for c in ['book', 'config', 'l 8', '218', 'h', 'ha', 'c', 'u',
+            'jpg', 'jm', 'b', 'i', 'initial', 'j 2', 'n', 'p', 'a 3', 'ac', 'sp', 'ii', 'iii', 'bl', 'br b1',
+            'solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030']:
+            print ('Testing command '+c)
+            c = c.split()
+            config = command(c, config)
+        print ('\nFinished testing.')
+        print ('Not tested: all, append, bp, ba, create, giveup, import, reanalyze')
+        return config2
     print('Invalid command. Type h for help.')
     return config
 
 
-def show(file, move, level, n, bookmark, datadir, type, maxtime):
+def show(c, verbose, config):
     """Show current position."""
+    file = os.path.expanduser(config["file"])
+    move = config["move"]
+    level = int(config["level"])
+    pointer = config['pointer']
+    maxtime = int(config['maxtime'])
+    bookmark = config["bookmark"]
+    n = pointer[level]
+    datadir = config["datadir"]
     infile = open(file, 'r')
     no = 0
     if level == 0:  # bookmark
         if n not in bookmark:
             print('Label {0} not found in bookmark.')
-            return n, move, datadir
+            return config, False
         if 'problem' not in bookmark[n]:
             print('Label {0} broken.')
-            return n, move, datadir
+            return config, False
         problem = bookmark[n]['problem']
     else:
         n = int(n)
@@ -524,14 +486,14 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
         infile.close
         if problem == '':
             print('Level {0} no. {1} not found.'.format(level, n))
-            return -1, move, datadir  # not found
+            return config, True  # not found
 
     s, err = conv(problem)
 
     if err:
         print(s)
-        print('This problem is not valid. Going to next problem.')
-        return n + 1, move, datadir
+        print('This problem is not valid.')
+        return config, True
 
     if level == 0:
         if 'comment' in bookmark[n]:
@@ -548,7 +510,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
             label += ': solution'
         else:
             label += ': move ' + str(len(move))
-    if type == 0:  # show
+    if c == 'c':
         print(label)
         print(output(s))
         if blank(s) == 0:
@@ -563,25 +525,25 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
             drawimage(s, '', label, size, textcolor, imgfile, False)
             print('Image file created: ' + str(imgfile))
 
-    if type > 0 and type < 6:
+    if c == 'a' or c == 'ac':
         print('\n' + label)
-        solveprint(s, type, blank(s), maxtime)
-    if type == 6:  # url
+        solveprint(s, verbose, blank(s), maxtime)
+    if c == 'u':
         print(url(s))
-    if type == 7 or type == 8:  # jpg
+    if c == 'jpg' or c == 'jm':  # jpg
         p = possible(s)
         textcolor = 'black'
         datadir = checkdatadir(datadir)
         imgfile = datadir + '/current.jpg'
-        if type == 7:
+        if c == 'jpg':
             size = 'small'
             mark = False
-        if type == 8:
+        if c == 'jm':
             size = 'medium'
             mark = True
         drawimage(s, p, label, size, textcolor, imgfile, mark)
         print('Image file created: ' + imgfile)
-    if type == 11 or type == 12 or type == 13 or type == 20:  # prepare solving
+    if c[0] == 'i' or c == 'sp':  # prepare solving
         if blank(s) == 0:
             print('Already solved.')
             return n, move, datadir
@@ -601,7 +563,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
         blank1 = blank(s)
         start = datetime.datetime.now()
         endtime = start + datetime.timedelta(seconds=maxtime)
-    if type == 11 or type == 12 or type == 13:  # show hint
+    if c[0] == 'i':  # show hint
         s2, p, message, logic, depth, found, err = solveone(
             s, p, 4, 0, blank1, endtime, b, pb)
         if logic == 'Naked single' or logic == 'Hidden single':
@@ -611,10 +573,10 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
             else:
                 print(message[:message.index(':')] + 'can be found.')
         else:
-            if type == 11:
+            if c == 'i':
                 print('Think candidates of the cells.')
                 if datadir == '':
-                    print ('Use jm command to see the diagram of candidates.')
+                    print('Use jm command to see the diagram of candidates.')
                 else:
                     size = 'medium'
                     textcolor = 'black'
@@ -624,7 +586,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
                     drawimage(s, p, label, size, textcolor, imgfile, True)
                     print('Image file: ' + str(imgfile))
                 print('For more hints, type ii.')
-            if type == 12 or type == 13:
+            if c == 'ii' or c == 'iii':
                 logi = [logic]
                 mes = [message]
                 while blank(s2) == blank1:
@@ -632,7 +594,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
                         s, p, 4, 0, blank1, endtime, b, pb)
                     logi.append(logic)
                     mes.append(message)
-                if type == 12:
+                if c == 'ii':
                     if len(logi) > 1:
                         print('Following logics are successively used.')
                     for i in range(len(logi)):
@@ -641,7 +603,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
                 else:
                     for message in mes:
                         print(message)
-    if type == 20:  # Solve partially
+    if c == 'sp':
         logic = 'Naked single'
         while (logic == 'Naked single' or logic == 'Hidden single') and blank(s) > 0:
             s2 = copy.copy(s)
@@ -655,7 +617,7 @@ def show(file, move, level, n, bookmark, datadir, type, maxtime):
                     m = j * 10 + s[i]
                     move.append(m)
         print('\n' + output(s))
-    return n, move, datadir
+    return config, False
 
 
 def checkdatadir(datadir):

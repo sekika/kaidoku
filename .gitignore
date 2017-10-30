@@ -1,6 +1,9 @@
 # Kaidoku files automatically created
 kaidoku/data/blank*
 
+# Test result
+dev/*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
