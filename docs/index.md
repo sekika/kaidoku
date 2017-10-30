@@ -53,7 +53,3 @@ More logics to be implemented.
 - [Web sudoku](https://www.websudoku.com/)
 - [sudoku-solutions.com](http://www.sudoku-solutions.com/)
 - [SudokuWiki.org](http://www.sudokuwiki.org)
-
-```
-The final element.
-```

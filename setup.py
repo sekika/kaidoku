@@ -21,7 +21,7 @@ setup(
     version=version,
     description='Player, solver and creater of sudoku puzzles',
     long_description=long_description,
-    url='https://github.com/sekika/kaidoku',
+    url='https://sekika.github.io/kaidoku/',
     author='Katsutoshi Seki',
     license='MIT',
     classifiers=[

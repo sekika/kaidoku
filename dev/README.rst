@@ -26,6 +26,11 @@ Lint
 - autopep8 -i *.py
 - flake8 *.py
 
+GitHub pages
+---------------
+- Time machi theme https://github.com/pages-themes/time-machine
+
+
 Reference
 ---------------
 

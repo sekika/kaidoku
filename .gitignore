@@ -4,6 +4,12 @@ kaidoku/data/blank*
 # Test result
 dev/*.txt
 
+# GitHub Pages
+_site
+.sass-cache
+Gemfile.lock
+*.gem
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
