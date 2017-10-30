@@ -29,7 +29,7 @@ By invoking kaidoku, you get into kaidoku command prompt. You can get help of th
 
 ## Document
 
-This is a program in development. Document is not written yet. It will be written here.
+Kaidoku is a program in development. Document is not written yet. It will be written here.
 
 - [Logics](logic)
 
