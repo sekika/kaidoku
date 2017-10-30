@@ -554,7 +554,7 @@ def show(c, verbose, config):
     if c[0] == 'i' or c == 'sp':  # prepare solving
         if blank(s) == 0:
             print('Already solved.')
-            return n, move, datadir
+            return config, True
         s2 = copy.copy(s)
         s2, message, level2, solved, err = solve(s2, 0, blank(s), maxtime)
         if err:
@@ -564,7 +564,7 @@ def show(c, verbose, config):
                 print(
                     'There is no solution for this position.'
                     + 'You can take back one move with b.')
-            return n, move, datadir
+            return config, True
         p = possible(s)
         b = box()
         pb = pbox()
