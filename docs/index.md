@@ -2,15 +2,15 @@
 layout: default
 ---
 
-Kaidoku can solve sudoku puzzles, play with the puzzles and create sudoku puzzles from command-line interface.
+Kaidoku can solve **sudoku** puzzles as shown in the figure, play with the puzzles and create sudoku puzzles with a command-line interface.
 
 ![](img/3-1.jpg)
 
 Kaidoku is a
 
 * **player** of sudoku. You can play original sudoku puzzles in various level of difficulty with command line interface. You can get hints when you want.
-* **solver** of sudoku. It can solve sudoku puzzles. It evaluates if a given puzzle is valid sudoku with unique solution, or invalid sudoku with no solution or multiple solutions. It can show the procedure of solving a sudoku puzzle with various logics. Based on the logics required to solve a sudoku puzzle, it identifies the difficulty of the sudoku puzzles for humans to solve.
-* **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself.
+* **solver** of sudoku. It can solve sudoku puzzles. It evaluates if a given puzzle is valid sudoku with unique solution. It also shows the procedure of solving a sudoku puzzle with various logics.
+* **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself. You can grow the numbers of sudoku puzzles by this program itself.
 
 # [](#header-1)Install
 
