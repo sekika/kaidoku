@@ -519,10 +519,11 @@ def show(c, verbose, config):
             print('Type 3 digits (row, column, number) to put a number. i for hint.')
         if datadir != '':
             size = 'small'
-            textcolor = 'black'
             datadir = checkdatadir(datadir)
             imgfile = datadir + '/current.jpg'
-            drawimage(s, '', label, size, textcolor, imgfile, False)
+            font = config['font']
+            textcolor = config['color']
+            drawimage(s, '', label, size, imgfile, textcolor, font, False)
             print('Image file created: ' + str(imgfile))
 
     if c == 'a' or c == 'ac':
@@ -532,7 +533,6 @@ def show(c, verbose, config):
         print(url(s))
     if c == 'jpg' or c == 'jm':  # jpg
         p = possible(s)
-        textcolor = 'black'
         datadir = checkdatadir(datadir)
         imgfile = datadir + '/current.jpg'
         if c == 'jpg':
@@ -541,7 +541,9 @@ def show(c, verbose, config):
         if c == 'jm':
             size = 'medium'
             mark = True
-        drawimage(s, p, label, size, textcolor, imgfile, mark)
+        font = config['font']
+        textcolor = config['color']
+        drawimage(s, p, label, size, imgfile, textcolor, font, mark)
         print('Image file created: ' + imgfile)
     if c[0] == 'i' or c == 'sp':  # prepare solving
         if blank(s) == 0:
@@ -579,11 +581,12 @@ def show(c, verbose, config):
                     print('Use jm command to see the diagram of candidates.')
                 else:
                     size = 'medium'
-                    textcolor = 'black'
                     datadir = checkdatadir(datadir)
                     imgfile = datadir + '/current.jpg'
                     p = possible(s)
-                    drawimage(s, p, label, size, textcolor, imgfile, True)
+                    font = config['font']
+                    textcolor = config['color']
+                    drawimage(s, p, label, size, imgfile, textcolor, font, True)
                     print('Image file: ' + str(imgfile))
                 print('For more hints, type ii.')
             if c == 'ii' or c == 'iii':

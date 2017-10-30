@@ -4,18 +4,10 @@ import os.path
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-import sys
 
 
-def drawimage(s, p, label, size, textcolor, imgfile, mark):
+def drawimage(s, p, label, size, imgfile, textcolor, font, mark):
     """Draw sudoku image."""
-    import configparser
-    # Read font information from system.ini
-    inifile = configparser.ConfigParser()
-    here = os.path.abspath(os.path.dirname(__file__))
-    inifile.read(os.path.join(here, 'data/system.ini'))
-    font = inifile.get('file', 'font')
-
     scalelist = {'small': 1, 'medium': 1.5, 'large': 2, 'x-large': 3}
     if size in scalelist:
         scale = scalelist[size]
@@ -33,9 +25,7 @@ def drawimage(s, p, label, size, textcolor, imgfile, mark):
         tfont = ImageFont.truetype(font, int(16 * scale))
     except Exception:
         print('Font file cannot be loaded: ', font)
-        print('Rewrite [file] section of font variable in the following file.')
-        print(os.path.join(here, 'data/system.ini'))
-        sys.exit()
+        print('Rewrite font variable in the configuration file.')
     nfont = ImageFont.truetype(font, int(24 * scale))
     sfont = ImageFont.truetype(font, int(9 * scale))
     draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
@@ -53,8 +43,6 @@ def drawimage(s, p, label, size, textcolor, imgfile, mark):
                 draw.text(((20 + j * 28.3) * scale, (36 + i * 28.3)
                            * scale), str(n), font=nfont, fill=textcolor)
     c.save(imgfile, 'JPEG', quality=100, optimize=True)
-
-# make sudoku.eps
 
 
 def blankimage(file, scale):

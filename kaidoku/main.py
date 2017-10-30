@@ -112,5 +112,9 @@ def readconfig(ConfFile):
     else:
         bookmark = {}
         config["bookmark"] = bookmark
+    if 'font' not in config:
+        config['font'] = 'Arial'
+    if 'color' not in config:
+        config['color'] = 'black'
     config.write()
     return config
