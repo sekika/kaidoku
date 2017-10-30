@@ -12,7 +12,7 @@ layout: default
 * **solver** of sudoku. It can solve sudoku puzzles. It evaluates if a given puzzle is valid sudoku with unique solution. It also shows the procedure of solving a sudoku puzzle with various logics.
 * **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself. You can grow the numbers of sudoku puzzles by this program itself.
 
-# [](#header-1)Install
+## [](#header-1)Install
 
 Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
 
@@ -23,18 +23,22 @@ pip3 install kaidoku
 You can check the [latest version](https://pypi.python.org/pypi/kaidoku) by **pip3 search kaidoku** and update to the latest version by **pip3 install -U kaidoku**.
  
 
-## [](#header-2)How to use
+## [](#header-2)Getting started
 
 By invoking kaidoku, you get into kaidoku command prompt. You can get help of the command by typing 'h'.
 
-This is a program in development. Document is to be written in this page.
+## Document
 
-### Contents
+This is a program in development. Document is not written yet. It will be written here.
 
 - [Logics](logic)
 
-### External great sudoku sites
+## External sudoku sites
 
+Please obtain general information about sudoku by these great pages.
+
+- [Sudoku by Nikoli](http://nikoli.co.jp/en/puzzles/sudoku.html)
 - [Web sudoku](https://www.websudoku.com/)
 - [sudoku-solutions.com](http://www.sudoku-solutions.com/)
 - [SudokuWiki.org](http://www.sudokuwiki.org)
+
