@@ -1,1 +1,4 @@
 theme: jekyll-theme-time-machine
+title: Kaidoku for sudoku puzzles
+description: Player, solver and creater of sudoku puzzles
+show_downloads: false
