@@ -301,6 +301,7 @@ def command(arg, config):
         if len(move) > 0:
             s2, move, message, err = current(s2, move)
             if err:
+                config['move'] = move
                 print(message)
                 return config
         problem = short(s)
@@ -437,7 +438,7 @@ def command(arg, config):
     if c == 'test':  # Test code for debugging
         config2 = copy.copy(config)
         print('Start testing commands.')
-        for c in ['book', 'config', 'l 8', '218', 'h', 'ha', 'c', 'u',
+        for c in ['book', 'config', 'l 8', 'j 1', '131', '218', 'h', 'ha', 'c', 'u',
                   'jpg', 'jm', 'b', 'i', 'initial', 'j 2', 'n', 'p', 'a 3', 'ac', 'sp', 'ii', 'iii', 'bl', 'br b1',
                   'solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030']:
             print('Testing command ' + c)
@@ -505,6 +506,7 @@ def show(c, verbose, config):
     if len(move) > 0:
         s, move, message, err = current(s, move)
         if err:
+            config['move'] = move
             print(message)
         if blank(s) == 0:
             label += ': solution'
@@ -520,6 +522,7 @@ def show(c, verbose, config):
         if datadir != '':
             size = 'small'
             datadir = checkdatadir(datadir)
+            config['datadir'] = datadir
             imgfile = datadir + '/current.jpg'
             font = config['font']
             textcolor = config['color']
@@ -535,6 +538,7 @@ def show(c, verbose, config):
     if c == 'jpg' or c == 'jm':  # jpg
         p = possible(s)
         datadir = checkdatadir(datadir)
+        config['datadir'] = datadir
         imgfile = datadir + '/current.jpg'
         if c == 'jpg':
             size = 'small'
@@ -584,6 +588,7 @@ def show(c, verbose, config):
                 else:
                     size = 'medium'
                     datadir = checkdatadir(datadir)
+                    config['datadir'] = datadir
                     imgfile = datadir + '/current.jpg'
                     p = possible(s)
                     font = config['font']
