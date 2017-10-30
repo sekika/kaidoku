@@ -1,8 +1,10 @@
-#  Chain of pairs
+# -*- coding: utf-8 -*-
+"""Chain logic."""
 
 
 def pairchain(s, p, b, pair, paircomb, verbose):
-    from .misc import (cell)
+    """Chain of pairs."""
+    from kaidoku.misc import cell
     message = ''
     if len(pair) < 4:
         return (s, p, message, False, False)
@@ -61,15 +63,16 @@ def pairchain(s, p, b, pair, paircomb, verbose):
                                                         cell(i[0]) + '.'
                                                 else:
                                                     message = 'Chain of pairs. Assume that ' + \
-                                                        cell(
-                                                            i[0]) + ' is ' + str(i[1]) + ' and we have following chains.\n'
+                                                        cell(i[0]) + ' is ' + str(i[1]) + \
+                                                        ' and we have following chains.\n'
                                                     message += '(1) ' + chainpath(path1) + \
                                                         '\n' + \
                                                         '(2) ' + \
                                                         chainpath(path2) + '\n'
                                                     message += 'Now we have contradiction on ' + \
-                                                        cell(
-                                                            j2[0]) + '. Therefore ' + cell(i[0]) + ' should be ' + str(n) + '. '
+                                                        cell(j2[0]) + '. Therefore ' + cell(i[0]) + \
+                                                        ' should be ' + \
+                                                        str(n) + '. '
                                             return (s, p, message, chainlength, True, False)
                             chaincell.append(j2[0])
                         if not loop:
@@ -82,6 +85,7 @@ def pairchain(s, p, b, pair, paircomb, verbose):
 
 
 def findchain(pair, i, b):
+    """Find chain."""
     chain = []
     for j in pair:
         if j[0] in b[i[0]] and (i[1] == j[1] or i[1] == j[2]):
@@ -93,7 +97,8 @@ def findchain(pair, i, b):
 
 
 def chainpath(path):
-    from .misc import (cell)
+    """Get path of chain."""
+    from kaidoku.misc import cell
     chainpath = ''
     for i in path:
         if i != path[0]:

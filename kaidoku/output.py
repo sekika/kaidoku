@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from .misc import (conv, blank)
+"""Modules for output."""
 
 
 def output(s):
-
+    """Convert to text output format."""
     out = '  1 2 3 4 5 6 7 8 9\n'
     out += ' +-----+-----+-----+\n'
     for i in range(9):
@@ -25,6 +25,7 @@ def output(s):
 
 
 def url(s):
+    """Convert to URL."""
     out = "http://www.sudoku-solutions.com/index.php?puzzle="
     for i in range(81):
         v = str(s[i])
@@ -36,23 +37,8 @@ def url(s):
 
 
 def short(s):
+    """Convert to short form."""
     sudoku = ''
     for j in s:
         sudoku += str(j)
     return sudoku
-
-# not using now
-
-
-def listup(file, level):
-    input = open(file, 'r')
-    i = 0
-    for line in input:
-        data = line.strip().split(' ')
-        s = conv(data[1])[0]
-        i += 1
-        if int(data[0]) == level:
-            print('No.{0} with {1} numbers starting from {2}'.format(
-                i, 81 - blank(s), data[1][:18]))
-    input.close
-    return

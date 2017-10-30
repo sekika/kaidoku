@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-# Help messages
+"""Help messages."""
 
 
 def welcommessage(version):
-    message = 'Kaidoku - player, solver and creater of sudoku puzzles.\nType h for help, c for showing a problem, q for quit.'
+    """Return welcome message."""
+    message = 'Kaidoku - player, solver and creater of sudoku puzzles.\n' + \
+        'Type h for help, c for showing a problem, q for quit.'
     return message
 
 
 def helpmessage():
+    """Return help message."""
     message = '246 : In the cell of row 2 column 4, put number 6\n'
     message += 'b   : take Back one move\n'
     message += 'c   : show Current position\n'
@@ -27,6 +30,7 @@ def helpmessage():
 
 
 def advancedhelp():
+    """Return help message for advanced commands."""
     message = 'a [verb]        : Analyze the current problem\n'
     message += 'ac [verb]       : Analyze from the Current position\n'
     message += 'all [verb]      : analyze all the problems in the current level\n'

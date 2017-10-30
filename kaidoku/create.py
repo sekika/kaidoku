@@ -1,15 +1,23 @@
 # -*- coding: utf-8 -*-
-import sys
+"""Modules for creating and maintaining book database."""
 import copy
 import datetime
+from kaidoku.calc import possible
+from kaidoku.calc import solve
+from kaidoku.misc import blank
+from kaidoku.misc import box
+from kaidoku.misc import check
+from kaidoku.misc import conv
+from kaidoku.misc import lev
+from kaidoku.misc import openappend
+from kaidoku.output import short
 import random
-from statistics import mean, stdev
-from .calc import (solve, possible)
-from .misc import (conv, check, box, blank, lev, status, current, openappend)
-from .output import (output, short)
+from statistics import mean
+from statistics import stdev
 
 
 def analyze(file, level, verbose):
+    """Analyze whole database of the level."""
     if file == '':
         return
     start = datetime.datetime.now()
@@ -58,11 +66,12 @@ def analyze(file, level, verbose):
 
 
 def reanalyze(file, file2):
+    """Reanalyze whole database."""
     if file == '':
         return
     start = datetime.datetime.now()
     input = open(file, 'r')
-    output = open(file2, 'w')
+    outfile = open(file2, 'w')
     i = 0
     for line in input:
         data = line.strip().split(' ')
@@ -78,7 +87,7 @@ def reanalyze(file, file2):
         if not solved and not err:
             print('\nGive up {0}'.format(data[1]))
             continue
-        output.write(str(level) + ' ' + data[1] + '\n')
+        outfile.write(str(level) + ' ' + data[1] + '\n')
         dt = datetime.datetime.now() - start
         t = dt.seconds + float(dt.microseconds) / 1000000
         i += 1
@@ -90,20 +99,20 @@ def reanalyze(file, file2):
             print(' {0} problems reanalyzed in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
                 i, t, t / i))
     input.close
-    output.close
+    outfile.close
     print('')
     return
 
 
 def append_database(file, giveup, n):
-
+    """Create new problems and append to database."""
     maxtime = 3
     maxdepth = 999  # Creating mode
 
     if file == '':
         return
-    output = openappend(file)
-    if output == 'error':
+    outfile = openappend(file)
+    if outfile == 'error':
         print('Unable to write a file:', file)
         return
     start = datetime.datetime.now()
@@ -113,31 +122,30 @@ def append_database(file, giveup, n):
         print('.', end='', flush=True)
         if level == 0:
             give = openappend(giveup)
-            if output == 'error':
+            if outfile == 'error':
                 print('Unable to write a file:', giveup)
                 return
             give.write('g ' + str(maxtime) + ' ' + sudoku + '\n')
             give.close
         else:
-            output.write(str(level) + ' ' + sudoku + '\n')
+            outfile.write(str(level) + ' ' + sudoku + '\n')
         if (i + 1) % 10 == 0 and i + 1 < n:
             dt = datetime.datetime.now() - start
             t = dt.seconds + float(dt.microseconds) / 1000000
-            print(' {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
-                i + 1, t, t / (i + 1)))
-            output.close
-            output = open(file, 'a')
-    output.close
+            print(' {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(i + 1, t, t / (i + 1)))
+            outfile.close
+            outfile = open(file, 'a')
+    outfile.close
     dt = datetime.datetime.now() - start
     t = dt.seconds + float(dt.microseconds) / 1000000
-    print('\nFinished. {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
-        n, t, t / n))
+    print('\nFinished. {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(n, t, t / n))
     show_status(file)
 
     return
 
 
 def show_status(file):
+    """Show status of the database."""
     if file == '':
         return
     input = open(file, 'r')
@@ -159,7 +167,7 @@ def show_status(file):
 
 
 def create(maxdepth, maxtime):
-
+    """Create a new problem."""
     min = 17  # proven minimum numbers
 
     order = []
@@ -190,19 +198,13 @@ def create(maxdepth, maxtime):
         if not err:
             s2 = copy.copy(s)
             s3 = copy.copy(s)
-            start = datetime.datetime.now()
             s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
-            dt = datetime.datetime.now() - start
-            # print (status(level, solved, err)+' ', end='', flush=True) #######
-#            if dt.seconds > maxtime - 2:
-            # print ('\n{0} seconds for {1}: {2}'.format(dt.seconds,status(level, solved, err),short(s3)))
             if not solved and err:
                 return (s3, 0)
             if solved:
                 break
             err = True
 
-    t = dt.seconds + float(dt.microseconds) / 1000000
     while len(s2) == 2:
 
         j = []
@@ -222,10 +224,7 @@ def create(maxdepth, maxtime):
         s[i] = s2[0][i]
         s = shuffle(s)
         s2 = copy.copy(s)
-        start = datetime.datetime.now()
         s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime + 3)
-        dt = datetime.datetime.now() - start
-        t = dt.seconds + float(dt.microseconds) / 1000000
 
     if level < 3:
         s = make_easy(s)
@@ -236,6 +235,7 @@ def create(maxdepth, maxtime):
 
 
 def make_easy(s):
+    """Make a problem easy."""
     s2 = copy.copy(s)
     sol, message, level, solved, err = solve(s2, 0, 1, 1)
     if not solved or err:
@@ -263,6 +263,7 @@ def make_easy(s):
 
 
 def shuffle(s):
+    """Shuffle board."""
     # rotate right
     s2 = [0] * 81
     for i in range(9):
@@ -286,13 +287,13 @@ def shuffle(s):
 
 
 def merge(file, file2):
+    """Import file2 to file."""
     if file == '':
         return
     if file2 == '':
         return
     input = open(file, 'r')
     problem = []
-    new = []
     for line in input:
         data = line.strip().split(' ')
         problem.append(data[1])
@@ -302,8 +303,8 @@ def merge(file, file2):
     input = open(file2, 'r')
     j = 0
     k = 0
-    output = openappend(file)
-    if output == 'error':
+    outfile = openappend(file)
+    if outfile == 'error':
         print('Unable to write a file:', file)
         return
     for line in input:
@@ -311,25 +312,27 @@ def merge(file, file2):
         data = line.strip().split(' ')
         if data[1] not in problem:
             j += 1
-            output.write(line)
+            outfile.write(line)
     input.close
-    output.close
+    outfile.close
     print('{0} / {1} problems appended.'.format(j, k))
     return
 
 
 def countproblem(file):
+    """Count numbers of problems."""
     input = open(file, 'r')
     n = 0
     for line in input:
         data = line.strip().split(' ')
-        if conv(data[1])[1] == False:
+        if not conv(data[1])[1]:
             n += 1
     input.close
     return(n)
 
 
 def reanalyze_giveup(giveup, t):
+    """Reanalyze giveup data."""
     maxdepth = 999  # Creating mode
     give = givedata(giveup, t)
     for i in give[4]:
@@ -365,7 +368,7 @@ def reanalyze_giveup(giveup, t):
             if err:
                 give = givedata(giveup, t)
                 give[3] = give[3][1:]
-                if dt.seconds > 3:  # Discard no solution shorter than 3 seconds
+                if dt.seconds > 3:
                     give[1].append('n ' + str(dt.seconds) + ' ' + prob)
                 writegive(giveup, give)
                 print('no solution. {0} left.'.format(len(give[3])))
@@ -379,6 +382,7 @@ def reanalyze_giveup(giveup, t):
 
 
 def givedata(giveup, t):
+    """Get giveup data."""
     input = open(giveup, 'r')
     uniq = []
     no = []
@@ -413,15 +417,16 @@ def givedata(giveup, t):
 
 
 def writegive(giveup, g):
+    """Write giveup data."""
     try:
-        output = open(giveup, 'w')
-    except:
+        outfile = open(giveup, 'w')
+    except Exception:
         print('Unable to write a file:', giveup)
         return
     for i in range(3):
         for j in g[i]:
-            output.write(j.strip() + '\n')
+            outfile.write(j.strip() + '\n')
     for i in g[3]:
-        output.write('g ' + str(i[0]) + ' ' + i[1] + '\n')
-    output.close
+        outfile.write('g ' + str(i[0]) + ' ' + i[1] + '\n')
+    outfile.close
     return

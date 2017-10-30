@@ -434,17 +434,17 @@ def command(arg, config):
     if c == 'sp':
         config, err = show(c, 0, config)
         return config
-    if c == 'test': # Test code for debugging
+    if c == 'test':  # Test code for debugging
         config2 = copy.copy(config)
-        print ('Start testing commands.')
+        print('Start testing commands.')
         for c in ['book', 'config', 'l 8', '218', 'h', 'ha', 'c', 'u',
-            'jpg', 'jm', 'b', 'i', 'initial', 'j 2', 'n', 'p', 'a 3', 'ac', 'sp', 'ii', 'iii', 'bl', 'br b1',
-            'solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030']:
-            print ('Testing command '+c)
+                  'jpg', 'jm', 'b', 'i', 'initial', 'j 2', 'n', 'p', 'a 3', 'ac', 'sp', 'ii', 'iii', 'bl', 'br b1',
+                  'solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030']:
+            print('Testing command ' + c)
             c = c.split()
             config = command(c, config)
-        print ('\nFinished testing.')
-        print ('Not tested: all, append, bp, ba, create, giveup, import, reanalyze')
+        print('\nFinished testing.')
+        print('Not tested: all, append, bp, ba, create, giveup, import, reanalyze')
         return config2
     print('Invalid command. Type h for help.')
     return config

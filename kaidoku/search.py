@@ -1,14 +1,12 @@
+"""Trial and search."""
 import copy
 import datetime
-import itertools
-from .misc import (cell, blank)
-
-######################################
-#                           Trial
-######################################
+from kaidoku.misc import blank
+from kaidoku.misc import cell
 
 
 def trial(s, p, maxstep, verbose, b, pair):
+    """Trial."""
     if len(pair) == 0:
         return (s, p, 0, '', False, False)
     for x in pair:
@@ -34,7 +32,8 @@ def trial(s, p, maxstep, verbose, b, pair):
                     if verbose == 2:
                         message = 'Determine ' + cell(i) + ' by trial.'
                     else:
-                        message = 'Trial. If ' + cell(i) + ' is ' + str(j) + ',\n' + message2.replace(
+                        message = 'Trial. If ' + cell(i) + ' is ' + str(j) + \
+                            ',\n' + message2.replace(
                             'This sudoku has no solution because', 'Contradiction:')
                 p[i][j - 1] = 0
                 s[i] = p[i].index(1) + 1
@@ -47,8 +46,10 @@ def trial(s, p, maxstep, verbose, b, pair):
 
 
 def scan(s, p, verbose, b):
-    from .calc import (naksing, hidsing)
-    from .misc import check
+    """Scan."""
+    from kaidoku.calc import hidsing
+    from kaidoku.calc import naksing
+    from kaidoku.misc import check
     s, p, message, found, err = naksing(s, p, b, verbose)  # Naked single
     if found or err:
         return (s, p, message, found, err)
@@ -58,13 +59,10 @@ def scan(s, p, verbose, b):
     s, p, message, found, err = hidsing(s, p, verbose)  # Hidden single
     return (s, p, message, found, err)
 
-###########################################################
-#                                                   Full search
-###########################################################
-
 
 def search(s, p, verbose, depth, maxdepth, endtime, b, pb):
-    from .calc import (solveone)
+    """Full search."""
+    from kaidoku.calc import (solveone)
 
     if datetime.datetime.now() > endtime:
         message = ''
@@ -133,7 +131,8 @@ def search(s, p, verbose, depth, maxdepth, endtime, b, pb):
         if verbose > 1:
             message = 'Search with depth ' + \
                 str(depth) + ' shows that this sudoku has multiple solutions.'
-        return ([solution[0][1], solution[1][1]], p, message, logic, depth, True, True)
+        s = [solution[0][1], solution[1][1]]
+        return (s, p, message, logic, depth, True, True)
     if len(removed) > 0:
         for n in removed:
             p[i][n] = 0
