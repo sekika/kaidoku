@@ -1,0 +1,22 @@
+3,7c3,7
+< Level 1 trivial   :   4111 ( 9.37 %)
+< Level 2 very easy :   4209 ( 9.59 %)
+< Level 3 easy      :  15898 (36.23 %)
+< Level 4 normal    :  15145 (34.52 %)
+< Level 5 hard      :   1986 ( 4.53 %)
+---
+> Level 1 trivial   :   4113 ( 9.37 %)
+> Level 2 very easy :   4210 ( 9.59 %)
+> Level 3 easy      :  15905 (36.23 %)
+> Level 4 normal    :  15151 (34.51 %)
+> Level 5 hard      :   1987 ( 4.53 %)
+9,10c9,10
+< Level 7 evil      :   1003 ( 2.29 %)
+< Level 8 extreme   :    682 ( 1.55 %)
+---
+> Level 7 evil      :   1003 ( 2.28 %)
+> Level 8 extreme   :    683 ( 1.56 %)
+12c12
+< Total numbers     :  43879
+---
+> Total numbers     :  43897
