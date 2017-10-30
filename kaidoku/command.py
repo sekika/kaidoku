@@ -520,6 +520,7 @@ def show(c, verbose, config):
         if datadir != '':
             size = 'small'
             datadir = checkdatadir(datadir)
+            config['datadir'] = datadir
             imgfile = datadir + '/current.jpg'
             font = config['font']
             textcolor = config['color']
@@ -535,6 +536,7 @@ def show(c, verbose, config):
     if c == 'jpg' or c == 'jm':  # jpg
         p = possible(s)
         datadir = checkdatadir(datadir)
+        config['datadir'] = datadir
         imgfile = datadir + '/current.jpg'
         if c == 'jpg':
             size = 'small'
@@ -584,6 +586,7 @@ def show(c, verbose, config):
                 else:
                     size = 'medium'
                     datadir = checkdatadir(datadir)
+                    config['datadir'] = datadir
                     imgfile = datadir + '/current.jpg'
                     p = possible(s)
                     font = config['font']
