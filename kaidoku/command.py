@@ -507,7 +507,6 @@ def show(c, verbose, config):
         s, move, message, err = current(s, move)
         if err:
             config['move'] = move
-            print (move) ###
             print(message)
         if blank(s) == 0:
             label += ': solution'
