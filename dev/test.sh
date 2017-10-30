@@ -1,7 +1,6 @@
 #!/bin/sh
 echo 'flake8'
-cd ../kaidoku
-flake8 *.py | grep -v E501
+flake8 ../kaidoku/*.py | grep -v E501
 echo 'kaidoku test'
 kaidoku test > test.txt
 diff test-pre.txt test.txt > diff.txt
