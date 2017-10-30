@@ -5,6 +5,7 @@
 def welcommessage(version):
     """Return welcome message."""
     message = 'Kaidoku - player, solver and creater of sudoku puzzles.\n' + \
+        '          https://sekika.github.io/kaidoku/\n' + \
         'Type h for help, c for showing a problem, q for quit.'
     return message
 
