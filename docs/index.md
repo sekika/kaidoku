@@ -31,7 +31,7 @@ This is a program in development. Document is to be written in this page.
 
 ### Contents
 
-- [Logics](logic).
+- [Logics](logic)
 
 ### External great sudoku sites
 
