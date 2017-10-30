@@ -14,8 +14,6 @@ Following sudoku puzzles were made by this program, and drawn by this program.
 
 [Link to another page](another-page).
 
-This is a program in development. Document is to be written in this page.
-
 # [](#header-1)Install
 
 Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
@@ -31,36 +29,7 @@ You can check the [latest version](https://pypi.python.org/pypi/kaidoku) by **pi
 
 By invoking kaidoku, you get into kaidoku command prompt. You can get help of the command by typing 'h'.
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-###### [](#header-6)Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
+This is a program in development. Document is to be written in this page.
 
 ### Logics
 
@@ -81,9 +50,9 @@ More logics to be implemented.
 
 ### External great sudoku sites
 
-- https://www.websudoku.com/
-- http://www.sudoku-solutions.com/
-- http://www.sudokuwiki.org
+- [Web sudoku](https://www.websudoku.com/)
+- [sudoku-solutions.com](http://www.sudoku-solutions.com/)
+- [SudokuWiki.org](http://www.sudokuwiki.org)
 
 ```
 The final element.
