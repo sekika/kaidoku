@@ -512,7 +512,7 @@ def show(c, verbose, config):
             label += ': solution'
         else:
             label += ': move ' + str(len(move))
-    if c == 'c' or c == 'n' or c == 'p' or c == 'initial' or c.isdigit():
+    if c == 'c' or c == 'n' or c == 'p' or c == 'j' or c == 'initial' or c.isdigit():
         print(label)
         print(output(s))
         if blank(s) == 0:
