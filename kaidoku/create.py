@@ -107,7 +107,7 @@ def reanalyze(file, file2):
 def append_database(file, giveup, n, symmetry):
     """Create new problems and append to database."""
     maxtime = 3
-    maxdepth = 4
+    maxdepth = 25
 
     if file == '':
         return
@@ -115,28 +115,31 @@ def append_database(file, giveup, n, symmetry):
     if outfile == 'error':
         print('Unable to write a file:', file)
         return
+        outfile.close
     start = datetime.datetime.now()
     for i in range(n):
-        s, level = create(maxdepth,  maxtime, symmetry)
-        sudoku = short(s)
-        print('.', end='', flush=True)
-        if level == 0:
-            give = openappend(giveup)
-            if outfile == 'error':
-                print('Unable to write a file:', giveup)
-                return
-            give.write('g ' + str(maxtime) + ' ' + sudoku + '\n')
-            give.close
-        else:
-            outfile.write(str(level) + ' ' + sudoku + '\n')
+        level = 0
+        while level == 0:
+            s, level = create(maxdepth,  maxtime, symmetry)
+            sudoku = short(s)
+            if level == 0:
+                give = openappend(giveup)
+                if outfile == 'error':
+                    print('Unable to write a file:', giveup)
+                    return
+                give.write('g ' + str(maxtime) + ' ' + sudoku + '\n')
+                give.close()
+            else:
+                print('.', end='', flush=True)
+                outfile = open(file, 'a')
+                outfile.write(str(level) + ' ' + sudoku + '\n')
+                outfile.flush()
+                outfile.close()
         if (i + 1) % 10 == 0 and i + 1 < n:
             dt = datetime.datetime.now() - start
             t = dt.seconds + float(dt.microseconds) / 1000000
             print(' {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
                 i + 1, t, t / (i + 1)))
-            outfile.close
-            outfile = open(file, 'a')
-    outfile.close
     dt = datetime.datetime.now() - start
     t = dt.seconds + float(dt.microseconds) / 1000000
     print('\nFinished. {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
@@ -253,18 +256,11 @@ def create(maxdepth, maxtime, symmetry):
             s[80 - i] = s2[0][80 - i]
         s = shuffle(s)
         s2 = copy.copy(s)
-        if blank(s) < 27:
-            s2, message, level, solved, err = solve(
+        s2, message, level, solved, err = solve(
                 s2, 0, 999, maxtime)  # creating mode
-        else:
-            if blank(s) < 30:
-                s2, message, level, solved, err = solve(
-                    s2, 0, maxdepth, maxtime)
-            else:
-                s2, message, level, solved, err = solve(s2, 0, 3, maxtime)
 
-    if blank(s) < 27:  # Recalculate to determine level
-        s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
+    s2 = copy.copy(s)
+    s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
 
     if level < 3:
         s = make_easy(s)
