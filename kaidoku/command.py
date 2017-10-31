@@ -520,7 +520,7 @@ def show(c, verbose, config):
         else:
             print('Type 3 digits (row, column, number) to put a number. i for hint.')
         if datadir != '':
-            size = 'small'
+            size = 'medium'
             datadir = checkdatadir(datadir)
             config['datadir'] = datadir
             imgfile = datadir + '/current.jpg'
@@ -541,10 +541,10 @@ def show(c, verbose, config):
         config['datadir'] = datadir
         imgfile = datadir + '/current.jpg'
         if c == 'jpg':
-            size = 'small'
+            size = 'medium'
             mark = False
         if c == 'jm':
-            size = 'medium'
+            size = 'large'
             mark = True
         font = config['font']
         textcolor = config['color']
@@ -586,7 +586,7 @@ def show(c, verbose, config):
                 if datadir == '':
                     print('Use jm command to see the diagram of candidates.')
                 else:
-                    size = 'medium'
+                    size = 'large'
                     datadir = checkdatadir(datadir)
                     config['datadir'] = datadir
                     imgfile = datadir + '/current.jpg'

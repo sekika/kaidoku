@@ -8,7 +8,7 @@ from PIL import ImageFont
 
 def drawimage(s, p, label, size, imgfile, textcolor, font, mark):
     """Draw sudoku image."""
-    scalelist = {'small': 1, 'medium': 1.5, 'large': 2, 'x-large': 3}
+    scalelist = {'small': 0.8, 'medium': 1, 'large': 1.5, 'x-large': 2}
     if size in scalelist:
         scale = scalelist[size]
     else:
