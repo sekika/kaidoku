@@ -107,7 +107,7 @@ def reanalyze(file, file2):
 def append_database(file, giveup, n, symmetry):
     """Create new problems and append to database."""
     maxtime = 3
-    maxdepth = 999  # Creating mode
+    maxdepth = 4
 
     if file == '':
         return
@@ -211,7 +211,8 @@ def create(maxdepth, maxtime, symmetry):
         if not err:
             s2 = copy.copy(s)
             s3 = copy.copy(s)
-            s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
+            # Calculate with maxdepth = 999, creating mode
+            s2, message, level, solved, err = solve(s2, 0, 999, maxtime)
             if not solved and err:
                 return (s3, 0)
             if solved:
@@ -252,7 +253,18 @@ def create(maxdepth, maxtime, symmetry):
             s[80 - i] = s2[0][80 - i]
         s = shuffle(s)
         s2 = copy.copy(s)
-        s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime + 3)
+        if blank(s) < 27:
+            s2, message, level, solved, err = solve(
+                s2, 0, 999, maxtime)  # creating mode
+        else:
+            if blank(s) < 30:
+                s2, message, level, solved, err = solve(
+                    s2, 0, maxdepth, maxtime)
+            else:
+                s2, message, level, solved, err = solve(s2, 0, 3, maxtime)
+
+    if blank(s) < 27:  # Recalculate to determine level
+        s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
 
     if level < 3:
         s = make_easy(s)
@@ -363,7 +375,6 @@ def countproblem(file):
 
 def reanalyze_giveup(giveup, t):
     """Reanalyze giveup data."""
-    maxdepth = 999  # Creating mode
     give = givedata(giveup, t)
     for i in give[4]:
         print('Invalid data: ', i)
@@ -381,6 +392,7 @@ def reanalyze_giveup(giveup, t):
         print('Analyzing ... ', end='', flush=True)
         start = datetime.datetime.now()
         dt = datetime.datetime.now() - start
+        maxdepth = blank(s)
         s, message, level, solved, err = solve(s, 0, maxdepth, t)
         if solved:
             if err:  # Discard multiple solutions
