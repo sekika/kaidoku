@@ -251,8 +251,12 @@ def command(arg, config):
             n = 10
         file = os.path.expanduser(config["file"])
         giveup = os.path.expanduser(config["giveup"])
+        if config['symmetry'] == 'y':
+            symmetry = True
+        else:
+            symmetry = False
         print('Creating {0} new problems.'.format(n))
-        append_database(file, giveup, n)
+        append_database(file, giveup, n, symmetry)
         return config
     if c == 'ba':  # add bookmark
         file = os.path.expanduser(config["file"])
@@ -435,7 +439,9 @@ def command(arg, config):
     if c == 'sp':
         config, err = show(c, 0, config)
         return config
-    if c == 'test':  # Test code for debugging
+    
+    # Following commands are for debugging and not in help
+    if c == 'test':
         config2 = copy.copy(config)
         print('Start testing commands.')
         for c in ['book', 'config', 'l 8', 'j 1', '131', '218', 'h', 'ha', 'c', 'u',
@@ -447,6 +453,18 @@ def command(arg, config):
         print('\nFinished testing.')
         print('Not tested: all, append, bp, ba, create, giveup, import, reanalyze')
         return config2
+
+    if c == 'createtest':
+        from kaidoku.create import create
+        maxtime = 3
+        maxdepth = 999  # Creating mode
+        start = datetime.datetime.now()
+        level = 0
+        while level == 0:
+            s, level = create(maxdepth,  maxtime, False)
+        print(output(s))
+        return config
+
     print('Invalid command. Type h for help.')
     return config
 

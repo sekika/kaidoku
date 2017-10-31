@@ -104,7 +104,7 @@ def reanalyze(file, file2):
     return
 
 
-def append_database(file, giveup, n):
+def append_database(file, giveup, n, symmetry):
     """Create new problems and append to database."""
     maxtime = 3
     maxdepth = 999  # Creating mode
@@ -117,7 +117,7 @@ def append_database(file, giveup, n):
         return
     start = datetime.datetime.now()
     for i in range(n):
-        s, level = create(maxdepth,  maxtime)
+        s, level = create(maxdepth,  maxtime, symmetry)
         sudoku = short(s)
         print('.', end='', flush=True)
         if level == 0:
@@ -132,13 +132,15 @@ def append_database(file, giveup, n):
         if (i + 1) % 10 == 0 and i + 1 < n:
             dt = datetime.datetime.now() - start
             t = dt.seconds + float(dt.microseconds) / 1000000
-            print(' {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(i + 1, t, t / (i + 1)))
+            print(' {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
+                i + 1, t, t / (i + 1)))
             outfile.close
             outfile = open(file, 'a')
     outfile.close
     dt = datetime.datetime.now() - start
     t = dt.seconds + float(dt.microseconds) / 1000000
-    print('\nFinished. {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(n, t, t / n))
+    print('\nFinished. {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
+        n, t, t / n))
     show_status(file)
 
     return
@@ -166,16 +168,27 @@ def show_status(file):
     return
 
 
-def create(maxdepth, maxtime):
+def create(maxdepth, maxtime, symmetry):
     """Create a new problem."""
     min = 17  # proven minimum numbers
-
     order = []
     for i in range(81):
         order.append(i)
     err = True
     while err:
         random.shuffle(order)
+        if symmetry:
+            order2 = []
+            j = 0
+            while len(order2) < min:
+                while order[j] in order2:
+                    j += 1
+                order2.append(order[j])
+                if order[j] != 40:
+                    order2.append(80 - order[j])
+            random.shuffle(order2)
+        else:
+            order2 = order[:min]
         n = []
         v = 0
         while (v < 8):
@@ -184,15 +197,15 @@ def create(maxdepth, maxtime):
                 v = len(set(n))
         s = [0] * 81
         for i in range(8):
-            s[order[i]] = i + 1
-        for i in range(8, min):
+            s[order2[i]] = i + 1
+        for i in range(8, len(order2)):
             p = set(range(1, 10))
-            for j in box()[i]:
+            for j in box()[order2[i]]:
                 if s[j] in p:
                     p.remove(s[j])
             if len(p) == 0:
                 continue
-            s[order[i]] = int(random.sample(p, 1)[0])
+            s[order2[i]] = int(random.sample(p, 1)[0])
         message, err = check(s)
         # if err: print ('err ', end='', flush=True) ##############
         if not err:
@@ -206,22 +219,37 @@ def create(maxdepth, maxtime):
             err = True
 
     while len(s2) == 2:
-
-        j = []
         p = possible(s)
-        maxp = 0
-        for i in range(81):
-            if s2[0][i] != s2[1][i]:
-                j.append([i, sum(p[i])])
-                if sum(p[i]) > maxp:
-                    maxp = sum(p[i])
-        k = []
-        for i in range(len(j)):
-            if j[i][1] == maxp:
-                k.append(j[i][0])
-        random.shuffle(k)
-        i = k[0]
+        if symmetry:
+            j = []
+            j2 = []
+            for i in range(81):
+                if s2[0][i] != s2[1][i]:
+                    j.append(i)
+                    if i < 41 and s2[0][80 - i] != s2[1][80 - i]:
+                        j2.append(i)
+            if len(j2) > 0:
+                j = j2
+            random.shuffle(j)
+            i = j[0]
+        else:
+            j = []
+            maxp = 0
+            for i in range(81):
+                if s2[0][i] != s2[1][i]:
+                    j.append([i, sum(p[i])])
+                    if sum(p[i]) > maxp:
+                        maxp = sum(p[i])
+            k = []
+            for i in range(len(j)):
+                if j[i][1] == maxp:
+                    k.append(j[i][0])
+            random.shuffle(k)
+            i = k[0]
+
         s[i] = s2[0][i]
+        if symmetry:
+            s[80 - i] = s2[0][80 - i]
         s = shuffle(s)
         s2 = copy.copy(s)
         s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime + 3)
@@ -250,14 +278,16 @@ def make_easy(s):
         bl = random.randint(24, 28)
     else:
         bl = random.randint(37, 43)
-    fill = blank(s) - bl
     cell = []
     for i in range(81):
         if s[i] == 0:
             cell.append(i)
     random.shuffle(cell)
-    for i in range(fill):
+    i = 0
+    while blank(s) > bl:
         s[cell[i]] = sol[cell[i]]
+        s[80 - cell[i]] = sol[80 - cell[i]]
+        i += 1
 
     return s
 

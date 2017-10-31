@@ -21,6 +21,13 @@ To do, or not to do?
 - Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
 - Write document
 
+Debug commands
+-----------------
+
+- test
+- createtest [verbose]
+
+
 Lint
 ---------------
 - autopep8 -i *.py
