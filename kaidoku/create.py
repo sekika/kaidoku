@@ -104,7 +104,7 @@ def reanalyze(file, file2):
     return
 
 
-def append_database(file, giveup, n, symmetry):
+def append_database(file, giveup, n, creation):
     """Create new problems and append to database."""
     maxtime = 3
     maxdepth = 25
@@ -120,7 +120,7 @@ def append_database(file, giveup, n, symmetry):
     for i in range(n):
         level = 0
         while level == 0:
-            s, level = create(maxdepth,  maxtime, symmetry)
+            s, level = create(maxdepth,  maxtime, creation)
             sudoku = short(s)
             if level == 0:
                 give = openappend(giveup)
@@ -171,9 +171,13 @@ def show_status(file):
     return
 
 
-def create(maxdepth, maxtime, symmetry):
+def create(maxdepth, maxtime, creation):
     """Create a new problem."""
-    min = 17  # proven minimum numbers
+    if creation['symmetry'] == 'y':
+        symmetry = True
+    else:
+        symmetry = False
+    min = int(creation['mincell'])
     order = []
     for i in range(81):
         order.append(i)

@@ -112,10 +112,12 @@ def readconfig(ConfFile):
     else:
         bookmark = {}
         config["bookmark"] = bookmark
-    if 'symmetry' in config:
-        symmetry = config['symmetry']
-    else:
-        config['symmetry'] = 'y'
+    if 'create' not in config:
+        config['create'] = {}
+    if 'symmetry' not in config['create']:
+        config['create']['symmetry'] = 'y'
+    if 'mincell' not in config['create']:
+        config['create']['mincell'] = 17
     if 'font' not in config:
         config['font'] = 'Arial'
     if 'color' not in config:

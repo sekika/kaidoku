@@ -251,12 +251,9 @@ def command(arg, config):
             n = 10
         file = os.path.expanduser(config["file"])
         giveup = os.path.expanduser(config["giveup"])
-        if config['symmetry'] == 'y':
-            symmetry = True
-        else:
-            symmetry = False
+        creation = config["create"]
         print('Creating {0} new problems.'.format(n))
-        append_database(file, giveup, n, symmetry)
+        append_database(file, giveup, n, creation)
         return config
     if c == 'ba':  # add bookmark
         file = os.path.expanduser(config["file"])
