@@ -30,12 +30,12 @@ def xwing(s, p, b, boxl, mirror, verbose):
         if len(double[m]) > 1:
             n = m // 162
             if len(double[m]) > 2:
-                message = 'This sudoku has no solution because '
-                + cell(double[m][0][0]) + ' or ' + cell(double[m][0][1])
-                + ' is ' + str(n) + ' and ' + cell(double[m][1][0]) + ' or '
-                + cell(
-                    double[m][1][1]) + ' is ' + str(n) + ' and '
-                + cell(double[m][2][0]) + ' or ' + cell(double[m][2][1])
+                message = 'This sudoku has no solution because ' \
+                + cell(double[m][0][0]) + ' or ' + cell(double[m][0][1]) \
+                + ' is ' + str(n) + ' and ' + cell(double[m][1][0]) + ' or ' \
+                + cell( \
+                    double[m][1][1]) + ' is ' + str(n) + ' and ' \
+                + cell(double[m][2][0]) + ' or ' + cell(double[m][2][1]) \
                 + ' is ' + str(n) + ', but all of them cannot be true.'
                 return (s, p, message, False, True)
             if n in wing:
