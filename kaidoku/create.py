@@ -261,7 +261,7 @@ def create(maxdepth, maxtime, creation):
         s = shuffle(s)
         s2 = copy.copy(s)
         s2, message, level, solved, err = solve(
-                s2, 0, 999, maxtime)  # creating mode
+            s2, 0, 999, maxtime)  # creating mode
 
     s2 = copy.copy(s)
     s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)

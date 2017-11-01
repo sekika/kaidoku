@@ -25,6 +25,10 @@ def main(argv=sys.argv[1:]):
 
     # Read user configuration
     config = readconfig(ConfFile)
+    # configuration file can be redirected
+    while 'redirect' in config:
+        ConfFile = os.path.expanduser(config['redirect'])
+        config = readconfig(ConfFile)
 
     # Kaidoku command line
     if (len(sys.argv)) == 1:
@@ -50,6 +54,8 @@ def main(argv=sys.argv[1:]):
 def readconfig(ConfFile):
     """Read configuration."""
     config = ConfigObj(os.path.expanduser(ConfFile), encoding='utf-8')
+    if 'redirect' in config:
+        return config
     if 'datadir' in config:
         datadir = os.path.expanduser(config['datadir'])
         if not os.path.isdir(datadir):
