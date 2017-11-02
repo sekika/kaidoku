@@ -255,9 +255,9 @@ def create(maxdepth, maxtime, creation):
             random.shuffle(k)
             i = k[0]
 
-        s[i] = s2[0][i]
+        s[i] = s2[1][i]
         if symmetry:
-            s[80 - i] = s2[0][80 - i]
+            s[80 - i] = s2[1][80 - i]
         s = shuffle(s)
         s2 = copy.copy(s)
         s2, message, level, solved, err = solve(
