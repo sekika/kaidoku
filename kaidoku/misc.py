@@ -13,7 +13,7 @@ def conv(problem):
             else:
                 s = s + [0]
         if len(s) != 81:
-            return ('Error in input.')
+            return ('Error in input.', True)
     else:
         for line in problem.split(","):
             if (len(line)) == 9:

@@ -388,7 +388,13 @@ def reanalyze_giveup(giveup, t):
         if len(give[3]) == 0:
             break
         prob = give[3][0][1]
-        s, err = conv(prob)
+        err = True
+        while err:
+            s, err = conv(prob)
+            if err:
+                give = givedata(giveup, t)
+                give[3] = give[3][1:]
+                writegive(giveup, give)
         print('Analyzing ... ', end='', flush=True)
         start = datetime.datetime.now()
         dt = datetime.datetime.now() - start
