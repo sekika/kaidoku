@@ -43,6 +43,7 @@ def advancedhelp():
     message += 'config          : show configuration\n'
     message += 'create [numbers]: create new problems and append to book\n'
     message += 'giveup [sec]    : reanalyze giveup positions\n'
+    message += 'html            : see image in web browzer as html\n'
     message += 'jpg             : draw jpeg image\n'
     message += 'jm              : draw jpeg image with mark\n'
     message += 'import          : import file2\n'

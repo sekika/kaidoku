@@ -32,6 +32,8 @@ import sys
 
 def command(arg, config):
     """Interpret command."""
+    import shutil
+    import webbrowser
     c = arg[0]
     if c == 'a' or c == 'ac':
         bookmark = config["bookmark"]
@@ -399,6 +401,13 @@ def command(arg, config):
         giveup = os.path.expanduser(config["giveup"])
         reanalyze_giveup(giveup, t)
         return config
+    if c == 'html':
+        datadir = config['datadir']
+        html = os.path.join(datadir, 'sudoku.html')
+        here = os.path.abspath(os.path.dirname(__file__))
+        shutil.copyfile(os.path.join(here, 'data/sudoku.html'), html)
+        webbrowser.open('file://' + html)
+        return config
     if c == 'import':
         file = os.path.expanduser(config["file"])
         file2 = os.path.expanduser(config["file2"])
@@ -436,7 +445,7 @@ def command(arg, config):
     if c == 'sp':
         config, err = show(c, 0, config)
         return config
-    
+
     # Following commands are for debugging and not in help
     if c == 'test':
         config2 = copy.copy(config)
@@ -541,7 +550,8 @@ def show(c, verbose, config):
             imgfile = datadir + '/current.jpg'
             font = config['font']
             textcolor = config['color']
-            err = drawimage(s, '', label, size, imgfile, textcolor, font, False)
+            err = drawimage(s, '', label, size, imgfile,
+                            textcolor, font, False)
             if not err:
                 print('Image file created: ' + str(imgfile))
 
@@ -608,7 +618,8 @@ def show(c, verbose, config):
                     p = possible(s)
                     font = config['font']
                     textcolor = config['color']
-                    err = drawimage(s, p, label, size, imgfile, textcolor, font, True)
+                    err = drawimage(s, p, label, size, imgfile,
+                                    textcolor, font, True)
                     if not err:
                         print('Image file: ' + str(imgfile))
                 print('For more hints, type ii.')
