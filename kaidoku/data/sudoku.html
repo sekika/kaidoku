@@ -1,17 +1,37 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Sudoku</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sudoku</title>
     <script language="JavaScript">
     <!--
+    var timer;
     function tm(){
-        tm = setInterval("location.reload()",5000);
+        second = document.forms.input.second.value;
+        ms = second * 1000;
+        if (timer) clearInterval(timer);
+        if (ms>0) timer = setInterval(reload,ms);
+    }
+    function reload(){
+        image = document.getElementById("update");
+        src = image.src;
+        src = src.replace(/\?.*$/,"");
+        image.src = src + '?' + (new Date()).getTime();
     }
     //-->
     </script>
 </head>
 <body onLoad="tm()">
-<p>Sudoku: refresh every 5 seconds.</p>
-<img src="current.jpg" alt="sudoku">
-<p>Put this file with the same directory of current.jpg.</p>
+<p>Sudoku image by
+<a href="https://sekika.github.io/kaidoku/">Kaidoku</a></p>
+<img id="update" src="current.jpg" alt="sudoku">
+<form name="input" id="input">
+<p>
+Refresh every
+<input name="second" id="second" size="5" value="5" onkeyup="tm()">
+seconds.</p>
+</form>
 </body>
 </html>
