@@ -553,7 +553,7 @@ def show(c, verbose, config):
             err = drawimage(s, '', label, size, imgfile,
                             textcolor, font, False)
             if not err:
-                print('Image file created: ' + str(imgfile))
+                print('See image by "html".')
 
     if c == 'a' or c == 'ac':
         print('\n' + label)
@@ -575,8 +575,8 @@ def show(c, verbose, config):
         textcolor = config['color']
         err = drawimage(s, p, label, size, imgfile, textcolor, font, mark)
         if not err:
-            print('Image file created: ' + imgfile)
-    if c[0] == 'i' or c == 'sp':  # prepare solving
+            print('See image by "html".')
+    if c == 'i' or c == 'ii' or c == 'iii' or c == 'sp':  # prepare solving
         if blank(s) == 0:
             print('Already solved.')
             return config, True
@@ -596,9 +596,10 @@ def show(c, verbose, config):
         blank1 = blank(s)
         start = datetime.datetime.now()
         endtime = start + datetime.timedelta(seconds=maxtime)
-    if c[0] == 'i':  # show hint
+    if c == 'i' or c == 'ii' or c == 'iii':  # show hint
+        s2 = copy.copy(s)
         s2, p, message, logic, depth, found, err = solveone(
-            s, p, 4, 0, blank1, endtime, b, pb)
+            s2, p, 4, 0, blank1, endtime, b, pb)
         if logic == 'Naked single' or logic == 'Hidden single':
             if logic == 'Naked single':
                 print('Look at {0}. What number is available?'.format(
@@ -621,14 +622,14 @@ def show(c, verbose, config):
                     err = drawimage(s, p, label, size, imgfile,
                                     textcolor, font, True)
                     if not err:
-                        print('Image file: ' + str(imgfile))
+                        print('See image by "html".')
                 print('For more hints, type ii.')
             if c == 'ii' or c == 'iii':
                 logi = [logic]
                 mes = [message]
                 while blank(s2) == blank1:
-                    s, p, message, logic, depth, found, err = solveone(
-                        s, p, 4, 0, blank1, endtime, b, pb)
+                    s2, p, message, logic, depth, found, err = solveone(
+                        s2, p, 4, 0, blank1, endtime, b, pb)
                     logi.append(logic)
                     mes.append(message)
                 if c == 'ii':
@@ -656,6 +657,7 @@ def show(c, verbose, config):
             else:
                 s = s2
         print('\n' + output(s))
+        config, err = show('jpg', 0, config)
     return config, False
 
 
