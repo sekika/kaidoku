@@ -587,7 +587,7 @@ def show(c, verbose, config):
                 print('This position has multiple solutions.')
             else:
                 print(
-                    'There is no solution for this position.'
+                    'There is no solution for this position. '
                     + 'You can take back one move with b.')
             return config, True
         p = possible(s)
