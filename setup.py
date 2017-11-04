@@ -34,7 +34,7 @@ setup(
         'Topic :: Games/Entertainment :: Puzzle Games'
     ],
     packages=['kaidoku'],
-    package_data={'kaidoku': ['data/sudoku.txt', 'data/system.ini']},
+    package_data={'kaidoku': ['data/sudoku.*', 'data/system.ini']},
     install_requires=['ConfigObj', 'pillow', 'pyx'],
     entry_points={  
         'console_scripts':  
