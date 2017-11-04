@@ -648,11 +648,13 @@ def show(c, verbose, config):
                 s, p, 4, 0, blank(s), endtime, b, pb)
             if logic == 'Naked single' or logic == 'Hidden single':
                 print(message)
-            for i in range(81):
-                if s[i] != s2[i]:
-                    j = (i // 9) * 10 + i % 9 + 11
-                    m = j * 10 + s[i]
-                    move.append(m)
+                for i in range(81):
+                    if s[i] != s2[i]:
+                        j = (i // 9) * 10 + i % 9 + 11
+                        m = j * 10 + s[i]
+                        move.append(m)
+            else:
+                s = s2
         print('\n' + output(s))
     return config, False
 
