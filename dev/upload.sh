@@ -5,8 +5,14 @@ CURRENT=`grep ^version ../kaidoku/data/system.ini | sed -e 's/^.*=//' | sed -e '
 echo 'Development version: '$CURRENT
 if [ $LATEST = $CURRENT ]; then
   echo 'Change version in ../kaidoku/data/system.ini to upload.'
-  exit
 fi
+echo "Rewriting document"
+cd ../docs
+cat _config.yml | sed -e "s/^version:$/version: $CURRENT/" > tmp
+mv tmp _config.yml
+git add _config.yml
+git commit -m "version "$CURRENT
+git push
 echo "Making packages."
 cd ..
 python3 setup.py sdist
