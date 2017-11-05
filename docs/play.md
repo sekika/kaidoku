@@ -84,5 +84,23 @@ Now row 2 has only one blank cell, and it is easy to see that R2C7 is 8. Column 
 
 ![](img/2-1-6.jpg)
 
+## Notifying a mistake
+
+When you put a number that is unable to be placed, the number is not placed. For example if you type `722` in this situation, warning message is shown as follows.
+
+    kaidoku-{{ site.version }}> 722
+    Both R7C2 and R7C9 have the same value of 2.
+
+## Take back a move
+
+You can always erase a number that was written at the last time. Writing a number is regarded as a "move", and we call it "take back a move". You can take back as many move as possible, until the initial position.
+
+## Finish a problem and go to next problem
+
+This problem can be solved with only the naked single logic. When you fill out all the blank cells, a massage appears that
+
+    Now this problem is solved !
+
+You can go to the next problem with `n`.
 
 [Home Page](./)
