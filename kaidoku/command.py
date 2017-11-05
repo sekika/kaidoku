@@ -57,6 +57,7 @@ def command(arg, config):
             return config
         config["move"] = move[:len(move) - 1]
         config, err = show(c, 0, config)
+        config = command(['c'], config)
         return config
     if c == 'c' or c == 'u' or c == 'jpg' or c == 'jm':
         config, err = show(c, 0, config)
