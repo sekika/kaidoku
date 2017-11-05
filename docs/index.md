@@ -2,7 +2,7 @@
 layout: default
 ---
 
-**Kaidoku** can solve **sudoku** puzzles as shown in the figure, play with the puzzles and create sudoku puzzles with a command-line interface.
+**Kaidoku** can solve [sudoku](rule) puzzles as shown in the figure, play with the puzzles and create sudoku puzzles with a command-line interface.
 
 ![](img/3-1.jpg)
 
