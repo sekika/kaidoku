@@ -29,6 +29,15 @@ def main(argv=sys.argv[1:]):
     while 'redirect' in config:
         ConfFile = os.path.expanduser(config['redirect'])
         config = readconfig(ConfFile)
+    # overwrite configuration
+    if 'overwrite' in config:
+        overwrite = os.path.expanduser(config['overwrite'])
+        config2 = readconfig(overwrite)
+        for i in config2:
+            if i != 'redirect':
+                config[i] = config2[i]
+    else:
+        config2 = {}
 
     # Kaidoku command line
     if (len(sys.argv)) == 1:
@@ -69,6 +78,7 @@ def readconfig(ConfFile):
     config['datadir'] = datadir
     if 'file' in config:
         file = os.path.expanduser(config["file"])
+        print (file) #####
         try:
             input = open(file, 'r')
             input.close()
