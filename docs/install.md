@@ -58,7 +58,6 @@ b   : take Back one move
 c   : show Current position
 i   : show hInt for current position
 q   : Quit kaidoku
-u   : show URL of the current position
 
 (continues)
 

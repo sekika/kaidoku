@@ -16,8 +16,7 @@ def helpmessage():
     message += 'b   : take Back one move\n'
     message += 'c   : show Current position\n'
     message += 'i   : show hInt for current position\n'
-    message += 'q   : Quit kaidoku\n'
-    message += 'u   : show URL of the current position\n\n'
+    message += 'q   : Quit kaidoku\n\n'
     message += '[Select problem]\n'
     message += 'j num  : Jump to problem num\n'
     message += 'n      : Next problem\n'
@@ -51,5 +50,6 @@ def advancedhelp():
     message += 'maxtime [sec]   : set maximum time for analyzing a position (todo)\n'
     message += 'reanalyze       : reanalyze whole book\n'
     message += 'solve pos [verb]: solve a specified position\n'
-    message += 'sp              : Solve Partially with naked or hidden single'
+    message += 'sp              : Solve Partially with naked or hidden single\n'
+    message += 'u               : show URL of the current position'
     return message
