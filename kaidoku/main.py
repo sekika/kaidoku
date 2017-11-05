@@ -69,7 +69,6 @@ def readconfig(ConfFile):
     config['datadir'] = datadir
     if 'file' in config:
         file = os.path.expanduser(config["file"])
-        print (file) #####
         try:
             input = open(file, 'r')
             input.close()
