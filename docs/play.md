@@ -103,4 +103,7 @@ This problem can be solved with only the naked single logic. When you fill out a
 
 You can go to the next problem with `n`.
 
+    kaidoku-{{ site.version }}> n
+    Level 2 No. 2
+
 [Home Page](./)
