@@ -4,6 +4,8 @@ layout: default
 
 # How to install and get started
 
+Latest version of Kaidoku is **{{ site.katex-version }}**.
+
 ## Install
 
 Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
