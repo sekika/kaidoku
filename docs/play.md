@@ -95,6 +95,10 @@ When you put a number that is unable to be placed, the number is not placed. For
 
 You can always erase a number that was written at the last time. Writing a number is regarded as a "move", and we call it "take back a move". You can take back as many move as possible, until the initial position.
 
+## Quit and restart
+
+You can always quit the game by `q`. The status is saved in configuration file, and when you kaidoku next time, you can start from the position where you quitted last time. Just type `c` or `html` to show the position and continue.
+
 ## Finish a problem and go to next problem
 
 This problem can be solved with only the naked single logic. When you fill out all the blank cells, a massage appears that
