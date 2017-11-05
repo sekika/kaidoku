@@ -6,7 +6,7 @@ layout: default
 
 ## Install Python 3
 
-Python 3 is needed to be installed before installing kaidoku. Install Python 3 by
+Python 3 should be installed before installing kaidoku. Install Python 3 by
 
 - Download and install from [Python official page](https://www.python.org/).
 - If you are using [Homebrew](https://brew.sh/) on macOS, just run `brew install python3`
