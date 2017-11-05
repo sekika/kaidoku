@@ -66,11 +66,23 @@ When you want to know which number is to be placed in a certain cell, you scan t
 
 Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits (row, column, number) to put a number.**. You specify row, column, and number to place in this order. In this case, row is 2, column is 9, number is 9, and therefore you type `299`.
 
-    kaidoku-0.2.2> 299
+    kaidoku-{{ site.version }}> 299
 
 The ascii image of the board is shown and the image file shown in the html file is update as follows.
 
 ![](img/2-1-1.jpg)
+
+## Keep on solving
+
+Now row 2 has only one blank cell, and it is easy to see that R2C7 is 8. Column 9 has only one blank cell and R5C9 is 1. By the naked single logic, R8C1 is 6. After that, column 1 has only one blank cell and R5C1 is 4. Row 8 has only one blank cell and R8C3 is 9. Put these numbers as follows.
+
+    kaidoku-{{ site.version }}> 278
+    kaidoku-{{ site.version }}> 591
+    kaidoku-{{ site.version }}> 816
+    kaidoku-{{ site.version }}> 514
+    kaidoku-{{ site.version }}> 839
+
+![](img/2-1-6.jpg)
 
 
 [Home Page](./)
