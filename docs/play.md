@@ -51,4 +51,26 @@ Now this image file is created as current.jpg in the data directory.
 
 Now run `html` and a html file showing this image file is opened with your default web browser. The html file reloads the image file every 2 seconds (interval can be adjusted with a text box). From now on, as you proceed with this problem, the image file is updated and the html file reloads, so that it is easy to follow the change in the state of the board.
 
+## Put a number
+
+Now we are ready to play. Look at the above figure and think where to start.
+
+Look at **row 2, column 9**. Here, it means that
+
+- **Row 2** means a 2nd row from the top
+- **Column 9** means a 9th column from the left
+
+It can also be written as **R2C9**. Scan row 2. It has all the digits from 1 to 9 except 8 and 9. Therefore, R2C9 should have 8 or 9. In column 9, there is 8 on R8C9, and therefore R2C9 should not be 8. Therefore, R2C9 should be 9.
+
+When you want to know which number is to be placed in a certain cell, you scan the same row, column, and box. From the digits 1 to 9, the number already filled in the same row, column, and box is removed from the candidate. If there is a unique candidate, that is the number to be filled in that cell. This logic is called **naked single**. By using the naked single logic, R2C9 is 9.
+
+Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits (row, column, number) to put a number.**. You specify row, column, and number to place in this order. In this case, row is 2, column is 9, number is 9, and therefore you type `299`.
+
+    kaidoku-0.2.2> 299
+
+The ascii image of the board is shown and the image file shown in the html file is update as follows.
+
+![](img/2-1-1.jpg)
+
+
 [Home Page](./)
