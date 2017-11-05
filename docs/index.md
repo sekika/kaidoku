@@ -25,7 +25,7 @@ layout: default
 Kaidoku is a program in development. Complete document is not available yet. Here document is written little by little.
 
 - [How to install and get started](install)
-- How to play with a sudoku puzzle
+- [How to play with a sudoku puzzle](play)
 - Getting hint on basic logic
 - Select a problem of a specified difficulty level
 - [Logics for solving sudoku puzzles used in this program](logic)

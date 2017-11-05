@@ -6,7 +6,7 @@ layout: default
 
 ## Showing a problem
 
-We assume that [you installed kaidoku and got into kaidoku prompt](install). Just type 'c' and a problem is shown.
+We assume that [you installed kaidoku and got into kaidoku prompt](install). Just type `c` and a problem is shown.
 
 ```
 kaidoku-{{ site.version }}> c
