@@ -31,4 +31,16 @@ Type 3 digits (row, column, number) to put a number. i for hint.
 kaidoku-{{ site.version }}>
 ```
 
+Kaidoku is shipped with sudoku problems of different levels of difficulty. At the first time you run kaidoku, level 2 is selected. Therefore, "Level 2 No. 1" is shown.
+
+You can now start solving this problem, but before doing it, you may want to see the image of the problem. At first, you should explicitly create an image file with `jpg` command to designate the directory of the data file. Default data directory is `~/kaidoku`. If you prefer other directory, input the directory when it is prompted.
+
+```
+kaidoku-{{ site.version }}> jpg
+Data directory does not exist.
+Input name of the data directory (default: ~/kaidoku):
+See image by "html".
+kaidoku-{{ site.version }}>
+```
+
 [Home Page](./)

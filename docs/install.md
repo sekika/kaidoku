@@ -49,7 +49,7 @@ from the terminal emulator. You get into kaidoku command prompt.
     Type h for help, c for showing a problem, q for quit.
     kaidoku-{{ site.version }}>
 
-You can get help of the command by typing 'h' (and Enter key), like this
+You can get help of the command by typing `h` (and Enter key), like this
 
 ```
 kaidoku-{{ site.version }}> h
@@ -64,6 +64,6 @@ q   : Quit kaidoku
 kaidoku-{{ site.version }}> 
 ```
 
-You can quit from the kaidoku prompt by typing 'q'.
+You can quit from the kaidoku prompt by typing `q`.
 
 [Home Page](./)
