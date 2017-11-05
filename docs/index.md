@@ -31,7 +31,14 @@ By invoking kaidoku, you get into kaidoku command prompt. You can get help of th
 
 Kaidoku is a program in development. Document is not written yet. It will be written here.
 
-- [Logics](logic)
+- How to play
+- Getting hint on basic logic
+- [Logics for solving sudoku puzzles](logic)
+- Levels and logics
+- Getting hint on advanced logic and showing candidates
+- Bookmark management
+- Play and analyze external sudoku puzzles
+- Create new sudoku puzzles
 
 ## External sudoku sites
 
