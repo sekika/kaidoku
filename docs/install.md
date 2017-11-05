@@ -4,7 +4,7 @@ layout: default
 
 # How to install and get started
 
-Latest version of Kaidoku is **{{ site.katex-version }}**.
+Latest version of Kaidoku is **{{ site.version }}**.
 
 ## Install
 
