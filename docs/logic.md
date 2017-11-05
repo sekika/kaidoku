@@ -28,7 +28,7 @@ For more difficult problems, these logics do not directly lead to solution, and 
 
 ## Logics implemented in Kaidoku
 
-Actually the easiest way for the computers to solve sudoku is to use only the naked single logic and search algorithm, because the computers can make so many times of trial and errors quite easily. However, kaidoku uses many logics to find the best way for humans to solve a sudoku puzzles, and use the search algorithm as a last resort.
+Actually the easiest way for the computers to solve sudoku is to use only the naked single logic and search algorithm, because the computers can make so many times of trial and errors quite easily. However, kaidoku uses many logics to find the best way for humans to solve a sudoku puzzle, and use the search algorithm as a last resort.
 
 Following logics are currently implemented in Kaidoku. These logics are applied in this order.
 
