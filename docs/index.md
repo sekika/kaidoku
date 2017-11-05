@@ -16,11 +16,9 @@ layout: default
 
 Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
 
-```
-pip3 install kaidoku
-```
+    pip3 install kaidoku
 
-You can check the [latest version](https://pypi.python.org/pypi/kaidoku) by **pip3 search kaidoku** and update to the latest version by **pip3 install -U kaidoku**.
+You can check the [latest version](https://pypi.python.org/pypi/kaidoku) by `pip3 search kaidoku` and update to the latest version by `pip3 install -U kaidoku`.
  
 
 ## [](#header-2)Getting started
