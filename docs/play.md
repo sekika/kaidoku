@@ -43,4 +43,9 @@ See image by "html".
 kaidoku-{{ site.version }}>
 ```
 
+Now this image file is created as current.jpg in the data directory.
+
+![](img/2-1.jpg)
+
+
 [Home Page](./)
