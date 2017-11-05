@@ -17,13 +17,17 @@ You can check your installed version of python 3 by
 
 ## Install Kaidoku
 
-[Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
-
 After installing python 3, install kaidoku by running
 
     pip3 install kaidoku
 
-from terminal emulator. You can check the latest version by
+from terminal emulator.
+
+## Update Kaidoku
+
+[Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
+
+You can check the latest version of kaidoku by
 
     pip3 search kaidoku
 
@@ -45,6 +49,22 @@ from the terminal emulator. You get into kaidoku command prompt.
     Type h for help, c for showing a problem, q for quit.
     kaidoku-{{ site.version }}>
 
-You can get help of the command by typing 'h'.
+You can get help of the command by typing 'h' (and Enter key), like this
+
+```
+kaidoku-0.2.2> h
+246 : In the cell of row 2 column 4, put number 6
+b   : take Back one move
+c   : show Current position
+i   : show hInt for current position
+q   : Quit kaidoku
+u   : show URL of the current position
+
+(continues)
+
+kaidoku-0.2.2> 
+```
+
+You can quit from the kaidoku prompt by typing 'q'.
 
 [Home Page](./)
