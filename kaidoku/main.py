@@ -115,6 +115,9 @@ def readconfig(ConfFile):
         config["move"] = []
     if 'bookmark' in config:
         bookmark = config["bookmark"]
+        # If filename is written in bookmark, read bookmark from the file
+        if type(bookmark) is str:
+            config['bookmark'] = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
     else:
         bookmark = {}
         config["bookmark"] = bookmark
