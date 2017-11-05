@@ -27,7 +27,6 @@ Debug commands
 - test
 - createtest [verbose]
 
-
 Lint
 ---------------
 - autopep8 -i *.py
@@ -35,7 +34,8 @@ Lint
 
 GitHub pages
 ---------------
-- Time machi theme https://github.com/pages-themes/time-machine
+
+- [Supported themes](https://pages.github.com/themes/)
 
 
 Reference
