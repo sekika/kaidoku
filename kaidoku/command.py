@@ -464,7 +464,6 @@ def command(arg, config):
         from kaidoku.create import create
         maxtime = 3
         maxdepth = 999  # Creating mode
-        start = datetime.datetime.now()
         level = 0
         while level == 0:
             s, level = create(maxdepth,  maxtime, False)
