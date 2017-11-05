@@ -6,9 +6,20 @@ layout: default
 
 [Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
 
-## Install
+## Install Python 3
 
-Python 3 is required. Install Python at https://www.python.org/ . After that, install kaidoku by running
+Python 3 is needed to be installed before installing kaidoku. Install Python 3 by
+
+- Download and install from [Python official page](https://www.python.org/).
+- If you are using [Homebrew](https://brew.sh/) on macOS, just run `brew install python3`
+
+You can check your installed version of python 3 by
+
+    python3 -V
+
+## Install Kaidoku
+
+After installing python 3, install kaidoku by running
 
     pip3 install kaidoku
 
