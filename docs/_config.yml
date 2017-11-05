@@ -2,5 +2,5 @@ title: Kaidoku
 description: Player, solver and creater of sudoku puzzles
 show_downloads: false
 google_analytics:
-theme: jekyll-theme-time-machine
+theme: jekyll-theme-merlot
 version: 0.2.2
