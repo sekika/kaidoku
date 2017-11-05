@@ -4,7 +4,7 @@ layout: default
 
 # How to install and get started
 
-Latest version of Kaidoku is **{{ site.version }}**.
+[Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
 
 ## Install
 
@@ -12,7 +12,7 @@ Python 3 is required. Install Python at https://www.python.org/ . After that, in
 
     pip3 install kaidoku
 
-from terminal emulator. You can check the [latest version](https://pypi.python.org/pypi/kaidoku) by
+from terminal emulator. You can check the latest version by
 
     pip3 search kaidoku
 
