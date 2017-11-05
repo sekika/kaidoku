@@ -52,7 +52,7 @@ from the terminal emulator. You get into kaidoku command prompt.
 You can get help of the command by typing 'h' (and Enter key), like this
 
 ```
-kaidoku-0.2.2> h
+kaidoku-{{ site.version }}> h
 246 : In the cell of row 2 column 4, put number 6
 b   : take Back one move
 c   : show Current position
@@ -62,7 +62,7 @@ u   : show URL of the current position
 
 (continues)
 
-kaidoku-0.2.2> 
+kaidoku-{{ site.version }}> 
 ```
 
 You can quit from the kaidoku prompt by typing 'q'.
