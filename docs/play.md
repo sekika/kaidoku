@@ -33,6 +33,8 @@ kaidoku-{{ site.version }}>
 
 Kaidoku is shipped with sudoku problems of different levels of difficulty. At the first time you run kaidoku, level 2 is selected. Therefore, "Level 2 No. 1" is shown.
 
+## Creating an image file
+
 You can now start solving this problem, but before doing it, you may want to see the image of the problem. At first, you should explicitly create an image file with `jpg` command to designate the directory of the data file. Default data directory is `~/kaidoku`. If you prefer other directory, input the directory when it is prompted.
 
 ```
@@ -47,5 +49,6 @@ Now this image file is created as current.jpg in the data directory.
 
 ![](img/2-1.jpg)
 
+Now run `html` and a html file showing this image file is opened with your default web browser. The html file reloads the image file every 2 seconds (interval can be adjusted with a text box). From now on, as you proceed with this problem, the image file is updated and the html file reloads, so that it is easy to follow the change in the state of the board.
 
 [Home Page](./)
