@@ -12,7 +12,13 @@ layout: default
 * **solver** of sudoku. It can solve a sudoku puzzle and show the procedure of solving a sudoku puzzle with various logics. It evaluates if a given puzzle is valid sudoku with unique solution.
 * **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself.
 
-[Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
+## Update
+
+[Latest version](https://pypi.python.org/pypi/kaidoku) is **{{ site.version }}**
+
+* 2017-11-05: Version 0.2.1 published.
+* 2017-11-04: Version 0.2.0 published.
+* 2017-10-28: Version 0.0.1 published.
 
 ## Document
 
