@@ -4,7 +4,7 @@ layout: default
 
 # Rule of sudoku
 
-**Sudoku**, also called **Number Place**, is a logic-based numberplacement puzzle. A problem of sudoku puzzle is made of 9x9 grid with digits from 1 to 9 partially filled as in the following figure.
+**Sudoku**, also called **Number Place**, is a logic-based number-placement puzzle. A problem of sudoku puzzle is made of 9x9 grid with digits from 1 to 9 partially filled as in the following figure.
 
 ![](img/3-1.jpg)
 
