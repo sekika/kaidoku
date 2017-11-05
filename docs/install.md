@@ -4,8 +4,6 @@ layout: default
 
 # How to install and get started
 
-[Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
-
 ## Install Python 3
 
 Python 3 is needed to be installed before installing kaidoku. Install Python 3 by
@@ -18,6 +16,8 @@ You can check your installed version of python 3 by
     python3 -V
 
 ## Install Kaidoku
+
+[Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
 
 After installing python 3, install kaidoku by running
 
@@ -37,7 +37,14 @@ Just run
 
     kaidoku
 
-from the terminal emulator. You get into kaidoku command prompt. You can get help of the command by typing 'h'.
+from the terminal emulator. You get into kaidoku command prompt.
 
+    $ kaidoku
+    Kaidoku - player, solver and creater of sudoku puzzles.
+              https://sekika.github.io/kaidoku/
+    Type h for help, c for showing a problem, q for quit.
+    kaidoku-{{ site.version }}>
 
-[back](./)
+You can get help of the command by typing 'h'.
+
+[Home Page](./)

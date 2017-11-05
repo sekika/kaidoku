@@ -12,4 +12,4 @@ Please obtain general information about sudoku by these great pages.
 - [SudokuWiki.org](http://www.sudokuwiki.org)
 
 
-[back](./)
+[Home Page](./)

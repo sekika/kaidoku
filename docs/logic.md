@@ -47,4 +47,4 @@ Following logics are currently implemented in Kaidoku. These logics are applied 
 
 More logics will be hopefully implemented.
 
-[back](./)
+[Home Page](./)
