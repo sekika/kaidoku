@@ -18,7 +18,7 @@ title: 解独 - 数独・ナンプレの解析プログラム
 
 ## 更新情報
 
-[最新バージョン](https://pypi.python.org/pypi/kaidoku) is **{{ site.version }}**
+[最新バージョン](https://pypi.python.org/pypi/kaidoku)は **{{ site.version }}** です。
 
 {% include update.html %}
 

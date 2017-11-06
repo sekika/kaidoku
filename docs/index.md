@@ -18,9 +18,7 @@ ref: index
 
 [Latest version](https://pypi.python.org/pypi/kaidoku) is **{{ site.version }}**
 
-* 2017-11-05: Version 0.2.2 published.
-* 2017-11-04: Version 0.2.0 published.
-* 2017-10-28: Version 0.0.1 published.
+{% include update.html %}
 
 ## Document
 
