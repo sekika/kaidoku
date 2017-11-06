@@ -2,6 +2,7 @@
 layout: default.ja
 lang: 日本語
 ref: rule
+permalink: /rule.ja
 ---
 
 # 数独・ナンプレのルール

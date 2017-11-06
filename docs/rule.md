@@ -2,6 +2,7 @@
 layout: default
 lang: English
 ref: rule
+permalink: /rule
 ---
 
 # Rule of sudoku

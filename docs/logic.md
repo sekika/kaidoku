@@ -1,5 +1,6 @@
 ---
 layout: default
+permalink: /logic
 ---
 
 # Logics for solving sudoku puzzle

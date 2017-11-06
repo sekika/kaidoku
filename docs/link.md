@@ -1,5 +1,6 @@
 ---
 layout: default
+permalink: /link
 ---
 
 # External sudoku sites

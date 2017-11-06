@@ -2,6 +2,7 @@
 layout: default
 lang: English
 ref: index
+permalink: /
 ---
 
 **Kaidoku** can solve [sudoku](rule) puzzles as shown in the figure, play with the puzzles and create sudoku puzzles with a command-line interface.

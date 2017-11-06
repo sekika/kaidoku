@@ -2,6 +2,7 @@
 layout: default
 lang: English
 ref: install
+permalink: /install
 ---
 
 # How to install and get started
