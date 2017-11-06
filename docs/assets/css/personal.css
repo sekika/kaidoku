@@ -4,5 +4,7 @@ ul.selector li {
   padding: 6px;
   background: #F6CC72;
   width: 100px;
+  align: right;
+  color: black;
   text-align: center;
 }
