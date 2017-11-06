@@ -3,6 +3,7 @@ layout: default.ja
 lang: 日本語
 ref: index
 permalink: /ja
+title: 解独 - 数独・ナンプレの解析プログラム
 ---
 
 **解独** (Kaidoku) は[数独・ナンプレ](rule.ja)を解析するプログラムです。コマンドラインから、図のようなパズルで遊び、解析し、創作することができます。 
