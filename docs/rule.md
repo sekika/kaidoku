@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: English
+ref: rule
 ---
 
 # Rule of sudoku
@@ -18,9 +20,11 @@ Sudoku puzzle should have a unique solution.
 
 # Variant
 
-The above mentioned rule is a sudoku rule adopted in Kaidoku program. There are many variant of the rule. For detail, please refer to
+The above mentioned rule is a standard sudoku rule adopted in Kaidoku program. There are many variant of the rule. For detail, please refer to
 
 - [Sudoku - Wikipedia](https://en.wikipedia.org/wiki/Sudoku)
 - [Sudoku by nikoli](http://nikoli.co.jp/en/puzzles/sudoku.html)
+
+- - -
 
 [Home Page](./)
