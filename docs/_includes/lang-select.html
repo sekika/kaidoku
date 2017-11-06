@@ -1,8 +1,5 @@
-<ul>
-{% assign pages=site.pages | where:"ref", page.ref | sort: 'lang' %}
-{% for page in pages %}
-  <li class="selector">
+<ul class="selector">{% assign pages=site.pages | where:"ref", page.ref | sort: 'lang' %}{% for page in pages %}
+  <li>
     <a href="{{ page.url  | relative_url }}" class="{{ page.lang }}">{{ page.lang }}</a>
-  </li>
-{% endfor %}
+  </li>{% endfor %}
 </ul>
