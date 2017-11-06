@@ -1,17 +1,17 @@
 ---
 layout: default
-lang: “ú–{Œê
+lang: æ—¥æœ¬èª
 ref: index
 ---
 
-**‰ğ“Æ**‚Í[”“ÆEƒiƒ“ƒvƒŒ](rule.ja)‚ğ‰ğÍ‚·‚éƒvƒƒOƒ‰ƒ€‚Å‚·BƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚©‚çA}‚Ì‚æ‚¤‚ÈƒpƒYƒ‹‚Å—V‚ÑA‰ğÍ‚µA‘nì‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B 
+**è§£ç‹¬**ã¯[æ•°ç‹¬ãƒ»ãƒŠãƒ³ãƒ—ãƒ¬](rule.ja)ã‚’è§£æã™ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§ã™ã€‚ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‹ã‚‰ã€å›³ã®ã‚ˆã†ãªãƒ‘ã‚ºãƒ«ã§éŠã³ã€è§£æã—ã€å‰µä½œã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚ 
 
 ![](img/3-1.jpg)
 
-**‰ğ“Æ**‚Í”“ÆEƒiƒ“ƒvƒŒ‚Ì
+**è§£ç‹¬**ã¯æ•°ç‹¬ãƒ»ãƒŠãƒ³ãƒ—ãƒ¬ã®
 
-* **ƒvƒŒƒCƒ„[**‚Å‚·BFX‚È“ï‚µ‚³‚Ì”“ÆEƒiƒ“ƒvƒŒ‚Å—V‚Ô‚±‚Æ‚ª‚Å‚«‚Ü‚·B¢‚Á‚½‚É‚Íƒqƒ“ƒg‚ğ‚à‚ç‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-* **‰ğÍÒ**‚Å‚·B It can solve a sudoku puzzle and show the procedure of solving a sudoku puzzle with various logics. It evaluates if a given puzzle is valid sudoku with unique solution.
+* **ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼**ã§ã™ã€‚è‰²ã€…ãªé›£ã—ã•ã®æ•°ç‹¬ãƒ»ãƒŠãƒ³ãƒ—ãƒ¬ã§éŠã¶ã“ã¨ãŒã§ãã¾ã™ã€‚å›°ã£ãŸæ™‚ã«ã¯ãƒ’ãƒ³ãƒˆã‚’ã‚‚ã‚‰ã†ã“ã¨ãŒã§ãã¾ã™ã€‚
+* **è§£æè€…**ã§ã™ã€‚ It can solve a sudoku puzzle and show the procedure of solving a sudoku puzzle with various logics. It evaluates if a given puzzle is valid sudoku with unique solution.
 * **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself.
 
 ## Update
