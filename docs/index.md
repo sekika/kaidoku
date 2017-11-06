@@ -7,7 +7,7 @@ permalink: /
 
 **Kaidoku** can solve [sudoku](rule) puzzles as shown in the figure, play with the puzzles and create sudoku puzzles with a command-line interface.
 
-![](img/3-1.jpg)
+![]({{'/img/3-1.jpg' | relative_url}})
 
 **Kaidoku** is a
 

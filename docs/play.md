@@ -47,7 +47,7 @@ kaidoku-{{ site.version }}>
 
 Now this image file is created as current.jpg in the data directory.
 
-![](img/2-1.jpg)
+![]({{'/img/2-1.jpg' | relative_url}})
 
 Now run `html` and a html file showing this image file is opened with your default web browser. The html file reloads the image file every 2 seconds (interval can be adjusted with a text box). From now on, as you proceed with this problem, the image file is updated and the html file reloads, so that it is easy to follow the change in the state of the board.
 
@@ -70,7 +70,7 @@ Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits
 
 The ascii image of the board is shown and the image file shown in the html file is update as follows.
 
-![](img/2-1-1.jpg)
+![]({{'/img/2-1-1.jpg' | relative_url}})
 
 ## Keep on solving
 
@@ -82,7 +82,7 @@ Now row 2 has only one blank cell, and it is easy to see that R2C7 is 8. Column 
     kaidoku-{{ site.version }}> 514
     kaidoku-{{ site.version }}> 839
 
-![](img/2-1-6.jpg)
+![]({{'/img/2-1-6.jpg' | relative_url}})
 
 ## Notifying a mistake
 
