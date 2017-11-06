@@ -27,8 +27,8 @@ permalink: /ja
 
 Kaidoku is a program in development. Complete document is not available yet. Here document is written little by little.
 
-- [Rule of sudoku](rule)
-- [How to install and get started](install)
+- [数独・ナンプレのルール](rule.ja)
+- [インストールと実行](install.ja)
 - [How to play with a sudoku puzzle](play)
 - Getting hint on basic logic
 - Select a problem of a specified difficulty level

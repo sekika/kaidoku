@@ -29,4 +29,4 @@ ref: rule
 
 - - -
 
-[Home Page](./)
+[ホームページ](./ja)

@@ -70,4 +70,4 @@ You can quit from the kaidoku prompt by typing `q`.
 
 - - -
 
-[Home Page](./)
+[ホームページ](./ja)
