@@ -2,6 +2,7 @@
 layout: default
 lang: 日本語
 ref: index
+permalink: /ja
 ---
 
 **解独**は[数独・ナンプレ](rule.ja)を解析するプログラムです。コマンドラインから、図のようなパズルで遊び、解析し、創作することができます。 
