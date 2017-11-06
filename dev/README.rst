@@ -18,7 +18,7 @@ To do, or not to do?
 
 - Implement additional logics
 - Fix bookmark redirect
-- Multilingual site
+- Multilingual site https://www.sylvaindurand.org/making-jekyll-multilingual/
 - Create PDF
 - Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
 - Write document
