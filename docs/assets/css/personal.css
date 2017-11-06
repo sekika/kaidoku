@@ -1,3 +1,8 @@
 ul.selector li {
-display: inline;
+  display: inline-block;
+  border: 1px solid #D35400;
+  padding: 10px;
+  background: #F39C12;
+  width: 100px;
+  text-align: center;
 }
