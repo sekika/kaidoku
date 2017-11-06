@@ -2,7 +2,7 @@
 layout: default.ja
 lang: 日本語
 ref: install
-permalink: /install.ja
+permalink: /ja/install
 ---
 
 # インストールと実行
