@@ -1,3 +1,5 @@
+baseurl: "https://sekika.github.io/kaidoku/"
+url: "https://sekika.github.io/kaidoku/"
 title: Kaidoku
 description: Player, solver and creater of sudoku puzzles
 show_downloads: false
