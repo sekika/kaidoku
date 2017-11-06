@@ -26,15 +26,15 @@ title: 解独 - 数独・ナンプレの解析プログラム
 
 解独は開発中のプログラムで、まだマニュアルは完成していません。このページで少しずつ作成しています。
 
-- [数独・ナンプレのルール](rule.ja)
-- [インストールと実行](install.ja)
-- [How to play with a sudoku puzzle](play)
+- [数独・ナンプレのルール](rule)
+- [インストールと実行](install)
+- [How to play with a sudoku puzzle](../play)
 - Getting hint on basic logic
 - Select a problem of a specified difficulty level
-- [Logics for solving sudoku puzzles used in this program](logic)
+- [Logics for solving sudoku puzzles used in this program](../logic)
 - Getting hint on advanced logics and showing candidates
 - Bookmark management
 - Play and analyze external sudoku problems
 - Create new sudoku problems
 - Managing configuration file
-- [External sudoku sites](link)
+- [External sudoku sites](../link)
