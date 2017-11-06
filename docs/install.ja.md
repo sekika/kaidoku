@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: default.ja
 lang: 日本語
 ref: install
 ---
