@@ -1,12 +1,12 @@
 ---
 layout: default
-lang: en
+lang: ja
 ref: install
 ---
 
-# How to install and get started
+# インストールと実行
 
-## Install Python 3
+## Python 3 のインストール
 
 Python 3 should be installed before installing kaidoku. Install Python 3 by
 
