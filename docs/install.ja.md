@@ -1,6 +1,6 @@
 ---
 layout: default
-lang: ja
+lang: 日本語
 ref: install
 ---
 
