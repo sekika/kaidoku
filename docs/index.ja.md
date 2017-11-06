@@ -13,20 +13,18 @@ title: 解独 - 数独・ナンプレの解析プログラム
 **解独**は数独・ナンプレの
 
 * **プレイヤー**です。色々な難しさの数独・ナンプレで遊ぶことができます。困った時にはヒントをもらうことができます。
-* **解析者**です。 It can solve a sudoku puzzle and show the procedure of solving a sudoku puzzle with various logics. It evaluates if a given puzzle is valid sudoku with unique solution.
-* **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself.
+* **解析者**です。与えられたパズルを様々なロジックによって解く手順を示します。唯一の正解を持つパズルであるかどうかを判定します。
+* **創作者**です。新しいパズルを作ることができます。 このプログラム自身で作ったパズルが同梱されています。
 
-## Update
+## 更新情報
 
-[Latest version](https://pypi.python.org/pypi/kaidoku) is **{{ site.version }}**
+[最新バージョン](https://pypi.python.org/pypi/kaidoku) is **{{ site.version }}**
 
-* 2017-11-05: Version 0.2.2 published.
-* 2017-11-04: Version 0.2.0 published.
-* 2017-10-28: Version 0.0.1 published.
+{% include update.html %}
 
-## Document
+## マニュアル
 
-Kaidoku is a program in development. Complete document is not available yet. Here document is written little by little.
+解独は開発中のプログラムで、まだマニュアルは完成していません。このページで少しずつ作成ていています。
 
 - [数独・ナンプレのルール](rule.ja)
 - [インストールと実行](install.ja)
