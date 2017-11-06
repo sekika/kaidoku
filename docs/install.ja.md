@@ -71,4 +71,4 @@ You can quit from the kaidoku prompt by typing `q`.
 
 - - -
 
-[ホームページ](./ja)
+[ホームページ](./)

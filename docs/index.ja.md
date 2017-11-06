@@ -2,7 +2,7 @@
 layout: default.ja
 lang: 日本語
 ref: index
-permalink: /ja
+permalink: /ja/
 title: 解独 - 数独・ナンプレの解析プログラム
 ---
 
