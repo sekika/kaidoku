@@ -1,10 +1,11 @@
+ul.selector {
+  text-align: right;
+}
 ul.selector li {
   display: inline-block;
   border: 1px solid #D35400;
-  padding: 6px;
+  padding: 5px;
   background: #F6CC72;
   width: 100px;
-  align: right;
-  color: black;
   text-align: center;
 }
