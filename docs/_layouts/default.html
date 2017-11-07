@@ -19,7 +19,7 @@
       <section id="main_content">
         {% include lang-select.html %}
         {{ content }}
-        {% if page.page > 0 %}{% assign nextpage = page.page + 1 %}
+        {% if page.page > 0 %}{% capture nextpage %}{{ page.page }}{% endcapture %}{% increment nextpage %}
         <hr>
         <ul>
         {% assign pages=site.pages | where:"page", page.page %}{% for page in pages %}{% if page.page  == nextpage %}<li>{{ page.permalink nextpage page.page }}</li>{% endif %}{% endfor %}
