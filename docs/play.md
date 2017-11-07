@@ -67,7 +67,7 @@ It can also be written as **R2C9**. Scan row 2. It has all the digits from 1 to 
 
 When you want to know which number is to be placed in a certain cell, you scan the same row, column, and box. From the digits 1 to 9, the number already filled in the same row, column, and box is removed from the candidate. If there is a unique candidate, that is the number to be filled in that cell. This logic is called **naked single**. By using the naked single logic, R2C9 is 9.
 
-Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits (row, column, number) to put a number.**. You specify row, column, and number to place in this order. In this case, row is 2, column is 9, number is 9, and therefore you type `299`.
+Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits (row, column, number) to put a number.** You specify row, column, and number to place in this order. In this case, row is 2, column is 9, number is 9, and therefore you type `299`.
 
     kaidoku-{{ site.version }}> 299
 
