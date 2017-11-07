@@ -1,30 +1,30 @@
 ---
 layout: default.ja
-lang: ���{��
+lang: 日本語
 ref: logic
 permalink: /ja/logic
 ---
 
-# �g���Ă���_��
+# 使われている論理
 
-���ƁE�i���v�����������߂̘_���ɂ͗l�X�Ȃ��̂�����A�p��A���{��ŗl�X�ȗp�ꂪ����B�����ł́A�p�ꖼ�Ɠ��{�ꖼ��Ή�������B�Ȃ��A�����Ɉ�Έ�Ή������Ă��Ȃ����̂�����B
+数独・ナンプレを解くための論理には様々なものがあり、英語、日本語で様々な用語がある。ここでは、英語名と日本語名を対応させる。なお、厳密に一対一対応をしていないものもある。
 
-## ��{���_
+## 基本理論
 
-�ȒP�Ȗ��́A���̊�{���_�����ŉ������Ƃ��ł���B
+簡単な問題は、この基本理論だけで解くことができる。
 
-- Naked single �}�X�~�A�P�ƌ�␔��
-- Hidden single �P�ƌ��}�X
+- Naked single マスミ、単独候補数字
+- Hidden single 単独候補マス
 
-## �����E�㋉�_��
+## 中級・上級論理
 
-���x�Ȗ��́A��{�_�������ł͑��肸�ɂ��̂悤�Ș_�����g���K�v���o��B
+高度な問題は、基本論理だけでは足りずにこのような論理を使う必要が出る。
 
 - Pointing pair, triple (also called: Locked candidates, Localization)
-- Naked pair, triple, quad �A�̒���m��
-- Hidden pair ����m��, Hiddn triple �O������, Hidden quad  �l�d�t�c
+- Naked pair, triple, quad 陰の定員確定
+- Hidden pair 定員確定, Hiddn triple 三国同盟, Hidden quad  四重奏団
 - Unique rectangle
-- X-wing, Swordfish, Jellyfish �䌅���_
+- X-wing, Swordfish, Jellyfish 井桁理論
 - XY-wing, XYZ-wing
 - Analysis of chain of pairs
 
@@ -59,5 +59,5 @@ More logics will be hopefully implemented.
 
 - - -
 
-- [�}�j���A���̖ڎ�](./#�}�j���A��)
-- [�z�[���y�[�W](./)
+- [マニュアルの目次](./#マニュアル)
+- [ホームページ](./)
