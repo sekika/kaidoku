@@ -22,7 +22,9 @@ permalink: /ja/logic
 
 - Pointing pair, triple (also called: Locked candidates, Localization)
 - Naked pair, triple, quad 陰の定員確定
-- Hidden pair 定員確定, Hiddn triple 三国同盟, Hidden quad  四重奏団
+- Hidden pair 定員確定
+- Hidden triple 三国同盟
+- Hidden quad  四重奏団
 - Unique rectangle
 - X-wing, Swordfish, Jellyfish 井桁理論
 - XY-wing, XYZ-wing
