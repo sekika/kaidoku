@@ -20,8 +20,9 @@
         {% include lang-select.html %}
         {{ content }}
         {% if page.page > 0 %}{% assign nextpage = page.page + 1 %}
+        <hr>
         <ul>
-        {% assign pages=site.pages | where:"page", page.page %}{% for page in pages %}{% if page.page  == nextpage %}<li>{{ page.permalink }}</li>{% endif %}{% endfor %}
+        {% assign pages=site.pages | where:"page", page.page %}{% for page in pages %}{% if page.page  == nextpage %}<li>{{ page.permalink nextpage page.page }}</li>{% endif %}{% endfor %}
            <li><a href="./#document">Document index</a></li>
            <li><a href="./">Home Page</a></li>
         </ul>
