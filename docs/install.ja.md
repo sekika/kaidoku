@@ -72,5 +72,5 @@ You can quit from the kaidoku prompt by typing `q`.
 - - -
 
 - [前: 数独・ナンプレのルール](./rule)
-- [マニュアルの目次](./#document)
+- [マニュアルの目次](./#マニュアル)
 - [ホームページ](./)
