@@ -5,6 +5,7 @@ CURRENT=`grep ^version ../kaidoku/data/system.ini | sed -e 's/^.*=//' | sed -e '
 echo 'Development version: '$CURRENT
 if [ $LATEST = $CURRENT ]; then
   echo 'Change version in ../kaidoku/data/system.ini to upload.'
+  exit
 fi
 echo "Rewriting document"
 cd ../docs
