@@ -3,7 +3,6 @@ layout: default
 lang: English
 ref: rule
 permalink: /rule
-page: 1
 ---
 
 # Rule of sudoku
@@ -26,8 +25,3 @@ The above mentioned rule is a standard sudoku rule adopted in Kaidoku program. T
 
 - [Sudoku - Wikipedia](https://en.wikipedia.org/wiki/Sudoku)
 - [Sudoku by nikoli](http://nikoli.co.jp/en/puzzles/sudoku.html)
-
-- - -
-
-- [Document index](./#document)
-- [Home Page](./)
