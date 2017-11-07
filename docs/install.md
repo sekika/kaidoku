@@ -3,7 +3,7 @@ layout: default
 lang: English
 ref: install
 permalink: /install
-docpage: 2
+page: 2
 ---
 
 # How to install and get started
