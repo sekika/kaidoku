@@ -19,9 +19,9 @@
       <section id="main_content">
         {% include lang-select.html %}
         {{ content }}
-        {% if page.page > 0 %}
+        {% if page.docpage > 0 %}
         <ul>
-        {% assign pages=site.pages | where:"page", page.page %}{% for p in pages %}{% if page.page +1 == p %}<li>p.page</li>{% endif %}{% endfor %}
+        {% assign pages=site.pages | where:"page", page.page %}{% for p in pages %}{% if page.page +1 == p %}<li>{% p.permalink %}</li>{% endif %}{% endfor %}
            <li><a href="./#document">Document index</a></li>
            <li><a href="./">Home Page</a></li>
         </ul>
