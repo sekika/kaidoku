@@ -7,27 +7,27 @@ permalink: /ja/logic
 
 # 使われている解法
 
-数独・ナンプレを解くための解法（ロジック、テクニック）には様々なものがあり、英語、日本語で様々な用語がある。ここでは、英語名と日本語名を対応させる。なお、厳密に一対一対応をしていないものもある。
+数独・ナンプレを解くための解法（ロジック、テクニック）には様々なものがあり、英語、日本語で様々な用語がある。ここでは、英語名と日本語名を対応させる。なお、用語の定義は人によっても微妙に異なることがあり、英語と日本語で厳密に一対一対応をしていないものもある。
 
 ## 基本解法
 
 簡単な問題は、この基本解法だけで解くことができる。
 
-- Naked single マスミ、単独候補数字
-- Hidden single 単独候補マス
+- Naked single マスミ、単独候補数字、裸のシングル
+- Hidden single 単独候補マス、隠れたシングル
 
 ## 中級・上級解法
 
 高度な問題は、基本解法だけでは足りずにこのような解法を使う必要が出る。
 
-- Pointing pair, triple (also called: Locked candidates, Localization)
-- Naked pair, triple, quad 陰の定員確定
-- Hidden pair 定員確定
-- Hidden triple 三国同盟
-- Hidden quad  四重奏団
+- Pointing pair, triple (also called: Locked candidates, Localization) いずれにしても理論、ロックされた候補
+- Naked pair, Hidden pair 二国同盟
+- Naked triple, Hidden triple 三国同盟
+- Naked quad, Hidden quad  四国同盟
 - Unique rectangle
-- X-wing, Swordfish, Jellyfish 井桁理論
+- X-wing, Swordfish, Jellyfish 井桁理論、四角の対角線
 - XY-wing, XYZ-wing
+- Remote pairs
 - Analysis of chain of pairs
 
 To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied.
