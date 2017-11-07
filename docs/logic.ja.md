@@ -1,28 +1,31 @@
 ---
-layout: default
-lang: English
+layout: default.ja
+lang: 日本語
 ref: logic
-permalink: /logic
+permalink: /ja/logic
 ---
 
-# Logics for solving sudoku puzzle
+# 数独・ナンプレの論理
 
-## Basic logics
+数独・ナンプレを解くための論理には様々なものがあり、英語、日本語で様々な用語がある。ここでは、英語名と日本語名を対応させる。なお、厳密に一対一対応をしていないものもある。
 
-Easy sudoku puzzles can be solved with basic strategies of
+## 基本理論
 
-- Naked single
-- Hidden single
+簡単な問題は、この基本理論だけで解くことができる。
 
-## Advanced logics
+- Naked single マスミ、単独候補数字
+- Hidden single 単独候補マス
 
-For solving harder puzzles, some advanced logics need to be used, such as
+## 中級・上級論理
+
+高度な問題は、基本論理だけでは足りずにこのような論理を使う必要が出る。
 
 - Pointing pair, triple (also called: Locked candidates, Localization)
-- Naked pair, triple, quad
-- Hidden pair, triple, quad
+- Naked pair, triple, quad 陰の定員確定
+- Hidden pair 定員確定, Hiddn triple 三国同盟, Hidden quad  四重奏団
 - Unique rectangle
-- X-wing, XY-wing, XYZ-wing
+- X-wing, Swordfish, Jellyfish 井桁理論
+- XY-wing, XYZ-wing
 - Analysis of chain of pairs
 
 To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied.
@@ -56,5 +59,5 @@ More logics will be hopefully implemented.
 
 - - -
 
-- [Document index](./#document)
-- [Home Page](./)
+- [マニュアルの目次](./#マニュアル)
+- [ホームページ](./)
