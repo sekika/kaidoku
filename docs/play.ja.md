@@ -34,11 +34,11 @@ Type 3 digits (row, column, number) to put a number. i for hint.
 kaidoku-{{ site.version }}>
 ```
 
-Kaidoku is shipped with sudoku problems of different levels of difficulty. At the first time you run kaidoku, level 2 is selected. Therefore, "Level 2 No. 1" is shown.
+解独は難易度がレベル分けされたナンプレの問題集があらかじめ用意されている。解独をはじめて起動したときには、レベル2が自動的に選ばれている。そのため、レベル2の1番目の問題が表示される。
 
-## Creating an image file
+## 画像の生成
 
-You can now start solving this problem, but before doing it, you may want to see the image of the problem. At first, you should explicitly create an image file with `jpg` command to designate the directory of the data file. Default data directory is `‾/kaidoku`. If you prefer other directory, input the directory when it is prompted.
+ここから問題を解き始めることもできるが、その前に、端末上のアスキー図では見にくいので、画像を生成すると良い。そのために、まずは `jpg` コマンドで画像を生成する。そのときに、データ用のディレクトリを聞かれるので、指定する。何も入力しなければ、デフォルトの `‾/kaidoku` ディレクトリがデータディレクトリとして指定される。
 
 ```
 kaidoku-{{ site.version }}> jpg
@@ -48,24 +48,24 @@ See image by "html".
 kaidoku-{{ site.version }}>
 ```
 
-Now this image file is created as current.jpg in the data directory.
+これで、このような画像ファイルが、データディレクトリの下に current.jpg として生成される。
 
 ![]({{'/img/2-1.jpg' | relative_url}})
 
-Now run `html` and a html file showing this image file is opened with your default web browser. The html file reloads the image file every 2 seconds (interval can be adjusted with a text box). From now on, as you proceed with this problem, the image file is updated and the html file reloads, so that it is easy to follow the change in the state of the board.
+次に、`html`コマンドを実行することで、デフォルトのウェブブラウザで画像ファイルを閲覧するための html ファイルが開かれる。その html ファイルは2秒ごとに画像ファイルを自動的に読み直す（秒数はテキストボックスで調整できる）。ここから先は、問題を解き進めると自動的に画像ファイルが更新されて、html ファイルが画像ファイルを再読み込みするので、ウェブブラウザで図面が更新されるのを見ながら解き進めることができる。
 
-## Put a number
+## 数字を埋める
 
-Now we are ready to play. Look at the above figure and think where to start.
+これで、問題を解く準備が整ったので、解き始めることとする。上の図を見て、どこから解き始めるかを考えてみよう。
 
-Look at **row 2, column 9**. Here, it means that
+ここで、**2行9列** (row 2, column 9) を見る。行と列の意味は
 
-- **Row 2** means a 2nd row from the top
-- **Column 9** means a 9th column from the left
+- **2行** (row 2) は、上から2番目の横一行
+- **9列** (column 9) は、左から9番目の縱一列
 
-It can also be written as **R2C9**. Scan row 2. It has all the digits from 1 to 9 except 8 and 9. Therefore, R2C9 should have 8 or 9. In column 9, there is 8 on R8C9, and therefore R2C9 should not be 8. Therefore, R2C9 should be 9.
+である。そして、2行9列は **R2C9** と表記される。2行目に入っている数は、1から9までの数の中で8と9だけが入っていないので、R2C9には8か9が入る。そして、9列目にはR8C9に8があるため、R2C9に8は入らない。よって、R2C9は9となる。
 
-When you want to know which number is to be placed in a certain cell, you scan the same row, column, and box. From the digits 1 to 9, the number already filled in the same row, column, and box is removed from the candidate. If there is a unique candidate, that is the number to be filled in that cell. This logic is called **naked single**. By using the naked single logic, R2C9 is 9.
+あるマス目にどの数字が入ることが可能かと考えるときには、同じ行、列、ボックスの数字を一通り見て、その中に入っている数字は候補から外れる。その結果、候補がただ1つだけ残るときには、その数がそのマス目に入る数字となる。この解法を **naked single** という。日本語では、**マスミ**あるいは**単独候補数字**などと言われる。この解法を使うことで、R2C9が9であると確定する。
 
 Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits (row, column, number) to put a number.**. You specify row, column, and number to place in this order. In this case, row is 2, column is 9, number is 9, and therefore you type `299`.
 
