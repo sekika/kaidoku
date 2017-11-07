@@ -9,42 +9,42 @@ permalink: /ja/install
 
 ## Python 3 のインストール
 
-Python 3 should be installed before installing kaidoku. Install Python 3 by
+解独をインストールするためには、まず Python 3 をインストールする必要がある。Python 3 のインストールについては、以下のようにする。
 
-- Download and install from [Python official page](https://www.python.org/).
-- If you are using [Homebrew](https://brew.sh/) on macOS, just run `brew install python3`
+- [Python オフィシャルホームページ](https://www.python.org/)からダウンロードとインスストールをする。
+- macOS で [Homebrew](https://brew.sh/) を使っているのであれば  `brew install python3` を実行する。
 
-You can check your installed version of python 3 by
+インストールされている Python 3 のバージョンは、次のコマンドで確認できる。
 
     python3 -V
 
-## Install Kaidoku
+## 解独のインストール
 
-After installing python 3, install kaidoku by running
+Python 3 のインストールができたら、ターミナルエミュレーターから次のコマンドで解独をインストールする。
 
     pip3 install kaidoku
 
-from terminal emulator.
+## 解独のアップデート
 
-## Update Kaidoku
+[最新のバージョン](https://pypi.python.org/pypi/kaidoku)は **{{ site.version }}**
 
-[Latest version](https://pypi.python.org/pypi/kaidoku): **{{ site.version }}**
-
-You can check the latest version of kaidoku by
+解独の最新バージョンは
 
     pip3 search kaidoku
 
-and update to the latest version by
+で確認できる。最新バージョンへのアップデートは
 
     pip3 install -U kaidoku
  
-## Getting started
+できる。
 
-Just run
+## 解独の実行
+
+ターミナルエミュレータから
 
     kaidoku
 
-from the terminal emulator. You get into kaidoku command prompt.
+と実行すると、次のように解独のコマンドプロンプトに入る。
 
     $ kaidoku
     Kaidoku - player, solver and creater of sudoku puzzles.
@@ -52,7 +52,7 @@ from the terminal emulator. You get into kaidoku command prompt.
     Type h for help, c for showing a problem, q for quit.
     kaidoku-{{ site.version }}>
 
-You can get help of the command by typing `h` (and Enter key), like this
+コマンドのヘルプは `h` と入力することで、次のように表示される。
 
 ```
 kaidoku-{{ site.version }}> h
@@ -62,15 +62,16 @@ c   : show Current position
 i   : show hInt for current position
 q   : Quit kaidoku
 
-(continues)
+(中略)
 
 kaidoku-{{ site.version }}> 
 ```
 
-You can quit from the kaidoku prompt by typing `q`.
+解独のコマンドプロンプトから抜けるためには `q` と入力する。
 
 - - -
 
+- [次: ナンプレで遊ぶ](./play)
 - [前: 数独・ナンプレのルール](./rule)
 - [マニュアルの目次](./#マニュアル)
 - [ホームページ](./)

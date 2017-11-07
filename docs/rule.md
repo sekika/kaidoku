@@ -3,7 +3,6 @@ layout: default
 lang: English
 ref: rule
 permalink: /rule
-page: 1
 ---
 
 # Rule of sudoku

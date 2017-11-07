@@ -28,7 +28,7 @@ title: 解独 - 数独・ナンプレの解析プログラム
 
 - [数独・ナンプレのルール](rule)
 - [インストールと実行](install)
-- [How to play with a sudoku puzzle](../play)
+- [ナンプレで遊ぶ](./play)
 - Getting hint on basic logic
 - Select a problem of a specified difficulty level
 - [Logics for solving sudoku puzzles used in this program](../logic)

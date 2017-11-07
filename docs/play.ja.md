@@ -1,15 +1,15 @@
 ---
-layout: default
-lang: English
+layout: default.ja
+lang: 日本語
 ref: play
-permalink: /play
+permalink: /ja/play
 ---
 
-# How to play with a sudoku puzzle
+# ナンプレで遊ぶ
 
-## Showing a problem
+## 問題を表示する
 
-We assume that [you installed kaidoku and got into kaidoku prompt](install). Just type `c` and a problem is shown.
+[解独のインストールと解独コマンドプロンプトの立ち上げ](install)までは終わっているものとして、ここからは解独コマンドプロンプト内での操作方法について記す。まずは、`c` と入力することで次のように問題が表示される。
 
 ```
 kaidoku-{{ site.version }}> c
@@ -115,6 +115,6 @@ You can go to the next problem with `n`.
 
 - - -
 
-- [Previous: How to install and get started](./install)
-- [Document index](./#document)
-- [Home Page](./)
+- [前: インストールと実行](./install)
+- [マニュアルの目次](./#マニュアル)
+- [ホームページ](./)
