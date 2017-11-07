@@ -19,6 +19,12 @@
       <section id="main_content">
         {% include lang-select.html %}
         {{ content }}
+        {% if page.page > 0 %}
+        - - -
+
+        - [Document index](./#document)
+        - [Home Page](./)
+        {% endif %}
       </section>
         {% include footer.html %}
     </div>
