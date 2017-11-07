@@ -72,4 +72,7 @@ You can quit from the kaidoku prompt by typing `q`.
 
 - - -
 
-[Home Page](./)
+- [Next: How to play with a sudoku puzzle](./play)
+- [Previous: Rule of sudoku](./rule)
+- [Document index](./#document)
+- [Home Page](./)

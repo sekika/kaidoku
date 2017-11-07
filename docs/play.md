@@ -110,4 +110,8 @@ You can go to the next problem with `n`.
     kaidoku-{{ site.version }}> n
     Level 2 No. 2
 
-[Home Page](./)
+- - -
+
+- [Previous: How to install and get started](./install)
+- [Document index](./#document)
+- [Home Page](./)
