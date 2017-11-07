@@ -21,7 +21,7 @@ permalink: /
 
 {% include update.html %}
 
-## Document
+## (#document)Document
 
 Kaidoku is a program in development. Complete document is not available yet. Here document is written little by little.
 

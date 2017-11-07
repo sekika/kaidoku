@@ -28,4 +28,5 @@ The above mentioned rule is a standard sudoku rule adopted in Kaidoku program. T
 
 - - -
 
-[Home Page](./)
+- [Document index](./#document)
+- [Home Page](./)
