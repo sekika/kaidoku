@@ -52,7 +52,12 @@ Following logics are currently implemented in Kaidoku. These logics are applied 
 
 Unique rectangle is not implmented. It is valid when we know that the sudoku has unique solution. If it is implemented, kaidoku may not correctly identify a sudoku if it has multiple solutions.
 
-More logics will be hopefully implemented.
+More logics will be hopefully implemented. Especially the following.
+
+- XYZ-wing
+- Remote pairs
+- Naked quad
+- Hidden quad
 
 - - -
 
