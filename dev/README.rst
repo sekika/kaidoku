@@ -16,12 +16,17 @@ Logics to be hopefully implemented
 To do, or not to do?
 -----------------
 
-- Implement additional logics
 - Fix bookmark redirect
-- Multilingual site https://www.sylvaindurand.org/making-jekyll-multilingual/
+- Label in figure
+- Implement additional logics
+- Write test codes
+- Change order? Pointing, naked, XY-wing, X-wing, Hidden? Analyze frequency.
+- Adjust level parameters
+- Write document
+- Finalize the sudoku book to contain
+- Javascript to browze the sample book
 - Create PDF
 - Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
-- Write document
 
 Debug commands
 -----------------
