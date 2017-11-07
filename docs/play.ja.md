@@ -1,15 +1,15 @@
 ---
 layout: default.ja
-lang: ���{��
+lang: 日本語
 ref: play
 permalink: /ja/play
 ---
 
-# �i���v���ŗV��
+# ナンプレで遊ぶ
 
-## ����\������
+## 問題を表示する
 
-[��Ƃ̃C���X�g�[���Ɖ�ƃR�}���h�v�����v�g�̗����グ](install)�܂ł͏I����Ă�����̂Ƃ��āA��������͉�ƃR�}���h�v�����v�g���ł̑�����@�ɂ��ċL���B�܂��́A`c` �Ɠ��͂��邱�ƂŎ��̂悤�ɖ�肪�\�������B
+[解独のインストールと解独コマンドプロンプトの立ち上げ](install)までは終わっているものとして、ここからは解独コマンドプロンプト内での操作方法について記す。まずは、`c` と入力することで次のように問題が表示される。
 
 ```
 kaidoku-{{ site.version }}> c
@@ -38,12 +38,12 @@ Kaidoku is shipped with sudoku problems of different levels of difficulty. At th
 
 ## Creating an image file
 
-You can now start solving this problem, but before doing it, you may want to see the image of the problem. At first, you should explicitly create an image file with `jpg` command to designate the directory of the data file. Default data directory is `~/kaidoku`. If you prefer other directory, input the directory when it is prompted.
+You can now start solving this problem, but before doing it, you may want to see the image of the problem. At first, you should explicitly create an image file with `jpg` command to designate the directory of the data file. Default data directory is `‾/kaidoku`. If you prefer other directory, input the directory when it is prompted.
 
 ```
 kaidoku-{{ site.version }}> jpg
 Data directory does not exist.
-Input name of the data directory (default: ~/kaidoku):
+Input name of the data directory (default: ‾/kaidoku):
 See image by "html".
 kaidoku-{{ site.version }}>
 ```
@@ -115,6 +115,6 @@ You can go to the next problem with `n`.
 
 - - -
 
-- [�O: �C���X�g�[���Ǝ��s](./install)
-- [�}�j���A���̖ڎ�](./#�}�j���A��)
-- [�z�[���y�[�W](./)
+- [前: インストールと実行](./install)
+- [マニュアルの目次](./#マニュアル)
+- [ホームページ](./)
