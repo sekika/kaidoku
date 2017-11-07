@@ -31,7 +31,7 @@ title: 解独 - 数独・ナンプレの解析プログラム
 - [ナンプレで遊ぶ](./play)
 - Getting hint on basic logic
 - Select a problem of a specified difficulty level
-- [使われている論理](logic)
+- [使われている解法](logic)
 - Getting hint on advanced logics and showing candidates
 - Bookmark management
 - Play and analyze external sudoku problems
