@@ -15,7 +15,7 @@ permalink: /ja/rule
 
 上の図の解答は以下のようになる。
 
-![]({{'/img/3-1.jpg' | relative_url}})
+![]({{'/img/3-1s.jpg' | relative_url}})
 
 数独は正解が唯一でなければならない。
 
