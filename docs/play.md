@@ -96,7 +96,12 @@ When you put a number that is unable to be placed, the number is not placed. For
 
 ## Take back a move
 
-You can always erase a number that was written at the last time. Writing a number is regarded as a "move", and we call it "take back a move". You can take back as many move as possible, until the initial position.
+You can always erase a number that was written at the last time. Just type `b`.
+
+    kaidoku-{{ site.version }}> b
+    Level 2 No. 1: move 5
+
+Writing a number is regarded as a "move", and we call it "take back a move". You can take back as many moves as possible, until you reach the initial position.
 
 ## Quit and restart
 
