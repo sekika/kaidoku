@@ -41,7 +41,7 @@ Look at 2 in R7C8 and R8C6, and also look at box 7. Here box is defined as
 | Box 4  | Box 5  | Box 6  |
 | Box 7  | Box 8  | Box 9  |
 
-and think where 2 can be filled. 2 in R7R8 eliminates tha possibility of 2 in row 7, and 2 in R8C6 eliminates the possibility of 2 in row 8. Therefore the possibility of 2 only remains in R9C3 as in the following table.
+and think where 2 can be filled. 2 in R7R8 eliminates the possibility of 2 in row 7, and 2 in R8C6 eliminates the possibility of 2 in row 8. Therefore the possibility of 2 only remains in R9C3 as in the following table.
 
 | x | x | x |
 | 1 | 8 | x |
