@@ -19,7 +19,7 @@ Solution of the above puzzle is as follows. Please confirm that the condition is
 
 Sudoku puzzle should have a unique solution.
 
-# Variant
+## Variant
 
 The above mentioned rule is a standard sudoku rule adopted in Kaidoku program. There are many variant of the rule. For detail, please refer to
 
