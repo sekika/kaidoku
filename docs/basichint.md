@@ -51,7 +51,7 @@ Therefore R9C3 = 2 is determined and you can fill it by `932`. This is the **hid
 
 Actually, after filling 2 in R9C3, there remains only 1 cell in box 1 that 2 can be filled, R1C2. Hidden single in 2 in box 1. Now type `122`. Then you can keep on finding hidden single of 2 in boxes. Type `652`, `592`, `372`. Now all of the 2s are determined. Next you can determine all 4s successively by applying hidden single in boxes. Confirm it by typing  `334`, `264`, `744`. Then you can determine all 1s successively by applying hidden single in boxes. Confirm it by typing `131`, `361`, `671`, `521`, `791`. Like this way, you can solve this problem by using only the hidden single logic.
 
-When you type `i` to ask for a hint in the situation that naked single is not available and hidden single is available, hidden single is shown as a hint. For example, go back to the initial position of Level 3 No. 1 by typing `initial`, `226`, `253`, `264`, `118`, `277`, `317`, reaching this position
+When you type `i` to ask for a hint in the situation that naked single is not available and hidden single is available, hidden single is shown as a hint. For example, go back to the initial position of Level 3 No. 1 by typing `initial`, and then type `226`, `253`, `264`, `118`, `277`, `317`, reaching this position
 
 ![]({{'/img/3-1-6.jpg' | relative_url}})
 
