@@ -55,7 +55,7 @@ When you type `i` to ask for a hint in the situation that naked single is not av
 
 ![]({{'/img/3-1-6.jpg' | relative_url}})
 
-Here you get hint like this.
+Here you get a hint like this.
 
     kaidoku-{{ site.version }}> i
     Hidden single in box 1 can be found.
