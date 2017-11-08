@@ -37,4 +37,4 @@ title: 解独 - 数独・ナンプレの解析プログラム
 - Play and analyze external sudoku problems
 - Create new sudoku problems
 - Managing configuration file
-- [External sudoku sites](../link)
+- [リンク](link)

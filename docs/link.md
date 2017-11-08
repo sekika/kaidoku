@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: English
+ref: link
 permalink: /link
 ---
 
@@ -12,5 +14,7 @@ Please obtain general information about sudoku by these great pages.
 - [sudoku-solutions.com](http://www.sudoku-solutions.com/)
 - [SudokuWiki.org](http://www.sudokuwiki.org)
 
+- - -
 
-[Home Page](./)
+- [Document index](./#document)
+- [Home Page](./)
