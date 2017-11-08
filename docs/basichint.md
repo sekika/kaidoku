@@ -64,7 +64,7 @@ Now you can examine box 1 and you will find that 4 is only available in R3C3.
 
 Almost all of the problems up to level 3 can be solved with the basic logics of naked single and hidden single. Most of the problems in level 4 can also be solved with the basic logics, while in some cases some more advanced logics might be needed.
 
-If you are not familiar with solving sudoku, I would recommend solving this basic levels of problems with kaidoku, getting hints when you get stuck, until you get used to the basic logics, before going to more advanced logics.
+If you are not familiar with solving sudoku, I would recommend solving the easy problems with kaidoku, in the level you feel comfortable, and get used to the basic logics. Get hints when you get stuck and you will get used to the logics.
 
 ## When advanced logic is required
 
