@@ -82,7 +82,7 @@ Suppose that you made a mistake without realizing it, and you get stuck. In this
     kaidoku-{{ site.version }}> i
     There is no solution for this position. You can take back one move with b.
 
-You can take back one move with `b` and think again. You can get a hint again in this position and you may get similar message. You can keep this until you get a proper hint. Now this is the position where you made a mistake.
+You can take back one move with `b` and think again. You can get a hint again in this position and you may get a similar message. You can keep this until you get a proper hint. Now this is the position where you made a mistake.
 
 - - -
 
