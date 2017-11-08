@@ -71,7 +71,7 @@ Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits
 
     kaidoku-{{ site.version }}> 299
 
-The ascii image of the board is shown and the image file shown in the html file is update as follows.
+The ascii image of the board is shown and the image file shown in the html file updates automatically as follows.
 
 ![]({{'/img/2-1-1.jpg' | relative_url}})
 

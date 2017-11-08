@@ -67,17 +67,17 @@ kaidoku-{{ site.version }}>
 
 あるマス目にどの数字が入ることが可能かと考えるときには、同じ行、列、ボックスの数字を一通り見て、その中に入っている数字は候補から外れる。その結果、候補がただ1つだけ残るときには、その数がそのマス目に入る数字となる。この解法を **naked single** という。日本語では、**マスミ**あるいは**単独候補数字**などと言われる。この解法を使うことで、R2C9が9であると確定する。
 
-Now we place number 9 on R2C9. Please look at the instruction of **Type 3 digits (row, column, number) to put a number.**. You specify row, column, and number to place in this order. In this case, row is 2, column is 9, number is 9, and therefore you type `299`.
+それでは、R2C9に9を入れる。**Type 3 digits (row, column, number) to put a number.** という指示が表示されているように、行 (row)、列 (column)、数字 (number) の順番で3つの数字を入れる。この場合は、2行9列に9を入れるので`299`と入力する。
 
     kaidoku-{{ site.version }}> 299
 
-The ascii image of the board is shown and the image file shown in the html file is update as follows.
+更新されたアスキーの図が表示され、ブラウザに表示されている html ファイルの画像が、次のように自動的に更新される。
 
 ![]({{'/img/2-1-1.jpg' | relative_url}})
 
-## Keep on solving
+## 解答を続ける
 
-Now row 2 has only one blank cell, and it is easy to see that R2C7 is 8. Column 9 has only one blank cell and R5C9 is 1. By the naked single logic, R8C1 is 6. After that, column 1 has only one blank cell and R5C1 is 4. Row 8 has only one blank cell and R8C3 is 9. Put these numbers as follows.
+これで2行目には空のマスが1つだけになるため、R2C7が2であることが簡単にわかる。同様に、9列目には空のマスが1つだけなのでR5C9は1である。単独候補数字 (naked single) によってR8C1に6を入れると、1列目は空のマスが1つだけになってR5C1は4となり、8行目は空のマスが1つになってR8C3は9となる。ここまでの数字を、以下のように入れることができる。
 
     kaidoku-{{ site.version }}> 278
     kaidoku-{{ site.version }}> 591
