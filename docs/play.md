@@ -101,7 +101,7 @@ You can always erase a number that was written at the last time. Just type `b`.
     kaidoku-{{ site.version }}> b
     Level 2 No. 1: move 5
 
-Writing a number is regarded as a "move", and we call it "take back a move". You can take back as many moves as possible, until you reach the initial position.
+Writing a number is regarded as a "move", and we call canceling the last move as "take back a move". You can take back as many moves as possible, until you reach the initial position.
 
 ## Quit and restart
 

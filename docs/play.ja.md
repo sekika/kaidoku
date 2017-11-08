@@ -87,33 +87,35 @@ kaidoku-{{ site.version }}>
 
 ![]({{'/img/2-1-6.jpg' | relative_url}})
 
-## Notifying a mistake
+## 間違いの指摘
 
-When you put a number that is unable to be placed, the number is not placed. For example if you type `722` in this situation, warning message is shown as follows.
+不可能な数字（同じ数字が行列ボックスのどこかに入っている数字）を入れようとすると、その数字は入らない。たとえば、もし上の図で`722`と入力すると、次のような警告メッセージが出る。
 
     kaidoku-{{ site.version }}> 722
     Both R7C2 and R7C9 have the same value of 2.
 
-## Take back a move
+つまり、R7C2とR7C9が同じ2になってしまうと表示される。
 
-You can always erase a number that was written at the last time. Just type `b`.
+## 数字を消す
+
+最後に入れた数字をいつでも消すことができる。そのためには、`b`と入力する。
 
     kaidoku-{{ site.version }}> b
     Level 2 No. 1: move 5
 
-Writing a number is regarded as a "move", and we call it "take back a move". You can take back as many moves as possible, until you reach the initial position.
+数を書くことは「手を進める」と解釈され、最後の手を取り消すことを「手を戻す」と言う。初期配置になるまで、いくらでも手を戻すことができる。
 
-## Quit and restart
+## 中断と再開
 
-You can always quit the game by `q`. The status is saved in configuration file, and when you run kaidoku next time, you can start from the position where you quitted last time. Just type `c` or `html` to show the position and continue.
+いつでも`q`と入力することでゲームを中断して終了することができる。そのときの状態は設定ファイルに保存され、次に解独を起動するときには、最後に中断した場面から再開することができる。再開したら、`c`あるいは`html`とすることで図面を表示して継続する。
 
-## Finish a problem and go to the next problem
+## ゲームの終了と次のゲーム
 
-This problem can be solved with only the naked single logic. When you fill out all the blank cells, a massage appears that
+このページで例に出した問題は、単独候補数字のみで解くことができる。すべての空白マスを埋めてると、次のようなメッセージが表示されて、解答が完了したことが知らされる。
 
     Now this problem is solved !
 
-You can go to the next problem with `n`.
+次の問題へは`n`で進むことができる。
 
     kaidoku-{{ site.version }}> n
     Level 2 No. 2
