@@ -22,6 +22,8 @@ To do, or not to do?
 - Write test codes
 - Change order? Pointing, naked, XY-wing, X-wing, Hidden? Analyze frequency.
 - Adjust level parameters
+- Check in different environment
+- Font selection
 - Write document
 - Finalize the sudoku book to contain
 - Javascript to browze the sample book
@@ -36,16 +38,11 @@ Debug commands
 
 Lint
 ---------------
+
 - autopep8 -i *.py
 - flake8 *.py
 
 GitHub pages
 ---------------
 
-- [Supported themes](https://pages.github.com/themes/)
-
-
-Reference
----------------
-
-- Package index: https://pypi.python.org/pypi/kaidoku
+- Supported themes: https://pages.github.com/themes/
