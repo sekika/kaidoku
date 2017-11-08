@@ -5,7 +5,7 @@ ref: rule
 permalink: /basichint
 ---
 
-# Getting a hint on basic logic
+# Getting a hint on basic logics
 
 ## Ask for a hint
 
@@ -18,7 +18,7 @@ Now type `i` and this hint is displayed.
     kaidoku-{{ site.version }}> i
     Look at R1C2. What number is available?
 
-This is a format of hint to be given when naked single logic can be used. You can just look at R1C2 and think what number is available. Whenever this type hint is given, only one number is available. In this case, you will find that only 6 is available. Naked single is one of the basic logics in sudoku, and the program first evaluates if naked single is available. Therefore this hint is most likely to be shown.
+This is a format of hint to be given when naked single logic can be used. You can just look at R1C2 and think what number is available. Whenever this type of hint is given, only one number is available and the number to be filled in the cell is determined. In this case, you will find that only 6 is available. Naked single is one of the basic logics in sudoku, and the program first evaluates if naked single logic can be applied. Therefore this type of hint is most likely to be shown.
 
 ## Hidden single
 
@@ -62,9 +62,11 @@ Here you get hint like this.
 
 Now you can examine box 1 and you will find that 4 is only available in R3C3.
 
-## When advanced logic is required
+Almost all of the problems up to level 3 can be solved with the basic logics of naked single and hidden single. Most of the problems in level 4 can also be solved with the basic logics, while in some cases some more advanced logics might be needed.
 
-Almost all of the problems up to level 3 can be solved with the basic logics of naked single and hidden single. Most of the problems in level 4 can also be solved with the basic logics, while in some cases some more advanced logic might be needed.
+If you are not familiar with solving sudoku, I would recommend solving this basic levels of problems with kaidoku, getting hints when you get stuck, until you get used to the basic logics, before going to more advanced logics.
+
+## When advanced logic is required
 
 When you try to solve problems in higher levels, you will meet the positions when advanced logics other than naked single and hidden single is required. In such cases, following message appears. It will be discussed in the later pages of this document.
 

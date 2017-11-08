@@ -120,7 +120,7 @@ You can go to the next problem with `n`.
 
 - - -
 
-- [Next: Getting a hint on basic logic](./basichint)
+- [Next: Getting a hint on basic logics](./basichint)
 - [Previous: How to install and get started](./install)
 - [Document index](./#document)
 - [Home Page](./)
