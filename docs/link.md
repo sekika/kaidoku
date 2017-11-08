@@ -14,7 +14,7 @@ Please obtain general information about sudoku by these great pages.
 - [sudoku-solutions.com](http://www.sudoku-solutions.com/)
 - [SudokuWiki.org](http://www.sudokuwiki.org)
 - [Sudoku Susser](http://www.madoverlord.com/wiki/doku.php/madoverlord:projects-sudoku)
-- [Sudokuby moonrabbit  for iOS](https://itunes.apple.com/app/sudoku/id426472181) and [for Android](https://play.google.com/store/apps/details?id=com.moonrabbit.sudoku)
+- [Sudoku by moonrabbit  for iOS](https://itunes.apple.com/app/sudoku/id426472181) and [for Android](https://play.google.com/store/apps/details?id=com.moonrabbit.sudoku)
 
 - - -
 
