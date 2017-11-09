@@ -48,7 +48,7 @@ You can show the index of the problem book by `book` command, which shows the nu
 
 The levels are determined by the numbers of initial blank cells, the difficulty of the logics that is used, and the complexity of seach. Up to level 3 the number of blank cells is the dominant factor, up to level 6 the difficulty of the logics is the dominant factor, and from level 7 complexity of the search is the dominant factor.
 
-Current status of kaidoku is in development, and algorithm to determine the level is not fixed yet. As more logics will be implemented, the level will change.
+Current status of kaidoku is in development, and algorithm to determine the level is not fixed yet. As more logics will be implemented, the level of a certain problem will change. Therefore, the problem book shipped now is a tentative one.
 
 - - -
 
