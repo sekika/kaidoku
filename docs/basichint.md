@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: English
-ref: rule
+ref: basichint
 permalink: /basichint
 ---
 
