@@ -24,6 +24,7 @@ To do, or not to do?
 - Adjust level parameters
 - Check in different environment
 - Font selection
+- maxtime, and other config management
 - Write document
 - Finalize the sudoku book to contain
 - Javascript to browze the sample book
