@@ -42,7 +42,7 @@ Current problem is stored in each level. For example,
 
 Therefore, recommended way is to start from no. 1 in each level, and after solving a problem you go to the next problem with `n` command.
 
-You can show the index of the problem book by `book` command, which shows the numbers of problems in each level. Kaidoku is shipped with certain numbers of problems in each level. It can increase the numbers of problems by creating new problems. The rate of creating new a problem is faster than a human to solve the problem. Therefore, you can inifinitely enjoy new problems.
+You can show the index of the problem book by `book` command, which shows the numbers of problems in each level. Kaidoku is shipped with certain numbers of problems in each level. It can increase the numbers of problems by creating new problems. The rate of creating a new problem is faster than a human to solve the problem. Therefore, you can inifinitely enjoy new problems.
 
 ## Determination of level
 
