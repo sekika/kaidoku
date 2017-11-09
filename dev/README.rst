@@ -30,6 +30,7 @@ To do, or not to do?
 - Finalize the sudoku book to contain
 - Javascript to browze the sample book
 - Create PDF
+- Feedback
 - Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
 
 Debug commands
