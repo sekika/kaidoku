@@ -86,6 +86,7 @@ You can take back one move with `b` and think again. You can get a hint again in
 
 - - -
 
+- [Next: Select a problem of a specified difficulty level](./level)
 - [Previous: How to play with a sudoku puzzle](./play)
 - [Document index](./#document)
 - [Home Page](./)

@@ -29,7 +29,7 @@ Kaidoku is a program in development. Complete document is not available yet. Her
 - [How to install and get started](install)
 - [How to play with a sudoku puzzle](play)
 - [Getting a hint on basic logics](basichint)
-- Select a problem of a specified difficulty level
+- [Select a problem of a specified difficulty level](level)
 - [Logics for solving sudoku puzzles used in this program](logic)
 - Getting hint on advanced logics and showing candidates
 - Bookmark management
