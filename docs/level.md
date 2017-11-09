@@ -40,15 +40,17 @@ Current problem is stored in each level. For example,
 - You go to level 4 and solve 5 problems. Now you are at level 4, no. 6.
 - After that, you go back to level 3. In this case, you are at level 3, no. 24.
 
+Note that only the information of the number of problem is stored in each level. Move is stored only for the current problem.
+
 Therefore, recommended way is to start from no. 1 in each level, and after solving a problem you go to the next problem with `n` command.
 
 You can show the index of the problem book by `book` command, which shows the numbers of problems in each level. Kaidoku is shipped with certain numbers of problems in each level. It can increase the numbers of problems by creating new problems. The rate of creating a new problem is faster than a human to solve the problem. Therefore, you can inifinitely enjoy new problems.
 
 ## Determination of level
 
-The levels are determined by the numbers of initial blank cells, the difficulty of the logics that is used, and the complexity of seach. Up to level 3 the number of blank cells is the dominant factor, up to level 6 the difficulty of the logics is the dominant factor, and from level 7 complexity of the search is the dominant factor.
+The levels are determined by the numbers of initial blank cells, the difficulty of the logics, and the complexity of seach. Up to level 3 the numbers of blank cells are the dominant factor, up to level 6 the difficulty of the logics is the dominant factor, and from level 7 complexity of the search is the dominant factor.
 
-Current status of kaidoku is in development, and algorithm to determine the level is not fixed yet. As more logics will be implemented, the level of a certain problem will change. Therefore, the problem book shipped now is a tentative one.
+Current status of kaidoku is in development, and the algorithm to determine the level is not fixed yet. As more logics will be implemented, the level of a certain problem will change. Therefore, the problem book shipped now is a tentative one.
 
 - - -
 
