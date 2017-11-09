@@ -9,3 +9,6 @@ ul.selector li {
   width: 100px;
   text-align: center;
 }
+table {
+  width: auto;
+}
