@@ -5,16 +5,18 @@ ref: logic
 permalink: /logic
 ---
 
-# Logics for solving sudoku puzzle
+# Logics for solving sudoku puzzles used in this program
 
 ## Basic logics
 
-Easy sudoku puzzles can be solved with basic strategies of
+Easy sudoku puzzles can be solved with basic logics of
 
 - Naked single
 - Hidden single
 
-## Advanced logics
+which were explained at previous pages.
+
+## Intermediate and advanced logics
 
 For solving harder puzzles, some advanced logics need to be used, such as
 
@@ -25,7 +27,10 @@ For solving harder puzzles, some advanced logics need to be used, such as
 - X-wing, XY-wing, XYZ-wing
 - Analysis of chain of pairs
 
-To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied.
+To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied. Detail of each logic is not discussed in this page. Please refer to these sites.
+
+- [SudokuWiki.org](http://www.sudokuwiki.org/Getting_Started)
+- [sudoku-solutions.com - Background](http://www.sudoku-solutions.com/index.php?page=background)
 
 ## Trial and search
 
