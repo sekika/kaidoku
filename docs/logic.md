@@ -61,5 +61,6 @@ More logics will be hopefully implemented. Especially the following.
 
 - - -
 
+- [Previous: Select a problem of a specified difficulty level](./level)
 - [Document index](./#document)
 - [Home Page](./)
