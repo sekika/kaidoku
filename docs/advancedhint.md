@@ -31,7 +31,7 @@ This is the message that was briefly described [previously](basichint.md). It me
 
 ![]({{'/img/5-1-9p.jpg' | relative_url}})
 
-Candidates of each cell is written automatically in this image, and you can think which logic can be applied to solve this problem. If you need further hints, type `ii` and 
+Candidates of each cell is written automatically in this image, and you can think which logic can be applied to solve this problem. If you need further hints, type `ii` and we get this message.
 
     kaidoku-{{ site.version }}> ii
     Following logics are successively used.
@@ -47,15 +47,13 @@ If you want to know how the logics are applied, type `iii` and you will get the 
     Pointing pair in box 1 removed 5 from R9C3 R7C3 
     Pointing pair in box 8 removed 5 from R8C4 (=7) R9C5 
 
-There is a pointing pair of 5 in box 1 (R1C3 and R2C3), which removes 5 from R9C3 R7C3. After that, there is a pointing pair of 5 in box 8 (R7C5 and R7C6) in box 8, which removes 5 from R8C4 R9C5. After removing 5 from R8C4, R8C4 is 7.
-
-After R8C4 as 7, this problem can be solved with only naked single and hidden single logics.
+There is a pointing pair of 5 in box 1 (R1C3 and R2C3), which removes 5 from R9C3 R7C3. After that, there is a pointing pair of 5 in box 8 (R7C5 and R7C6) in box 8, which removes 5 from R8C4 R9C5. After removing 5 from R8C4, R8C4 becomes 7, and we can make move of `847`. After that, this problem can be solved with only basic logics.
 
 ## Solve partially
 
 Sometimes you may just want to concentrate on analyzing the advanced logics, rather than solving the whole problem. In such situation, you want to directly go to the position where advanced logic is applied. Go back to the initial position of the above problem by `initial` and use "solve partially" command, `sp`.
 
-    kaidoku-{{ site.version }}> iii
+    kaidoku-{{ site.version }}> sp
     Naked single: R4C4 = 4
     Naked single: R3C4 = 9
     Hidden single in box 1 : R2C1 = 9
@@ -66,7 +64,7 @@ Sometimes you may just want to concentrate on analyzing the advanced logics, rat
     Hidden single in box 8 : R9C6 = 9
     Hidden single in column 8 : R8C8 = 2
 
-![]({{'/img/5-1-9p.jpg' | relative_url}})
+![]({{'/img/5-1-9.jpg' | relative_url}})
 
 Now naked single and hidden single are applied repeatedly until the basic logic is not available. `sp` command directly leads us to the position where advanced logic has to be used. You can use `i` command or `jm` command to show the image with candidates.
 
