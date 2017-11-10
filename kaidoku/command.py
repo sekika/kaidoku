@@ -468,6 +468,8 @@ def command(arg, config):
 
     # Following commands are for debugging and not in help
     if c == 'test':
+        from kaidoku.test import test_all
+        test_all()
         config2 = copy.copy(config)
         print('Start testing commands.')
         for c in ['book', 'config', 'l 8', 'j 1', '131', '218', 'h', 'ha', 'c', 'u',
