@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Modules for commandline interpretation."""
+from configobj import ConfigObj
 import copy
 import datetime
 from kaidoku.calc import possible
@@ -156,6 +157,9 @@ def command(arg, config):
         file = os.path.expanduser(config["file"])
         maxtime = int(config['maxtime'])
         bookmark = config['bookmark']
+        # If filename is written in bookmark, read bookmark from the file
+        if type(bookmark) is str:
+            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
         if len(arg) > 2:
             verbose = int(arg[2])
         else:
@@ -201,6 +205,9 @@ def command(arg, config):
                     comment = ''
                     if 'bookmark' in config:
                         bookmark = config['bookmark']
+                        # If filename is written in bookmark, read bookmark from the file
+                        if type(bookmark) is str:
+                            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
                         num = 1
                         while 'b' + str(num) in bookmark:
                             num += 1
@@ -229,7 +236,10 @@ def command(arg, config):
                     ).strftime('%Y/%m/%d')
                     if comment != '':
                         bookmark[label]['comment'] = comment
-                    config['bookmark'] = bookmark
+                    if type(bookmark) is str:
+                        config.write
+                    else:
+                        config['bookmark'] = bookmark
         else:
             if err:
                 print('This sudoku has no solution.')
@@ -264,6 +274,9 @@ def command(arg, config):
         pointer = config['pointer']
         move = config["move"]
         bookmark = config["bookmark"]
+        # If filename is written in bookmark, read bookmark from the file
+        if type(bookmark) is str:
+            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
         n = pointer[level]
         if level == 0:  # bookmark
             if n not in bookmark:
@@ -351,6 +364,9 @@ def command(arg, config):
     if c == 'bl':
         if 'bookmark' in config:
             bookmark = config['bookmark']
+            # If filename is written in bookmark, read bookmark from the file
+            if type(bookmark) is str:
+                bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
         else:
             print('No bookmark.')
             return config
@@ -368,6 +384,9 @@ def command(arg, config):
     if c == 'br':
         if 'bookmark' in config:
             bookmark = config['bookmark']
+            # If filename is written in bookmark, read bookmark from the file
+            if type(bookmark) is str:
+                bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
         else:
             print('No bookmark.')
             return config
@@ -483,6 +502,9 @@ def show(c, verbose, config):
     pointer = config['pointer']
     maxtime = int(config['maxtime'])
     bookmark = config["bookmark"]
+    # If filename is written in bookmark, read bookmark from the file
+    if type(bookmark) is str:
+        bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
     n = pointer[level]
     datadir = config["datadir"]
     infile = open(file, 'r')
