@@ -29,16 +29,18 @@ For solving harder puzzles, some advanced logics need to be used, such as
 
 To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied. Detail of each logic is not discussed in this page. Please refer to these sites.
 
-- [SudokuWiki.org](http://www.sudokuwiki.org/Getting_Started)
+- [SudokuWiki.org](http://www.sudokuwiki.org/Strategy_Families)
 - [sudoku-solutions.com - Background](http://www.sudoku-solutions.com/index.php?page=background)
 
 ## Trial and search
 
-For more difficult problems, these logics do not directly lead to solution, and 'trial and error' approach is required. Computers can easily perform such trial and error with search algorithm. Such puzzles are too hard for normal human beings, but some people enjoy solving such touch puzzles.
+For more difficult problems, the above logics do not directly lead to solution, and 'trial and error' approach is required. Suppose that R2C3has 3 candidate numbers, 2, 4, 6. For each number, we assume that R2C3 is that number. First we assume that R2C3 is 2 and keep solving. If we meet a contradiction, we can eliminate 2 from the candidates. If 4 is also eliminated, R2C3 should be 6. Many advanced logics explained in  [SudokuWiki.org](http://www.sudokuwiki.org/) are trying to find a certain (assumption - contradiction) combination strategically. Trial approach is especially useful for chain of pairs, because one assumption successively determines many cells. Therefore in kaidoku trial and error approach is performed for pairs, and it is regarded as the analysis of chain of pairs.
+
+Trials and errors can be recursively employed with search algorithm. In the above example, while examining R2C3 = 2, we will make another assumption in another cell. As we have only finite numbers of blank cells, this is not an infinite steps. Therefore we can always get to the final conclusion. If we have 3 candidates in a certain cell and for each candidates we make 5 trials, we make total of 15 trials. The numbers of trials are multiplied in this way. Computers can easily perform such large numbers of trials and errors with search algorithm. Such puzzles are too hard for normal human beings, but a small numbers of trials and errors are actually available. It can be solved with luck. In any case, problems requiring the trial and error approach is too hard for avaraged sudoku players. Some people enjoy such difficult problems, and kaidoku offers such problems in beyond level 7.
 
 ## Logics implemented in Kaidoku
 
-Actually the easiest way for the computers to solve sudoku is to use only the naked single logic and search algorithm, because the computers can make so many times of trial and errors quite easily. However, kaidoku uses many logics to find the best way for humans to solve a sudoku puzzle, and use the search algorithm as a last resort.
+Actually the easiest way for the computers to solve sudoku is to use only the naked single logic and search algorithm, because the computers can make so many times of trials and errors quite easily. However, kaidoku uses many logics to find the best way for humans to solve a sudoku puzzle, and use the search algorithm as a last resort.
 
 Following logics are currently implemented in Kaidoku. These logics are applied in this order.
 
