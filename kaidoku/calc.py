@@ -33,12 +33,9 @@ def solve(s, verbose, maxdepth, maxtime):
             else:
                 return (s, message, 0, False, True)
         if found:
-            if verbose == 4:
-                message = str(81 - bl) + ': ' + message
             if message != '':
                 print(message)
             if verbose > 4 and blank(s) < bl:
-                print(str(81 - blank(s)) + ' numbers determined')
                 print(output(s))
             LevelPoint += {
                 'Naked single': 0,
