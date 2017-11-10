@@ -16,7 +16,6 @@ Logics to be hopefully implemented
 To do, or not to do?
 -----------------
 
-- Fix bookmark redirect
 - Label in figure
 - Implement additional logics
 - Write test codes
