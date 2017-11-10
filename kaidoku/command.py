@@ -158,8 +158,9 @@ def command(arg, config):
         maxtime = int(config['maxtime'])
         bookmark = config['bookmark']
         # If filename is written in bookmark, read bookmark from the file
-        if type(bookmark) is str:
-            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
+        if type(config['bookmark']) is str:
+            confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+            bookmark = confbookmark['bookmark']
         if len(arg) > 2:
             verbose = int(arg[2])
         else:
@@ -206,8 +207,8 @@ def command(arg, config):
                     if 'bookmark' in config:
                         bookmark = config['bookmark']
                         # If filename is written in bookmark, read bookmark from the file
-                        if type(bookmark) is str:
-                            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+                        if type(config['bookmark']) is str:
+                            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
                         num = 1
                         while 'b' + str(num) in bookmark:
                             num += 1
@@ -236,8 +237,9 @@ def command(arg, config):
                     ).strftime('%Y/%m/%d')
                     if comment != '':
                         bookmark[label]['comment'] = comment
-                    if type(bookmark) is str:
-                        config.write
+                    if type(config['bookmark']) is str:
+                        confbookmark['bookmark'] = bookmark
+                        confbookmark.write()
                     else:
                         config['bookmark'] = bookmark
         else:
@@ -276,7 +278,8 @@ def command(arg, config):
         bookmark = config["bookmark"]
         # If filename is written in bookmark, read bookmark from the file
         if type(bookmark) is str:
-            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
+            confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+            bookmark = confbookmark['bookmark']
         n = pointer[level]
         if level == 0:  # bookmark
             if n not in bookmark:
@@ -332,6 +335,10 @@ def command(arg, config):
         comment = ''
         if 'bookmark' in config:
             bookmark = config['bookmark']
+            # If filename is written in bookmark, read bookmark from the file
+            if type(bookmark) is str:
+                confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+                bookmark = confbookmark['bookmark']
             num = 1
             for i in bookmark:
                 num += 1
@@ -359,7 +366,11 @@ def command(arg, config):
         bookmark[label]['added'] = datetime.datetime.now().strftime('%Y/%m/%d')
         if comment != '':
             bookmark[label]['comment'] = comment
-        config['bookmark'] = bookmark
+        if type(config['bookmark']) is str:
+            confbookmark['bookmark'] = bookmark
+            confbookmark.write()
+        else:
+            config['bookmark'] = bookmark
         return config
     if c == 'bl':
         if 'bookmark' in config:
@@ -386,7 +397,8 @@ def command(arg, config):
             bookmark = config['bookmark']
             # If filename is written in bookmark, read bookmark from the file
             if type(bookmark) is str:
-                bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
+                confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+                bookmark = confbookmark['bookmark']
         else:
             print('No bookmark.')
             return config
@@ -409,7 +421,11 @@ def command(arg, config):
         pointer = config['pointer']
         pointer[0] = n
         config['pointer'] = pointer
-        config['bookmark'] = bookmark
+        if type(config['bookmark']) is str:
+            confbookmark['bookmark'] = bookmark
+            confbookmark.write()
+        else:
+            config['bookmark'] = bookmark
         config['move'] = move
         config, err = show(c, 0, config)
         return config
@@ -505,18 +521,18 @@ def show(c, verbose, config):
     maxtime = int(config['maxtime'])
     bookmark = config["bookmark"]
     # If filename is written in bookmark, read bookmark from the file
-    if type(bookmark) is str:
-        bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+    if type(config['bookmark']) is str:
+        bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
     n = pointer[level]
     datadir = config["datadir"]
     infile = open(file, 'r')
     no = 0
     if level == 0:  # bookmark
         if n not in bookmark:
-            print('Label {0} not found in bookmark.')
+            print('Label {0} not found in bookmark.'.format(n))
             return config, False
         if 'problem' not in bookmark[n]:
-            print('Label {0} broken.')
+            print('Label {0} broken.'.format(n))
             return config, False
         problem = bookmark[n]['problem']
     else:
