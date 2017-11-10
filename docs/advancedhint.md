@@ -1,7 +1,7 @@
 ---
 layout: default
 lang: English
-ref: basichint
+ref: advancedhint
 permalink: /advancedhint
 ---
 
