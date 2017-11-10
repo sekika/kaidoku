@@ -23,7 +23,7 @@ permalink: /
 
 ## [](#document)Document
 
-Kaidoku is a program in development. Complete document is not available yet. Here document is written little by little.
+Kaidoku is a program in development. Document is not complete and what is written is likely to change, but here it is.
 
 - [Rule of sudoku](rule)
 - [How to install and get started](install)
