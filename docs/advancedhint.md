@@ -39,7 +39,7 @@ Candidates of each cell is written automatically in this image, and you can thin
     Pointing pair
     See full explanation by typing iii.
 
-Now the logic which can be applied is shown. This hint means that after using pointing pair logic two times, we can determine a number of a certain cell.
+Now the logic which can be applied is shown. This hint means that after using pointing pair logic twice, we can determine a certain cell.
 
 If you want to know how the logics are applied, type `iii` and you will get the full explanation like this.
 
@@ -47,7 +47,7 @@ If you want to know how the logics are applied, type `iii` and you will get the 
     Pointing pair in box 1 removed 5 from R9C3 R7C3 
     Pointing pair in box 8 removed 5 from R8C4 (=7) R9C5 
 
-There is a pointing pair of 5 in box 1 (R1C3 and R2C3), which removes 5 from R9C3 R7C3. After that, there is a pointing pair of 5 in box 8 (R7C5 and R7C6) in box 8, which removes 5 from R8C4 R9C5. After removing 5 from R8C4, R8C4 becomes 7, and we can make move of `847`. After that, this problem can be solved with only basic logics.
+There is a pointing pair of 5 in box 1 (R1C3 and R2C3), which removes 5 from R9C3 and R7C3. After that, there is a pointing pair of 5 in box 8 (R7C5 and R7C6), which removes 5 from R8C4 R9C5. After removing 5 from R8C4, R8C4 is determined to be 7, and we can make move of `847`. After that, this problem can be solved with only basic logics.
 
 ## Solve partially
 
@@ -66,7 +66,7 @@ Sometimes you may just want to concentrate on analyzing the advanced logics, rat
 
 ![]({{'/img/5-1-9.jpg' | relative_url}})
 
-Now naked single and hidden single are applied repeatedly until the basic logic is not available. `sp` command directly leads us to the position where advanced logic has to be used. You can use `i` command or `jm` command to show the image with candidates.
+Now basic logics of naked single and hidden single are applied repeatedly as long as they can be used. `sp` command directly leads us to the position where advanced logic has to be used. You can use `i` command or `jm` command to show the image with candidates if you want.
 
 - - -
 
