@@ -31,7 +31,7 @@ Kaidoku is a program in development. Complete document is not available yet. Her
 - [Getting a hint on basic logics](basichint)
 - [Select a problem of a specified difficulty level](level)
 - [Logics for solving sudoku puzzles used in this program](logic)
-- Getting hint on advanced logics and showing candidates
+- [Getting a hint on advanced logics](advancedhint)
 - Bookmark management
 - Play and analyze external sudoku problems
 - Create new sudoku problems

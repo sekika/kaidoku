@@ -71,6 +71,7 @@ More logics will be hopefully implemented. Especially the following.
 
 - - -
 
+- [Next: Getting a hint on advanced logics](advancedhint)
 - [Previous: Select a problem of a specified difficulty level](./level)
 - [Document index](./#document)
 - [Home Page](./)

@@ -68,7 +68,7 @@ If you are not familiar with solving sudoku, I would recommend solving the easy 
 
 ## When advanced logic is required
 
-When you try to solve problems in higher levels, you will meet the positions when advanced logics other than naked single and hidden single is required. In such cases, following message appears. It will be discussed in the later pages of this document.
+When you try to solve problems in higher levels, you will meet the positions when advanced logics other than naked single and hidden single is required. In such cases, following message appears. It will be discussed in a [later page](advancedhint) of this document.
 
     kaidoku-{{ site.version }}> i
     Think candidates of the cells.
