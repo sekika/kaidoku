@@ -70,6 +70,7 @@ Now naked single and hidden single are applied repeatedly until the basic logic 
 
 - - -
 
+- [Next: Analysis of a whole problem](analysis)
 - [Previous: Logics for solving sudoku puzzles used in this program](logic)
 - [Document index](./#document)
 - [Home Page](./)
