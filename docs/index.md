@@ -37,4 +37,5 @@ Kaidoku is a program in development. Document is not complete and what is writte
 - Play and analyze external sudoku problems
 - Create new sudoku problems
 - Managing configuration file
+- Index of commands
 - [External sudoku sites](link)
