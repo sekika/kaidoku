@@ -2,7 +2,7 @@
 layout: default
 lang: English
 ref: basichint
-permalink: /basichint
+permalink: /advancedhint
 ---
 
 # Getting a hint on advanced logics
