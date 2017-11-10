@@ -39,11 +39,12 @@ def main(argv=sys.argv[1:]):
             except Exception:
                 print('\nQuitting kaidoku.')
                 return
-            if arg[0] == 'q':
-                print('Quitting kaidoku.')
-                return
-            config = command(arg, config)
-            config.write()
+            if len(arg) > 0:
+                if arg[0] == 'q':
+                    print('Quitting kaidoku.')
+                    return
+                config = command(arg, config)
+                config.write()
     else:
         arg = sys.argv[1:]
         config = command(arg, config)
