@@ -54,6 +54,7 @@ Following logics are currently implemented in Kaidoku. These logics are applied 
 - Hidden triple
 - X-wing
 - XY-wing (Y-Wing)
+- XYZ-wing
 - Chain of pairs
 - Trial
 - Search
@@ -64,7 +65,6 @@ Trial and search is basically doing the same thing, but it is distinguished in k
 
 More logics will be hopefully implemented. Especially the following.
 
-- XYZ-wing
 - Remote pairs
 - Naked quad
 - Hidden quad
