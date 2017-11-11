@@ -129,3 +129,96 @@ def xywing(s, p, b, pair, verbose):
                                     return (s, p, message, True, False)
 
     return (s, p, message, False, False)
+
+
+def xyzwing(s, p, b, boxl, comb, pb, verbose):
+    """XYZ-wing."""
+    from kaidoku.misc import (cell)
+    message = ''
+    a = [0, 0, 0]
+    for i in range(9):
+        for x in comb[i]:
+            if len(x) == 3:
+                for y in comb[i]:
+                    if len(y) == 2:
+                        if y[0] in x and y[1] in x:
+                            xa = boxl[i][comb[i].index(x)]
+                            ya = boxl[i][comb[i].index(y)]
+                            xp = xa - [0, 3, 6, 27, 30, 33, 54, 57, 60][i]
+                            if abs(xa - ya) > 3:
+                                for za in pb[i, xp // 9]:
+                                    if s[za] == 0 and sum(p[za]) == 2:
+                                        if p[za][x[0] - 1] + p[za][x[1] - 1] + p[za][x[2] - 1] == 2:
+                                            if p[za][y[0] - 1] + p[za][y[1] - 1] == 1:
+                                                if p[za][y[0] - 1] == 1:
+                                                    Z = y[0]
+                                                else:
+                                                    Z = y[1]
+                                                a[0] = xa + [1, -1, -2][xp % 3]
+                                                a[1] = xa + [2, 1, -1][xp % 3]
+                                                for j in [0, 1]:
+                                                    if s[a[j]] == 0:
+                                                        if p[a[j]][Z - 1] == 1:
+                                                            z = ()
+                                                            for k in range(9):
+                                                                if p[za][k] == 1:
+                                                                    z = z + \
+                                                                        (k + 1,)
+                                                            message = xyzmessage(
+                                                                xa, x, ya, y, za, z, Z, a[j], verbose)
+                                                            p[a[j]][Z - 1] = 0
+                                                            if sum(p[a[j]]) == 1:
+                                                                s[a[j]] = p[a[j]].index(
+                                                                    1) + 1
+                                                                if verbose > 2:
+                                                                    message += '\nTherefore ' + \
+                                                                        cell(a[j]) + ' = ' + \
+                                                                        str(s[a[j]]
+                                                                            ) + '.'
+                                                            return (s, p, message, True, False)
+                            if (xa - ya) % 3 > 0:
+                                for za in pb[i, 3 + xp % 3]:
+                                    if s[za] == 0 and sum(p[za]) == 2:
+                                        if p[za][x[0] - 1] + p[za][x[1] - 1] + p[za][x[2] - 1] == 2:
+                                            if p[za][y[0] - 1] + p[za][y[1] - 1] == 1:
+                                                if p[za][y[0] - 1] == 1:
+                                                    Z = y[0]
+                                                else:
+                                                    Z = y[1]
+                                                a[0] = xa + \
+                                                    [9, -9, -18][xp // 9]
+                                                a[1] = xa + [18, 9, -9][xp // 9]
+                                                for j in [0, 1]:
+                                                    if s[a[j]] == 0:
+                                                        if p[a[j]][Z - 1] == 1:
+                                                            z = ()
+                                                            for k in range(9):
+                                                                if p[za][k] == 1:
+                                                                    z = z + \
+                                                                        (k + 1,)
+                                                            message = xyzmessage(
+                                                                xa, x, ya, y, za, z, Z, a[j], verbose)
+                                                            p[a[j]][Z - 1] = 0
+                                                            if sum(p[a[j]]) == 1:
+                                                                s[a[j]] = p[a[j]].index(
+                                                                    1) + 1
+                                                                if verbose > 2:
+                                                                    message += '\nTherefore ' + \
+                                                                        cell(a[j]) + ' = ' + \
+                                                                        str(s[a[j]]
+                                                                            ) + '.'
+                                                            return (s, p, message, True, False)
+    return (s, p, message, False, False)
+
+
+def xyzmessage(xa, x, ya, y, za, z, Z, a, verbose):
+    from kaidoku.misc import (cell)
+    message = ''
+    if verbose > 1:
+        if verbose == 2:
+            message = 'XYZ-wing can be found.'
+        else:
+            message = 'XYZ-wing of ' + cell(xa) + ' ' + str(x) + ' ' + \
+                cell(ya) + ' ' + str(y) + ' ' + cell(za) + ' ' + str(z) + ' ' + \
+                'removes ' + str(Z) + ' from ' + cell(a) + '.'
+    return message

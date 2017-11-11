@@ -27,6 +27,7 @@ def test_calc():
     from kaidoku.misc import pbox
     from kaidoku.wing import xwing
     from kaidoku.wing import xywing
+    from kaidoku.wing import xyzwing
     problem = '010003000002040800098000000850007930000504000023900056000000360005090400000600010'
     s, err = conv(problem)
     s2 = copy.copy(s)
@@ -86,6 +87,21 @@ def test_calc():
     s, p, message, found, err = xywing(s, p, b, pair, 4)
     assert (message[:21]) == 'XY-wing of R8C7 (4,9)', 'Error in xywing'
     s, err = conv(
+        '240800039073900084800034257064208793907003805308009410732586941481390500600001308')
+    p = possible(s)
+    boxl = boxlist(s)
+    s, p, logic, message, found, err = pointing(s, p, pb, 4)
+    assert message == 'Pointing pair in box 2 removed 5 from R1C5 R2C5 ', 'Error in pointing'
+    comb, mirror = combmir(p, boxl)
+    s, p, message, found, err = xwing(s, p, b, boxl, mirror, 4)
+    assert (
+        message[:42]) == 'X-wing is found. R3C2, R5C2, R3C4 and R5C4', 'Error in xwing'
+    comb, mirror = combmir(p, boxl)
+    s, p, message, found, err = xyzwing(s, p, b, boxl, comb, pb, 4)
+    assert (
+        message[:50]) == 'XYZ-wing of R5C4 (1, 4, 6) R5C5 (4, 6) R3C4 (1, 6)', 'Error in xyzwing'
+    s, err = conv(
+
         '300957800074368015050142000005271639163894050792536100000703590507689420009405006')
     p = possible(s)
     pair, paircomb = pairs(s, p)

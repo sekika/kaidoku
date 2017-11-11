@@ -49,7 +49,7 @@ def solve(s, verbose, maxdepth, maxtime):
                 'Hidden triple': 70,
                 'X-wing': 70,
                 'XY-wing': 70,
-                'XYZ-wing': 100,  # not implemented yet
+                'XYZ-wing': 100,
                 'Swordfish': 100,  # not implemented, rare
                 'Jellyfish': 100,  # not implemented, rare
                 "Bowman's Bingo": 100,  # not sure
@@ -85,6 +85,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     from kaidoku.search import trial
     from kaidoku.wing import xwing
     from kaidoku.wing import xywing
+    from kaidoku.wing import xyzwing
     # Check validity
     message, err = check(s)
     if verbose == 0:
@@ -127,6 +128,9 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
         s, p, message, found, err = xywing(s, p, b, pair, verbose)  # XY-wing
         if found or err:
             return (s, p, message, 'XY-wing', depth, found, err)
+        s, p, message, found, err = xyzwing(s, p, b, boxl, comb, pb, verbose)  # XYZ-wing
+        if found or err:
+            return (s, p, message, 'XYZ-wing', depth, found, err)
 
         if len(pair) > 3:
             s, p, message, chainlength, found, err = pairchain(
