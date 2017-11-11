@@ -9,8 +9,6 @@ pip3 install -e .. > /dev/null
 # Test
 sh test.sh
 
-exit #####
-
 # Check version
 LATEST=`pip3 search kaidoku | grep ^kaidoku | awk '{print $2}' | sed -e 's/(//' | sed -e 's/)//'`
 echo 'Latest version: '$LATEST
