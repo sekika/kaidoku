@@ -6,8 +6,11 @@ from PIL import ImageDraw
 from PIL import ImageFont
 
 
-def drawimage(s, p, label, size, imgfile, textcolor, font, mark):
+def drawimage(s, p, label, size, imgfile, figure, mark):
     """Draw sudoku image."""
+    font = figure['font']
+    textcolor = figure['color']
+    axis = figure['axis']
     scalelist = {'small': 0.8, 'medium': 1, 'large': 1.5, 'x-large': 2}
     if size in scalelist:
         scale = scalelist[size]
@@ -29,7 +32,17 @@ def drawimage(s, p, label, size, imgfile, textcolor, font, mark):
         return True
     nfont = ImageFont.truetype(font, int(24 * scale))
     sfont = ImageFont.truetype(font, int(9 * scale))
-    draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
+    if axis == 'numeric':
+        draw.text((20 * scale, 0), label, font=tfont, fill='#000')
+    else:
+        draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
+    if axis == 'numeric':
+        for i in range(9):
+            draw.text((1*scale, (45+i*28.3)*scale), str(i+1),
+                font=sfont, fill=textcolor)
+        for j in range(9):
+            draw.text(((24 + j * 28.3 )*scale, 21), str(j+1),
+                font=sfont, fill=textcolor)
     for i in range(9):
         for j in range(9):
             n = int(s[i * 9 + j])

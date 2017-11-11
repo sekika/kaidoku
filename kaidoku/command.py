@@ -588,10 +588,9 @@ def show(c, verbose, config):
             datadir = checkdatadir(datadir)
             config['datadir'] = datadir
             imgfile = datadir + '/current.jpg'
-            font = config['font']
-            textcolor = config['color']
+            figure = config['figure']
             err = drawimage(s, '', label, size, imgfile,
-                            textcolor, font, False)
+                            figure, False)
             if not err:
                 print('See image by "html".')
 
@@ -611,9 +610,8 @@ def show(c, verbose, config):
         if c == 'jm':
             size = 'large'
             mark = True
-        font = config['font']
-        textcolor = config['color']
-        err = drawimage(s, p, label, size, imgfile, textcolor, font, mark)
+        figure = config['figure']
+        err = drawimage(s, p, label, size, imgfile, figure, mark)
         if not err:
             print('See image by "html".')
     if c == 'i' or c == 'ii' or c == 'iii' or c == 'sp':  # prepare solving
@@ -657,10 +655,9 @@ def show(c, verbose, config):
                     config['datadir'] = datadir
                     imgfile = datadir + '/current.jpg'
                     p = possible(s)
-                    font = config['font']
-                    textcolor = config['color']
+                    figure = config['figure']
                     err = drawimage(s, p, label, size, imgfile,
-                                    textcolor, font, True)
+                                    figure, True)
                     if not err:
                         print('See image by "html".')
                 print('For more hints, type ii.')

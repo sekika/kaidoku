@@ -125,9 +125,13 @@ def readconfig(ConfFile):
         config['create']['symmetry'] = 'y'
     if 'mincell' not in config['create']:
         config['create']['mincell'] = 17
-    if 'font' not in config:
-        config['font'] = 'Arial'
-    if 'color' not in config:
-        config['color'] = 'black'
+    if 'figure' not in config:
+        config['figure'] = {}
+    if 'font' not in config['figure']:
+        config['figure']['font'] = 'Arial'
+    if 'color' not in config['figure']:
+        config['figure']['color'] = 'black'
+    if 'axis' not in config['figure']:
+        config['figure']['axis'] = 'none'
     config.write()
     return config
