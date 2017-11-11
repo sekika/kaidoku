@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Modules for generating sudoku figures."""
 import os.path
+
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
@@ -38,11 +39,11 @@ def drawimage(s, p, label, size, imgfile, figure, mark):
         draw.text((20 * scale, 10 * scale), label, font=tfont, fill='#000')
     if axis == 'numeric':
         for i in range(9):
-            draw.text((1*scale, (45+i*28.3)*scale), str(i+1),
-                font=sfont, fill=textcolor)
+            draw.text((scale, (45 + i * 28.3) * scale), str(i + 1),
+                      font=sfont, fill=textcolor)
         for j in range(9):
-            draw.text(((24 + j * 28.3 )*scale, 21), str(j+1),
-                font=sfont, fill=textcolor)
+            draw.text(((24 + j * 28.3) * scale, 21 * scale), str(j + 1),
+                      font=sfont, fill=textcolor)
     for i in range(9):
         for j in range(9):
             n = int(s[i * 9 + j])

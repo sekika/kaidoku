@@ -2,6 +2,10 @@
 """Modules for creating and maintaining book database."""
 import copy
 import datetime
+import random
+from statistics import mean
+from statistics import stdev
+
 from kaidoku.calc import possible
 from kaidoku.calc import solve
 from kaidoku.misc import blank
@@ -11,9 +15,6 @@ from kaidoku.misc import conv
 from kaidoku.misc import lev
 from kaidoku.misc import openappend
 from kaidoku.output import short
-import random
-from statistics import mean
-from statistics import stdev
 
 
 def analyze(file, level, verbose):
@@ -23,7 +24,7 @@ def analyze(file, level, verbose):
     start = datetime.datetime.now()
     input = open(file, 'r')
     i = []
-    l = []
+    le = []
     n = 0
     for line in input:
         n += 1
@@ -41,7 +42,7 @@ def analyze(file, level, verbose):
             if not solved and not err:
                 print('\nGive up {0}'.format(data[1]))
             i.append(blank(s))
-            l.append(level2)
+            le.append(level2)
             if verbose == 0:
                 if len(i) % 10 == 0:
                     print('.', end='', flush=True)
@@ -56,7 +57,7 @@ def analyze(file, level, verbose):
     print('\n{0} problems solved in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
         len(i), t, t / (len(i))))
     for j in range(11):
-        n = l.count(j)
+        n = le.count(j)
         if n > 0:
             print('Level {0}: {1}'.format(j, n))
     print('Numbers: mean {0:.1f} std {1:.1f} min {2}'.format(
@@ -154,18 +155,18 @@ def show_status(file):
     if file == '':
         return
     input = open(file, 'r')
-    l = [0] * 10
+    li = [0] * 10
     for line in input:
         data = line.strip().split(' ')
-        l[int(data[0])] += 1
-    su = sum(l)
+        li[int(data[0])] += 1
+    su = sum(li)
     if su == 0:
         print('No problem in the book.')
         print('Create problems with c command.')
         return
     for i in range(1, 10):
         print('Level {0} {1:<10}: {2:>6} ({3:5.2f} %)'.format(
-            i, lev(i), l[i], l[i] / su * 100))
+            i, lev(i), li[i], li[i] / su * 100))
     print('Total numbers     : {0:>6}'.format(su))
     input.close
     return

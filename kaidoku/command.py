@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """Modules for commandline interpretation."""
-from configobj import ConfigObj
 import copy
 import datetime
+import os.path
+import sys
+
+from configobj import ConfigObj
+
 from kaidoku.calc import possible
 from kaidoku.calc import solve
 from kaidoku.calc import solveone
@@ -27,8 +31,6 @@ from kaidoku.misc import pbox
 from kaidoku.output import output
 from kaidoku.output import short
 from kaidoku.output import url
-import os.path
-import sys
 
 
 def command(arg, config):
@@ -87,11 +89,11 @@ def command(arg, config):
     if c == 'l':
         level = int(config["level"])
         try:
-            l = int(arg[1])
+            le = int(arg[1])
         except Exception:
             return config
-        if l > 0 and l < 10:
-            level = l
+        if le > 0 and le < 10:
+            level = le
             config['level'] = level
         config['move'] = []
         config = command(['c'], config)
@@ -159,7 +161,8 @@ def command(arg, config):
         bookmark = config['bookmark']
         # If filename is written in bookmark, read bookmark from the file
         if type(config['bookmark']) is str:
-            confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+            confbookmark = ConfigObj(
+                os.path.expanduser(bookmark), encoding='utf-8')
             bookmark = confbookmark['bookmark']
         if len(arg) > 2:
             verbose = int(arg[2])
@@ -208,7 +211,8 @@ def command(arg, config):
                         bookmark = config['bookmark']
                         # If filename is written in bookmark, read bookmark from the file
                         if type(config['bookmark']) is str:
-                            bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
+                            bookmark = ConfigObj(os.path.expanduser(
+                                bookmark), encoding='utf-8')['bookmark']
                         num = 1
                         while 'b' + str(num) in bookmark:
                             num += 1
@@ -278,7 +282,8 @@ def command(arg, config):
         bookmark = config["bookmark"]
         # If filename is written in bookmark, read bookmark from the file
         if type(bookmark) is str:
-            confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+            confbookmark = ConfigObj(
+                os.path.expanduser(bookmark), encoding='utf-8')
             bookmark = confbookmark['bookmark']
         n = pointer[level]
         if level == 0:  # bookmark
@@ -337,7 +342,8 @@ def command(arg, config):
             bookmark = config['bookmark']
             # If filename is written in bookmark, read bookmark from the file
             if type(bookmark) is str:
-                confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+                confbookmark = ConfigObj(
+                    os.path.expanduser(bookmark), encoding='utf-8')
                 bookmark = confbookmark['bookmark']
             num = 1
             for i in bookmark:
@@ -377,7 +383,8 @@ def command(arg, config):
             bookmark = config['bookmark']
             # If filename is written in bookmark, read bookmark from the file
             if type(bookmark) is str:
-                bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
+                bookmark = ConfigObj(os.path.expanduser(
+                    bookmark), encoding='utf-8')['bookmark']
         else:
             print('No bookmark.')
             return config
@@ -397,7 +404,8 @@ def command(arg, config):
             bookmark = config['bookmark']
             # If filename is written in bookmark, read bookmark from the file
             if type(bookmark) is str:
-                confbookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')
+                confbookmark = ConfigObj(
+                    os.path.expanduser(bookmark), encoding='utf-8')
                 bookmark = confbookmark['bookmark']
         else:
             print('No bookmark.')
@@ -522,7 +530,8 @@ def show(c, verbose, config):
     bookmark = config["bookmark"]
     # If filename is written in bookmark, read bookmark from the file
     if type(config['bookmark']) is str:
-        bookmark = ConfigObj(os.path.expanduser(bookmark), encoding='utf-8')['bookmark']
+        bookmark = ConfigObj(os.path.expanduser(bookmark),
+                             encoding='utf-8')['bookmark']
     n = pointer[level]
     datadir = config["datadir"]
     infile = open(file, 'r')

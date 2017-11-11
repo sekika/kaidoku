@@ -1,6 +1,7 @@
 """Trial and search."""
 import copy
 import datetime
+
 from kaidoku.misc import blank
 from kaidoku.misc import cell
 

@@ -6,6 +6,7 @@ Modules for solving sudoku problems.
 import copy
 import datetime
 import itertools
+
 from kaidoku.misc import blank
 from kaidoku.misc import cell
 from kaidoku.misc import check

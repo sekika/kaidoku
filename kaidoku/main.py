@@ -3,13 +3,15 @@
 
 Start from main()
 """
-from configobj import ConfigObj
 import configparser
+import os.path
+import sys
+
+from configobj import ConfigObj
+
 from kaidoku.command import command
 from kaidoku.help import welcommessage
 from kaidoku.misc import openappend
-import os.path
-import sys
 
 # Kaidoku starts here
 
