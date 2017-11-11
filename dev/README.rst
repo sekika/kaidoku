@@ -16,7 +16,6 @@ Logics to be hopefully implemented
 To do, or not to do?
 -----------------
 
-- Label in figure
 - Implement additional logics
 - Write test codes
 - Update recursive scan in deep search for faster search
