@@ -6,12 +6,9 @@ This directory contains tools for development.
 Logics to be hopefully implemented
 -----------------
 
-- XYZ-wing
-- Remote pairs
 - Naked quad
 - Hidden quad
 - Swordfish
-- Bowman's Bingo
 
 To do, or not to do?
 -----------------
