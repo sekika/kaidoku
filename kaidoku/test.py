@@ -18,6 +18,7 @@ def test_calc():
     from kaidoku.calc import possible
     from kaidoku.calc import solve
     from kaidoku.calc import solveone
+    from kaidoku.chain import remotepair
     from kaidoku.chain import pairchain
     from kaidoku.misc import box
     from kaidoku.misc import boxlist
@@ -44,12 +45,12 @@ def test_calc():
     s, p, message, found, err = naksing(s, p, b, 4)
     assert message == 'Naked single: R2C8 = 7', 'Error in naksing'
     s, err = conv(
-        '178500390396000205452093810621384759587169432934275168263450980805900603709030520')
+'178500390396000205452093810621384759587169432934275168263450980805900603709030520')
     p = possible(s)
     s, p, logic, message, found, err = pointing(s, p, pb, 4)
     assert message == 'Pointing pair in box 2 removed 7 from R2C6 ', 'Error in pointing'
     s, err = conv(
-        '700060050501080000060002008040000007600803905900000020100700090000010206030090001')
+'700060050501080000060002008040000007600803905900000020100700090000010206030090001')
     p = possible(s)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
@@ -57,7 +58,7 @@ def test_calc():
         s, p, boxl, comb, mirror, 4, False)
     assert message == 'Naked pair in column 9 made removal from R1C9', 'Error in nakhid'
     s, err = conv(
-        '250400068960020000041600200586142379192367080734985612000006800000090056670004023')
+'250400068960020000041600200586142379192367080734985612000006800000090056670004023')
     p = possible(s)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
@@ -65,7 +66,7 @@ def test_calc():
         s, p, boxl, comb, mirror, 4, False)
     assert message == 'Naked triple in box 7 made removal from R7C3 R9C3', 'Error in nakhid'
     s, err = conv(
-        '528641739614937258793500641902000017487195326100000980870403192301209000209010003')
+'528641739614937258793500641902000017487195326100000980870403192301209000209010003')
     p = possible(s)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
@@ -73,7 +74,7 @@ def test_calc():
         s, p, boxl, comb, mirror, 4, False)
     assert message == 'Hidden pair in row 9', 'Error in nakhid'
     s, err = conv(
-        '030600078270080010500007004027591403090378120103264097300800749040750001700009052')
+'030600078270080010500007004027591403090378120103264097300800749040750001700009052')
     p = possible(s)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
@@ -81,13 +82,13 @@ def test_calc():
     assert (
         message[:42]) == 'X-wing is found. R4C1, R8C1, R4C8 and R8C8', 'Error in xwing'
     s, err = conv(
-        '589312746236740005714006023362987050847135269951264387478603500603001078105070630')
+'589312746236740005714006023362987050847135269951264387478603500603001078105070630')
     p = possible(s)
-    pair, paircomb = pairs(s, p)
+    pair, paircomb, pairdict = pairs(s, p)
     s, p, message, found, err = xywing(s, p, b, pair, 4)
     assert (message[:21]) == 'XY-wing of R8C7 (4,9)', 'Error in xywing'
     s, err = conv(
-        '240800039073900084800034257064208793907003805308009410732586941481390500600001308')
+'240800039073900084800034257064208793907003805308009410732586941481390500600001308')
     p = possible(s)
     boxl = boxlist(s)
     s, p, logic, message, found, err = pointing(s, p, pb, 4)
@@ -101,10 +102,26 @@ def test_calc():
     assert (
         message[:50]) == 'XYZ-wing of R5C4 (1, 4, 6) R5C5 (4, 6) R3C4 (1, 6)', 'Error in xyzwing'
     s, err = conv(
-
-        '300957800074368015050142000005271639163894050792536100000703590507689420009405006')
+'037080405658194300402357860063528004504761203201943650829415736006039540345070000')
     p = possible(s)
-    pair, paircomb = pairs(s, p)
+    boxl = boxlist(s)
+    s, p, logic, message, found, err = pointing(s, p, pb, 4)
+    assert message == 'Pointing pair in box 2 removed 2 from R1C8 ', 'Error in pointing'
+    s, p, logic, message, found, err = pointing(s, p, pb, 4)
+    assert message == 'Pointing pair in box 7 removed 1 from R8C9 ', 'Error in pointing'
+    comb, mirror = combmir(p, boxl)
+    s, p, logic, message, found, err = nakhid(
+        s, p, boxl, comb, mirror, 4, False)
+    assert message == 'Hidden pair in column 9', 'Error in nakhid'
+    pair, paircomb, pairdict = pairs(s, p)
+    s, p, message, found, err = remotepair(
+        s, p, b, pair, pairdict, 4)
+    assert (
+        message[:32]) == 'Remote pairs of (1, 9) is found.', 'Error in remotepair'
+    s, err = conv(
+'300957800074368015050142000005271639163894050792536100000703590507689420009405006')
+    p = possible(s)
+    pair, paircomb, pairdict = pairs(s, p)
     s, p, message, chainlength, found, err = pairchain(
         s, p, b, pair, paircomb, 4)
     assert (

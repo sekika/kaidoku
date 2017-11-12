@@ -50,12 +50,11 @@ def solve(s, verbose, maxdepth, maxtime):
                 'X-wing': 70,
                 'XY-wing': 70,
                 'XYZ-wing': 100,
+                'Remote pairs': 100,
                 'Swordfish': 100,  # not implemented, rare
                 'Jellyfish': 100,  # not implemented, rare
-                "Bowman's Bingo": 100,  # not sure
                 'Naked quad': 100,  # not implemented yet
                 'Hidden quad': 100,  # not implemented yet
-                'Remote pairs': 100,  # not implemented yet
                 'Chain of pairs': 200,
                 'Chain of pairs (long)': 300,
                 'Trial': 500,
@@ -78,6 +77,7 @@ def solve(s, verbose, maxdepth, maxtime):
 def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     """Solve one move."""
     from kaidoku.chain import pairchain
+    from kaidoku.chain import remotepair
     from kaidoku.misc import boxlist
     from kaidoku.misc import combmir
     from kaidoku.misc import pairs
@@ -119,7 +119,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
             return (s, p, message, logic, depth, found, err)
 
     # Advanced logic
-    pair, paircomb = pairs(s, p)
+    pair, paircomb, pairdict = pairs(s, p)
     if depth == 0:
         s, p, message, found, err = xwing(
             s, p, b, boxl, mirror, verbose)  # X-wing
@@ -133,6 +133,10 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
             return (s, p, message, 'XYZ-wing', depth, found, err)
 
         if len(pair) > 3:
+            s, p, message, found, err = remotepair(
+                s, p, b, pair, pairdict, verbose)  # Remote pairs
+            if found or err:
+                return (s, p, message, 'Remote pairs', depth, found, err)
             s, p, message, chainlength, found, err = pairchain(
                 s, p, b, pair, paircomb, verbose)  # Chain of pairs
             if chainlength < 8:

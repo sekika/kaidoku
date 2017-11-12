@@ -2,6 +2,88 @@
 """Chain logic."""
 
 
+def remotepair(s, p, b, pair, pairdict, verbose):
+    """Remote pairs."""
+    from kaidoku.misc import cell
+    message = ''
+    if len(pair) < 4:
+        return (s, p, message, False, False)
+    for i in pairdict:
+        if len(pairdict[i]) > 3:
+            pd = pairdict[i]
+            link = {}
+            for j in pd:
+                for k in pd:
+                    if k in b[j]:
+                        if j in link:
+                            link[j].append(k)
+                        else:
+                            link[j] = [k, ]
+            a = []
+            c = []
+            for j in link:
+                if len(link[j]) > 1:
+                    a = [j, ]
+                    c = link[j]
+                    break
+            if len(c) > 0:
+                appended = True
+            else:
+                appended = False
+            while appended:
+                appended = False
+                for d in c:
+                    for e in link[d]:
+                        if e not in a:
+                            a.append(e)
+                            appended = True
+                            for f in link[e]:
+                                if f not in c:
+                                    c.append(f)
+            if len(a) > 1 and len(c) > 1:
+                i1 = i // 10 - 1
+                i2 = i % 10 - 1
+                rpair = []
+                for d in a:
+                    for e in c:
+                        if d not in link[e]:
+                            for f in b[d]:
+                                if f in b[e] and s[f] == 0:
+                                    if p[f][i1] + p[f][i2] > 0:
+                                        rpair.append([d, e, f])
+                if len(rpair) > 0:
+                    if verbose > 1:
+                        if verbose == 2:
+                            message = 'Remote pairs.'
+                        else:
+                            message = 'Remote pairs of (' + str(i1+1) + \
+                                ', ' + str(i2+1) + ') is found.'
+                    for rp in rpair:
+                        if verbose > 2:
+                            message += '\n' + \
+                                cell(rp[0]) + ' and ' + \
+                                cell(rp[1]) + ' are remote pairs.'
+                        p[rp[2]][i1] = 0
+                        p[rp[2]][i2] = 0
+                        if sum(p[rp[2]]) == 0:
+                            if verbose > 2:
+                                message += '\nNow ' + \
+                                    cell(
+                                        rp[2]) + ' has no candidate. This sudoku is unsolvable.'
+                            return (s, p, message, False, True)
+                        if sum(p[rp[2]]) == 1:
+                            s[rp[2]] = p[rp[2]].index(1) + 1
+                            if verbose > 2:
+                                message += ' ' + \
+                                    cell(rp[2]) + ' is ' + str(s[rp[2]]) + '.'
+                        else:
+                            if verbose > 2:
+                                message += ' Candidates of ' + \
+                                    cell(rp[2]) + ' changes.'
+                    return (s, p, message, True, False)
+    return (s, p, message, False, False)
+
+
 def pairchain(s, p, b, pair, paircomb, verbose):
     """Chain of pairs."""
     from kaidoku.misc import cell

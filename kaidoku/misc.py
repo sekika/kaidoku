@@ -150,6 +150,7 @@ def pairs(s, p):
     """Extract pair."""
     pair = []
     paircomb = []
+    pairdict = {}
     for i in range(81):
         if s[i] == 0:
             if sum(p[i]) == 2:
@@ -158,7 +159,13 @@ def pairs(s, p):
                 pair.append([i, m, n])
                 paircomb.append([i, m])
                 paircomb.append([i, n])
-    return (pair, paircomb)
+                if m*10+n not in pairdict:
+                    pd = []
+                else:
+                    pd = pairdict[m*10+n]
+                pd.append(i,)
+                pairdict[m*10+n] = pd
+    return (pair, paircomb, pairdict)
 
 
 def cell(i):
