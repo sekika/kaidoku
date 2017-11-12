@@ -12,6 +12,7 @@ def test_calc():
     """test modules in calc.py, wing.py, and chain.py."""
     import copy
     import datetime
+    from kaidoku.calc import hidquad
     from kaidoku.calc import nakhid
     from kaidoku.calc import nakquad
     from kaidoku.calc import naksing
@@ -73,7 +74,19 @@ def test_calc():
     comb, mirror = combmir(p, boxl)
     s, p, logic, message, found, err = nakhid(
         s, p, boxl, comb, mirror, 4, False)
-    assert message == 'Hidden pair in row 9', 'Error in nakhid'
+    assert message == 'Hidden pair of (4, 5) in row 9: R9C2 R9C7', 'Error in nakhid'
+    s, err = conv(
+        '000039760006000004700500010900608030560390002310705006070083001200000803003450000')
+    p = possible(s)
+    boxl = boxlist(s)
+    found = True
+    while found:
+        comb, mirror = combmir(p, boxl)
+        s, p, logic, message, found, err = nakhid(
+            s, p, boxl, comb, mirror, 4, True)
+    s, p, logic, message, found, err = nakhid(
+        s, p, boxl, comb, mirror, 4, False)
+    assert message == 'Hidden triple in row 2: R2C2 R2C7 R2C8', 'Error in nakhid'
     s, err = conv(
         '320456000014200000070008040006020009050000020192080400941500070200801904000940031')
     p = possible(s)
@@ -87,8 +100,24 @@ def test_calc():
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
     s, p, message, found, err = nakquad(
-        s, p, boxl, comb, mirror, 4)
+        s, p, boxl, comb, 4)
     assert message == 'Naked quad in box 3 made removal from R2C7 R2C9', 'Error in nakquad'
+    # Hidden Quads example by Klaus Brenner at http://www.sudokuwiki.org/Hidden_Candidates
+    s, err = conv(
+        '901500046425090081860010020502000000019000460600000002196040253200060817000001694')
+    p = possible(s)
+    found = True
+    while found:
+        s, p, logic, message, found, err = pointing(s, p, pb, 4)
+    boxl = boxlist(s)
+    comb, mirror = combmir(p, boxl)
+    s, p, logic, message, found, err = nakhid(
+        s, p, boxl, comb, mirror, 4, False)
+    boxl = boxlist(s)
+    comb, mirror = combmir(p, boxl)
+    s, p, message, found, err = hidquad(
+        s, p, boxl, mirror, 4)
+    assert message == 'Hidden quad in box 5: R4C4 R4C6 R6C4 R6C6', 'Error in hidquad'
     s, err = conv(
         '030600078270080010500007004027591403090378120103264097300800749040750001700009052')
     p = possible(s)
@@ -128,7 +157,7 @@ def test_calc():
     comb, mirror = combmir(p, boxl)
     s, p, logic, message, found, err = nakhid(
         s, p, boxl, comb, mirror, 4, False)
-    assert message == 'Hidden pair in column 9', 'Error in nakhid'
+    assert message == 'Hidden pair of (1, 9) in column 9: R3C9 R9C9', 'Error in nakhid'
     pair, paircomb, pairdict = pairs(s, p)
     s, p, message, found, err = remotepair(
         s, p, b, pair, pairdict, 4)

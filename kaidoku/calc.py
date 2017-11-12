@@ -51,10 +51,10 @@ def solve(s, verbose, maxdepth, maxtime):
                 'XY-wing': 70,
                 'XYZ-wing': 100,
                 'Remote pairs': 100,
-                'Swordfish': 100,  # not implemented, rare
+                'Swordfish': 100,  # not implemented
                 'Jellyfish': 100,  # not implemented, rare
                 'Naked quad': 120,
-                'Hidden quad': 150,  # not implemented yet
+                'Hidden quad': 150,
                 'Chain of pairs': 200,
                 'Chain of pairs (long)': 300,
                 'Trial': 500,
@@ -134,9 +134,14 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
             return (s, p, message, 'XYZ-wing', depth, found, err)
 
         s, p, message, found, err = nakquad(
-            s, p, boxl, comb, mirror, verbose)  # Naked quad
+            s, p, boxl, comb, verbose)  # Naked quad
         if found or err:
             return (s, p, message, 'Naked quad', depth, found, err)
+
+        s, p, message, found, err = hidquad(
+            s, p, boxl, mirror, verbose)  # Hidden quad
+        if found or err:
+            return (s, p, message, 'Hidden quad', depth, found, err)
 
         if len(pair) > 3:
             s, p, message, found, err = remotepair(
@@ -450,19 +455,21 @@ def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
             if hp:
                 p1 = mirror[i][0][position[0]]
                 p2 = mirror[i][0][position[1]]
-                message = 'Hidden pair of (' + str(p1) + ', ' + str(
-                    p2) + ') in ' + ['box ', 'row ', 'column '][i // 9] + str(
-                    i % 9 + 1) + ': ' + cell(boxl[i][pa[0]]) + ' ' + cell(
-                    boxl[i][pa[1]])
-                r = [0] * 9
-                r[p1 - 1] = 1
-                r[p2 - 1] = 1
-                p[boxl[i][pa[0]]] = r
-                p[boxl[i][pa[1]]] = copy.copy(r)
                 message = ''
                 if verbose > 2:
                     message = 'Hidden pair in ' + \
                         ['box ', 'row ', 'column '][i // 9] + str(i % 9 + 1)
+                if verbose > 3:
+                    message = 'Hidden pair of (' + str(p1) + ', ' + str(
+                        p2) + ') in ' + ['box ', 'row ', 'column '][i // 9] + str(
+                        i % 9 + 1) + ': ' + cell(boxl[i][pa[0]]) + ' ' + cell(
+                        boxl[i][pa[1]])
+                r = [0] * 9
+                r[p1 - 1] = 1
+                r[p2 - 1] = 1
+                for m in [0, 1]:
+                    n = boxl[i][pa[m]]
+                    p[n] = copy.copy(r)
                 return (s, p, 'Hidden pair', message, True, False)
 
     # Hidden triple
@@ -475,19 +482,19 @@ def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
                     rem = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
                     for k in range(3):
                         rem.remove(mirror[i][0][position[k]])
-                    message = 'Hidden triple of ' + str(tri) + ' in ' + [
-                        'box ', 'row ', 'column '][i // 9] + str(
-                        i % 9 + 1) + ': ' + cell(boxl[i][tri[0]]) + ' ' + cell(
-                        boxl[i][tri[1]]) + ' ' + cell(boxl[i][tri[2]])
                     for k in range(3):
                         for m in rem:
                             p[boxl[i][tri[k]]][m - 1] = 0
-
                     message = ''
                     if verbose > 2:
                         message = 'Hidden triple in ' + \
                             ['box ', 'row ', 'column '][i // 9] + \
                             str(i % 9 + 1)
+                    if verbose > 3:
+                        message = 'Hidden triple in ' + [
+                            'box ', 'row ', 'column '][i // 9] + str(
+                            i % 9 + 1) + ': ' + cell(boxl[i][tri[0]]) + ' ' + cell(
+                            boxl[i][tri[1]]) + ' ' + cell(boxl[i][tri[2]])
                     return (s, p, 'Hidden triple', message, True, False)
 
     return (s, p, '', '', False, False)
@@ -551,7 +558,7 @@ def naktriple(list):
     return (False, 0, 0, 0)
 
 
-def nakquad(s, p, boxl, comb, mirror, verbose):
+def nakquad(s, p, boxl, comb, verbose):
     """Naked quad."""
     message = ''
     for i in range(len(comb)):
@@ -578,6 +585,36 @@ def nakquad(s, p, boxl, comb, mirror, verbose):
                             message = message + \
                                 '(=' + str(p[k].index(1) + 1) + ') '
                         s[k] = p[k].index(1) + 1
+                return (s, p, message, True, False)
+
+    return (s, p, '', False, False)
+
+
+def hidquad(s, p, boxl, mirror, verbose):
+    """Hidden quad."""
+    message = ''
+    for i in range(len(mirror)):
+        list2 = mirror[i][1]
+        if len(list2) > 8:
+            hq, quad, position, f = nakqua(list2)
+            if hq:
+                rem = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
+                for k in range(4):
+                    rem.remove(mirror[i][0][position[k]])
+                for k in range(4):
+                    for m in rem:
+                        p[boxl[i][quad[k]]][m - 1] = 0
+                message = ''
+                if verbose > 1:
+                    message = 'Hidden quad in ' + \
+                        ['box ', 'row ', 'column '][i // 9] + \
+                        str(i % 9 + 1)
+                if verbose > 2:
+                    message = 'Hidden quad in ' + [
+                        'box ', 'row ', 'column '][i // 9] + str(
+                        i % 9 + 1) + ': ' + cell(boxl[i][quad[0]]) + ' ' + cell(
+                        boxl[i][quad[1]]) + ' ' + cell(boxl[i][quad[2]]) + ' ' + cell(
+                        boxl[i][quad[3]])
                 return (s, p, message, True, False)
 
     return (s, p, '', False, False)
