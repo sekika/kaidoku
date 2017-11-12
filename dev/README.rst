@@ -6,8 +6,6 @@ This directory contains tools for development.
 Logics to be hopefully implemented
 -----------------
 
-- Naked quad
-- Hidden quad
 - Swordfish
 
 To do, or not to do?
