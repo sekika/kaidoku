@@ -53,8 +53,8 @@ def solve(s, verbose, maxdepth, maxtime):
                 'Remote pairs': 100,
                 'Swordfish': 100,  # not implemented, rare
                 'Jellyfish': 100,  # not implemented, rare
-                'Naked quad': 100,  # not implemented yet
-                'Hidden quad': 100,  # not implemented yet
+                'Naked quad': 120,
+                'Hidden quad': 150,  # not implemented yet
                 'Chain of pairs': 200,
                 'Chain of pairs (long)': 300,
                 'Trial': 500,
@@ -128,9 +128,15 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
         s, p, message, found, err = xywing(s, p, b, pair, verbose)  # XY-wing
         if found or err:
             return (s, p, message, 'XY-wing', depth, found, err)
-        s, p, message, found, err = xyzwing(s, p, b, boxl, comb, pb, verbose)  # XYZ-wing
+        s, p, message, found, err = xyzwing(
+            s, p, b, boxl, comb, pb, verbose)  # XYZ-wing
         if found or err:
             return (s, p, message, 'XYZ-wing', depth, found, err)
+
+        s, p, message, found, err = nakquad(
+            s, p, boxl, comb, mirror, verbose)  # Naked quad
+        if found or err:
+            return (s, p, message, 'Naked quad', depth, found, err)
 
         if len(pair) > 3:
             s, p, message, found, err = remotepair(
@@ -484,7 +490,7 @@ def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
                             str(i % 9 + 1)
                     return (s, p, 'Hidden triple', message, True, False)
 
-    return (s, p, 5, '', False, False)
+    return (s, p, '', '', False, False)
 
 
 def nakpair(list):
@@ -521,25 +527,90 @@ def naktriple(list):
             triple.append(i)
             for j in i:
                 num.add(j)
-        for c in itertools.combinations(num, 3):
-            n = 0
-            for k in triple:
+    for c in itertools.combinations(num, 3):
+        n = 0
+        for k in triple:
+            if set(k).issubset(set(c)):
+                n += 1
+        if n == 3:
+            tri = []
+            position = []
+            m = 0
+            f = []
+            for k in list:
                 if set(k).issubset(set(c)):
-                    n += 1
-            if n == 3:
-                tri = []
-                position = []
-                m = 0
-                f = []
-                for k in list:
-                    if set(k).issubset(set(c)):
-                        tri.append(k)
-                        position.append(m)
-                    else:
-                        if set(k).intersection(set(c)):
-                            f.append(m)
-                    m += 1
-                if len(f) > 0:
-                    return (True, c, position, f)
+                    tri.append(k)
+                    position.append(m)
+                else:
+                    if set(k).intersection(set(c)):
+                        f.append(m)
+                m += 1
+            if len(f) > 0:
+                return (True, c, position, f)
+
+    return (False, 0, 0, 0)
+
+
+def nakquad(s, p, boxl, comb, mirror, verbose):
+    """Naked quad."""
+    message = ''
+    for i in range(len(comb)):
+        list = comb[i]
+        if len(list) > 7:
+            nq, quad, position, f = nakqua(list)
+            if nq:
+                if verbose > 1:
+                    message = 'Naked quad in ' + \
+                        ['box ', 'row ', 'column '][i // 9] + \
+                        str(i % 9 + 1)
+                if verbose > 2:
+                    message = message + ' made removal from'
+                for j in f:
+                    k = boxl[i][j]
+                    p[k][quad[0] - 1] = 0
+                    p[k][quad[1] - 1] = 0
+                    p[k][quad[2] - 1] = 0
+                    p[k][quad[3] - 1] = 0
+                    if verbose > 2:
+                        message = message + ' ' + cell(k)
+                    if p[k].count(1) == 1:
+                        if verbose > 2:
+                            message = message + \
+                                '(=' + str(p[k].index(1) + 1) + ') '
+                        s[k] = p[k].index(1) + 1
+                return (s, p, message, True, False)
+
+    return (s, p, '', False, False)
+
+
+def nakqua(list):
+    """Naked quad."""
+    quad = []
+    num = set()
+    for i in list:
+        if len(i) < 5:
+            quad.append(i)
+            for j in i:
+                num.add(j)
+    for c in itertools.combinations(num, 4):
+        n = 0
+        for k in quad:
+            if set(k).issubset(set(c)):
+                n += 1
+        if n == 4:
+            qua = []
+            position = []
+            m = 0
+            f = []
+            for k in list:
+                if set(k).issubset(set(c)):
+                    qua.append(k)
+                    position.append(m)
+                else:
+                    if set(k).intersection(set(c)):
+                        f.append(m)
+                m += 1
+            if len(f) > 0:
+                return (True, c, position, f)
 
     return (False, 0, 0, 0)

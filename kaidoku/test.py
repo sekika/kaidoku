@@ -13,6 +13,7 @@ def test_calc():
     import copy
     import datetime
     from kaidoku.calc import nakhid
+    from kaidoku.calc import nakquad
     from kaidoku.calc import naksing
     from kaidoku.calc import pointing
     from kaidoku.calc import possible
@@ -73,6 +74,21 @@ def test_calc():
     s, p, logic, message, found, err = nakhid(
         s, p, boxl, comb, mirror, 4, False)
     assert message == 'Hidden pair in row 9', 'Error in nakhid'
+    s, err = conv(
+        '320456000014200000070008040006020009050000020192080400941500070200801904000940031')
+    p = possible(s)
+    found = True
+    while found:
+        s, p, logic, message, found, err = pointing(s, p, pb, 4)
+    boxl = boxlist(s)
+    comb, mirror = combmir(p, boxl)
+    s, p, logic, message, found, err = nakhid(
+        s, p, boxl, comb, mirror, 4, False)
+    boxl = boxlist(s)
+    comb, mirror = combmir(p, boxl)
+    s, p, message, found, err = nakquad(
+        s, p, boxl, comb, mirror, 4)
+    assert message == 'Naked quad in box 3 made removal from R2C7 R2C9', 'Error in nakquad'
     s, err = conv(
         '030600078270080010500007004027591403090378120103264097300800749040750001700009052')
     p = possible(s)
