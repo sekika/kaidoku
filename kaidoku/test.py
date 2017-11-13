@@ -4,7 +4,35 @@
 
 def test_all():
     """do all the tests in this module"""
+    test_command()
     test_calc()
+    return
+
+
+def test_command():
+    """test modules in calc.py, wing.py, and chain.py."""
+    from kaidoku.command import command
+    import os.path
+    config = {}
+    config['datadir'] = ''
+    config['file'] = os.path.abspath(
+        os.path.dirname(__file__)) + '/data/sudoku.txt'
+    config['level'] = 2
+    config['maxtime'] = 60
+    config['pointer'] = [''] + [1] * 9
+    config['move'] = []
+    config['bookmark'] = {}
+    config['bookmark']['b1'] = {}
+    config['bookmark']['b1']['problem'] = '000001058581094302206080010100960820008402100020018500010036709009100005760809031'
+    config['bookmark']['b1']['move'] = ''
+    config['bookmark']['b1']['added'] = '2017/11/14'
+    config['bookmark']['b1']['comment'] = 'XYZ-wing'
+    for c in ['book', 'config', 'l 8', 'j 1', '131', '218', 'h', 'ha', 'c', 'u',
+              'b', 'i', 'initial', 'j 2', 'n', 'p', 'a 3', 'ac', 'sp', 'ii', 'iii', 'bl', 'br b1',
+              'solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030']:
+        print('Testing command ' + c)
+        c = c.split()
+        config = command(c, config)
     return
 
 

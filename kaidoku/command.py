@@ -490,21 +490,10 @@ def command(arg, config):
         config, err = show(c, 0, config)
         return config
 
-    # Following commands are for debugging and not in help
     if c == 'test':
         from kaidoku.test import test_all
         test_all()
-        config2 = copy.copy(config)
-        print('Start testing commands.')
-        for c in ['book', 'config', 'l 8', 'j 1', '131', '218', 'h', 'ha', 'c', 'u',
-                  'jpg', 'jm', 'b', 'i', 'initial', 'j 2', 'n', 'p', 'a 3', 'ac', 'sp', 'ii', 'iii', 'bl', 'br b1',
-                  'solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030']:
-            print('Testing command ' + c)
-            c = c.split()
-            config = command(c, config)
-        print('\nFinished testing.')
-        print('Not tested: all, append, bp, ba, create, giveup, import, reanalyze')
-        return config2
+        return config
 
     print('Invalid command. Type h for help.')
     return config
@@ -693,7 +682,7 @@ def show(c, verbose, config):
             else:
                 s = s2
         print('\n' + output(s))
-        config, err = show('jpg', 0, config)
+        config, err = show('c', 0, config)
     return config, False
 
 
