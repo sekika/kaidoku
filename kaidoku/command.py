@@ -506,16 +506,6 @@ def command(arg, config):
         print('Not tested: all, append, bp, ba, create, giveup, import, reanalyze')
         return config2
 
-    if c == 'createtest':
-        from kaidoku.create import create
-        maxtime = 3
-        maxdepth = 999  # Creating mode
-        level = 0
-        while level == 0:
-            s, level = create(maxdepth,  maxtime, False)
-        print(output(s))
-        return config
-
     print('Invalid command. Type h for help.')
     return config
 

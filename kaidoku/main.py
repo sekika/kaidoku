@@ -125,6 +125,12 @@ def readconfig(ConfFile):
         config['create'] = {}
     if 'symmetry' not in config['create']:
         config['create']['symmetry'] = 'y'
+    if 'minlevel' not in config['create']:
+        config['create']['minlevel'] = 1
+    if int(config['create']['minlevel']) < 1:
+        config['create']['minlevel'] = 1
+    if int(config['create']['minlevel']) > 9:
+        config['create']['minlevel'] = 1  
     if 'mincell' not in config['create']:
         config['create']['mincell'] = 17
     if 'figure' not in config:

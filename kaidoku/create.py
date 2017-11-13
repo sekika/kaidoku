@@ -107,6 +107,7 @@ def reanalyze(file, file2):
 
 def append_database(file, giveup, n, creation):
     """Create new problems and append to database."""
+    minlevel = int(creation['minlevel'])
     maxtime = 3
     maxdepth = 25
 
@@ -120,7 +121,7 @@ def append_database(file, giveup, n, creation):
     start = datetime.datetime.now()
     for i in range(n):
         level = 0
-        while level == 0:
+        while level < minlevel:
             s, level = create(maxdepth,  maxtime, creation)
             sudoku = short(s)
             if level == 0:
@@ -131,11 +132,12 @@ def append_database(file, giveup, n, creation):
                 give.write('g ' + str(maxtime) + ' ' + sudoku + '\n')
                 give.close()
             else:
-                print('.', end='', flush=True)
-                outfile = open(file, 'a')
-                outfile.write(str(level) + ' ' + sudoku + '\n')
-                outfile.flush()
-                outfile.close()
+                if level >= minlevel:
+                    print('.', end='', flush=True)
+                    outfile = open(file, 'a')
+                    outfile.write(str(level) + ' ' + sudoku + '\n')
+                    outfile.flush()
+                    outfile.close()
         if (i + 1) % 10 == 0 and i + 1 < n:
             dt = datetime.datetime.now() - start
             t = dt.seconds + float(dt.microseconds) / 1000000
@@ -178,6 +180,7 @@ def create(maxdepth, maxtime, creation):
         symmetry = True
     else:
         symmetry = False
+    minlevel = int(creation['minlevel'])
     min = int(creation['mincell'])
     order = []
     for i in range(81):
@@ -263,19 +266,48 @@ def create(maxdepth, maxtime, creation):
         s2 = copy.copy(s)
         s2, message, level, solved, err = solve(
             s2, 0, 999, maxtime)  # creating mode
-
+    bs = blank(s)
     s2 = copy.copy(s)
     s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
+    count = 0
+    while level < minlevel and level > 0 and count < 3:
+        count += 1
+        pos = []
+        emp = []
+        for i in range(41):
+            if s[i] > 0:
+                pos.append(i)
+            else:
+                emp.append(i)
+        random.shuffle(pos)
+        random.shuffle(emp)
+        rep = int((bs - blank(s)) / 2) + 1
+        for j in range(rep):
+            s[pos[j]] = 0
+            s[80 - pos[j]] = 0
+        err = True
+        while err:
+            s3 = copy.copy(s)
+            s3, message, level, solved, err = solve(s3, 0, maxdepth, maxtime)
+            if err:
+                dif = []
+                for i in range(len(emp)):
+                    if s3[0][emp[i]] != s3[1][emp[i]] or s3[0][80 - emp[i]] != s3[1][80 - emp[i]]:
+                        dif.append(emp[i])
+                random.shuffle(dif)
+                emp.remove(dif[0])
+                s[dif[0]] = s2[dif[0]]
+                s[80 - dif[0]] = s2[80 - dif[0]]
 
-    if level < 3:
-        s = make_easy(s)
+    if level < 3 and minlevel < 3:
+        s = make_easy(s, minlevel)
         if blank(s) < 30:
             level = 1
 
     return (s, level)
 
 
-def make_easy(s):
+def make_easy(s, minlevel):
     """Make a problem easy."""
     s2 = copy.copy(s)
     sol, message, level, solved, err = solve(s2, 0, 1, 1)
@@ -286,7 +318,10 @@ def make_easy(s):
     if blank(s) < 43:
         level = 1
     else:
-        level = random.randint(1, 2)
+        if minlevel == 1:
+            level = random.randint(1, 2)
+        else:
+            level = 2
     if level == 1:
         bl = random.randint(24, 28)
     else:
