@@ -17,6 +17,8 @@ To do, or not to do?
 - Change order? Pointing, naked, XY-wing, X-wing, Hidden? Analyze frequency.
 - Adjust level parameters
 - Check in different environment
+- Create: minimum level, adjust level
+- Create: decrease numbers in no-solution
 - Font selection
 - maxtime, and other config management
 - Write document
