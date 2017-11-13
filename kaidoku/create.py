@@ -269,35 +269,6 @@ def create(maxdepth, maxtime, creation):
     bs = blank(s)
     s2 = copy.copy(s)
     s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
-    count = 0
-    while level < minlevel and level > 0 and count < 3:
-        count += 1
-        pos = []
-        emp = []
-        for i in range(41):
-            if s[i] > 0:
-                pos.append(i)
-            else:
-                emp.append(i)
-        random.shuffle(pos)
-        random.shuffle(emp)
-        rep = int((bs - blank(s)) / 2) + 1
-        for j in range(rep):
-            s[pos[j]] = 0
-            s[80 - pos[j]] = 0
-        err = True
-        while err:
-            s3 = copy.copy(s)
-            s3, message, level, solved, err = solve(s3, 0, maxdepth, maxtime)
-            if err:
-                dif = []
-                for i in range(len(emp)):
-                    if s3[0][emp[i]] != s3[1][emp[i]] or s3[0][80 - emp[i]] != s3[1][80 - emp[i]]:
-                        dif.append(emp[i])
-                random.shuffle(dif)
-                emp.remove(dif[0])
-                s[dif[0]] = s2[dif[0]]
-                s[80 - dif[0]] = s2[80 - dif[0]]
 
     if level < 3 and minlevel < 3:
         s = make_easy(s, minlevel)
