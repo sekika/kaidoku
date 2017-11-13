@@ -98,29 +98,33 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     s, p, message, found, err = naksing(s, p, b, verbose)  # Naked single
     if found or err:
         return (s, p, message, 'Naked single', depth, found, err)
+    s, p, message, found, err = hidsing(s, p, verbose)  # Hidden single
+    if found or err:
+        return (s, p, message, 'Hidden single', depth, found, err)
 
-    # Intermediate logic
+    # Advanced logic
+
+    # Pointing pair or triple
+    s, p, logic, message, found, err = pointing(
+        s, p, pb, verbose)
+    if found or err:
+        return (s, p, message, logic, depth, found, err)
+
+    # Naked and hidden pair and triple
     comb, mirror = combmir(p, boxl)
     if depth < 2:
-        s, p, message, found, err = hidsing(s, p, verbose)  # Hidden single
-        if found or err:
-            return (s, p, message, 'Hidden single', depth, found, err)
-        s, p, logic, message, found, err = pointing(
-            s, p, pb, verbose)  # Pointing pair or triple
-        if found or err:
-            return (s, p, message, logic, depth, found, err)
         if depth < 1:
             onlypair = False
         else:
             onlypair = True
         s, p, logic, message, found, err = nakhid(
-            s, p, boxl, comb, mirror, verbose, onlypair)  # Naked or hidden
+            s, p, boxl, comb, mirror, verbose, onlypair)
         if found or err:
             return (s, p, message, logic, depth, found, err)
 
-    # Advanced logic
+    # Wing families
     pair, paircomb, pairdict = pairs(s, p)
-    if depth == 0:
+    if depth < 2:
         s, p, message, found, err = xwing(
             s, p, b, boxl, mirror, verbose)  # X-wing
         if found or err:
@@ -133,6 +137,8 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
         if found or err:
             return (s, p, message, 'XYZ-wing', depth, found, err)
 
+    # Naked and hidden quad
+    if depth == 0:
         s, p, message, found, err = nakquad(
             s, p, boxl, comb, verbose)  # Naked quad
         if found or err:
@@ -143,6 +149,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
         if found or err:
             return (s, p, message, 'Hidden quad', depth, found, err)
 
+        # Chain
         if len(pair) > 3:
             s, p, message, found, err = remotepair(
                 s, p, b, pair, pairdict, verbose)  # Remote pairs
