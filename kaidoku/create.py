@@ -63,8 +63,8 @@ def analyze(file, level, verbose):
         n = le.count(j)
         if n > 0:
             print('Level {0}: {1}'.format(j, n))
-    print('Numbers: mean {0:.1f} std {1:.1f} min {2}'.format(
-        81 - mean(i), stdev(i), 81 - max(i)))
+    print('Numbers: mean {0:.1f} min {1}'.format(
+        81 - mean(i), 81 - max(i)))
     input.close
     return
 
