@@ -66,14 +66,14 @@ def command(arg, config):
         config, err = show(c, 0, config)
         if err:
             print('Going back to problem No. 1.')
-            level = config['level']
+            level = int(config['level'])
             pointer = config['pointer']
             pointer[level] = 1
             config['pointer'] = pointer
             config, err = show(c, 0, config)
             if err:
                 print(
-                    'There is no problem in level ' + config['level'] +
+                    'There is no problem in level ' + str(config['level']) +
                     '. Change level with l command.')
                 return config
         return config

@@ -54,6 +54,9 @@ def analyze(file, level, verbose):
 
     dt = datetime.datetime.now() - start
     t = dt.seconds + float(dt.microseconds) / 1000000
+    if len(i) == 0:
+        input.close
+        return
     print('\n{0} problems solved in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
         len(i), t, t / (len(i))))
     for j in range(11):
