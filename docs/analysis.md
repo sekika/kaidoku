@@ -14,7 +14,7 @@ When you want to show the process of solving a whole problem, you can use `a` co
     Level 5 No. 1
     Valid sudoku with unique solution of level 5 (hard).
 
-By default, it shows if the sudoku is valid sudoku with unique solution, and if it is, the difficulty of the problem. It is the analysis of verbose level 1. `a` command can have a parameter of verbose level as an argument. Output of the analysis can have 5 level of verbose. As the number increases, the message will increase.
+By default, it shows if the sudoku is valid sudoku with unique solution, and if it is, the difficulty of the problem. It is the analysis of verbose level 1. `a` command can have a parameter of verbose level as an argument. Output of the analysis can have 5 level of verboseness. As the number increases, the message will increase.
 
 - `a` shows only the difficulty level.
 - `a 2` shows part of advanced logics.
