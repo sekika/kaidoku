@@ -7,26 +7,26 @@ permalink: /ja/level
 
 # 難易度レベル別に問題を選ぶ
 
-## Selection of level and problem
+## レベルと問題の選択
 
-Kaidoku classifies sudoku problems with 9 difficulty levels.
+解独は、ナンプレの問題を9種類の難易度レベルに分類する、
 
-|Level 1| trivial |
-|Level 2| very easy |
-|Level 3| easy |
-|Level 4| normal |
-|Level 5| hard |
-|Level 6| very hard |
-|Level 7| evil |
-|Level 8| extreme |
-|Level 9| ultimate |
+|Level 1| trivial | 簡単すぎ |
+|Level 2| very easy | 超簡単 |
+|Level 3| easy | 簡単 |
+|Level 4| normal | 普通 |
+|Level 5| hard | 難しい |
+|Level 6| very hard | とても難しい |
+|Level 7| evil | 意地悪 |
+|Level 8| extreme | 難しすぎ |
+|Level 9| ultimate | 究極 |
 
-You can select the level with `l level`. For example, to select level 5,
+レベルは `l レベル` で選ぶことができる。たとえば、レベル 5 を選ぶためには次のようにする。
 
     kaidoku-{{ site.version }}> l 5
     Level 5 No. 1
 
-You can start from whichever level you want. When you feel that the problem is too hard, go to lower level. When you feel that the problem is too easy, go to higher level. In this way, you can always solve the problems that are most comfortable for you.
+どのレベルからでも好きなところから始めて、問題が難しすぎると思ったらレベルを下げて、簡単すぎると思ったらレベルを上げることで、常に自分に最適な難易度の問題を解くことができる。
 
 At each level, you can select the problems by the following commands.
 
