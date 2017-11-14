@@ -1,11 +1,11 @@
 ---
 layout: default
-lang: “ú–{Œê
+lang: æ—¥æœ¬èª
 ref: level
 permalink: /ja/level
 ---
 
-# “ïˆÕ“xƒŒƒxƒ‹•Ê‚É–â‘è‚ğ‘I‚Ô
+# é›£æ˜“åº¦ãƒ¬ãƒ™ãƒ«åˆ¥ã«å•é¡Œã‚’é¸ã¶
 
 ## Selection of level and problem
 
@@ -54,7 +54,7 @@ Current status of kaidoku is in development, and the algorithm to determine the 
 
 - - -
 
-- [Ÿ: g‚í‚ê‚Ä‚¢‚é‰ğ–@](./play)
-- [‘O: Šî–{‰ğ–@‚Ìƒqƒ“ƒg‚ğŒ©‚é](./play)
-- [ƒ}ƒjƒ…ƒAƒ‹‚Ì–ÚŸ](./#ƒ}ƒjƒ…ƒAƒ‹)
-- [ƒz[ƒ€ƒy[ƒW](./)
+- [æ¬¡: ä½¿ã‚ã‚Œã¦ã„ã‚‹è§£æ³•](./play)
+- [å‰: åŸºæœ¬è§£æ³•ã®ãƒ’ãƒ³ãƒˆã‚’è¦‹ã‚‹](./play)
+- [ãƒãƒ‹ãƒ¥ã‚¢ãƒ«ã®ç›®æ¬¡](./#ãƒãƒ‹ãƒ¥ã‚¢ãƒ«)
+- [ãƒ›ãƒ¼ãƒ ãƒšãƒ¼ã‚¸](./)

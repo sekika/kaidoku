@@ -1,11 +1,11 @@
 ---
 layout: default
-lang: “ú–{Œê
+lang: æ—¥æœ¬èª
 ref: analysis
 permalink: /ja/analysis
 ---
 
-# –â‘è‘S‘Ì‚Ì‰ğÍ
+# å•é¡Œå…¨ä½“ã®è§£æ
 
 When you want to show the process of solving a whole problem, you can use `a` command.
 
@@ -78,6 +78,6 @@ While `a` command analyzes the whole problem, `ac` command analyzes the problem 
 
 - - -
 
-- [‘O: ‚“x‚È‰ğ–@‚Ìƒqƒ“ƒg‚ğŒ©‚é](./advancedhint)
-- [ƒ}ƒjƒ…ƒAƒ‹‚Ì–ÚŸ](./#ƒ}ƒjƒ…ƒAƒ‹)
-- [ƒz[ƒ€ƒy[ƒW](./)
+- [å‰: é«˜åº¦ãªè§£æ³•ã®ãƒ’ãƒ³ãƒˆã‚’è¦‹ã‚‹](./advancedhint)
+- [ãƒãƒ‹ãƒ¥ã‚¢ãƒ«ã®ç›®æ¬¡](./#ãƒãƒ‹ãƒ¥ã‚¢ãƒ«)
+- [ãƒ›ãƒ¼ãƒ ãƒšãƒ¼ã‚¸](./)
