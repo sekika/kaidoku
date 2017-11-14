@@ -1,11 +1,11 @@
 ---
 layout: default
-lang: “ú–{Œê
+lang: æ—¥æœ¬èª
 ref: advancedhint
 permalink: /ja/advancedhint
 ---
 
-# ‚“x‚È‰ğ–@‚Ìƒqƒ“ƒg‚ğŒ©‚é
+# é«˜åº¦ãªè§£æ³•ã®ãƒ’ãƒ³ãƒˆã‚’è¦‹ã‚‹
 
 ## Hint on advanced logic
 
@@ -70,7 +70,7 @@ Now basic logics of naked single and hidden single are applied repeatedly as lon
 
 - - -
 
-- [Ÿ: –â‘è‘S‘Ì‚Ì‰ğÍ](./advancedhint)
-- [‘O: g‚í‚ê‚Ä‚¢‚é‰ğ–@](./logic)
-- [ƒ}ƒjƒ…ƒAƒ‹‚Ì–ÚŸ](./#ƒ}ƒjƒ…ƒAƒ‹)
-- [ƒz[ƒ€ƒy[ƒW](./)
+- [æ¬¡: å•é¡Œå…¨ä½“ã®è§£æ](./advancedhint)
+- [å‰: ä½¿ã‚ã‚Œã¦ã„ã‚‹è§£æ³•](./logic)
+- [ãƒãƒ‹ãƒ¥ã‚¢ãƒ«ã®ç›®æ¬¡](./#ãƒãƒ‹ãƒ¥ã‚¢ãƒ«)
+- [ãƒ›ãƒ¼ãƒ ãƒšãƒ¼ã‚¸](./)

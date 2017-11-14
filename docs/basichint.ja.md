@@ -9,16 +9,17 @@ permalink: /ja/basichint
 
 ## ヒントを見る
 
-You can ask for a hint by typing `i`. Go back to the [last page](play) and take this first problem as an example (you can go back to the initial position by `initial`).
+`i`と入力することでヒントを見ることができる。[遊び方](play)で示した最初の図面を例として見る。ここで、問題の最初に戻るには `initial` と入力する。
 
 ![]({{'/img/2-1.jpg' | relative_url}})
 
-Now type `i` and this hint is displayed.
+ここで`i`と入力することで、次のようなヒントを見ることができる。
 
     kaidoku-{{ site.version }}> i
     Look at R1C2. What number is available?
 
-This is a format of hint to be given when naked single logic can be used. You can just look at R1C2 and think what number is available. Whenever this type of hint is given, only one number is available and the number to be filled in the cell is determined. In this case, you will find that only 6 is available. Naked single is one of the basic logics in sudoku, and the program first evaluates if naked single logic can be applied. Therefore this type of hint is most likely to be shown.
+つまり「R1C2を見てください。どの数字が入りますか？」と聞かれている。これが、マスミすなわち naked single 解法を使うことができるときに表示されるヒントの形式である。
+Whenever this type of hint is given, only one number is available and the number to be filled in the cell is determined. In this case, you will find that only 6 is available. Naked single is one of the basic logics in sudoku, and the program first evaluates if naked single logic can be applied. Therefore this type of hint is most likely to be shown.
 
 ## Hidden single
 
