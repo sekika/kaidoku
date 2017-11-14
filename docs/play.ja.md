@@ -38,12 +38,12 @@ kaidoku-{{ site.version }}>
 
 ## 画像の生成
 
-ここから問題を解き始めることもできるが、その前に、端末上のアスキー図では見にくいので、画像を生成すると良い。そのために、まずは `jpg` コマンドで画像を生成する。そのときに、データ用のディレクトリを聞かれるので、指定する。何も入力しなければ、デフォルトの `‾/kaidoku` ディレクトリがデータディレクトリとして指定される。
+ここから問題を解き始めることもできるが、その前に、端末上のアスキー図では見にくいので、画像を生成すると良い。そのために、まずは `jpg` コマンドで画像を生成する。そのときに、データ用のディレクトリを聞かれるので、指定する。何も入力しなければ、デフォルトの `~/kaidoku` ディレクトリがデータディレクトリとして指定される。
 
 ```
 kaidoku-{{ site.version }}> jpg
 Data directory does not exist.
-Input name of the data directory (default: ‾/kaidoku):
+Input name of the data directory (default: ~/kaidoku):
 See image by "html".
 kaidoku-{{ site.version }}>
 ```
