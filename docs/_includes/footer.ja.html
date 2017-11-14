@@ -2,10 +2,10 @@
         <span class="ribbon-outer">
           <span class="ribbon-inner">
             {% if site.github.is_project_page %}
-              <p>this project by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> can be found on <a href="{{ site.github.repository_url }}">GitHub</a></p>
+              <p>このプログラムは <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> が <a href="{{ site.github.repository_url }}">GitHub</a> で開発しています。</p>
             {% endif %}
             {% if site.github.is_user_page %}
-              <p>このプログラムは <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> が <a href="{{ site.github.repository_url }}">GitHub リポジトリ</a> で開発しています。</p>
+              <p><a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a> のプロジェクトは <a href="{{ site.github.repository_url }}">GitHub</a> にあります。</p>
             {% endif %}
           </span>
           <span class="left-tail"></span>
