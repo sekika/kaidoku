@@ -7,14 +7,14 @@ permalink: /ja/analysis
 
 # 問題全体の解析
 
-When you want to show the process of solving a whole problem, you can use `a` command.
+問題全体を解く手順をまとめて見たいときには、`a`コマンドを使う。
 
     kaidoku-{{ site.version }}> a
     
     Level 5 No. 1
     Valid sudoku with unique solution of level 5 (hard).
 
-By default, it shows if the sudoku is valid sudoku with unique solution, and if it is, the difficulty of the problem. It is the analysis of verbose level 1. `a` command can have a parameter of verbose level as an argument. Output of the analysis can have 5 level of verbose. As the number increases, the message will increase.
+デフォルトでは、その問題が正解が1つだけである有効な問題なのかどうか、そしてそうであれば難易度のレベルはいくつなのかが示される。上記の英語は「唯一解を持つ有効な問題で、難易度はレベル5（難しい）である」と表示されている。これが冗長性 (verbose) 1の表示である。`a`コマンドは引数として冗長性を1から5までの数で指定することができる。冗長性の数が大きくなるにつれて、より多くの解析メッセージが表示される。
 
 - `a` shows only the difficulty level.
 - `a 2` shows part of advanced logics.
