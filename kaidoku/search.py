@@ -110,6 +110,8 @@ def search(s, p, verbose, depth, maxdepth, endtime, b, pb):
                     return (s2, p2, message, logic, depth, True, True)
                 else:
                     if blank(s2) == 0:
+                        if depth2 > depth:
+                            depth = depth2
                         solution.append([n, s2])
                         break
             else:
