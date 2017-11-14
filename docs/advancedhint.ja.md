@@ -7,16 +7,16 @@ permalink: /ja/advancedhint
 
 # 高度な解法のヒントを見る
 
-## Hint on advanced logic
+## 高度な解法のヒント
 
-Let us take a problem in level 5 for example. By typing `l 5`, Level 5 no. 1 is selected.
+例としてレベル5の問題を取り上げる。`l 5`とすることで、レベル 5 の 1 番目が選ばれる。
 
     kaidoku-{{ site.version }}> l 5
     Level 5 No. 1
 
 ![]({{'/img/5-1.jpg' | relative_url}})
 
-We can solve this problem with basic logics to some extent, but we get stuck in this position.
+この問題を基本解法だけで解き進めると、この場面でこれ以上何もできなくなる。
 
 ![]({{'/img/5-1-9.jpg' | relative_url}})
 
