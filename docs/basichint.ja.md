@@ -18,8 +18,7 @@ permalink: /ja/basichint
     kaidoku-{{ site.version }}> i
     Look at R1C2. What number is available?
 
-つまり「R1C2を見てください。どの数字が入りますか？」と聞かれている。これが、マスミすなわち naked single 解法を使うことができるときに表示されるヒントの形式である。この形式のヒントが出たときには、そのマスに入る数字は1つしかない。この場合は、R1C2に入る数字は6しかないことがわかる。マスミはナンプレの基本解法の1つであり、解独では最初にマスミが適用可能であるかどうかを調べる。
-Whenever this type of hint is given, only one number is available and the number to be filled in the cell is determined. In this case, you will find that only 6 is available. Naked single is one of the basic logics in sudoku, and the program first evaluates if naked single logic can be applied. Therefore this type of hint is most likely to be shown.
+つまり「R1C2を見てください。どの数字が入りますか？」と聞かれている。これが、マスミすなわち naked single 解法を使うことができるときに表示されるヒントの形式である。この形式のヒントが出たときには、そのマスに入る数字は1つしかない。この場合は、R1C2に入る数字は6しかないことがわかる。マスミはナンプレの基本解法の1つであり、解独では最初にマスミが適用可能であるかどうかを調べる。そのため、このヒントを見る可能性が最も高い。
 
 ## Hidden single
 
