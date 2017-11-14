@@ -54,7 +54,7 @@ Current status of kaidoku is in development, and the algorithm to determine the 
 
 - - -
 
-- [次: 使われている解法](./play)
-- [前: 基本解法のヒントを見る](./play)
+- [次: 使われている解法](./logic)
+- [前: 基本解法のヒントを見る](./basichint)
 - [マニュアルの目次](./#マニュアル)
 - [ホームページ](./)

@@ -70,7 +70,7 @@ Now basic logics of naked single and hidden single are applied repeatedly as lon
 
 - - -
 
-- [次: 問題全体の解析](./advancedhint)
+- [次: 問題全体の解析](./analysis)
 - [前: 使われている解法](./logic)
 - [マニュアルの目次](./#マニュアル)
 - [ホームページ](./)
