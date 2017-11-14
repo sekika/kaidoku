@@ -28,11 +28,12 @@ title: 解独 - 数独・ナンプレの解析プログラム
 
 - [数独・ナンプレのルール](rule)
 - [インストールと実行](install)
-- [ナンプレで遊ぶ](./play)
-- Getting hint on basic logic
-- Select a problem of a specified difficulty level
+- [ナンプレで遊ぶ](play)
+- [基本解法のヒントを見る](basichint)
+- [難易度レベル別に問題を選ぶ](level)
 - [使われている解法](logic)
-- Getting hint on advanced logics and showing candidates
+- [高度な解法のヒントを見る](advancedhint)
+- [問題全体の解析](analysis)
 - Bookmark management
 - Play and analyze external sudoku problems
 - Create new sudoku problems
