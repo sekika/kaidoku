@@ -92,7 +92,26 @@ Now we have contradiction on R2C4. Therefore R5C8 should be 9.'''],
 9|  7  |     |  3  |
  +-----+-----+-----+
 
-Valid sudoku with unique solution''']
+Valid sudoku with unique solution'''],
+        ['solve 427001008105090040000570300900083000000000206040900000510000000090160800070000030', '''  1 2 3 4 5 6 7 8 9
+ +-----+-----+-----+
+1|4 2 7|    1|    8|
+2|1   5|  9  |  4  |
+3|     |5 7  |3    |
+ +-----+-----+-----+
+4|9    |  8 3|     |
+5|     |     |2   6|
+6|  4  |9    |     |
+ +-----+-----+-----+
+7|5 1  |     |     |
+8|  9  |1 6  |8    |
+9|  7  |     |  3  |
+ +-----+-----+-----+
+
+This sudoku has no solution because R8C1 has no candidate.
+Invalid sudoku with no solution.
+
+Give up with 7 blank cells.''']
     ]:
         com = c[0].split()
         sys.stdout = open(redirect, 'w')

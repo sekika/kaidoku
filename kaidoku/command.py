@@ -728,7 +728,6 @@ def solveprint(s, verbose, maxdepth, maxtime):
         else:
             if verbose > 0:
                 print("Invalid sudoku with no solution.")
-        sys.exit()
     if solved:
         if verbose > 0:
             print('Valid sudoku with unique solution of level {0} ({1}).'.format(
