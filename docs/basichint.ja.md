@@ -20,36 +20,36 @@ permalink: /ja/basichint
 
 つまり「R1C2を見てください。どの数字が入りますか？」と聞かれている。これが、マスミすなわち naked single 解法を使うことができるときに表示されるヒントの形式である。この形式のヒントが出たときには、そのマスに入る数字は1つしかない。この場合は、R1C2に入る数字は6しかないことがわかる。マスミはナンプレの基本解法の1つであり、解独では最初にマスミが適用可能であるかどうかを調べる。そのため、このヒントを見る可能性が最も高い。
 
-## Hidden single
+## 単独候補マス
 
-Hidden single is another basic logic in sudoku. When naked single is not available, kaidoku checks if this logic can be applied. Therefore when you ask for a hint, this hint is likely to be given next to the naked single.
+ナンプレの基本解法には、マスミともう1つ**単独候補マス** (**Hidden single**) がある。[ニコリの解説](http://www.nikoli.co.jp/ja/publication/number/sudoku_communication/)では、ブロックの単独候補マスが**ブロッケン**で、行あるいは列の単独候補マスが**レッツミー**となる。解独立ではマスミの次に単独候補マスを調べるため、マスミの次に出やすいヒントである。
 
-Actually in some situations hidden single can be found more easily than naked single for humans. Take Level 3 No. 1 for example. You can change to level 3 by `l 3` and this problem is shown (this problem is shown at the top page).
+実際には、マスミよりも単独候補マス、特にブロッケンを発見しやすいことがよくある。レベル3の問題1を例にとる。`l 3`と入力することでレベル3に移ることができて、次のような問題が表示される。この問題は、トップページの図と同じである。
 
 ![]({{'/img/3-1.jpg' | relative_url}})
 
-Now if you ask for a hint, this hint is given.
+ここで、ヒントを見るとこのように表示される。
 
     kaidoku-{{ site.version }}> i
     Look at R2C2. What number is available?
 
-and if you check R2C2, you will find only 6 is available. You can find more naked single pattern in R2C5 as 3, R2C6 as 4. However, it is easier to find a hidden single pattern for me, in the following way.
+これはマスミのヒントであり、R2C2を見ると6が入ることがわかる。他にも、マスミによって R2C5 が 3であり、R2C6が4であることがわかる。ところが、このマスミのマスを発見するよりも、次のようなブロッケンのパターンを発見する方がむしろ速いだろう。
 
-Look at 2 in R7C8 and R8C6, and also look at box 7. Here box is defined as
+R7C8とR8C6の2と、ボックス7に着目して、ボックス7のどこに2が入るのかを考える。ここで、ボックスの番号は
 
 | Box 1  | Box 2  | Box 3  |
 | Box 4  | Box 5  | Box 6  |
 | Box 7  | Box 8  | Box 9  |
 
-and think where 2 can be filled. 2 in R7R8 eliminates the possibility of 2 in row 7, and 2 in R8C6 eliminates the possibility of 2 in row 8. Therefore the possibility of 2 only remains in R9C3 as in the following table.
+のように決める。そして、R7Rの2は7行に2が入る可能性をなくして、R8C6の2は8行に2が入る可能性をなくすため、次の図のように、R9C3だけにしか2が入る場所がなくなる。
 
 | x | x | x |
 | 1 | 8 | x |
 | 4 | 7 |  |
 
-Therefore R9C3 = 2 is determined and you can fill it by `932`. This is the **hidden single** logic. Suppose that in a certain row, line or box, therere is only one place that a certain number can be filled. The cell is a **hidden single**. In this case, R9C3 is a hidden single of 2 in box 7. If you get used to this logic, you can easily find this pattern by scanning 2 in R7C8 and R8C6 horizontally. Hidden single in a box is often easier to find than naked single.
+よって R9C3 = 2 が決まり、`932`と入力できる。これが単独候補マス (hidden single) の解法である。すなわち、ある行、列、ボックスのいずれかの中で、ある数字が入る場所が1箇所だけだったとする。そのマスが単独候補マスとなる。このケースでは、R9C3がボックス7における2の単独候補マスである。この解法に慣れると、R7C8とR8C6の2を横に流して見ることで簡単に単独候補マスを見つけることができる。ボックスの単独候補マス、すなわちブロッケンは、マスミよりも見つけやすい場合が多い。
 
-Actually, after filling 2 in R9C3, there remains only 1 cell in box 1 that 2 can be filled, R1C2. Hidden single in 2 in box 1. Now type `122`. Then you can keep on finding hidden single of 2 in boxes. Type `652`, `592`, `372`. Now all of the 2s are determined. Next you can determine all 4s successively by applying hidden single in boxes. Confirm it by typing  `334`, `264`, `744`. Then you can determine all 1s successively by applying hidden single in boxes. Confirm it by typing `131`, `361`, `671`, `521`, `791`. Like this way, you can solve this problem by using only the hidden single logic.
+R9C3に2を入れた後には、ボックス1には2が入る場所はR1C2の1箇所しかなくなる。ボックス1の単独候補マスである。`122`と入力してこれを埋める。さらに、2の単独候補マスをブロッケンで見つけ続けることができる。`652`, `592`, `372`と連続で2を埋めることができる。これで、すべての2が決まった。次に、すべての4をブロッケンによって連続的に決めることができる。`334`, `264`, `744`と入力する。次に、すべての1を連続的にブロッケンで決めることができる。`131`, `361`, `671`, `521`, `791`となる。このように、この問題は単独候補マスの解法だけで解くことが可能である。また、同じ数字で連続的に単独候補マスが決まることもよくある。
 
 When you type `i` to ask for a hint in the situation that naked single is not available and hidden single is available, hidden single is shown as a hint. For example, go back to the initial position of Level 3 No. 1 by typing `initial`, and then type `226`, `253`, `264`, `118`, `277`, `317`, reaching this position
 

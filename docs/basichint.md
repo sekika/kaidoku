@@ -35,21 +35,21 @@ Now if you ask for a hint, this hint is given.
 
 and if you check R2C2, you will find only 6 is available. You can find more naked single pattern in R2C5 as 3, R2C6 as 4. However, it is easier to find a hidden single pattern for me, in the following way.
 
-Look at 2 in R7C8 and R8C6, and also look at box 7. Here box is defined as
+Look at 2 in R7C8 and R8C6, and also look at box 7, and think where 2 can be filled in box 7. Here box numbers are defined as follows.
 
 | Box 1  | Box 2  | Box 3  |
 | Box 4  | Box 5  | Box 6  |
 | Box 7  | Box 8  | Box 9  |
 
-and think where 2 can be filled. 2 in R7R8 eliminates the possibility of 2 in row 7, and 2 in R8C6 eliminates the possibility of 2 in row 8. Therefore the possibility of 2 only remains in R9C3 as in the following table.
+2 in R7C8 eliminates the possibility of 2 in row 7, and 2 in R8C6 eliminates the possibility of 2 in row 8. Therefore the possibility of 2 only remains in R9C3 as in the following table.
 
 | x | x | x |
 | 1 | 8 | x |
 | 4 | 7 |  |
 
-Therefore R9C3 = 2 is determined and you can fill it by `932`. This is the **hidden single** logic. Suppose that in a certain row, line or box, therere is only one place that a certain number can be filled. The cell is a **hidden single**. In this case, R9C3 is a hidden single of 2 in box 7. If you get used to this logic, you can easily find this pattern by scanning 2 in R7C8 and R8C6 horizontally. Hidden single in a box is often easier to find than naked single.
+Therefore R9C3 = 2 is determined and you can fill it by `932`. This is the **hidden single** logic. Suppose that in a certain row, line or box, therere is only one place that a certain number can be filled. The cell is a hidden single. In this case, R9C3 is a hidden single of 2 in box 7. If you get used to this logic, you can easily find this pattern by scanning 2 in R7C8 and R8C6 horizontally. Hidden single in a box is often easier to find than naked single.
 
-Actually, after filling 2 in R9C3, there remains only 1 cell in box 1 that 2 can be filled, R1C2. Hidden single in 2 in box 1. Now type `122`. Then you can keep on finding hidden single of 2 in boxes. Type `652`, `592`, `372`. Now all of the 2s are determined. Next you can determine all 4s successively by applying hidden single in boxes. Confirm it by typing  `334`, `264`, `744`. Then you can determine all 1s successively by applying hidden single in boxes. Confirm it by typing `131`, `361`, `671`, `521`, `791`. Like this way, you can solve this problem by using only the hidden single logic.
+Actually, after filling 2 in R9C3, there remains only 1 cell in box 1 that 2 can be filled, R1C2. Hidden single in 2 in box 1. Now type `122`. Then you can keep on finding hidden single of 2 in boxes. Type `652`, `592`, `372`. Now all of the 2s are determined. Next you can determine all 4s successively by applying hidden single in boxes. Confirm it by typing  `334`, `264`, `744`. Then you can determine all 1s successively by applying hidden single in boxes. Confirm it by typing `131`, `361`, `671`, `521`, `791`. Like this way, you can solve this problem by using only the hidden single logic. Often it is possible to successively apply hidden single logic for a same number.
 
 When you type `i` to ask for a hint in the situation that naked single is not available and hidden single is available, hidden single is shown as a hint. For example, go back to the initial position of Level 3 No. 1 by typing `initial`, and then type `226`, `253`, `264`, `118`, `277`, `317`, reaching this position
 
