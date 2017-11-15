@@ -80,6 +80,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     from kaidoku.chain import remotepair
     from kaidoku.misc import boxlist
     from kaidoku.misc import combmir
+    from kaidoku.misc import line
     from kaidoku.misc import pairs
     from kaidoku.search import search
     from kaidoku.search import trial
@@ -98,7 +99,8 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     s, p, message, found, err = naksing(s, p, b, verbose)  # Naked single
     if found or err:
         return (s, p, message, 'Naked single', depth, found, err)
-    s, p, message, found, err = hidsing(s, p, verbose)  # Hidden single
+    linescan = line()
+    s, p, message, found, err = hidsing(s, p, linescan, verbose)  # Hidden single
     if found or err:
         return (s, p, message, 'Hidden single', depth, found, err)
 
@@ -169,7 +171,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     maxstep = 15
     if depth == 0 and maxdepth < 999:
         s, p, step, message, found, err = trial(
-            s, p, maxstep, verbose, b, pair)
+            s, p, linescan, maxstep, verbose, b, pair)
         if step < 10:
             logic = 'Trial'
         else:
@@ -267,61 +269,26 @@ def naksing(s, p, b, verbose):
     return (s, p, message, found, False)
 
 
-def hidsing(s, p, verbose):
+def hidsing(s, p, linescan, verbose):
     """Hidden single."""
-    for b in range(9):
-        begin = [0, 3, 6, 27, 30, 33, 54, 57, 60][b]
+    
+    for sc in linescan:
         for n in range(9):
             sum = 0
-            for i in (0, 1, 2, 9, 10, 11, 18, 19, 20):
-                if s[begin + i] == 0:
-                    sum = sum + p[begin + i][n]
+            for i in sc:
+                if s[i] == 0:
+                    sum = sum + p[i][n]
             if sum == 1:
-                for i in (0, 1, 2, 9, 10, 11, 18, 19, 20):
-                    if (s[begin + i] == 0) and (p[begin + i][n]) == 1:
-                        s[begin + i] = n + 1
+                for i in sc:
+                    if (s[i] == 0) and (p[i][n]) == 1:
+                        s[i] = n + 1
                         if verbose < 4:
                             message = ''
                         else:
-                            message = 'Hidden single in box ' + \
-                                str(b + 1) + ' : ' + \
-                                cell(begin + i) + ' = ' + str(n + 1)
-                        return (s, p, message, True, False)
-
-    for i in range(9):
-        for n in range(9):
-            sum = 0
-            for j in range(9):
-                if s[i * 9 + j] == 0:
-                    sum = sum + p[i * 9 + j][n]
-            if sum == 1:
-                for j in range(9):
-                    if (s[i * 9 + j] == 0) and (p[i * 9 + j][n]) == 1:
-                        s[i * 9 + j] = n + 1
-                        if verbose < 4:
-                            message = ''
-                        else:
-                            message = 'Hidden single in row ' + \
-                                str(i + 1) + ' : ' + \
-                                cell(i * 9 + j) + ' = ' + str(n + 1)
-                        return (s, p, message, True, False)
-
-    for j in range(9):
-        for n in range(9):
-            sum = 0
-            for i in range(9):
-                if s[i * 9 + j] == 0:
-                    sum = sum + p[i * 9 + j][n]
-            if sum == 1:
-                for i in range(9):
-                    if (s[i * 9 + j] == 0) and (p[i * 9 + j][n]) == 1:
-                        s[i * 9 + j] = n + 1
-                        if verbose < 4:
-                            message = ''
-                        else:
-                            message = 'Hidden single in column ' + \
-                                str(j + 1) + ' : ' + \
-                                cell(i * 9 + j) + ' = ' + str(n + 1)
+                            m = linescan.index(sc)
+                            message = 'Hidden single in ' + ['box ', 'row ', 'column '][m // 9] + \
+                                str(m % 9 + 1) + ' : ' + \
+                                cell(i) + ' = ' + str(n + 1)
                         return (s, p, message, True, False)
 
     return (s, p, '', False, False)

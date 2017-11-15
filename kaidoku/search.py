@@ -6,7 +6,7 @@ from kaidoku.misc import blank
 from kaidoku.misc import cell
 
 
-def trial(s, p, maxstep, verbose, b, pair):
+def trial(s, p, linescan, maxstep, verbose, b, pair):
     """Trial."""
     if len(pair) == 0:
         return (s, p, 0, '', False, False)
@@ -24,7 +24,7 @@ def trial(s, p, maxstep, verbose, b, pair):
             message2 = ''
             line = 1
             while found and blank(s2) > minblank:
-                s2, p2, message3, found, err = scan(s2, p2, 4, b)
+                s2, p2, message3, found, err = scan(s2, p2, linescan, 4, b)
                 message2 += '(' + str(line) + ') ' + message3 + '\n'
                 line += 1
             if err:
@@ -46,7 +46,7 @@ def trial(s, p, maxstep, verbose, b, pair):
     return (s, p, 0, '', False, False)
 
 
-def scan(s, p, verbose, b):
+def scan(s, p, linescan, verbose, b):
     """Scan."""
     from kaidoku.calc import hidsing
     from kaidoku.calc import naksing
@@ -57,7 +57,7 @@ def scan(s, p, verbose, b):
     message, err = check(s)
     if err:
         return (s, p, message, False, True)
-    s, p, message, found, err = hidsing(s, p, verbose)  # Hidden single
+    s, p, message, found, err = hidsing(s, p, linescan, verbose)  # Hidden single
     return (s, p, message, found, err)
 
 

@@ -134,6 +134,7 @@ def test_calc():
     import copy
     import datetime
     # Following modules are tested
+    from kaidoku.calc import hidsing
     from kaidoku.calc import hidquad
     from kaidoku.calc import nakhid
     from kaidoku.calc import nakquad
@@ -148,6 +149,7 @@ def test_calc():
     from kaidoku.misc import boxlist
     from kaidoku.misc import combmir
     from kaidoku.misc import conv
+    from kaidoku.misc import line
     from kaidoku.misc import pairs
     from kaidoku.misc import pbox
     from kaidoku.wing import xwing
@@ -178,6 +180,13 @@ def test_calc():
     assert message == 'Hidden single in box 2 : R2C6 = 9', 'Error in solveone'
     s, p, message, found, err = naksing(s, p, b, 4)
     assert message == 'Naked single: R2C8 = 7', 'Error in naksing'
+    s, err = conv(
+        '085002000970601000020000000000500073001203900260004000000000080000409061000700530')
+    p = possible(s)
+    linescan = line()
+    assert linescan[0] == [0, 1, 2, 9, 10, 11, 18, 19, 20], 'Error in line'
+    s, p, message, found, err = hidsing(s, p, linescan, 4)
+    assert message == 'Hidden single in box 4 : R6C3 = 3', 'Error in hidsing'
     s, err = conv(
         '178500390396000205452093810621384759587169432934275168263450980805900603709030520')
     p = possible(s)
