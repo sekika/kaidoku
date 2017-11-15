@@ -11,6 +11,8 @@ Logics to be hopefully implemented
 To do, or not to do?
 -----------------
 
+- Show the number of the last move with different color
+- tidy up calc.py
 - Implement additional logics
 - Write test codes
 - Change order? Pointing, naked, XY-wing, X-wing, Hidden? Analyze frequency.
