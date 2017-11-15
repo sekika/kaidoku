@@ -4,7 +4,6 @@ import copy
 import datetime
 import random
 from statistics import mean
-from statistics import stdev
 
 from kaidoku.calc import possible
 from kaidoku.calc import solve
@@ -269,7 +268,6 @@ def create(maxdepth, maxtime, creation):
         s2 = copy.copy(s)
         s2, message, level, solved, err = solve(
             s2, 0, 999, maxtime)  # creating mode
-    bs = blank(s)
     s2 = copy.copy(s)
     s2, message, level, solved, err = solve(s2, 0, maxdepth, maxtime)
 

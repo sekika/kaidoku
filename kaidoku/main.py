@@ -130,7 +130,7 @@ def readconfig(ConfFile):
     if int(config['create']['minlevel']) < 1:
         config['create']['minlevel'] = 1
     if int(config['create']['minlevel']) > 9:
-        config['create']['minlevel'] = 1  
+        config['create']['minlevel'] = 1
     if 'mincell' not in config['create']:
         config['create']['mincell'] = 17
     if 'figure' not in config:

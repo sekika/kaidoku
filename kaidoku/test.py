@@ -4,13 +4,16 @@
 
 def test_all():
     """do all the tests in this module"""
-    test_command()
     test_calc()
+    test_command()
+    print('Test completed without error.')
     return
 
 
 def test_command():
     """test modules in calc.py, wing.py, and chain.py."""
+    import os
+    import sys
     from kaidoku.command import command
     import os.path
     config = {}
@@ -27,19 +30,91 @@ def test_command():
     config['bookmark']['b1']['move'] = ''
     config['bookmark']['b1']['added'] = '2017/11/14'
     config['bookmark']['b1']['comment'] = 'XYZ-wing'
-    for c in ['book', 'config', 'l 8', 'j 1', '131', '218', 'h', 'ha', 'c', 'u',
-              'b', 'i', 'initial', 'j 2', 'n', 'p', 'a 3', 'ac', 'sp', 'ii', 'iii', 'bl', 'br b1',
-              'solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030']:
-        print('Testing command ' + c)
-        c = c.split()
-        config = command(c, config)
+    redirect = os.path.abspath(
+        os.path.dirname(__file__)) + '/data/redirect'
+    stdout = sys.stdout
+    for c in [
+        ['book', 'Level 1 trivial'],
+        ['config', 'datadir ='],
+        ['l 2', 'Level 2 No. 1'],
+        ['299', 'Level 2 No. 1: move 1'],
+        ['initial', 'Level 2 No. 1\n'],
+        ['299', 'Level 2 No. 1: move 1'],
+        ['278', 'Level 2 No. 1: move 2'],
+        ['592', 'Both R5C8 and R5C9 have the same value of 2.'],
+        ['591', 'Level 2 No. 1: move 3'],
+        ['i', 'Look at R1C2. What number is available?'],
+        ['a 3', '\nLevel 2 No. 1\nValid sudoku with unique solution'],
+        ['ac', '\nLevel 2 No. 1: move 3\nValid sudoku with unique solution'],
+        ['658', 'Level 2 No. 1: move 4'],
+        ['i', 'There is no solution for this position.'],
+        ['h', '246 : In the cell of row 2 column 4, put number 6'],
+        ['ha', 'a [verb]'],
+        ['c', 'Level 2 No. 1: move 4'],
+        ['u', 'http://www.sudoku-solutions.com/index.php?puzzle=900850'],
+        ['b', 'Level 2 No. 1: move 3'],
+        ['j 3', 'Level 2 No. 3'],
+        ['n', 'Level 2 No. 4'],
+        ['p', 'Level 2 No. 3'],
+        ['j 1', 'Level 2 No. 1'],
+        ['sp', 'Naked single: R1C2 = 6, R1C6 = 7,'],
+        ['l 5', 'Level 5 No. 1'],
+        ['sp', 'Naked single: R4C4 = 4'],
+        ['ii', 'Following logics are successively used.'],
+        ['iii', 'Pointing pair in box 1 removed 5 from R9C3 R7C3'],
+        ['bl', '2017/11/14   b1   XYZ-wing'],
+        ['br b1', ''],
+        ['c', 'XYZ-wing'],
+        ['sp', 'Naked single: R8C6 = 7'],
+        ['iii', '''Pointing pair in box 4 removed 5 from R4C3 
+Pointing pair in box 6 removed 6 from R5C8 R6C8 
+Naked pair in row 7 made removal from R7C3
+Hidden pair of (2, 5) in box 7: R7C3 R9C3
+XYZ-wing of R3C4 (3, 5, 7) R3C6 (3, 5) R6C4 (3, 7) removes 3 from R1C4.
+Pointing triple in box 1 removed 3 from R3C2 
+Hidden pair of (3, 5) in box 2: R3C4 R3C6
+Chain of pairs. Assume that R5C8 is 7 and we have following chains.
+(1) R5C8 = 7 >> R5C5 = 5 >> R4C6 = 3 >> R6C4 = 7 >> R2C4 = 6
+(2) R5C8 = 7 >> R2C8 = 6 >> R2C4 = 7
+Now we have contradiction on R2C4. Therefore R5C8 should be 9.'''],
+        ['solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030', '''  1 2 3 4 5 6 7 8 9
+ +-----+-----+-----+
+1|4   7|    1|    8|
+2|1   5|  9  |  4  |
+3|     |5 7  |3    |
+ +-----+-----+-----+
+4|9    |  8 3|     |
+5|     |     |2   6|
+6|  4  |9    |     |
+ +-----+-----+-----+
+7|5 1  |     |     |
+8|  9  |1 6  |8    |
+9|  7  |     |  3  |
+ +-----+-----+-----+
+
+Valid sudoku with unique solution''']
+    ]:
+        com = c[0].split()
+        sys.stdout = open(redirect, 'w')
+        config = command(com, config)
+        sys.stdout = stdout
+        infile = open(redirect, 'r')
+        out = ''
+        for line in infile:
+            out += line
+        length = len(c[1])
+        assert c[1][:length] == out[:length], 'Error of assertion that ' + \
+            c[0] + ' begins with ' + c[1] + '\n' + out
+    os.remove(redirect)
     return
 
 
 def test_calc():
-    """test modules in calc.py, wing.py, and chain.py."""
+    """test modules in calc.py, wing.py, and chain.py.
+    Also testing misc.py that are used from these modules"""
     import copy
     import datetime
+    # Following modules are tested
     from kaidoku.calc import hidquad
     from kaidoku.calc import nakhid
     from kaidoku.calc import nakquad
@@ -59,14 +134,24 @@ def test_calc():
     from kaidoku.wing import xwing
     from kaidoku.wing import xywing
     from kaidoku.wing import xyzwing
+    problem = '013003000002040800098000000850007930000504000023900056000000360005090400000600010'
+    s, err = conv(problem)
+    s2 = copy.copy(s)
+    s2, message, level, solved, err = solve(s2, 1, 10, 5)
+    assert message == 'Both R1C3 and R1C6 have the same value of 3.', 'Error in solve'
     problem = '010003000002040800098000000850007930000504000023900056000000360005090400000600010'
     s, err = conv(problem)
+    assert s[:9] == [0, 1, 0, 0, 0, 3, 0, 0, 0], 'Error in conv'
     s2 = copy.copy(s)
     s2, message, level, solved, err = solve(s2, 1, 10, 5)
     assert message == 'Solved', 'Error in solve'
     p = possible(s)
+    assert p[0] == [0, 0, 0, 1, 1, 1, 1, 0, 0], 'Error in possible'
     b = box()
+    assert b[0] == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18,
+                    19, 20, 27, 36, 45, 54, 63, 72], 'Error in box'
     pb = pbox()
+    assert pb[(0, 0)] == {3, 4, 5, 6, 7, 8}, 'Error in pbox'
     start = datetime.datetime.now()
     endtime = start + datetime.timedelta(seconds=3)
     s, p, message, logic, depth, found, err = solveone(
@@ -83,6 +168,8 @@ def test_calc():
         '700060050501080000060002008040000007600803905900000020100700090000010206030090001')
     p = possible(s)
     boxl = boxlist(s)
+    assert boxl[0] == [1, 2, 10, 18, 20], 'Error in boxlist'
+    assert boxl[1] == [3, 5, 12, 14, 21, 22], 'Error in boxlist'
     comb, mirror = combmir(p, boxl)
     s, p, logic, message, found, err = nakhid(
         s, p, boxl, comb, mirror, 4, False)
@@ -92,6 +179,9 @@ def test_calc():
     p = possible(s)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
+    assert comb[0] == [(3, 7), (3, 7, 8), (3, 8)], 'Error in combmir'
+    assert mirror[0] == [[3, 7, 8], [
+        (0, 1, 2), (0, 1), (1, 2)]], 'Error in combmir'
     s, p, logic, message, found, err = nakhid(
         s, p, boxl, comb, mirror, 4, False)
     assert message == 'Naked triple in box 7 made removal from R7C3 R9C3', 'Error in nakhid'
@@ -187,6 +277,9 @@ def test_calc():
         s, p, boxl, comb, mirror, 4, False)
     assert message == 'Hidden pair of (1, 9) in column 9: R3C9 R9C9', 'Error in nakhid'
     pair, paircomb, pairdict = pairs(s, p)
+    assert pair[0] == [0, 1, 9], 'Error in pairs.'
+    assert paircomb[0] == [0, 1], 'Error in pairs.'
+    assert pairdict[19] == [0, 7, 19, 26, 33, 78, 80], 'Error in pairs.'
     s, p, message, found, err = remotepair(
         s, p, b, pair, pairdict, 4)
     assert (
