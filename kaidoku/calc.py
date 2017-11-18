@@ -112,7 +112,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     if found or err:
         return (s, p, message, logic, depth, found, err)
 
-    # Naked and hidden pair and triple
+    # Naked pair and triple
     comb, mirror = combmir(p, boxl)
     if depth < 2:
         s, p, message, found, err = naked(
@@ -124,6 +124,8 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
             s, p, 3, boxl, comb, verbose)  # Naked triple
         if found or err:
             return (s, p, message, 'Naked triple', depth, found, err)
+
+    # Hidden pair and triple
     if depth < 2:
         s, p, message, found, err = hidden(
             s, p, 2, boxl, mirror, verbose)  # Hidden pair
