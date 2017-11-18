@@ -118,18 +118,18 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
         s, p, message, found, err = naked(
             s, p, 2, boxl, comb, verbose)  # Naked pair
         if found or err:
-            return (s, p, message, 'Naked triple', depth, found, err)
-
+            return (s, p, message, 'Naked pair', depth, found, err)
+    if depth < 1:
         s, p, message, found, err = naked(
             s, p, 3, boxl, comb, verbose)  # Naked triple
         if found or err:
             return (s, p, message, 'Naked triple', depth, found, err)
-
+    if depth < 2:
         s, p, message, found, err = hidden(
             s, p, 2, boxl, mirror, verbose)  # Hidden pair
         if found or err:
-            return (s, p, message, 'Hidden triple', depth, found, err)
-
+            return (s, p, message, 'Hidden pair', depth, found, err)
+    if depth < 1:
         s, p, message, found, err = hidden(
             s, p, 3, boxl, mirror, verbose)  # Hidden triple
         if found or err:
