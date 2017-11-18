@@ -382,7 +382,7 @@ def naked(s, p, length, boxl, comb, verbose):
     for i in range(len(comb)):
         list = comb[i]
         if len(list) >= length * 2:
-            nk, quad, position, f = naklist(length, list)
+            nk, c, position, f = naklist(length, list)
             if nk:
                 if verbose > 1:
                     message = 'Naked ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + \
@@ -393,7 +393,7 @@ def naked(s, p, length, boxl, comb, verbose):
                 for j in f:
                     k = boxl[i][j]
                     for m in range(length):
-                        p[k][quad[m] - 1] = 0
+                        p[k][c[m] - 1] = 0
                     if verbose > 2:
                         message = message + ' ' + cell(k)
                     if p[k].count(1) == 1:
@@ -411,14 +411,14 @@ def hidden(s, p, length, boxl, mirror, verbose):
     for i in range(len(mirror)):
         list2 = mirror[i][1]
         if len(list2) > length * 2:
-            hd, quad, position, f = naklist(length, list2)
+            hd, c, position, f = naklist(length, list2)
             if hd:
                 rem = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
                 for k in range(length):
                     rem.remove(mirror[i][0][position[k]])
                 for k in range(length):
                     for m in rem:
-                        p[boxl[i][quad[k]]][m - 1] = 0
+                        p[boxl[i][c[k]]][m - 1] = 0
                 message = ''
                 if verbose > 1:
                     message = 'Hidden ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + \
@@ -429,7 +429,7 @@ def hidden(s, p, length, boxl, mirror, verbose):
                         'box ', 'row ', 'column '][i // 9] + str(
                         i % 9 + 1) + ': '
                     for m in range(length):
-                        message += cell(boxl[i][quad[m]])
+                        message += cell(boxl[i][c[m]])
                         if m < length - 1:
                             message += ' '
                 return (s, p, message, True, False)
