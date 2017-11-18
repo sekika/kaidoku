@@ -12,9 +12,8 @@ def drawimage(s, p, label, size, imgfile, figure, mark):
     font = figure['font']
     textcolor = figure['color']
     axis = figure['axis']
-    scalelist = {'small': 0.8, 'medium': 1, 'large': 1.5, 'x-large': 2}
-    if size in scalelist:
-        scale = scalelist[size]
+    if size in scalelist():
+        scale = scalelist()[size]
     else:
         size = 'medium'
         scale = 1.5
@@ -59,6 +58,20 @@ def drawimage(s, p, label, size, imgfile, figure, mark):
                            * scale), str(n), font=nfont, fill=textcolor)
     c.save(imgfile, 'JPEG', quality=100, optimize=True)
     return False
+
+
+def scalelist():
+    return {'small': 0.8, 'medium': 1, 'large': 1.5, 'x-large': 2}
+
+
+def blankimages():
+    """Draw blank images in all scales"""
+    for size in scalelist():
+        scale = scalelist()[size]
+        blankfile = os.path.abspath(
+            os.path.dirname(__file__)) + '/data/blank-' + size
+        blankimage(blankfile, scale)
+    return
 
 
 def blankimage(file, scale):

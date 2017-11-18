@@ -494,6 +494,10 @@ def command(arg, config):
         from kaidoku.test import test_all
         test_all()
         return config
+    if c == 'blankimages':
+        from kaidoku.image import blankimages
+        blankimages()
+        return config
 
     print('Invalid command. Type h for help.')
     return config
