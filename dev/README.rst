@@ -12,14 +12,11 @@ To do, or not to do?
 -----------------
 
 - Show the number of the last move with different color
-- include blank jpg file (in some systems data/ is not writable)
-- When creating, ask if data is copied to datadir
-- tidy up calc.py
 - Implement additional logics
-- Write test codes
 - Change order? Pointing, naked, XY-wing, X-wing, Hidden? Analyze frequency.
 - Adjust level parameters
 - Check in different environment
+- When creating, ask if data is copied to datadir
 - Font selection
 - maxtime, and other config management
 - Write document

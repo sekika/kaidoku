@@ -3,7 +3,6 @@
 
 Modules for solving sudoku problems.
 """
-import copy
 import datetime
 import itertools
 
@@ -100,7 +99,8 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     if found or err:
         return (s, p, message, 'Naked single', depth, found, err)
     linescan = line()
-    s, p, message, found, err = hidsing(s, p, linescan, verbose)  # Hidden single
+    s, p, message, found, err = hidsing(
+        s, p, linescan, verbose)  # Hidden single
     if found or err:
         return (s, p, message, 'Hidden single', depth, found, err)
 
@@ -115,14 +115,25 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     # Naked and hidden pair and triple
     comb, mirror = combmir(p, boxl)
     if depth < 2:
-        if depth < 1:
-            onlypair = False
-        else:
-            onlypair = True
-        s, p, logic, message, found, err = nakhid(
-            s, p, boxl, comb, mirror, verbose, onlypair)
+        s, p, message, found, err = naked(
+            s, p, 2, boxl, comb, verbose)  # Naked pair
         if found or err:
-            return (s, p, message, logic, depth, found, err)
+            return (s, p, message, 'Naked triple', depth, found, err)
+
+        s, p, message, found, err = naked(
+            s, p, 3, boxl, comb, verbose)  # Naked triple
+        if found or err:
+            return (s, p, message, 'Naked triple', depth, found, err)
+
+        s, p, message, found, err = hidden(
+            s, p, 2, boxl, mirror, verbose)  # Hidden pair
+        if found or err:
+            return (s, p, message, 'Hidden triple', depth, found, err)
+
+        s, p, message, found, err = hidden(
+            s, p, 3, boxl, mirror, verbose)  # Hidden triple
+        if found or err:
+            return (s, p, message, 'Hidden triple', depth, found, err)
 
     # Wing families
     pair, paircomb, pairdict = pairs(s, p)
@@ -141,13 +152,13 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
 
     # Naked and hidden quad
     if depth == 0:
-        s, p, message, found, err = nakquad(
-            s, p, boxl, comb, verbose)  # Naked quad
+        s, p, message, found, err = naked(
+            s, p, 4, boxl, comb, verbose)  # Naked quad
         if found or err:
             return (s, p, message, 'Naked quad', depth, found, err)
 
-        s, p, message, found, err = hidquad(
-            s, p, boxl, mirror, verbose)  # Hidden quad
+        s, p, message, found, err = hidden(
+            s, p, 4, boxl, mirror, verbose)  # Hidden quad
         if found or err:
             return (s, p, message, 'Hidden quad', depth, found, err)
 
@@ -271,7 +282,7 @@ def naksing(s, p, b, verbose):
 
 def hidsing(s, p, linescan, verbose):
     """Hidden single."""
-    
+
     for sc in linescan:
         for n in range(9):
             sum = 0
@@ -362,116 +373,102 @@ def pointing(s, p, pb, verbose):
                                                         1) + 1) + ') '
                                             s[a2] = p[a2].index(1) + 1
                             return (s, p, logic, message, True, False)
-
     return (s, p, '', '', False, False)
 
 
-def nakhid(s, p, boxl, comb, mirror, verbose, onlypair):
-    """Naked and hidden pair or triple."""
-    # Naked pair
+def naked(s, p, length, boxl, comb, verbose):
+    """Naked pair, triple or quad."""
+    message = ''
     for i in range(len(comb)):
         list = comb[i]
-        if len(list) > 3:
-            np, pa, position, f = nakpair(list)
-            if np:
-                message = ''
+        if len(list) >= length * 2:
+            nk, quad, position, f = naklist(length, list)
+            if nk:
+                if verbose > 1:
+                    message = 'Naked ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + \
+                        ['box ', 'row ', 'column '][i // 9] + \
+                        str(i % 9 + 1)
                 if verbose > 2:
-                    message = 'Naked pair in ' + \
-                        ['box ', 'row ', 'column '][i // 9] + str(i % 9 + 1)
-                if verbose > 3:
                     message = message + ' made removal from'
                 for j in f:
                     k = boxl[i][j]
-                    p[k][pa[0] - 1] = 0
-                    p[k][pa[1] - 1] = 0
-                    if verbose > 3:
+                    for m in range(length):
+                        p[k][quad[m] - 1] = 0
+                    if verbose > 2:
                         message = message + ' ' + cell(k)
                     if p[k].count(1) == 1:
-                        if verbose > 3:
+                        if verbose > 2:
                             message = message + \
                                 '(=' + str(p[k].index(1) + 1) + ') '
                         s[k] = p[k].index(1) + 1
-                return (s, p, 'Naked pair', message, True, False)
+                return (s, p, message, True, False)
+    return (s, p, '', False, False)
 
-    # Naked triple
-    if not onlypair:
-        for i in range(len(comb)):
-            list = comb[i]
-            if len(list) > 5:
-                nt, tri, position, f = naktriple(list)
-                if nt:
-                    message = ''
-                    if verbose > 2:
-                        message = 'Naked triple in ' + \
-                            ['box ', 'row ', 'column '][i // 9] + \
-                            str(i % 9 + 1)
-                    if verbose > 3:
-                        message = message + ' made removal from'
-                    for j in f:
-                        k = boxl[i][j]
-                        p[k][tri[0] - 1] = 0
-                        p[k][tri[1] - 1] = 0
-                        p[k][tri[2] - 1] = 0
-                        if verbose > 3:
-                            message = message + ' ' + cell(k)
-                        if p[k].count(1) == 1:
-                            if verbose > 3:
-                                message = message + \
-                                    '(=' + str(p[k].index(1) + 1) + ') '
-                            s[k] = p[k].index(1) + 1
-                    return (s, p, 'Naked triple', message, True, False)
 
-    # Hidden pair
+def hidden(s, p, length, boxl, mirror, verbose):
+    """Hidden pair, triple or quad."""
+    message = ''
     for i in range(len(mirror)):
         list2 = mirror[i][1]
-        if len(list2) > 3:
-            hp, pa, position, f = nakpair(list2)
-            if hp:
-                p1 = mirror[i][0][position[0]]
-                p2 = mirror[i][0][position[1]]
+        if len(list2) > length * 2:
+            hd, quad, position, f = naklist(length, list2)
+            if hd:
+                rem = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
+                for k in range(length):
+                    rem.remove(mirror[i][0][position[k]])
+                for k in range(length):
+                    for m in rem:
+                        p[boxl[i][quad[k]]][m - 1] = 0
                 message = ''
+                if verbose > 1:
+                    message = 'Hidden ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + \
+                        ['box ', 'row ', 'column '][i // 9] + \
+                        str(i % 9 + 1)
                 if verbose > 2:
-                    message = 'Hidden pair in ' + \
-                        ['box ', 'row ', 'column '][i // 9] + str(i % 9 + 1)
-                if verbose > 3:
-                    message = 'Hidden pair of (' + str(p1) + ', ' + str(
-                        p2) + ') in ' + ['box ', 'row ', 'column '][i // 9] + str(
-                        i % 9 + 1) + ': ' + cell(boxl[i][pa[0]]) + ' ' + cell(
-                        boxl[i][pa[1]])
-                r = [0] * 9
-                r[p1 - 1] = 1
-                r[p2 - 1] = 1
-                for m in [0, 1]:
-                    n = boxl[i][pa[m]]
-                    p[n] = copy.copy(r)
-                return (s, p, 'Hidden pair', message, True, False)
+                    message = 'Hidden ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + [
+                        'box ', 'row ', 'column '][i // 9] + str(
+                        i % 9 + 1) + ': '
+                    for m in range(length):
+                        message += cell(boxl[i][quad[m]])
+                        if m < length - 1:
+                            message += ' '
+                return (s, p, message, True, False)
+    return (s, p, '', False, False)
 
-    # Hidden triple
-    if not onlypair:
-        for i in range(len(mirror)):
-            list2 = mirror[i][1]
-            if len(list2) > 3:
-                ht, tri, position, f = naktriple(list2)
-                if ht:
-                    rem = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                    for k in range(3):
-                        rem.remove(mirror[i][0][position[k]])
-                    for k in range(3):
-                        for m in rem:
-                            p[boxl[i][tri[k]]][m - 1] = 0
-                    message = ''
-                    if verbose > 2:
-                        message = 'Hidden triple in ' + \
-                            ['box ', 'row ', 'column '][i // 9] + \
-                            str(i % 9 + 1)
-                    if verbose > 3:
-                        message = 'Hidden triple in ' + [
-                            'box ', 'row ', 'column '][i // 9] + str(
-                            i % 9 + 1) + ': ' + cell(boxl[i][tri[0]]) + ' ' + cell(
-                            boxl[i][tri[1]]) + ' ' + cell(boxl[i][tri[2]])
-                    return (s, p, 'Hidden triple', message, True, False)
 
-    return (s, p, '', '', False, False)
+def naklist(length, list):
+    """Naked pair, triple or quad."""
+    if length == 2:
+        np, c, position, f = nakpair(list)
+        return (np, c, position, f)
+    naked = []
+    num = set()
+    for i in list:
+        if len(i) <= length:
+            naked.append(i)
+            for j in i:
+                num.add(j)
+    for c in itertools.combinations(num, length):
+        n = 0
+        for k in naked:
+            if set(k).issubset(set(c)):
+                n += 1
+        if n == length:
+            nak = []
+            position = []
+            m = 0
+            f = []
+            for k in list:
+                if set(k).issubset(set(c)):
+                    nak.append(k)
+                    position.append(m)
+                else:
+                    if set(k).intersection(set(c)):
+                        f.append(m)
+                m += 1
+            if len(f) > 0:
+                return (True, c, position, f)
+    return (False, 0, 0, 0)
 
 
 def nakpair(list):
@@ -495,133 +492,4 @@ def nakpair(list):
             if len(f) > 0:
                 position = [i for i, x in enumerate(list) if x == pa]
                 return (True, pa, position, f)
-
-    return (False, 0, 0, 0)
-
-
-def naktriple(list):
-    """Naked triple."""
-    triple = []
-    num = set()
-    for i in list:
-        if len(i) < 4:
-            triple.append(i)
-            for j in i:
-                num.add(j)
-    for c in itertools.combinations(num, 3):
-        n = 0
-        for k in triple:
-            if set(k).issubset(set(c)):
-                n += 1
-        if n == 3:
-            tri = []
-            position = []
-            m = 0
-            f = []
-            for k in list:
-                if set(k).issubset(set(c)):
-                    tri.append(k)
-                    position.append(m)
-                else:
-                    if set(k).intersection(set(c)):
-                        f.append(m)
-                m += 1
-            if len(f) > 0:
-                return (True, c, position, f)
-
-    return (False, 0, 0, 0)
-
-
-def nakquad(s, p, boxl, comb, verbose):
-    """Naked quad."""
-    message = ''
-    for i in range(len(comb)):
-        list = comb[i]
-        if len(list) > 7:
-            nq, quad, position, f = nakqua(list)
-            if nq:
-                if verbose > 1:
-                    message = 'Naked quad in ' + \
-                        ['box ', 'row ', 'column '][i // 9] + \
-                        str(i % 9 + 1)
-                if verbose > 2:
-                    message = message + ' made removal from'
-                for j in f:
-                    k = boxl[i][j]
-                    p[k][quad[0] - 1] = 0
-                    p[k][quad[1] - 1] = 0
-                    p[k][quad[2] - 1] = 0
-                    p[k][quad[3] - 1] = 0
-                    if verbose > 2:
-                        message = message + ' ' + cell(k)
-                    if p[k].count(1) == 1:
-                        if verbose > 2:
-                            message = message + \
-                                '(=' + str(p[k].index(1) + 1) + ') '
-                        s[k] = p[k].index(1) + 1
-                return (s, p, message, True, False)
-
-    return (s, p, '', False, False)
-
-
-def hidquad(s, p, boxl, mirror, verbose):
-    """Hidden quad."""
-    message = ''
-    for i in range(len(mirror)):
-        list2 = mirror[i][1]
-        if len(list2) > 8:
-            hq, quad, position, f = nakqua(list2)
-            if hq:
-                rem = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
-                for k in range(4):
-                    rem.remove(mirror[i][0][position[k]])
-                for k in range(4):
-                    for m in rem:
-                        p[boxl[i][quad[k]]][m - 1] = 0
-                message = ''
-                if verbose > 1:
-                    message = 'Hidden quad in ' + \
-                        ['box ', 'row ', 'column '][i // 9] + \
-                        str(i % 9 + 1)
-                if verbose > 2:
-                    message = 'Hidden quad in ' + [
-                        'box ', 'row ', 'column '][i // 9] + str(
-                        i % 9 + 1) + ': ' + cell(boxl[i][quad[0]]) + ' ' + cell(
-                        boxl[i][quad[1]]) + ' ' + cell(boxl[i][quad[2]]) + ' ' + cell(
-                        boxl[i][quad[3]])
-                return (s, p, message, True, False)
-
-    return (s, p, '', False, False)
-
-
-def nakqua(list):
-    """Naked quad."""
-    quad = []
-    num = set()
-    for i in list:
-        if len(i) < 5:
-            quad.append(i)
-            for j in i:
-                num.add(j)
-    for c in itertools.combinations(num, 4):
-        n = 0
-        for k in quad:
-            if set(k).issubset(set(c)):
-                n += 1
-        if n == 4:
-            qua = []
-            position = []
-            m = 0
-            f = []
-            for k in list:
-                if set(k).issubset(set(c)):
-                    qua.append(k)
-                    position.append(m)
-                else:
-                    if set(k).intersection(set(c)):
-                        f.append(m)
-                m += 1
-            if len(f) > 0:
-                return (True, c, position, f)
-
     return (False, 0, 0, 0)

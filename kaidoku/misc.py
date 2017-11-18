@@ -73,19 +73,19 @@ def line():
     for b in [0, 3, 6, 27, 30, 33, 54, 57, 60]:
         one = []
         for n in [0, 1, 2, 9, 10, 11, 18, 19, 20]:
-            one.append(b+n)
+            one.append(b + n)
         line.append(one)
     for i in range(9):
         one = []
         for j in range(9):
-           one.append(i * 9 + j)
+            one.append(i * 9 + j)
         line.append(one)
     for j in range(9):
         one = []
         for i in range(9):
-           one.append(i * 9 + j)
+            one.append(i * 9 + j)
         line.append(one)
-    return line       
+    return line
 
 
 def pbox():
@@ -180,12 +180,12 @@ def pairs(s, p):
                 pair.append([i, m, n])
                 paircomb.append([i, m])
                 paircomb.append([i, n])
-                if m*10+n not in pairdict:
+                if m * 10 + n not in pairdict:
                     pd = []
                 else:
-                    pd = pairdict[m*10+n]
+                    pd = pairdict[m * 10 + n]
                 pd.append(i,)
-                pairdict[m*10+n] = pd
+                pairdict[m * 10 + n] = pd
     return (pair, paircomb, pairdict)
 
 

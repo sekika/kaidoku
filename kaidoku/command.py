@@ -3,7 +3,6 @@
 import copy
 import datetime
 import os.path
-import sys
 
 from configobj import ConfigObj
 

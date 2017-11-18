@@ -12,10 +12,9 @@ def test_all():
 
 def test_command():
     """test modules in calc.py, wing.py, and chain.py."""
+    from kaidoku.command import command
     import os
     import sys
-    from kaidoku.command import command
-    import os.path
     config = {}
     config['datadir'] = ''
     config['file'] = os.path.abspath(
@@ -69,10 +68,10 @@ def test_command():
         ['iii', '''Pointing pair in box 4 removed 5 from R4C3 
 Pointing pair in box 6 removed 6 from R5C8 R6C8 
 Naked pair in row 7 made removal from R7C3
-Hidden pair of (2, 5) in box 7: R7C3 R9C3
+Hidden pair in box 7: R7C3 R9C3
 XYZ-wing of R3C4 (3, 5, 7) R3C6 (3, 5) R6C4 (3, 7) removes 3 from R1C4.
 Pointing triple in box 1 removed 3 from R3C2 
-Hidden pair of (3, 5) in box 2: R3C4 R3C6
+Hidden pair in box 2: R3C4 R3C6
 Chain of pairs. Assume that R5C8 is 7 and we have following chains.
 (1) R5C8 = 7 >> R5C5 = 5 >> R4C6 = 3 >> R6C4 = 7 >> R2C4 = 6
 (2) R5C8 = 7 >> R2C8 = 6 >> R2C4 = 7
@@ -130,14 +129,15 @@ Give up with 7 blank cells.''']
 
 def test_calc():
     """test modules in calc.py, wing.py, and chain.py.
-    Also testing misc.py that are used from these modules"""
+
+    Also testing misc.py that are used from these modules
+    """
     import copy
     import datetime
     # Following modules are tested
+    from kaidoku.calc import hidden
     from kaidoku.calc import hidsing
-    from kaidoku.calc import hidquad
-    from kaidoku.calc import nakhid
-    from kaidoku.calc import nakquad
+    from kaidoku.calc import naked
     from kaidoku.calc import naksing
     from kaidoku.calc import pointing
     from kaidoku.calc import possible
@@ -199,9 +199,9 @@ def test_calc():
     assert boxl[0] == [1, 2, 10, 18, 20], 'Error in boxlist'
     assert boxl[1] == [3, 5, 12, 14, 21, 22], 'Error in boxlist'
     comb, mirror = combmir(p, boxl)
-    s, p, logic, message, found, err = nakhid(
-        s, p, boxl, comb, mirror, 4, False)
-    assert message == 'Naked pair in column 9 made removal from R1C9', 'Error in nakhid'
+    s, p, message, found, err = naked(
+        s, p, 2, boxl, comb, 4)
+    assert message == 'Naked pair in column 9 made removal from R1C9', 'Error in naked'
     s, err = conv(
         '250400068960020000041600200586142379192367080734985612000006800000090056670004023')
     p = possible(s)
@@ -210,17 +210,17 @@ def test_calc():
     assert comb[0] == [(3, 7), (3, 7, 8), (3, 8)], 'Error in combmir'
     assert mirror[0] == [[3, 7, 8], [
         (0, 1, 2), (0, 1), (1, 2)]], 'Error in combmir'
-    s, p, logic, message, found, err = nakhid(
-        s, p, boxl, comb, mirror, 4, False)
-    assert message == 'Naked triple in box 7 made removal from R7C3 R9C3', 'Error in nakhid'
+    s, p, message, found, err = naked(
+        s, p, 3, boxl, comb, 4)
+    assert message == 'Naked triple in box 7 made removal from R7C3 R9C3', 'Error in naked'
     s, err = conv(
         '528641739614937258793500641902000017487195326100000980870403192301209000209010003')
     p = possible(s)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
-    s, p, logic, message, found, err = nakhid(
-        s, p, boxl, comb, mirror, 4, False)
-    assert message == 'Hidden pair of (4, 5) in row 9: R9C2 R9C7', 'Error in nakhid'
+    s, p, message, found, err = hidden(
+        s, p, 2, boxl, mirror, 4)
+    assert message == 'Hidden pair in row 9: R9C2 R9C7', 'Error in hidden'
     s, err = conv(
         '000039760006000004700500010900608030560390002310705006070083001200000803003450000')
     p = possible(s)
@@ -228,11 +228,11 @@ def test_calc():
     found = True
     while found:
         comb, mirror = combmir(p, boxl)
-        s, p, logic, message, found, err = nakhid(
-            s, p, boxl, comb, mirror, 4, True)
-    s, p, logic, message, found, err = nakhid(
-        s, p, boxl, comb, mirror, 4, False)
-    assert message == 'Hidden triple in row 2: R2C2 R2C7 R2C8', 'Error in nakhid'
+        s, p, message, found, err = naked(
+            s, p, 2, boxl, mirror, 4)
+    s, p, message, found, err = hidden(
+        s, p, 3, boxl, mirror, 4)
+    assert message == 'Hidden triple in row 2: R2C2 R2C7 R2C8', 'Error in hidden'
     s, err = conv(
         '320456000014200000070008040006020009050000020192080400941500070200801904000940031')
     p = possible(s)
@@ -241,12 +241,12 @@ def test_calc():
         s, p, logic, message, found, err = pointing(s, p, pb, 4)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
-    s, p, logic, message, found, err = nakhid(
-        s, p, boxl, comb, mirror, 4, False)
+    s, p, message, found, err = naked(
+        s, p, 2, boxl, comb, 4)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
-    s, p, message, found, err = nakquad(
-        s, p, boxl, comb, 4)
+    s, p, message, found, err = naked(
+        s, p, 4, boxl, comb, 4)
     assert message == 'Naked quad in box 3 made removal from R2C7 R2C9', 'Error in nakquad'
     # Hidden Quads example by Klaus Brenner at http://www.sudokuwiki.org/Hidden_Candidates
     s, err = conv(
@@ -257,12 +257,12 @@ def test_calc():
         s, p, logic, message, found, err = pointing(s, p, pb, 4)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
-    s, p, logic, message, found, err = nakhid(
-        s, p, boxl, comb, mirror, 4, False)
+    s, p, message, found, err = naked(
+        s, p, 2, boxl, comb, 4)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
-    s, p, message, found, err = hidquad(
-        s, p, boxl, mirror, 4)
+    s, p, message, found, err = hidden(
+        s, p, 4, boxl, mirror, 4)
     assert message == 'Hidden quad in box 5: R4C4 R4C6 R6C4 R6C6', 'Error in hidquad'
     s, err = conv(
         '030600078270080010500007004027591403090378120103264097300800749040750001700009052')
@@ -301,9 +301,9 @@ def test_calc():
     s, p, logic, message, found, err = pointing(s, p, pb, 4)
     assert message == 'Pointing pair in box 7 removed 1 from R8C9 ', 'Error in pointing'
     comb, mirror = combmir(p, boxl)
-    s, p, logic, message, found, err = nakhid(
-        s, p, boxl, comb, mirror, 4, False)
-    assert message == 'Hidden pair of (1, 9) in column 9: R3C9 R9C9', 'Error in nakhid'
+    s, p, message, found, err = hidden(
+        s, p, 2, boxl, mirror, 4)
+    assert message == 'Hidden pair in column 9: R3C9 R9C9', 'Error in hidden'
     pair, paircomb, pairdict = pairs(s, p)
     assert pair[0] == [0, 1, 9], 'Error in pairs.'
     assert paircomb[0] == [0, 1], 'Error in pairs.'
