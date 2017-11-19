@@ -9,7 +9,6 @@ To do, or not to do?
 - Check in different environment
 - When creating, ask if data is copied to datadir
 - Font selection
-- maxtime, and other config management
 - Write document
 - Implement additional logics
 - Finalize the sudoku book to contain
