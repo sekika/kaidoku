@@ -167,6 +167,27 @@ def combmir(p, boxl):
     return (comb, mirror)
 
 
+def wingpos(boxl, mirror):
+    wing = [[[[],[]]]*9]*2
+    for i in range(18):
+        for j in range(len(mirror[i+9][0])):
+            n = mirror[i+9][0][j]-1
+            w = []
+            for k in range(len(mirror[i+9][1][j])):
+                a = (boxl[i+9][mirror[i+9][1][j][k]])
+                if i < 9: # row
+                    w.append(a % 9)
+                else:
+                    w.append(a // 9)
+            w2 = copy.copy(wing[i // 9][n][0])
+            w3 = copy.copy(wing[i // 9][n][1])
+            w2.append(i % 9)
+            w3.append(tuple(w))
+            wi = copy.copy(wing[i // 9])
+            wi[n] = [w2,w3]
+            wing[i // 9] = wi
+    return wing
+
 def pairs(s, p):
     """Extract pair."""
     pair = []

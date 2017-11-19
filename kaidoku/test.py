@@ -152,6 +152,7 @@ def test_calc():
     from kaidoku.misc import line
     from kaidoku.misc import pairs
     from kaidoku.misc import pbox
+    from kaidoku.misc import wingpos
     from kaidoku.wing import xwing
     from kaidoku.wing import xywing
     from kaidoku.wing import xyzwing
@@ -269,9 +270,10 @@ def test_calc():
     p = possible(s)
     boxl = boxlist(s)
     comb, mirror = combmir(p, boxl)
-    s, p, message, found, err = xwing(s, p, b, boxl, mirror, 4)
+    wing = wingpos(boxl, mirror)
+    s, p, message, found, err = xwing(s, p, 2, wing, 4)
     assert (
-        message[:42]) == 'X-wing is found. R4C1, R8C1, R4C8 and R8C8', 'Error in xwing'
+        message) == 'X-wing of 8 in C1, C8 and R4, R8 removes 8 from R8C3, R8C7', 'Error in xwing'
     s, err = conv(
         '589312746236740005714006023362987050847135269951264387478603500603001078105070630')
     p = possible(s)
@@ -285,15 +287,38 @@ def test_calc():
     s, p, logic, message, found, err = pointing(s, p, pb, 4)
     assert message == 'Pointing pair in box 2 removed 5 from R1C5 R2C5 ', 'Error in pointing'
     comb, mirror = combmir(p, boxl)
-    s, p, message, found, err = xwing(s, p, b, boxl, mirror, 4)
+    wing = wingpos(boxl, mirror)
+    s, p, message, found, err = xwing(s, p, 2, wing, 4)
     assert (
-        message[:42]) == 'X-wing is found. R3C2, R5C2, R3C4 and R5C4', 'Error in xwing'
+        message) == 'X-wing of 1 in C2, C4 and R3, R5 removes 1 from R5C5', 'Error in xwing'
     comb, mirror = combmir(p, boxl)
     s, p, message, found, err = xyzwing(s, p, b, boxl, comb, pb, 4)
     assert (
         message[:50]) == 'XYZ-wing of R5C4 (1, 4, 6) R5C5 (4, 6) R3C4 (1, 6)', 'Error in xyzwing'
     s, err = conv(
-        '037080405658194300402357860063528004504761203201943650829415736006039540345070000')
+        '917854623040106007605027104074080016109760042060410970406200701701640230823571469')
+    p = possible(s)
+    boxl = boxlist(s)
+    comb, mirror = combmir(p, boxl)
+    wing = wingpos(boxl, mirror)
+    s, p, message, found, err = xwing(s, p, 3, wing, 4)
+    assert (
+        message) == 'Swordfish of 3 in R2, R6, R7 and C1, C5, C6 removes 3 from R4C1, R4C6, R5C6 (=5)'
+    comb, mirror = combmir(p, boxl)
+    # Jellyfish example from http://www.sudokuwiki.org/Jelly_Fish_Strategy
+    s, err = conv(
+        '001753800050000007700890100000601570625478931017905400000067004070000010006309700')
+    p = possible(s)
+    boxl = boxlist(s)
+    comb, mirror = combmir(p, boxl)
+    wing = wingpos(boxl, mirror)
+    s, p, message, found, err = xwing(s, p, 4, wing, 4)
+    assert (
+        message) == 'Jellyfish of 2 in R1, R4, R6, R9 and C1, C5, C8, C9 removes 2 from R2C1, R2C5, R2C8, R3C8, R3C9, R7C1, R7C8, R8C1, R8C5, R8C9'
+    comb, mirror = combmir(p, boxl)
+    s, err = conv(
+
+'037080405658194300402357860063528004504761203201943650829415736006039540345070000')
     p = possible(s)
     boxl = boxlist(s)
     s, p, logic, message, found, err = pointing(s, p, pb, 4)

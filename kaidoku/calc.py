@@ -50,10 +50,10 @@ def solve(s, verbose, maxdepth, maxtime):
                 'XY-wing': 70,
                 'XYZ-wing': 100,
                 'Remote pairs': 100,
-                'Swordfish': 100,  # not implemented
-                'Jellyfish': 100,  # not implemented, rare
                 'Naked quad': 120,
                 'Hidden quad': 150,
+                'Swordfish': 150,
+                'Jellyfish': 200,
                 'Chain of pairs': 200,
                 'Chain of pairs (long)': 300,
                 'Trial': 500,
@@ -81,6 +81,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     from kaidoku.misc import combmir
     from kaidoku.misc import line
     from kaidoku.misc import pairs
+    from kaidoku.misc import wingpos
     from kaidoku.search import search
     from kaidoku.search import trial
     from kaidoku.wing import xwing
@@ -138,10 +139,11 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
             return (s, p, message, 'Hidden triple', depth, found, err)
 
     # Wing families
+    wing = wingpos(boxl, mirror)
     pair, paircomb, pairdict = pairs(s, p)
     if depth < 2:
         s, p, message, found, err = xwing(
-            s, p, b, boxl, mirror, verbose)  # X-wing
+            s, p, 2, wing, verbose)  # X-wing
         if found or err:
             return (s, p, message, 'X-wing', depth, found, err)
         s, p, message, found, err = xywing(s, p, b, pair, verbose)  # XY-wing
@@ -152,8 +154,15 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
         if found or err:
             return (s, p, message, 'XYZ-wing', depth, found, err)
 
-    # Naked and hidden quad
     if depth == 0:
+        # Remote pairs
+        if len(pair) > 3:
+            s, p, message, found, err = remotepair(
+                s, p, b, pair, pairdict, verbose)  # Remote pairs
+            if found or err:
+                return (s, p, message, 'Remote pairs', depth, found, err)
+
+        # Naked and hidden quad
         s, p, message, found, err = naked(
             s, p, 4, boxl, comb, verbose)  # Naked quad
         if found or err:
@@ -164,12 +173,18 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
         if found or err:
             return (s, p, message, 'Hidden quad', depth, found, err)
 
-        # Chain
+        # Swordfish and Jellyfish
+        s, p, message, found, err = xwing(
+            s, p, 3, wing, verbose)  # Swordfish
+        if found or err:
+            return (s, p, message, 'Swordfish', depth, found, err)
+        s, p, message, found, err = xwing(
+            s, p, 4, wing, verbose)  # Jellyfish
+        if found or err:
+            return (s, p, message, 'Jellyfish', depth, found, err)
+
+        # Chain of pairs
         if len(pair) > 3:
-            s, p, message, found, err = remotepair(
-                s, p, b, pair, pairdict, verbose)  # Remote pairs
-            if found or err:
-                return (s, p, message, 'Remote pairs', depth, found, err)
             s, p, message, chainlength, found, err = pairchain(
                 s, p, b, pair, paircomb, verbose)  # Chain of pairs
             if chainlength < 8:

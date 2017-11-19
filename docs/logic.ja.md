@@ -58,9 +58,11 @@ Following logics are currently implemented in Kaidoku. These logics are applied 
 - X-wing
 - XY-wing (Y-Wing)
 - XYZ-wing
+- Remote pairs
 - Naked quad
 - Hidden quad
-- Remote pairs
+- Swordfish
+- Jellyfish
 - Chain of pairs
 - Trial
 - Search
@@ -68,10 +70,6 @@ Following logics are currently implemented in Kaidoku. These logics are applied 
 Unique rectangle is not implmented. It is valid when we know that the sudoku has a unique solution. However, testing the validity of sudoku is one of the purpose in kaidoku. If it is implemented, kaidoku may not correctly evaluate if a sudoku has a unique solution.
 
 Trial and search is basically doing the same thing, but it is distinguished in kaidoku. Search performs a complete search in many depths. Here depth means the numbers of successive assumptions. We make first assumption in a certain cell, keep on solving with logics, and make another assumption; this is depth 2. Trial is the search within depth 1, starting from a pair candidate cell, within certain steps. Here step means the numbers of cells eliminated with naked single or hidden single logic. In short, trial is the search algorithm restricted within human ability. Trial may not get to final conclusion, but search always reaches the final conclusion.
-
-More logics will be hopefully implemented. Especially the following.
-
-- Swordfish
 
 - - -
 
