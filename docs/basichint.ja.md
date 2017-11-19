@@ -51,38 +51,38 @@ R7C8とR8C6の2と、ボックス7に着目して、ボックス7のどこに2�
 
 R9C3に2を入れた後には、ボックス1には2が入る場所はR1C2の1箇所しかなくなる。ボックス1の単独候補マスである。`122`と入力してこれを埋める。さらに、2の単独候補マスをブロッケンで見つけ続けることができる。`652`, `592`, `372`と連続で2を埋めることができる。これで、すべての2が決まった。次に、すべての4をブロッケンによって連続的に決めることができる。`334`, `264`, `744`と入力する。次に、すべての1を連続的にブロッケンで決めることができる。`131`, `361`, `671`, `521`, `791`となる。このように、この問題は単独候補マスの解法だけで解くことが可能である。また、同じ数字で連続的に単独候補マスが決まることもよくある。
 
-When you type `i` to ask for a hint in the situation that naked single is not available and hidden single is available, hidden single is shown as a hint. For example, go back to the initial position of Level 3 No. 1 by typing `initial`, and then type `226`, `253`, `264`, `118`, `277`, `317`, reaching this position
+マスミが使えずに単独候補マスが可能なときに `i` でヒントを表示すると、単独候補マスのヒントを見ることができる。たとえば、レベル3の1問目に `initial` コマンドで戻ってから `226`, `253`, `264`, `118`, `277`, `317` と入力して、この図面になったときに
 
 ![]({{'/img/3-1-6.jpg' | relative_url}})
 
-Here you get a hint like this.
+次のようにヒントが表示される。
 
     kaidoku-{{ site.version }}> i
     Hidden single in box 1 can be found.
 
-Now you can examine box 1 and you will find that 4 is only available in R3C3.
+つまり「ボックス1に単独候補マスがある」と表示される。そこで、ボックス1をよく見ると、4がR3C3のみに入ることがわかる。
 
-Almost all of the problems up to level 3 can be solved with the basic logics of naked single and hidden single. Most of the problems in level 4 can also be solved with the basic logics, while in some cases some more advanced logics might be needed.
+レベル3までのほぼすべての問題は naked single と hidden single の基本解法のみで解くことができる。レベル4の問題も、ほとんどは基本解法のみで解くことができるが、時々より進んだ解法が必要となる。
 
-If you are not familiar with solving sudoku, I would recommend solving the easy problems with kaidoku, in the level you feel comfortable, and get used to the basic logics. Get hints when you get stuck and you will get used to the logics.
+数独にあまり慣れていないのであれば、まずは解独で簡単な問題を解いて基本解法に慣れるのが良いであろう。詰まったときにはヒントを見て考えれば、次第に解法に慣れることができる。
 
-## When advanced logic is required
+## 高度な解法が必要なとき
 
-When you try to solve problems in higher levels, you will meet the positions when advanced logics other than naked single and hidden single is required. In such cases, following message appears. It will be discussed in a [later page](advancedhint) of this document.
+より高いレベルの問題を解こうとすると、naked single と hidden single のような基本解法のみでは解けずに、より高度な解法が必要となるときがある。そのようなときには、次のようなヒントが表示される。これは、[後ほど](advancedhint)取り上げる。
 
     kaidoku-{{ site.version }}> i
     Think candidates of the cells.
     See image by "html".
     For more hints, type ii.
 
-## When you made a mistake
+## 間違えたとき
 
-Suppose that you made a mistake without realizing it, and you get stuck. In this situation, `i` command will return this message.
+間違えに気がつかずに解き進めて、解答がストップしてしまったとする。このときには `i` コマンドで次のようなメッセージが表示される。
 
     kaidoku-{{ site.version }}> i
     There is no solution for this position. You can take back one move with b.
 
-You can take back one move with `b` and think again. You can get a hint again in this position and you may get a similar message. You can keep this until you get a proper hint. Now this is the position where you made a mistake.
+「この場面からは解答がありません。b で手を1つ戻すことができます」という意味である。ここで、`b`コマンドで手を1つ戻して考え直すことができる。適正なヒントが表示されるまで同様に繰り返せば、あなたがミスをした直前まで戻ることができる。
 
 - - -
 
