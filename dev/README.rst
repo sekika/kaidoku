@@ -11,9 +11,7 @@ Logics to be hopefully implemented
 To do, or not to do?
 -----------------
 
-- Show the number of the last move with different color
 - Implement additional logics
-- Change order? Pointing, naked, XY-wing, X-wing, Hidden? Analyze frequency.
 - Adjust level parameters
 - Check in different environment
 - When creating, ask if data is copied to datadir

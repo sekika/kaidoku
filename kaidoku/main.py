@@ -141,6 +141,10 @@ def readconfig(ConfFile):
         config['figure']['color'] = 'black'
     if 'lastcolor' not in config['figure']:
         config['figure']['lastcolor'] = 'green'
+    if 'normalsize' not in config['figure']:
+        config['figure']['normalsize'] = 'medium'
+    if 'markedsize' not in config['figure']:
+        config['figure']['markedsize'] = 'large'
     if 'axis' not in config['figure']:
         config['figure']['axis'] = 'none'
     config.write()

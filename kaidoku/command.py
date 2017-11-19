@@ -575,7 +575,6 @@ def show(c, verbose, config):
         else:
             print('Type 3 digits (row, column, number) to put a number. i for hint.')
         if datadir != '':
-            size = 'medium'
             datadir = checkdatadir(datadir)
             config['datadir'] = datadir
             move = config['move']
@@ -586,7 +585,7 @@ def show(c, verbose, config):
                 lastmove = 100
             imgfile = datadir + '/current.jpg'
             figure = config['figure']
-            err = drawimage(s, '', lastmove, label, size, imgfile,
+            err = drawimage(s, '', lastmove, label, imgfile,
                             figure, False)
             if not err:
                 print('See image by "html".')
@@ -602,10 +601,8 @@ def show(c, verbose, config):
         config['datadir'] = datadir
         imgfile = datadir + '/current.jpg'
         if c == 'jpg':
-            size = 'medium'
             mark = False
         if c == 'jm':
-            size = 'large'
             mark = True
         move = config['move']
         if len(move) > 0:
@@ -614,7 +611,7 @@ def show(c, verbose, config):
         else:
             lastmove = 100
         figure = config['figure']
-        err = drawimage(s, p, lastmove, label, size, imgfile, figure, mark)
+        err = drawimage(s, p, lastmove, label, imgfile, figure, mark)
         if not err:
             print('See image by "html".')
     if c == 'i' or c == 'ii' or c == 'iii' or c == 'sp':  # prepare solving
@@ -653,7 +650,6 @@ def show(c, verbose, config):
                 if datadir == '':
                     print('Use jm command to see the diagram of candidates.')
                 else:
-                    size = 'large'
                     datadir = checkdatadir(datadir)
                     config['datadir'] = datadir
                     imgfile = datadir + '/current.jpg'
@@ -665,7 +661,7 @@ def show(c, verbose, config):
                     else:
                         lastmove = 100
                     figure = config['figure']
-                    err = drawimage(s, p, lastmove, label, size, imgfile,
+                    err = drawimage(s, p, lastmove, label, imgfile,
                                     figure, True)
                     if not err:
                         print('See image by "html".')
