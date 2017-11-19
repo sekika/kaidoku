@@ -258,9 +258,65 @@ def command(arg, config):
         show_status(file)
         return config
     if c == "config":
+        ooc = ['bookmark', 'move', 'pointer', 'level']  # Out of control
         for i in config:
-            if i != 'bookmark':
+            if i not in ooc:
                 print('{0} = {1}'.format(i, config[i]))
+        while True:
+            try:
+                entry = input('Entry to edit: ')
+            except Exception:
+                print()
+                return config
+            if entry in config and entry not in ooc:
+                if type(config[entry]) is str:
+                    try:
+                        value = input(entry + ' = ')
+                    except Exception:
+                        print()
+                        return config
+                    if entry == 'maxtime':
+                        try:
+                            value = int(value)
+                        except Exception:
+                            return config
+                        if value == 0:
+                            break
+                        value = str(value)
+                    config[entry] = value
+                    for i in config:
+                        if i not in ooc:
+                            print('{0} = {1}'.format(i, config[i]))
+                else:
+                    print('Editing the config entry of ' + entry)
+                    for i in config[entry]:
+                        print('{0} = {1}'.format(i, config[entry][i]))
+                    try:
+                        subentry = input('Entry to edit in ' + entry + ': ')
+                    except Exception:
+                        print()
+                        return config
+                    if subentry in config[entry]:
+                        if subentry[-4:] == 'size':
+                            print('Available size: small, medium, large, x-large')
+                        try:
+                            value = input(subentry + ' = ')
+                        except Exception:
+                            print()
+                            return config
+                        if subentry[-4:] == 'size' and value not in ['small', 'medium', 'large', 'x-large']:
+                            print('Size not available.')
+                            return config
+                        config[entry][subentry] = value
+                        for i in config:
+                            if i not in ooc:
+                                print('{0} = {1}'.format(i, config[i]))
+                    else:
+                        return config
+            else:
+                if entry != '':
+                    print('Entry not found.')
+                return config
         return config
     if c == 'create':
         if len(arg) > 1:

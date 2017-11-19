@@ -34,7 +34,6 @@ def test_command():
     stdout = sys.stdout
     for c in [
         ['book', 'Level 1 trivial'],
-        ['config', 'datadir ='],
         ['l 2', 'Level 2 No. 1'],
         ['299', 'Level 2 No. 1: move 1'],
         ['initial', 'Level 2 No. 1\n'],
