@@ -139,6 +139,8 @@ def readconfig(ConfFile):
         config['figure']['font'] = 'Arial'
     if 'color' not in config['figure']:
         config['figure']['color'] = 'black'
+    if 'lastcolor' not in config['figure']:
+        config['figure']['lastcolor'] = 'green'
     if 'axis' not in config['figure']:
         config['figure']['axis'] = 'none'
     config.write()

@@ -578,9 +578,15 @@ def show(c, verbose, config):
             size = 'medium'
             datadir = checkdatadir(datadir)
             config['datadir'] = datadir
+            move = config['move']
+            if len(move) > 0:
+                lastmove = int(move[len(move) - 1]) // 10
+                lastmove = (lastmove // 10 - 1) * 9 + lastmove % 10 - 1
+            else:
+                lastmove = 100
             imgfile = datadir + '/current.jpg'
             figure = config['figure']
-            err = drawimage(s, '', label, size, imgfile,
+            err = drawimage(s, '', lastmove, label, size, imgfile,
                             figure, False)
             if not err:
                 print('See image by "html".')
@@ -601,8 +607,14 @@ def show(c, verbose, config):
         if c == 'jm':
             size = 'large'
             mark = True
+        move = config['move']
+        if len(move) > 0:
+            lastmove = int(move[len(move) - 1]) // 10
+            lastmove = (lastmove // 10 - 1) * 9 + lastmove % 10 - 1
+        else:
+            lastmove = 100
         figure = config['figure']
-        err = drawimage(s, p, label, size, imgfile, figure, mark)
+        err = drawimage(s, p, lastmove, label, size, imgfile, figure, mark)
         if not err:
             print('See image by "html".')
     if c == 'i' or c == 'ii' or c == 'iii' or c == 'sp':  # prepare solving
@@ -646,8 +658,14 @@ def show(c, verbose, config):
                     config['datadir'] = datadir
                     imgfile = datadir + '/current.jpg'
                     p = possible(s)
+                    move = config['move']
+                    if len(move) > 0:
+                        lastmove = int(move[len(move) - 1]) // 10
+                        lastmove = (lastmove // 10 - 1) * 9 + lastmove % 10 - 1
+                    else:
+                        lastmove = 100
                     figure = config['figure']
-                    err = drawimage(s, p, label, size, imgfile,
+                    err = drawimage(s, p, lastmove, label, size, imgfile,
                                     figure, True)
                     if not err:
                         print('See image by "html".')
@@ -684,7 +702,6 @@ def show(c, verbose, config):
                         move.append(m)
             else:
                 s = s2
-        print('\n' + output(s))
         config, err = show('c', 0, config)
     return config, False
 

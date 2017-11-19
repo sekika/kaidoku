@@ -318,7 +318,7 @@ def test_calc():
     comb, mirror = combmir(p, boxl)
     s, err = conv(
 
-'037080405658194300402357860063528004504761203201943650829415736006039540345070000')
+        '037080405658194300402357860063528004504761203201943650829415736006039540345070000')
     p = possible(s)
     boxl = boxlist(s)
     s, p, logic, message, found, err = pointing(s, p, pb, 4)

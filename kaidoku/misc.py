@@ -168,14 +168,14 @@ def combmir(p, boxl):
 
 
 def wingpos(boxl, mirror):
-    wing = [[[[],[]]]*9]*2
+    wing = [[[[], []]] * 9] * 2
     for i in range(18):
-        for j in range(len(mirror[i+9][0])):
-            n = mirror[i+9][0][j]-1
+        for j in range(len(mirror[i + 9][0])):
+            n = mirror[i + 9][0][j] - 1
             w = []
-            for k in range(len(mirror[i+9][1][j])):
-                a = (boxl[i+9][mirror[i+9][1][j][k]])
-                if i < 9: # row
+            for k in range(len(mirror[i + 9][1][j])):
+                a = (boxl[i + 9][mirror[i + 9][1][j][k]])
+                if i < 9:  # row
                     w.append(a % 9)
                 else:
                     w.append(a // 9)
@@ -184,9 +184,10 @@ def wingpos(boxl, mirror):
             w2.append(i % 9)
             w3.append(tuple(w))
             wi = copy.copy(wing[i // 9])
-            wi[n] = [w2,w3]
+            wi[n] = [w2, w3]
             wing[i // 9] = wi
     return wing
+
 
 def pairs(s, p):
     """Extract pair."""

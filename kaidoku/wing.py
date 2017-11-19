@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """Wing logics."""
-import copy
 
 
 def xwing(s, p, wings, wing, verbose):
     """X-wing familiy."""
     from kaidoku.calc import naklist
-    from kaidoku.misc import  cell
+    from kaidoku.misc import cell
     message = ''
-    logic = ['X-wing', 'Swordfish', 'Jellyfish'][wings-2]
+    logic = ['X-wing', 'Swordfish', 'Jellyfish'][wings - 2]
     for i in range(2):
         for n in range(9):
             if len(wing[i][n][0]) > 1:
@@ -29,24 +28,25 @@ def xwing(s, p, wings, wing, verbose):
                             s[j] = p[j].index(1) + 1
                     if verbose > 1:
                         if verbose == 2:
-                            message = logic =+ ' can be found.'
+                            message = logic = + ' can be found.'
                         else:
-                            message = logic + ' of ' + str(n+1) + ' in '
+                            message = logic + ' of ' + str(n + 1) + ' in '
                             for j in position:
-                                message += ['R', 'C'][i] + str(wing[i][n][0][j]+1)
-                                if j != position[len(position)-1]:
+                                message += ['R', 'C'][i] + \
+                                    str(wing[i][n][0][j] + 1)
+                                if j != position[len(position) - 1]:
                                     message += ', '
                             message += ' and '
                             for j in c:
-                                message += ['C', 'R'][i] + str(j+1)
-                                if j != c[len(c)-1]:
+                                message += ['C', 'R'][i] + str(j + 1)
+                                if j != c[len(c) - 1]:
                                     message += ', '
-                            message += ' removes ' + str(n+1) + ' from '
+                            message += ' removes ' + str(n + 1) + ' from '
                             for j in pos:
                                 message += cell(j)
                                 if s[j] > 0:
-                                    message += ' (=' + str(s[j])+')'
-                                if j != pos[len(pos)-1]:
+                                    message += ' (=' + str(s[j]) + ')'
+                                if j != pos[len(pos) - 1]:
                                     message += ', '
                     return (s, p, message, True, False)
     return (s, p, message, False, False)
