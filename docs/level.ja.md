@@ -28,27 +28,27 @@ permalink: /ja/level
 
 どのレベルからでも好きなところから始めて、問題が難しすぎると思ったらレベルを下げて、簡単すぎると思ったらレベルを上げることで、常に自分に最適な難易度の問題を解くことができる。
 
-At each level, you can select the problems by the following commands.
+それぞれのレベルで、次のコマンドで問題を移動することができる。
 
-|n |Go to next problem |
-|p |Go to previous problem |
-|j num |Jump to problem no. num |
+|n |次の問題に進む |
+|p |前の問題に戻る |
+|j num |問題番号 num に移動する |
 
-Current problem is stored in each level. For example,
+それぞれのレベルで、現在の問題番号が保存される。たとえば、
 
-- You solved 23 problems in level 3 and you are at level 3, no. 24.
-- You go to level 4 and solve 5 problems. Now you are at level 4, no. 6.
-- After that, you go back to level 3. In this case, you are at level 3, no. 24.
+- レベル3の問題 23 まで解き終わって、問題24に進む。
+- レベル4で5問解いて、レベル4の問題6を解いている。
+- その後、レベル3に戻ると、レベル3の問題24に戻ることとなる。
 
-Note that only the information of the number of problem is stored in each level. Move is stored only for the current problem.
+ここで、それぞれのレベルの問題番号のみが保存される。それぞれの問題のどこまで解き進めたかという情報は、現在解いている問題だけ保存されている。
 
-Therefore, recommended way is to start from no. 1 in each level, and after solving a problem you go to the next problem with `n` command.
+したがって、推奨される方法は、それぞれのレベルで問題番号1から始めて、解き終わったら`n`コマンドで次の問題へと進めることである。
 
-You can show the index of the problem book by `book` command, which shows the numbers of problems in each level. Kaidoku is shipped with certain numbers of problems in each level. It can increase the numbers of problems by creating new problems. The rate of creating a new problem is faster than a human to solve the problem. Therefore, you can inifinitely enjoy new problems.
+それぞれのレベルの問題数の一覧を `book` コマンドで見ることができる。解独は、それぞれのレベルで一定数の問題が同梱されている。そして、新しい問題を作ることも可能である。解独が新しい問題を作るスピードは人間が問題を解くスピードよりも速いため、いくらでも新しい問題を解き続けることが可能である。
 
-## Determination of level
+## 難易度レベルの決定
 
-The levels are determined by the numbers of initial blank cells, the difficulty of the logics, and the complexity of seach. Up to level 3 the numbers of blank cells are the dominant factor, up to level 6 the difficulty of the logics is the dominant factor, and from level 7 complexity of the search is the dominant factor.
+難易度レベルは、問題図面における空白セルの数、使われる解法の難易度、検索の複雑さによって決められる。レベル3までは空白セルの数が支配的要因であり、レベル6までは解法の難易度が支配的要因であり、レベル7以降は検索の複雑さが支配的要因となる。
 
 Current status of kaidoku is in development, and the algorithm to determine the level is not fixed yet. As more logics will be implemented, the level of a certain problem will change. Therefore, the problem book shipped now is a tentative one.
 
