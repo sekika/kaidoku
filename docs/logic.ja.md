@@ -30,16 +30,17 @@ permalink: /ja/logic
 - Remote pairs
 - Analysis of chain of pairs
 
-To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied. Detail of each logic is not discussed in this page. Please refer to these sites.
+このような難しい問題を解くためには、通常候補数字をメモする。紙と鉛筆を使うときには、それぞれの数字をセル内の位置に対応させたペンシルマークで候補数字を簡易的にメモする技法もある。このような高度な解法について、詳細ではこのサイトでは踏み込まない。以下のサイトを参照。
 
+- [ナンバープレース、数独 解法まとめ](http://www.geocities.jp/master_mishichan/)
+- [数独の解き方](http://www.sudokugame.org/solv/)
 - [SudokuWiki.org - Strategy Families](http://www.sudokuwiki.org/Strategy_Families)
-- [sudoku-solutions.com - Background](http://www.sudoku-solutions.com/index.php?page=background)
 
-## Trial and search
+## 試行と探索
 
-For more difficult problems, the above logics do not directly lead to solution, and 'trial and error' approach is required. Suppose that R2C3 has 3 candidate numbers, 2, 4, 6. For each number, we assume that R2C3 is that number. First we assume that R2C3 is 2 and keep solving. If we meet a contradiction, we can eliminate 2 from the candidates. If 4 is also eliminated, R2C3 should be 6. Many advanced logics explained in  [SudokuWiki.org](http://www.sudokuwiki.org/) are trying to find a certain (assumption - contradiction) combination strategically. Take [Nishio forcing chains](http://www.sudokuwiki.org/Nishio_Forcing_Chains) for example. In the diagram pattern in the page, assuming G2 = 6 leads J4 = 6 and J1 = 2 by hidden single, H9 = 6 by hidden single, J9 = 5 and G7 = 8 by naked single, and G8 has no candidate, which is contradiction. Trial approach is especially useful for chain of pairs, because one assumption successively determines many cells. Therefore in kaidoku trial and error approach is performed for cells with 2 candidates, and it is regarded as the analysis of chain of pairs.
+より難しい問題では、上述のような解法を使っても正解にたどり着くことができず、試行錯誤が必要とされる。たとえば、 R2C3 に2, 4, 6 の3つの候補数字があるとする。それぞれの数について、R2C3がその数であると仮定をして解き進める。はじめに、R2C3が2であると仮定して説き進め、矛盾が生じたとすれば、2を候補数字から外すことができる。4も候補数字から外すことができれば、R2C3が6であると確定する。[SudokuWiki.org](http://www.sudokuwiki.org/) で解説されている多くの高度な解法は、ある「仮定ー矛盾」関係をいかにして見つけるか、という戦略である。[西尾理論](http://www.sudokuwiki.org/Nishio_Forcing_Chains)のページの解説図を例にとる。この図において、G2 = 6 と仮定すれば、hidden single によって J4 = 6 と J1 = 2 が、さらに hidden single によって H9 = 6 が、そして naked single によって J9 = 5 と G7 = 8 が決まり、 G8 の候補がなくなって矛盾となる。試行錯誤は、特にペア（2つの候補数字）のチェーンで有効である。なぜならば、1つのマス目を仮定すれば、次々と他のペアのマス目が決定するためである。そこで、解独では2つの候補数字を持つマス目だけに限定した試行を実行して、ペアチェーンの解析 (analysis of chain of pairs) としている。
 
-Trials and errors can be recursively employed with search algorithm. In the first example of this section, while examining R2C3 = 2, we will make another assumption in another cell. If that is not enough, make another assumption. As we have only finite numbers of blank cells and an assumption reduces the numbers of blank cell, this is not infinite steps. Therefore we can always get to the final conclusion. If we have 3 candidates in a certain cell and for each candidates we make 5 trials, we make 15 trials in total. The numbers of trials are multiplied in this way. Computers can easily perform such large numbers of trials and errors with search algorithm. Such puzzles requiring extensive search are too hard for normal human beings, but a small number of trials and errors are actually available. It can also be solved with luck. In any case, problems requiring the trial and error approach is too hard for avaraged sudoku players. Some people enjoy such difficult problems, and kaidoku offers such problems in beyond level 7 to meet the need for strongest sudoku players.
+試行錯誤は、探索アルゴリズムによって再帰的に実行することができる。このページの最初の例において、R2C3 = 2 の仮定を探索している途中で、他のマス目で他の仮定をする。それで十分でなければ、さらに別の仮定をする。空白セルの数は有限であり、仮定を1つするたびに空白セルの数が1つ減るため、これは無限ループとはならない。したがって、この再帰的な探索アルゴリズムによって必ず最終的な結論を得ることができる。If we have 3 candidates in a certain cell and for each candidates we make 5 trials, we make 15 trials in total. The numbers of trials are multiplied in this way. Computers can easily perform such large numbers of trials and errors with search algorithm. Such puzzles requiring extensive search are too hard for normal human beings, but a small number of trials and errors are actually available. It can also be solved with luck. In any case, problems requiring the trial and error approach is too hard for avaraged sudoku players. Some people enjoy such difficult problems, and kaidoku offers such problems in beyond level 7 to meet the need for strongest sudoku players.
 
 ## Logics implemented in Kaidoku
 
