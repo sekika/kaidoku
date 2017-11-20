@@ -7,7 +7,6 @@ To do, or not to do?
 -----------------
 
 - Check in different environment
-- When creating, ask if data is copied to datadir
 - Font selection
 - Write document
 - Implement additional logics

@@ -324,10 +324,29 @@ def command(arg, config):
         else:
             n = 10
         file = os.path.expanduser(config["file"])
+        datadir = os.path.expanduser(config["datadir"])
         giveup = os.path.expanduser(config["giveup"])
         creation = config["create"]
+        if file == '':
+            print('File not specified.')
+            return config
+        outfile = openappend(file)
+        if outfile == 'error':
+            print('Unable to write a file:', file)
+            datadir = checkdatadir(datadir)
+            config['datadir'] = datadir
+            if os.path.isdir(datadir):
+                file = datadir + '/sudoku.txt'
+                print('Copying the system default file to ' + file)
+                shutil.copyfile(os.path.abspath(
+                    os.path.dirname(__file__)) + '/data/sudoku.txt', file)
+                config["file"] = file
+            else:
+                return config
+        else:
+            outfile.close()
         print('Creating {0} new problems.'.format(n))
-        append_database(file, giveup, n, creation)
+        append_database(file, datadir, giveup, n, creation)
         return config
     if c == 'ba':  # add bookmark
         file = os.path.expanduser(config["file"])

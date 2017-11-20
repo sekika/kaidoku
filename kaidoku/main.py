@@ -61,7 +61,7 @@ def readconfig(ConfFile):
         return config
     if 'datadir' in config:
         datadir = os.path.expanduser(config['datadir'])
-        if not os.path.isdir(datadir):
+        if not os.path.isdir(datadir) and datadir != '':
             try:
                 os.mkdir(datadir)
             except Exception:
@@ -72,16 +72,21 @@ def readconfig(ConfFile):
     config['datadir'] = datadir
     if 'file' in config:
         file = os.path.expanduser(config["file"])
-        try:
-            input = open(file, 'r')
-            input.close()
-        except Exception:
-            out = openappend(file)
-            if out == '':
-                print('Cannot open file:', file)
-                sys.exit()
-            out.close
-        config["file"] = file
+        if os.path.exists(file):
+            try:
+                input = open(file, 'r')
+                input.close()
+            except Exception:
+                out = openappend(file)
+                if out == '':
+                    print('Cannot open file:', file)
+                    sys.exit()
+                out.close()
+            config["file"] = file
+        else:
+            print(file + ' does not exist.')
+            file = ''
+            config['file'] = ''
     else:
         file = os.path.abspath(os.path.dirname(__file__)) + '/data/sudoku.txt'
         config["file"] = file

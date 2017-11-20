@@ -107,19 +107,13 @@ def reanalyze(file, file2):
     return
 
 
-def append_database(file, giveup, n, creation):
+def append_database(file, datadir, giveup, n, creation):
     """Create new problems and append to database."""
     minlevel = int(creation['minlevel'])
     maxtime = 3
     maxdepth = 25
 
-    if file == '':
-        return
     outfile = openappend(file)
-    if outfile == 'error':
-        print('Unable to write a file:', file)
-        return
-        outfile.close
     start = datetime.datetime.now()
     for i in range(n):
         level = 0
@@ -128,11 +122,9 @@ def append_database(file, giveup, n, creation):
             sudoku = short(s)
             if level == 0:
                 give = openappend(giveup)
-                if outfile == 'error':
-                    print('Unable to write a file:', giveup)
-                    return
-                give.write('g ' + str(maxtime) + ' ' + sudoku + '\n')
-                give.close()
+                if give != 'error':
+                    give.write('g ' + str(maxtime) + ' ' + sudoku + '\n')
+                    give.close()
             else:
                 if level >= minlevel:
                     print('.', end='', flush=True)
@@ -150,7 +142,6 @@ def append_database(file, giveup, n, creation):
     print('\nFinished. {0} problems created in {1:.1f} seconds (mean: {2:.3f} sec).'.format(
         n, t, t / n))
     show_status(file)
-
     return
 
 
