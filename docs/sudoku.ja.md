@@ -1,5 +1,5 @@
 ---
-layout: sudok.ja
+layout: sudoku.ja
 lang: 日本語
 ref: sudoku
 permalink: /ja/sudoku
