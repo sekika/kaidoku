@@ -188,6 +188,70 @@ function restorenumber() {
     }
 };
 
+// Keyboard pressed
+function keydown(key){
+     keycode = key.keyCode;
+     // numeric key
+     if ( keycode > 48 && keycode < 58 ) {
+         num(keycode - 48);
+     }
+     // backspace or delete key
+     if ( keycode == 8 || keycode == 46 ) {
+         num(0);
+     }
+     activecell = document.getElementById("activecell").textContent;
+     level = document.getElementById("level").value
+     s = localStorage.getItem("s"+level);
+     if (activecell.length == 0) {
+         return;
+     }
+     activecell = activecell - 0;
+     // left arrow
+     if ( keycode == 37 ) {
+         if ( activecell % 9 > 0 ) {
+             do {
+                 activecell -= 1;
+             } while ( s[activecell] != 0 && activecell % 9 > 0 )
+             if (s[activecell] == 0) {
+                 btn(activecell);
+             }
+         }
+     }
+     // up arrow
+     if ( keycode == 38 ) {
+         if ( activecell > 8 ) {
+             do {
+                 activecell -= 9;
+             } while ( s[activecell] != 0 && activecell > 8 )
+             if (s[activecell] == 0) {
+                 btn(activecell);
+             }
+         }
+     }
+     // right arrow
+     if ( keycode == 39 ) {
+         if ( activecell % 9 < 8 ) {
+             do {
+                 activecell += 1;
+             } while ( s[activecell] != 0 && activecell % 9 < 8 )
+             if (s[activecell] == 0) {
+                 btn(activecell);
+             }
+         }
+     }
+     // down arrow
+     if ( keycode == 40 ) {
+         if ( activecell < 72 ) {
+             do {
+                 activecell += 9;
+             } while ( s[activecell] != 0 && activecell < 72 )
+             if (s[activecell] == 0) {
+                 btn(activecell);
+             }
+         }
+     }
+};
+
 function sudoku(data, level, no) {
 var lines = data.split("\n");
 n = 0
