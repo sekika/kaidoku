@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+{% include head-sudoku.html %}
+  <body>
+    <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
+    <div class="shell">
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>解独</a></h1>
+            <h2>数独・ナンプレの解析プログラム</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+        {% include download.html %}
+      <span class="banner-fix"></span>
+      <section id="main_content">
+        {% include lang-select.html %}
+
+       <h1>ナンプレの問題</h1>
+
+       <p id="problem"></p>
+
+       <table class='invisible'>
+
+       <tr>
+       <td class='invisible'>
+       <div id="board"></div>
+       <div id='message'></div>
+       <td class='invisible' width='20px'>
+       <td class='invisible'>
+       <table class='invisible'>
+       <tr>
+       <td id='n1'><button type='button' class='command' id='bn1' onClick='num(1)'>1</button>
+       <td id='n2'><button type='button' class='command' id='bn2' onClick='num(2)'>2</button>
+</tr>
+<tr>
+       <td id='n3'><button type='button' class='command' id='bn3' onClick='num(3)'>3</button>
+       <td id='n4'><button type='button' class='command' id='bn4' onClick='num(4)'>4</button>
+</tr><tr>
+       <td id='n5'><button type='button' class='command' id='bn5' onClick='num(5)'>5</button>
+       <td id='n6'><button type='button' class='command' id='bn6' onClick='num(6)'>6</button>
+</tr>
+<tr>
+       <td id='n7'><button type='button' class='command' id='bn7' onClick='num(7)'>7</button>
+       <td id='n8'><button type='button' class='command' id='bn8' onClick='num(8)'>8</button>
+       </tr>
+       <tr>
+       <td id='n9'><button type='button' class='command' id='bn9' onClick='num(9)'>9</button>
+       <td id='del'><button type='button' class='command' id='del' onClick='num(0)'>X</button>
+        </tr>
+       </table>
+       </table>
+
+        {{ content }}
+      </section>
+      <div id='data' class='hidden'></div>
+      <div id='current' class='hidden'></div>
+      <div id='activecell' class='hidden'></div>
+
+        {% include footer.html %}
+    </div>
+  {% include google.html %}
+  </body>
+</html>
