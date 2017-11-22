@@ -1,0 +1,88 @@
+ul.selector {
+  text-align: right;
+}
+ul.selector li {
+  display: inline-block;
+  border: 1px solid #D35400;
+  padding: 5px;
+  background: #F6CC72;
+  width: 100px;
+  text-align: center;
+}
+table, td, th {
+  border-collapse: collapse;
+  background-color: white;
+  padding: 0px;
+  margin: 0px;
+}
+table.invisible, td.invisible {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+}
+table.external {
+  border: 2px solid;
+  padding: 0px;
+  margin: 0px;
+}
+td.external {
+  border: 1px solid;
+  padding: 0px;
+  margin: 0px;
+}
+td.internal {
+  display: float;
+  border: 1px solid;
+  width: 40px;
+  height: 40px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  background-color: white;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+td.selected {
+  display: float;
+  border: 1.5px solid;
+  width: 40px;
+  min-height: 40px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  background-color: white;
+  font-size: 0.8em;
+  font-weight: normal;
+  color: green;
+  background-color: skyblue;
+}
+button.cell {
+  display: float;
+  border: none;
+  width: 38px;
+  height: 24px;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  color: green;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+button.command {
+  width: 50px;
+  height: 50px;
+  font-size: 0.8em;
+}
+div.red {
+  color: red;
+  font-weight: bold;
+}
+div.hidden {
+  display:none;
+}
