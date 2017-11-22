@@ -34,29 +34,29 @@ td.external {
 td.internal {
   display: float;
   border: 1px solid;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   padding: 0px;
   margin: 0px;
   overflow: hidden;
   text-align: center;
   vertical-align: middle;
   background-color: white;
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-weight: normal;
 }
 td.selected {
   display: float;
   border: 1.5px solid;
-  width: 40px;
-  min-height: 40px;
+  width: 30px;
+  min-height: 30px;
   padding: 0px;
   margin: 0px;
   overflow: hidden;
   text-align: center;
   vertical-align: middle;
   background-color: white;
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-weight: normal;
   color: green;
   background-color: skyblue;
@@ -64,20 +64,20 @@ td.selected {
 button.cell {
   display: float;
   border: none;
-  width: 38px;
-  height: 24px;
+  width: 28px;
+  height: 20px;
   overflow: hidden;
   margin: 0px;
   padding: 0px;
   background-color: white;
   color: green;
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-weight: normal;
 }
 button.command {
-  width: 50px;
-  height: 50px;
-  font-size: 0.8em;
+  width: 40px;
+  height: 40px;
+  font-size: 0.7em;
 }
 div.red {
   color: red;
