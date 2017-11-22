@@ -35,8 +35,8 @@ $.ajax({
         $('#problem').html(problem);
         board = boardhtml(s);
         $('#board').html(board);
-        $('#message').text('');
         $('#data').text(data);
+        clear();
     }
 });
 
@@ -60,7 +60,7 @@ function updatelevel() {
         document.getElementById("current").textContent = s;
         board = boardhtml(s)
         $('#board').html(board);
-        $('#message').text('');
+        clear();
 };
 
 function updatenum() {
@@ -74,9 +74,15 @@ function updatenum() {
            localStorage.setItem("s"+level, s);
            board = boardhtml(s)
            $('#board').html(board);
-           $('#message').text('');
+           clear();
        }
 };
+
+function clear() {
+     $('#message').text('');
+     $('#current').text('');
+     $('#activecell').text('');
+}
 
 function numblank(s) {
     blank = 0;
