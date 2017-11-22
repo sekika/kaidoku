@@ -17,7 +17,7 @@ permalink: /
 
 ## Sudoku player
 
-[Online player] is available.
+[Online player](sudoku) is available.
 
 ## Update
 
