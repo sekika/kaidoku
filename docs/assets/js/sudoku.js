@@ -72,6 +72,7 @@ function updatenum() {
            localStorage.setItem("level"+level, no);
            s = sudoku(data, level, no);
            localStorage.setItem("s"+level, s);
+           document.getElementById("current").textContent = s;
            board = boardhtml(s)
            $('#board').html(board);
            clear();
@@ -80,7 +81,6 @@ function updatenum() {
 
 function clear() {
      $('#message').text('');
-     $('#current').text('');
      $('#activecell').text('');
 }
 
