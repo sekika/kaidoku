@@ -5,3 +5,4 @@ show_downloads: false
 google_analytics:
 theme: jekyll-theme-merlot
 version: 0.2.7
+jquery-version: "3.2.1" # jQuery https://jquery.com/download/
