@@ -197,6 +197,8 @@ function restorenumber() {
 };
 
 // Keyboard pressed
+document.onkeydown = keydown;
+
 function keydown(key){
      keycode = key.keyCode;
      // numeric key
