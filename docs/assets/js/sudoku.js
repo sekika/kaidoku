@@ -19,18 +19,26 @@ $.ajax({
             }
         }
         document.getElementById("current").textContent = s;
+        lang = document.getElementById("lang").textContent;
+        if ( lang == 'ja' ) {
+            levelname = ['レベル', '簡単すぎ', '超簡単', '簡単', '普通', '難しい', 'とても難しい', '意地悪', '難しすぎ', '究極'];
+            noname = '問題番号';
+        } else {
+            levelname = ['Level ', 'trivial', 'very easy', 'easy', 'normal', 'hard', 'very hard', 'evil', 'extreme', 'ultimate'];
+            noname = 'No.';
+        }
         problem = "<select id='level' onChange='updatelevel()'>"
         for (var i = 1; i <= 9; i++) {
-            problem += "<option value='"+i+"'"
+            problem += "<option value='"+i+"'";
             if (i == level) {
-                problem += " selected"
+                problem += " selected";
             }
-            problem += ">Level "+i+": "
-            problem += ['trivial', 'very easy', 'easy', 'normal', 'hard', 'very hard', 'evil', 'extreme', 'ultimate'][i-1]
-            problem += "</option>"
+            problem += ">" + levelname[0] +i+": ";
+            problem += levelname[i];
+            problem += "</option>";
         }
-        problem += "</select>\n"
-        problem += "No. <input type='text' name='no' id='no' size='5' maxlength='5' value='" +
+        problem += "</select>\n";
+        problem += noname + " <input type='text' name='no' id='no' size='5' maxlength='5' value='" +
             no+"' onkeyup='updatenum()'>"
         $('#problem').html(problem);
         board = boardhtml(s);
