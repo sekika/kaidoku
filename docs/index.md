@@ -15,6 +15,10 @@ permalink: /
 * **solver** of sudoku. It can solve a sudoku puzzle and show the procedure of solving a sudoku puzzle with various logics. It evaluates if a given puzzle is valid sudoku with unique solution.
 * **creater** of sudoku. It can create new sudoku puzzles. The puzzles shipped with this program was created by the program itself.
 
+## Sudoku player
+
+[Online player] is available.
+
 ## Update
 
 [Latest version](https://pypi.python.org/pypi/kaidoku) is **{{ site.version }}**
