@@ -112,6 +112,9 @@ function numblank(s) {
 // Click a cell
 function btn(i) {
     activecell = document.getElementById("activecell").textContent;
+    if ( activecell == 'solved' ) {
+        return;
+    }
     if (activecell != '') {
         document.getElementById(activecell).className = 'internal';
         content = document.getElementById(activecell).innerHTML;
@@ -142,7 +145,7 @@ function btn(i) {
 // Place a number
 function num(n) {
     activecell = document.getElementById("activecell").textContent;
-    if (activecell.length == 0) {
+    if (activecell.length == 0 || activecell == 'solved') {
         return;
     }
     s = document.getElementById("current").textContent;
@@ -203,21 +206,24 @@ function num(n) {
     $('#'+activecell).html("<button type='button' class='selected' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
     document.getElementById("message").innerHTML = "";
-    if (numblank(s) == 0) {
+    if (numblank(s) > 0) {
         // Solved
         start = localStorage.getItem("s"+level);
         document.getElementById(activecell).className = 'internal';
-        for ( i = 0; i < 81; i++ ) {
-            if (start[i] == 0) {
-                num = "<div class='blue'>"+s[i]+"</div>";
-            } else {
-                num = s[i];
-            }
-            document.getElementById(i).innerHTML = num;
-        }
+        $('#'+activecell).html("<button type='button' class='cell' id='b"+
+            activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
+        $('#buttons').html("");
         document.getElementById("activecell").textContent = 'solved';
+        showmessage({en: 'This is the solution.', ja: 'これが正解です。'});
     }
 };
+
+// Show mesage
+function showmessage(message) {
+    lang = document.getElementById("lang").textContent;
+    document.getElementById("message").innerHTML = "<p><strong>&lt;&lt; "+
+        message[lang]+"&gt;&gt; </strong></p>";
+}
 
 // Scan duplicated numbers
 function scancell(s, n) {
@@ -257,9 +263,6 @@ function highlight(match) {
 // Finish highlight
 function restorenumber() {
    activecell = document.getElementById("activecell").textContent;
-   if ( activecell == 'solved' ) {
-       return;
-   }
    level = document.getElementById("level").value
    s = localStorage.getItem("s"+level);
    c = document.getElementById("current").textContent;
@@ -363,7 +366,7 @@ function boardhtml(s) {
 if ( window.innerWidth > 640 ) {
    var board = "<table class='invisible'><tr class='invisible'><td class='invisible'>";
 } else {
-   board = '';
+   var board = '';
 }
 
 board += "<table class='external'>"
@@ -398,7 +401,7 @@ if ( window.innerWidth > 640 ) {
    w = 5;
 }
 
-board += "<table class='invisible'>";
+board += "<table id='buttons' class='invisible'>";
 for ( i = 1; i < 10; i ++ ) {
     if ( i % w == 1 ) {
         board += "<tr>";
