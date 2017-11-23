@@ -106,19 +106,28 @@ function btn(i) {
     activecell = document.getElementById("activecell").textContent;
     if (activecell != '') {
         document.getElementById(activecell).className = 'internal';
-        n = document.getElementById("current").textContent[activecell];
-        if (n == 0) {
-            n = ' '
+        content = document.getElementById(activecell).innerHTML;
+        content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+        if ( content.length == 1 ) {
+            c = "cell";
+        } else {
+            if ( content.length > 3 ) {
+                c = "mark";
+            } else {
+                c = "mark3";
+            }
         }
-        $('#'+activecell).html("<button type='button' class='cell' id='b"+
-            activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
+         $('#'+activecell).html("<button type='button' class='"+c+"' id='b"+
+            activecell+"' onClick='btn("+activecell+")'>"+content+"</button>");
     }
-    document.getElementById(i).className = 'selected';
-    n = document.getElementById("current").textContent[i];
-    if (n == 0) {
-        n = ' '
-    }
+    content = document.getElementById(i).innerHTML;
+    n = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
     document.getElementById(i).textContent = n;
+    if ( n.length == 1 ) {
+        document.getElementById(i).className = 'selected';
+    } else {
+        document.getElementById(i).className = 'selectedmark';
+    }
     document.getElementById("activecell").textContent = i;
 };
 
@@ -138,17 +147,17 @@ function num(n) {
         begin = Math.floor(row / 3) * 27 + Math.floor(column / 3)*3;
         box = [0, 1, 2, 9, 10, 11, 18, 19, 20];
         for (var i = 0; i < 9; i++) {
-            if (s[begin + box[i]] == n) {
+            if (s[begin + box[i]] == n && activecell != begin + box[i]) {
                 match[matched] = begin + box[i];
                 matched ++;
             }
         }
         for (var i = 0; i < 9; i++) {
-            if (s[row * 9 + i] == n) {
+            if (s[row * 9 + i] == n  && i != column) {
                 match[matched] = row * 9 + i;
                 matched ++;
             }
-            if (s[i * 9 + column] == n) {
+            if (s[i * 9 + column] == n && i != row) {
                 match[matched] = i * 9 + column;
                 matched ++;
             }
@@ -161,16 +170,46 @@ function num(n) {
             return;
         }
     }
+    // Pencil mark ?
+    content = document.getElementById(activecell).innerHTML;
+    content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+    if (content != ' ' && n-0 != 0) {
+        if ( content.includes(n) ) {
+            content = content.replace(n,'');
+            while ( content.includes(' ')) {
+                content = content.replace(' ','');
+            }
+            mark = content.slice(0, 5);
+            if ( mark.length > 4 ) {
+                mark += content.slice(6, 9);
+            }
+        } else {
+            if (  content.length == 5 ) {
+                content += ' ';
+            }
+            mark = content + '' + n;
+        }
+        if ( mark.length > 1 ) {
+            $('#'+activecell).html("<button type='button' class='selectedmark' id='b"+
+               activecell+"' onClick='btn("+activecell+")'>"+mark+"</button>");
+            s = s.slice(0, activecell-81) + '0'  + s.slice(activecell-1+2);
+            document.getElementById("current").textContent = s;
+            return;
+        }
+        if ( mark.length == 1 ) {
+            n = mark;
+        } else {
+            n = '0';
+        }
+    }    
     // Put a number
     s = s.slice(0, activecell-81) + n  + s.slice(activecell-1+2);
     document.getElementById("current").textContent = s;
     if ( n-0 == 0 ) {
         n = ' '
     }
-    document.getElementById(activecell).className = 'internal';
-    $('#'+activecell).html("<button type='button' class='cell' id='b"+
+    $('#'+activecell).html("<button type='button' class='selected' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
-    document.getElementById("activecell").textContent = '';
     if (numblank(s) == 0) {
         document.getElementById("message").innerHTML = "<p>Solved !</p>";
     } else {
@@ -210,7 +249,7 @@ function keydown(key){
          num(0);
      }
      activecell = document.getElementById("activecell").textContent;
-     level = document.getElementById("level").value
+     level = document.getElementById("level").value;
      s = localStorage.getItem("s"+level);
      if (activecell.length == 0) {
          return;
