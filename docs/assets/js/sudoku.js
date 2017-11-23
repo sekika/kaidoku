@@ -119,7 +119,11 @@ function btn(i) {
         if ( content.length == 1 ) {
             c = "cell";
         } else {
-            c = "mark";
+            if ( content.length > 3 ) {
+                c = "mark";
+            } else {
+                c = "mark3";
+            }
         }
          $('#'+activecell).html("<button type='button' class='"+c+"' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+content+"</button>");
