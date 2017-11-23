@@ -166,6 +166,9 @@ div.red {
   color: red;
   font-weight: bold;
 }
+div.blue {
+  color: blue;
+}
 div.hidden {
   display:none;
 }

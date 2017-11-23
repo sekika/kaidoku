@@ -32,6 +32,11 @@ td.external {
   padding: 0px;
   margin: 0px;
 }
+td.mark {
+  border: 0.5px solid;
+  padding: 0px;
+  margin: 0px;
+}
 td.internal {
   display: float;
   border: 1.5px solid;
@@ -62,18 +67,6 @@ td.selected {
   color: green;
   background-color: skyblue;
 }
-td.mark {
-  display: float;
-  overflow-wrap : break-word;
-  word-wrap:break-word;
-  border: 0.5px solid;
-  overflow: hidden;
-  font-size: 0.7em;
-  font-weight: normal;
-  color: green;
-  padding: 0px;
-  margin: 0px;
-}
 td.selectedmark {
   display: float;
   overflow-wrap : break-word;
@@ -87,7 +80,7 @@ td.selectedmark {
   text-align: center;
   vertical-align: middle;
   background-color: white;
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: normal;
   color: green;
   background-color: skyblue;
@@ -114,21 +107,8 @@ button.mark {
   margin: 0px;
   padding: 0px;
   background-color: white;
-  color: blue;
-  font-size: 0.5em;
-  font-weight: normal;
-}
-button.mark3 {
-  display: float;
-  border: none;
-  width: 38px;
-  height: 24px;
-  overflow: hidden;
-  margin: 0px;
-  padding: 0px;
-  background-color: white;
-  color: blue;
-  font-size: 0.7em;
+  color: green;
+  font-size: 0.6em;
   font-weight: normal;
 }
 button.selected {
@@ -154,7 +134,7 @@ button.selectedmark {
   padding: 0px;
   color: green;
   background-color: skyblue;
-  font-size: 0.5em;
+  font-size: 0.6em;
   font-weight: normal;
 }
 button.command {
@@ -165,6 +145,9 @@ button.command {
 div.red {
   color: red;
   font-weight: bold;
+}
+div.blue {
+  color: blue;
 }
 div.hidden {
   display:none;

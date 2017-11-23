@@ -1,5 +1,8 @@
 $.ajax({
     url:'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
+	beforeSend: function(){
+       $('#board').html(boardhtml(Array(9+1).join('Loading..')));
+	},
     success: function(data){
         level = localStorage.getItem("level");
         if (level == null) {
@@ -45,9 +48,13 @@ $.ajax({
         $('#board').html(board);
         $('#data').text(data);
         clear();
+    },
+    error: function () {
+        $('#board').html('Could not load sudoku problems.');
     }
 });
 
+// Change the level
 function updatelevel() {
        data = document.getElementById("data").textContent;
        level = document.getElementById("level").value;
@@ -71,6 +78,7 @@ function updatelevel() {
         clear();
 };
 
+// Change the problem number
 function updatenum() {
        data = document.getElementById("data").textContent
        level = document.getElementById("level").value
@@ -102,6 +110,7 @@ function numblank(s) {
     return blank;
 };
 
+// Click a cell
 function btn(i) {
     activecell = document.getElementById("activecell").textContent;
     if (activecell != '') {
@@ -111,11 +120,7 @@ function btn(i) {
         if ( content.length == 1 ) {
             c = "cell";
         } else {
-            if ( content.length > 3 ) {
-                c = "mark";
-            } else {
-                c = "mark3";
-            }
+            c = "mark";
         }
          $('#'+activecell).html("<button type='button' class='"+c+"' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+content+"</button>");
@@ -131,6 +136,7 @@ function btn(i) {
     document.getElementById("activecell").textContent = i;
 };
 
+// Place a number
 function num(n) {
     activecell = document.getElementById("activecell").textContent;
     if (activecell.length == 0) {
@@ -138,53 +144,30 @@ function num(n) {
     }
     s = document.getElementById("current").textContent;
 
+    content = document.getElementById(activecell).innerHTML;
+    content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
     // Check if available
-    if ( n-0 != 0) {
-        matched = 0;
-        var match = new Array();
-        row = Math.floor(activecell / 9);
-        column = activecell % 9;
-        begin = Math.floor(row / 3) * 27 + Math.floor(column / 3)*3;
-        box = [0, 1, 2, 9, 10, 11, 18, 19, 20];
-        for (var i = 0; i < 9; i++) {
-            if (s[begin + box[i]] == n && activecell != begin + box[i]) {
-                match[matched] = begin + box[i];
-                matched ++;
-            }
-        }
-        for (var i = 0; i < 9; i++) {
-            if (s[row * 9 + i] == n  && i != column) {
-                match[matched] = row * 9 + i;
-                matched ++;
-            }
-            if (s[i * 9 + column] == n && i != row) {
-                match[matched] = i * 9 + column;
-                matched ++;
-            }
-        }
-        if ( matched > 0 ) {
-            for (var i = 0; i < matched; i++) {
-                document.getElementById(match[i]).innerHTML = "<div class='red'>"+s[match[i]]+"</div>";
-            }
-            var timeout_id = setTimeout(restorenumber , 5000);
+    if ( n-0 != 0 && !content.includes(n) ) {
+        match = scancell(s, n);
+        if ( match.length > 0 ) {
+            highlight(match);
             return;
         }
     }
     // Pencil mark ?
-    content = document.getElementById(activecell).innerHTML;
-    content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
     if (content != ' ' && n-0 != 0) {
         if ( content.includes(n) ) {
             content = content.replace(n,'');
             while ( content.includes(' ')) {
                 content = content.replace(' ','');
             }
-            mark = content.slice(0, 5);
-            if ( mark.length > 4 ) {
-                mark += content.slice(6, 9);
+            mark = content.slice(0, 3);
+            i = 1;
+            while ( i*3 < mark.length ) {
+                mark += content.slice(i * 3 + 1, i*3 + 3);
             }
         } else {
-            if (  content.length == 5 ) {
+            if (  content.length % 4 == 3 ) {
                 content += ' ';
             }
             mark = content + '' + n;
@@ -197,7 +180,14 @@ function num(n) {
             return;
         }
         if ( mark.length == 1 ) {
-            n = mark;
+           n = mark;
+           if ( n-0 != 0) {
+               match = scancell(s, n);
+               if ( match.length > 0 ) {
+                   highlight(match);
+                   return;
+               }
+           }
         } else {
             n = '0';
         }
@@ -210,15 +200,64 @@ function num(n) {
     }
     $('#'+activecell).html("<button type='button' class='selected' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
-    if (numblank(s) == 0) {
-        document.getElementById("message").innerHTML = "<p>Solved !</p>";
-    } else {
-        document.getElementById("message").innerHTML = "";
+    document.getElementById("message").innerHTML = "";
+    if (numblank(s) > 0) {
+        // Solved
+        start = localStorage.getItem("s"+level);
+        document.getElementById(activecell).className = 'internal';
+        for ( i = 0; i < 81; i++ ) {
+            if (start[i] == 0) {
+                num = "<div class='blue'>"+s[i]+"</div>";
+            } else {
+                num = s[i];
+            }
+            document.getElementById(i).innerHTML = num;
+        }
+        document.getElementById("activecell").textContent = 'solved';
     }
 };
 
+// Scan duplicated numbers
+function scancell(s, n) {
+    matched = 0;
+    var match = new Array();
+    row = Math.floor(activecell / 9);
+    column = activecell % 9;
+    begin = Math.floor(row / 3) * 27 + Math.floor(column / 3)*3;
+    box = [0, 1, 2, 9, 10, 11, 18, 19, 20];
+    for (var i = 0; i < 9; i++) {
+        if (s[begin + box[i]] == n && activecell != begin + box[i]) {
+            match[matched] = begin + box[i];
+            matched ++;
+        }
+    }
+    for (var i = 0; i < 9; i++) {
+        if (s[row * 9 + i] == n  && i != column) {
+            match[matched] = row * 9 + i;
+            matched ++;
+        }
+        if (s[i * 9 + column] == n && i != row) {
+            match[matched] = i * 9 + column;
+            matched ++;
+        }
+    }
+    return match;
+}
+
+// Highlight the matching cells
+function highlight(match) {
+    for (var i = 0; i < match.length; i++) {
+        document.getElementById(match[i]).innerHTML = "<div class='red'>"+s[match[i]]+"</div>";
+    }
+    var timeout_id = setTimeout(restorenumber , 5000);
+}
+
+// Finish highlight
 function restorenumber() {
    activecell = document.getElementById("activecell").textContent;
+   if ( activecell == 'solved' ) {
+       return;
+   }
    level = document.getElementById("level").value
    s = localStorage.getItem("s"+level);
    c = document.getElementById("current").textContent;
