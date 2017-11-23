@@ -68,7 +68,7 @@ td.mark {
   word-wrap:break-word;
   border: 0.5px solid;
   overflow: hidden;
-  font-size: 0.5em;
+  font-size: 0.6em;
   font-weight: normal;
   color: green;
   padding: 0px;
@@ -87,7 +87,7 @@ td.selectedmark {
   text-align: center;
   vertical-align: middle;
   background-color: white;
-  font-size: 0.5em;
+  font-size: 0.6em;
   font-weight: normal;
   color: green;
   background-color: skyblue;
@@ -115,7 +115,7 @@ button.mark {
   padding: 0px;
   background-color: white;
   color: blue;
-  font-size: 0.4em;
+  font-size: 0.6em;
   font-weight: normal;
 }
 button.mark3 {
@@ -128,7 +128,7 @@ button.mark3 {
   padding: 0px;
   background-color: white;
   color: blue;
-  font-size: 0.6em;
+  font-size: 0.8em;
   font-weight: normal;
 }
 button.selected {
