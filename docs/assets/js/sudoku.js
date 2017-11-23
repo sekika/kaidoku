@@ -1,9 +1,8 @@
 $.ajax({
     url:'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
-	beforeSend: function(){
-       $('#board').html(boardhtml(Array(9+1).join('Loading..')));
-	},
     success: function(data){
+        board = boardhtml(Array(9+1).join('Loading..'));
+        document.getElementById("board").innerHTML = board;
         level = localStorage.getItem("level");
         if (level == null) {
             level = 3
@@ -358,7 +357,13 @@ for (var i = 0; i < lines.length; i++) {
 
 function boardhtml(s) {
 
-var board = "<table class='external'>"
+if ( window.innerWidth > 640 ) {
+   var board = "<table class='invisible'><tr class='invisible'><td class='invisible'>";
+} else {
+   board = '';
+}
+
+board += "<table class='external'>"
 for (var x = 0; x < 3; x++) {
     board += "<tr>";
     for (var y = 0; y < 3; y++) {
@@ -380,5 +385,32 @@ for (var x = 0; x < 3; x++) {
     }
 }
 board += "</table>";
+
+if ( window.innerWidth > 640 ) {
+   board += "<td class='invisible' style='width: 20px'>";
+   board += "<td class='invisible'>";
+   w = 2;
+} else {
+   board += "<p></p>";
+   w = 5;
+}
+
+board += "<table class='invisible'>";
+for ( i = 1; i < 10; i ++ ) {
+    if ( i % w == 1 ) {
+        board += "<tr>";
+    }
+    board += "<td id='n" + i + "'><button type='button' class='command' id='bn" +
+        i + "' onClick='num(" + i + ")'>" + i + "</button>";
+    if ( i % w == 0 ) {
+        board += "</tr>";
+    }
+}
+board += "<td id='del'><button type='button' class='command' id='del' onClick='num(0)'>X</button>";
+board += "</tr></table>";
+
+if ( window.innerWidth > 640 ) {
+    board += "</table>";
+}
 return board;
 }
