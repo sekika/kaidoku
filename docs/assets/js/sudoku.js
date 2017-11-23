@@ -201,7 +201,7 @@ function num(n) {
     $('#'+activecell).html("<button type='button' class='selected' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
     document.getElementById("message").innerHTML = "";
-    if (numblank(s) > 0) {
+    if (numblank(s) == 0) {
         // Solved
         start = localStorage.getItem("s"+level);
         document.getElementById(activecell).className = 'internal';
