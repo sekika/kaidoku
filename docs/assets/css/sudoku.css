@@ -33,7 +33,14 @@ td.external {
   margin: 0px;
 }
 td.mark {
+  display: float;
+  overflow-wrap : break-word;
+  word-wrap:break-word;
   border: 0.5px solid;
+  overflow: hidden;
+  font-size: 0.8em;
+  font-weight: normal;
+  color: green;
   padding: 0px;
   margin: 0px;
 }
@@ -98,6 +105,19 @@ button.cell {
   font-size: 1em;
   font-weight: normal;
 }
+button.mark3 {
+  display: float;
+  border: none;
+  width: 38px;
+  height: 24px;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+  color: blue;
+  font-size: 0.8em;
+  font-weight: normal;
+}
 button.mark {
   display: float;
   border: none;
@@ -107,8 +127,8 @@ button.mark {
   margin: 0px;
   padding: 0px;
   background-color: white;
-  color: green;
-  font-size: 0.6em;
+  color: blue;
+  font-size: 0.5em;
   font-weight: normal;
 }
 button.selected {
