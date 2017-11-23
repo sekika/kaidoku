@@ -160,13 +160,12 @@ function num(n) {
             while ( content.includes(' ')) {
                 content = content.replace(' ','');
             }
-            mark = content.slice(0, 3);
-            i = 1;
-            while ( i*3 < mark.length ) {
-                mark += content.slice(i * 3 + 1, i*3 + 3);
+            mark = content.slice(0, 5);
+            if ( mark.length > 5 ) {
+                mark += content.slice(6, 9);
             }
         } else {
-            if (  content.length % 4 == 3 ) {
+            if (  content.length == 5 ) {
                 content += ' ';
             }
             mark = content + '' + n;
