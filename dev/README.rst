@@ -9,18 +9,22 @@ To do, or not to do?
 - Check in different environment
 - Font selection
 - Write document
-- Implement additional logics
 - Finalize the sudoku book to contain
-- Javascript to browze the sample book
-- Create PDF
+
+Online player
+-----------------
+- Hypothesis number in different color?
+- Total numbers of problem
+- Table of keyboard command
+- Export position and copy to clipboard
+- i18n in a file
+
 - Feedback
-- Challenge mode (restrict command, no check, no hint, measure time and mistakes, keep record)
 
 Debug commands
 -----------------
 
 - test
-- createtest [verbose]
 
 Lint
 ---------------
