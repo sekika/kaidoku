@@ -14,11 +14,7 @@ To do, or not to do?
 Online player
 -----------------
 - Hypothesis number in different color?
-- Total numbers of problem
-- Table of keyboard command
-- Export position and copy to clipboard
 - i18n in a file
-
 - Feedback
 
 Debug commands
