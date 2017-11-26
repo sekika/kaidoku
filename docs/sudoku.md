@@ -2,6 +2,7 @@
 layout: sudoku
 lang: English
 ref: sudoku
+title: Live Sudoku book by Kaidoku
 permalink: /sudoku
 ---
 

@@ -2,6 +2,7 @@
 layout: sudoku.ja
 lang: 日本語
 ref: sudoku
+title: ナンプレ問題集 by 解独
 permalink: /ja/sudoku
 ---
 
