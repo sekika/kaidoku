@@ -172,6 +172,12 @@ div.blue {
 div.hidden {
   display:none;
 }
+div.loading {
+   color: red;
+   font-weight: bold;
+   font-size: 1.2em;
+   background: #fff6e9;   
+}
 #next {
   width: 100px;
   height: 70px;
