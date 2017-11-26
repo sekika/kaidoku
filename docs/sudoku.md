@@ -16,5 +16,5 @@ permalink: /sudoku
 
 Arrow| Move active cell
 0-9| Place or erase a number in the cell
-Del, BS, x| Delete numbers in the cell
+Del, BS, x| Delete all numbers in the cell
 c| Copy current position to clipboard to analyze with Kaidoku
