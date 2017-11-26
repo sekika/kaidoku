@@ -226,17 +226,34 @@ function num(n) {
     $('#'+activecell).html("<button type='button' class='selected' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
     document.getElementById("message").innerHTML = "";
-    if (numblank(s) == 0) {
+    if (numblank(s) > 0) {
         // Solved
         start = localStorage.getItem("s"+level);
         document.getElementById(activecell).className = 'internal';
         $('#'+activecell).html("<button type='button' class='cell' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
-        $('#buttons').html("");
+        no = document.getElementById("no").value
+        last = document.getElementById("last").textContent;
+        if ( no < last ) {
+            $('#buttons').html("<button type='button' id='next' class='next'                 onClick='next()'>Next</a>");
+        } else {
+            $('#buttons').html("");
+        }
         document.getElementById("activecell").textContent = 'solved';
         showmessage({en: 'This is the solution.', ja: 'これが正解です。'});
     }
 };
+
+// Next problem
+function next() {
+   no = document.getElementById("no").value
+   last = document.getElementById("last").textContent;
+   if ( no < last) {
+      document.getElementById("no").value = no-0+1;
+      console.log(no+1);
+      updatenum();
+   }
+}
 
 // Show mesage
 function showmessage(message) {
@@ -331,7 +348,8 @@ function keydown(key){
          current = document.getElementById("current").textContent;
          copyText(current);
          en = "Current position<br>"+current+"<br>copied to clipboard."
-         showmessage({en: en});
+         ja = "現局面は<br>"+current+"<br>クリップボードにコピーしました。"
+         showmessage({en: en, ja: ja});
          return;
      }
      activecell = document.getElementById("activecell").textContent;

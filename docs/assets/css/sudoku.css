@@ -172,6 +172,11 @@ div.blue {
 div.hidden {
   display:none;
 }
+#next {
+  width: 100px;
+  height: 50px;
+  font-size: 1.6em;
+}
 #message {
     background: #fff6e9;   
 }
