@@ -5,10 +5,16 @@ ref: sudoku
 permalink: /sudoku
 ---
 
+## How to play
+
 - [Rule of sudoku](./rule)
-- You can choose from 3000 problems each in levels up to 8 and 300 problems in level 9.
-- Keyboard can be used.
-- Multiple numbers in a cell are regarded as notes (pencil mark).
+- Multiple numbers in a cell are regarded as notes.
 - Retyping the same number erases the number.
-- Solution is unique in every problem.
-- Sudoku problems in this page were created by [Kaidoku](./).
+- Every problem has a unique solution.
+
+## Keyboard
+
+Arrow| Move active cell
+0-9| Place or erase a number in the cell
+Del, BS, x| Delete numbers in the cell
+c| Copy current position to clipboard to analyze with Kaidoku

@@ -11,13 +11,17 @@ $.ajax({
         no = localStorage.getItem("level"+level);
         if (no == null) {
             no = 1;
-            s = sudoku(data, level, no);
+            [s, last] = sudoku(data, level, no);
             localStorage.setItem("s"+level, s);
         } else {
             s = localStorage.getItem("s"+level);
-            if (s == null || s.length < 81) {
-                s = sudoku(data, level, no);
-                localStorage.setItem("s"+level, s);
+            last = localStorage.getItem("last"+level);
+            if (s == null || last == null || s.length < 81) {
+               [s, last] = sudoku(data, level, no);
+               if (no > last) {
+                    document.getElementById("no").textContent = last;
+               }
+               localStorage.setItem("s"+level, s);
             }
         }
         document.getElementById("current").textContent = s;
@@ -41,7 +45,8 @@ $.ajax({
         }
         problem += "</select>\n";
         problem += noname + " <input type='text' name='no' id='no' size='5' maxlength='5' value='" +
-            no+"' onkeyup='updatenum()'>"
+            no+"' onkeyup='updatenum()'>";
+        problem += " / " + "<span id='last'>" + last + "</span>";
         $('#problem').html(problem);
         board = boardhtml(s);
         $('#board').html(board);
@@ -62,15 +67,24 @@ function updatelevel() {
        if (no == null) {
             no = 1;
             document.getElementById("no").value = no;
-            s = sudoku(data, level, no);
+            [s, last] = sudoku(data, level, no);
+            if (no > last) {
+                document.getElementById("no").textContent = last;
+            }
             localStorage.setItem("s"+level, s);
         } else {
             document.getElementById("no").value = no;
             s = localStorage.getItem("s"+level);
-            if (s == null || s.length < 81) {
-                s = sudoku(data, level, no);
+            last = localStorage.getItem("last"+level);
+            if (s == null || last == null || s.length < 81) {
+                [s, last] = sudoku(data, level, no);
+                if (no > last) {
+                    document.getElementById("no").textContent = last;
+                }
             }
         }
+        localStorage.setItem("last"+level, last);
+        document.getElementById("last").textContent = last;
         document.getElementById("current").textContent = s;
         board = boardhtml(s)
         $('#board').html(board);
@@ -84,9 +98,15 @@ function updatenum() {
        no = document.getElementById("no").value
        if (isFinite(no) && no>"") {
            localStorage.setItem("level", level);
+           [s, last] = sudoku(data, level, no);
+           if (no > last) {
+               no = last;
+               document.getElementById("no").textContent = last;
+           }
            localStorage.setItem("level"+level, no);
-           s = sudoku(data, level, no);
            localStorage.setItem("s"+level, s);
+           localStorage.setItem("last"+level, last);
+           document.getElementById("last").textContent = last;
            document.getElementById("current").textContent = s;
            board = boardhtml(s)
            $('#board').html(board);
@@ -221,8 +241,12 @@ function num(n) {
 // Show mesage
 function showmessage(message) {
     lang = document.getElementById("lang").textContent;
-    document.getElementById("message").innerHTML = "<p><strong>&lt;&lt; "+
-        message[lang]+"&gt;&gt; </strong></p>";
+    if ( lang in message ) {
+        message = message[lang];
+    } else {
+        message = message['en'];
+    }
+    document.getElementById("message").innerHTML = message;
 }
 
 // Scan duplicated numbers
@@ -282,15 +306,33 @@ function restorenumber() {
 // Keyboard pressed
 document.onkeydown = keydown;
 
+function copyText(text){
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.parentElement.removeChild(ta);
+}
+
 function keydown(key){
      keycode = key.keyCode;
+     char = String.fromCharCode(keycode);
      // numeric key
      if ( keycode > 48 && keycode < 58 ) {
          num(keycode - 48);
      }
-     // backspace or delete key
-     if ( keycode == 8 || keycode == 46 ) {
+     // backspace, delete key or x
+     if ( keycode == 8 || keycode == 46 || char == "X") {
          num(0);
+     }
+     // c: copyt to clipboard
+     if ( char == "C" ) {
+         current = document.getElementById("current").textContent;
+         copyText(current);
+         en = "Current position<br>"+current+"<br>copied to clipboard."
+         showmessage({en: en});
+         return;
      }
      activecell = document.getElementById("activecell").textContent;
      level = document.getElementById("level").value;
@@ -345,22 +387,27 @@ function keydown(key){
      }
 };
 
+// Read sudoku data
 function sudoku(data, level, no) {
-var lines = data.split("\n");
-n = 0
-for (var i = 0; i < lines.length; i++) {
-   line = lines[i].split(" ");
-   if (line[0] == level) {
-       n++
-       s = line[1]
-       if (n >= no) {
-           i = lines.length
+    var lines = data.split("\n");
+    n = 0;
+    found = false;
+    for (var i = 0; i < lines.length; i++) {
+       line = lines[i].split(" ");
+       if (line[0] == level) {
+           n++;
+           if (!found) {
+               s = line[1]
+           }
+           if (n == no) {
+               found = true;
+           }
        }
-   }
-}
-    return s;
+    }
+    return [s, n];
 }
 
+// HTML of board
 function boardhtml(s) {
 
 if ( window.innerWidth > 640 ) {
@@ -394,14 +441,14 @@ board += "</table>";
 
 if ( window.innerWidth > 640 ) {
    board += "<td class='invisible' style='width: 20px'>";
-   board += "<td class='invisible'>";
+   board += "<td id='buttons' class='invisible'>";
    w = 2;
 } else {
    board += "<p></p>";
    w = 5;
 }
 
-board += "<table id='buttons' class='invisible'>";
+board += "<table class='invisible'>";
 for ( i = 1; i < 10; i ++ ) {
     if ( i % w == 1 ) {
         board += "<tr>";
