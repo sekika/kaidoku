@@ -13,8 +13,8 @@ To do, or not to do?
 
 Online player
 -----------------
-- Hypothesis number in different color?
-- i18n in a file
+- Take back move
+- Mark a cell
 - Feedback
 
 Debug commands
