@@ -232,10 +232,10 @@ function num(n) {
         document.getElementById(activecell).className = 'internal';
         $('#'+activecell).html("<button type='button' class='cell' id='b"+
             activecell+"' onClick='btn("+activecell+")'>"+n+"</button>");
-        no = document.getElementById("no").value
-        last = document.getElementById("last").textContent;
+        no = document.getElementById("no").value - 0;
+        last = document.getElementById("last").textContent - 0;
         if ( no < last ) {
-            $('#buttons').html("<button type='button' id='next' class='next'                 onClick='next()'>Next</a>");
+            $('#buttons').html("<button type='button' id='next' class='next' onClick='next()'>Next</a>");
         } else {
             $('#buttons').html("");
         }
@@ -246,11 +246,10 @@ function num(n) {
 
 // Next problem
 function next() {
-   no = document.getElementById("no").value
-   last = document.getElementById("last").textContent;
+   no = document.getElementById("no").value - 0;
+   last = document.getElementById("last").textContent - 0;
    if ( no < last) {
-      document.getElementById("no").value = no-0+1;
-      console.log(no+1);
+      document.getElementById("no").value = no+1;
       updatenum();
    }
 }
