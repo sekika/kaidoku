@@ -7,6 +7,7 @@ To do, or not to do?
 -----------------
 
 - Check in different environment
+- v, vv, vvv [pos] to give hint of a position
 - Font selection
 - Write document
 - Finalize the sudoku book to contain
@@ -14,7 +15,8 @@ To do, or not to do?
 Online player
 -----------------
 - Take back move
-- Mark a cell
+- Free textarea
+- Document
 - Feedback
 
 Debug commands
