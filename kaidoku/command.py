@@ -521,9 +521,9 @@ def command(arg, config):
         return config
     if c == 'html':
         datadir = config['datadir']
-        html = os.path.join(datadir, 'sudoku.html')
+        html = os.path.join(datadir, 'current.html')
         here = os.path.abspath(os.path.dirname(__file__))
-        shutil.copyfile(os.path.join(here, 'data/sudoku.html'), html)
+        shutil.copyfile(os.path.join(here, 'data/current.html'), html)
         webbrowser.open('file://' + html)
         return config
     if c == 'import':
