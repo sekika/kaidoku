@@ -11,6 +11,7 @@ permalink: /sudoku
 - [Rule of sudoku](./rule)
 - Multiple numbers in a cell are regarded as notes.
 - Retyping the same number erases the number.
+- Current position is always saved in your browser.
 
 ## Keyboard
 
