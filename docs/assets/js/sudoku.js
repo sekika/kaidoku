@@ -24,15 +24,8 @@ $.ajax({
                localStorage.setItem("s"+level, s);
             }
         }
-        document.getElementById("current").textContent = s;
-        lang = document.getElementById("lang").textContent;
-        if ( lang == 'ja' ) {
-            levelname = ['レベル', '簡単すぎ', '超簡単', '簡単', '普通', '難しい', 'とても難しい', '意地悪', '難しすぎ', '究極'];
-            noname = '問題番号';
-        } else {
-            levelname = ['Level ', 'trivial', 'very easy', 'easy', 'normal', 'hard', 'very hard', 'evil', 'extreme', 'ultimate'];
-            noname = 'No.';
-        }
+        levelname = getlevelname();
+        noname = localmessage({en: 'No.', ja: '問題番号'})
         problem = "<select id='level' onChange='updatelevel()'>"
         for (var i = 1; i <= 9; i++) {
             problem += "<option value='"+i+"'";
@@ -48,10 +41,8 @@ $.ajax({
             no+"' onkeyup='updatenum()'>";
         problem += " / " + "<span id='last'>" + last + "</span>";
         $('#problem').html(problem);
-        board = boardhtml(s);
-        $('#board').html(board);
         $('#data').text(data);
-        clear();
+        drawboard();
     },
     error: function () {
         $('#board').html('Could not load sudoku problems.');
@@ -64,6 +55,7 @@ function updatelevel() {
        level = document.getElementById("level").value;
        localStorage.setItem("level", level);
        no = localStorage.getItem("level"+level);
+       localStorage.setItem("note",'');
        if (no == null) {
             no = 1;
             document.getElementById("no").value = no;
@@ -83,12 +75,11 @@ function updatelevel() {
                 }
             }
         }
+        localStorage.setItem("level"+level, no);
         localStorage.setItem("last"+level, last);
+        localStorage.setItem("move",'');
         document.getElementById("last").textContent = last;
-        document.getElementById("current").textContent = s;
-        board = boardhtml(s)
-        $('#board').html(board);
-        clear();
+        drawboard();
 };
 
 // Change the problem number
@@ -96,6 +87,7 @@ function updatenum() {
        data = document.getElementById("data").textContent
        level = document.getElementById("level").value
        no = document.getElementById("no").value
+       localStorage.setItem("note",'');
        if (isFinite(no) && no>"") {
            localStorage.setItem("level", level);
            [s, last] = sudoku(data, level, no);
@@ -106,27 +98,10 @@ function updatenum() {
            localStorage.setItem("level"+level, no);
            localStorage.setItem("s"+level, s);
            localStorage.setItem("last"+level, last);
+           localStorage.setItem("move",'');
            document.getElementById("last").textContent = last;
-           document.getElementById("current").textContent = s;
-           board = boardhtml(s)
-           $('#board').html(board);
-           clear();
+           drawboard();
        }
-};
-
-function clear() {
-     $('#message').text('');
-     $('#activecell').text('');
-}
-
-function numblank(s) {
-    blank = 0;
-    for (var i = 0; i < 81; i++) {
-        if (s[i] == 0) {
-            blank ++;
-        }
-    }
-    return blank;
 };
 
 // Click a cell
@@ -136,20 +111,7 @@ function btn(i) {
         return;
     }
     if (activecell != '') {
-        document.getElementById(activecell).className = 'internal';
-        content = document.getElementById(activecell).innerHTML;
-        content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
-        if ( content.length == 1 ) {
-            c = "cell";
-        } else {
-            if ( content.length > 3 ) {
-                c = "mark";
-            } else {
-                c = "mark3";
-            }
-        }
-         $('#'+activecell).html("<button type='button' class='"+c+"' id='b"+
-            activecell+"' onClick='btn("+activecell+")'>"+content+"</button>");
+        deselect(activecell);
     }
     content = document.getElementById(i).innerHTML;
     n = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
@@ -164,6 +126,12 @@ function btn(i) {
 
 // Place a number
 function num(n) {
+    if ( n > 9 ) {
+        n = n - 10;    
+        save = false; // Avoid duplicate saving
+    } else {
+        save = true;
+    }
     activecell = document.getElementById("activecell").textContent;
     if (activecell.length == 0 || activecell == 'solved') {
         return;
@@ -179,6 +147,12 @@ function num(n) {
             highlight(match);
             return;
         }
+    }
+    // Move
+    if ( save ) {
+        move = getmove();
+        move.push (activecell * 10 + n);
+        savemove(move);
     }
     // Pencil mark ?
     if (content != ' ' && n-0 != 0) {
@@ -240,29 +214,44 @@ function num(n) {
             $('#buttons').html("");
         }
         document.getElementById("activecell").textContent = 'solved';
-        showmessage({en: 'This is the solution.', ja: 'これが正解です。'});
+        showfinished();
     }
 };
 
+// Back
+function back() {
+    var move = getmove();
+    if (move.length > 0) {
+        move.pop();
+        savemove(move);
+        drawboard();
+    }
+}
+
+// Reset
+function reset() {
+    if ( getmove().length > 0 ) {
+	    if(window.confirm(resetmessage())){
+            savemove([]);
+            drawboard();
+        }
+    }
+}
+
+// Save note
+function savenote() {
+    note = document.getElementById("note").value;
+    localStorage.setItem("note", note);
+}
+
 // Next problem
 function next() {
-   no = document.getElementById("no").value - 0;
-   last = document.getElementById("last").textContent - 0;
+   var no = document.getElementById("no").value - 0;
+   var last = document.getElementById("last").textContent - 0;
    if ( no < last) {
       document.getElementById("no").value = no+1;
       updatenum();
    }
-}
-
-// Show mesage
-function showmessage(message) {
-    lang = document.getElementById("lang").textContent;
-    if ( lang in message ) {
-        message = message[lang];
-    } else {
-        message = message['en'];
-    }
-    document.getElementById("message").innerHTML = message;
 }
 
 // Scan duplicated numbers
@@ -341,6 +330,16 @@ function keydown(key){
      // backspace, delete key or x
      if ( keycode == 8 || keycode == 46 || char == "X") {
          num(0);
+     }
+     // b: back
+     if ( char == "B" ) {
+         back();
+         return;
+     }
+     // r: restart
+     if ( char == "R" ) {
+         reset();
+         return;
      }
      // c: copyt to clipboard
      if ( char == "C" ) {
@@ -470,17 +469,139 @@ for ( i = 1; i < 10; i ++ ) {
     if ( i % w == 1 ) {
         board += "<tr>";
     }
-    board += "<td id='n" + i + "'><button type='button' class='command' id='bn" +
+    board += "<td class='invisible' id='n" + i + "'><button type='button' class='command' id='bn" +
         i + "' onClick='num(" + i + ")'>" + i + "</button>";
     if ( i % w == 0 ) {
         board += "</tr>";
     }
 }
-board += "<td id='del'><button type='button' class='command' id='del' onClick='num(0)'>X</button>";
+board += "<td class='invisible' id='del'><button type='button' class='command' id='del' onClick='num(0)'>X</button>";
+board += "<tr><td class='invisible' id='back'><button type='button' class='command' id='back' onClick='back()'>B</button>";
+board += "<td class='invisible' id='reset'><button type='button' class='command' id='reset' onClick='reset()'>R</button>";
+if ( window.innerWidth > 640 ) {
+    board += "<tr><td class='invisible'>" + localmessage({en: 'note', ja: 'メモ'});
+    note = localStorage.getItem("note");
+    if ( note == null) {
+        note = '';
+    }
+    board += "<tr><td class='invisible' colspan='2'><textarea id='note' rows='4' cols='12' onKeyup='savenote()'>" +
+        note + "</textarea>";
+} else {
+    board += "<div class='hidden' id='note'></div>";
+}
 board += "</tr></table>";
 
 if ( window.innerWidth > 640 ) {
     board += "</table>";
 }
 return board;
+}
+
+// Deselect
+
+function deselect(i) {
+    document.getElementById(activecell).className = 'internal';
+    content = document.getElementById(activecell).innerHTML;
+    content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+    if ( content.length == 1 ) {
+        c = "cell";
+    } else {
+        if ( content.length > 3 ) {
+            c = "mark";
+        } else {
+            c = "mark3";
+        }
+    }
+     $('#'+activecell).html("<button type='button' class='"+c+"' id='b"+
+        activecell+"' onClick='btn("+activecell+")'>"+content+"</button>");
+}
+
+// Draw board
+function drawboard() {
+   var level = document.getElementById("level").value;
+   var s = localStorage.getItem("s"+level);
+   document.getElementById("current").textContent = s;
+   var board = boardhtml(s);
+   $('#board').html(board);
+   var move = getmove();
+   putmove(move);
+   $('#message').text('');
+   $('#activecell').text('');
+}
+
+// Count numbers of blank cells
+function numblank(s) {
+    var blank = 0;
+    for (var i = 0; i < 81; i++) {
+        if (s[i] == 0) {
+            blank ++;
+        }
+    }
+    return blank;
+};
+
+// Get move
+function getmove() {
+    var m = localStorage.getItem('move');
+    if (m == null || m == '') return [];
+    var move = m.split(' ');
+    return move
+}
+  
+// Save move
+function savemove(move) {
+    var m = move.join(' ');
+    localStorage.setItem('move', m);
+}
+
+// Put moves
+function putmove(move) {
+    if ( move.length > 0 ) {
+        for ( var i = 0; i < move.length; i++) {
+            var n = move[i] % 10;
+            var cell = (move[i] - n) / 10;
+            btn(cell);
+            num(n+10);
+            cell = document.getElementById("activecell").textContent;
+            deselect(cell);
+        }
+    }
+}
+
+// Show mesage
+function showmessage(message) {
+    document.getElementById("message").innerHTML = localmessage(message);
+}
+
+// get local message
+function localmessage(message) {
+    var lang = document.getElementById("lang").textContent;
+    if ( lang in message ) {
+        var message = message[lang];
+    } else {
+        var message = message['en'];
+    }
+    return message;
+}
+
+// Level name
+function getlevelname() {
+    var lang = document.getElementById("lang").textContent;
+    if ( lang == 'ja' ) {
+        levelname = ['レベル', '簡単すぎ', '超簡単', '簡単', '普通', '難しい', 'とても難しい', '意地悪', '難しすぎ', '究極'];
+    } else {
+        levelname = ['Level ', 'trivial', 'very easy', 'easy', 'normal', 'hard', 'very hard', 'evil', 'extreme', 'ultimate'];
+    }
+    return levelname;
+}
+
+// Reset message
+function resetmessage() {
+    return localmessage({en: 'Restart the problem?', ja: '最初からやり直しますか?'})
+}
+
+// Show message when finished
+function showfinished() {
+    showmessage({en: 'This is the solution. Push Next button for next problem.',
+        ja: 'これが正解です。Next ボタンで次の問題となります。'});
 }
