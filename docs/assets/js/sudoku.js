@@ -24,10 +24,7 @@ $.ajax({
             }
         }
         var levelname = getlevelname();
-        var noname = localmessage({
-            en: 'No.',
-            ja: '問題番号'
-        })
+        var noname = getnoname();
         var problem = "<select id='level' onChange='updatelevel()'>"
         for (var i = 1; i <= 9; i++) {
             problem += "<option value='" + i + "'";
@@ -171,8 +168,7 @@ function num(n) {
             var mark = content + '' + n;
         }
         if (mark.length > 1) {
-            $('#' + activecell).html("<button type='button' class='selectedmark' id='b" + activecell +
-                "' onClick='btn(" + activecell + ")'>" + mark + "</button>");
+            $('#' + activecell).html(button(activecell, mark, 'selectedmark'));
             s = s.slice(0, activecell - 81) + '0' + s.slice(activecell - 1 + 2);
             document.getElementById("current").textContent = s;
             return;
@@ -196,15 +192,13 @@ function num(n) {
     if (n - 0 == 0) {
         n = ' '
     }
-    $('#' + activecell).html("<button type='button' class='selected' id='b" + activecell + "' onClick='btn(" +
-        activecell + ")'>" + n + "</button>");
+    $('#' + activecell).html(button(activecell, n, 'selected'));
     document.getElementById("message").innerHTML = "";
     if (numblank(s) == 0) {
         // Solved
         var start = localStorage.getItem("s" + level);
         document.getElementById(activecell).className = 'internal';
-        $('#' + activecell).html("<button type='button' class='cell' id='b" + activecell + "' onClick='btn(" +
-            activecell + ")'>" + n + "</button>");
+        $('#' + activecell).html(button(activecell, n, 'cell'));
         var no = document.getElementById("no").value - 0;
         var last = document.getElementById("last").textContent - 0;
         if (no < last) {
@@ -293,8 +287,7 @@ function restorenumber() {
     for (var i = 0; i < 81; i++) {
         if (c[i] != 0 && i != activecell) {
             if (s[i] == 0) {
-                document.getElementById(i).innerHTML = "<button type='button' class='cell' id='b" + i +
-                    "' onClick='btn(" + i + ")'>" + c[i] + "</button>"
+                document.getElementById(i).innerHTML = button(i, c[i], 'cell');
             } else {
                 document.getElementById(i).textContent = s[i];
             }
@@ -335,12 +328,7 @@ function keydown(key) {
     if (char == "C") {
         var current = document.getElementById("current").textContent;
         copyText(current);
-        var en = "Current position<br>" + current + "<br>copied to clipboard."
-        var ja = "現局面は<br>" + current + "<br>クリップボードにコピーしました。"
-        showmessage({
-            en: en,
-            ja: ja
-        });
+        showcopied(current);
         return;
     }
     var activecell = document.getElementById("activecell").textContent;
@@ -432,8 +420,7 @@ function boardhtml(s) {
                 for (var j = 0; j < 3; j++) {
                     var cell = x * 27 + i * 9 + y * 3 + j
                     if (s[cell] == 0) {
-                        board += "<td class='internal' id='" + cell + "'>" + "<button type='button' class='cell' id='b" +
-                            cell + "' onClick='btn(" + cell + ")'>" + ' ' + "</button></td>";
+                        board += "<td class='internal' id='" + cell + "'>" + button(cell, ' ', 'cell') + "</td>";
                     } else {
                         board += "<td class='internal' id='" + cell + "'>" + s[cell] + "</td>";
                     }
@@ -469,10 +456,7 @@ function boardhtml(s) {
     board +=
         "<td class='invisible' id='reset'><button type='button' class='command' id='reset' onClick='reset()'>R</button>";
     if (window.innerWidth > 640) {
-        board += "<tr><td class='invisible'>" + localmessage({
-            en: 'note',
-            ja: 'メモ'
-        });
+        board += "<tr><td class='invisible'>" + getnote();
         var note = localStorage.getItem("note");
         if (note == null) {
             note = '';
@@ -562,6 +546,11 @@ function putmove(move) {
         }
     }
 }
+// Button
+function button(cell, num, btnclass) {
+   return "<button type='button' class='" + btnclass + "' id='b" + cell +
+       "' onClick='btn(" + cell + ")'>" + num + "</button></td>";
+}
 // Show mesage
 function showmessage(message) {
     document.getElementById("message").innerHTML = localmessage(message);
@@ -576,6 +565,8 @@ function localmessage(message) {
     }
     return message;
 }
+//////////////////////////////////
+// Localization functions
 // Level name
 function getlevelname() {
     var lang = document.getElementById("lang").textContent;
@@ -588,12 +579,35 @@ function getlevelname() {
     }
     return levelname;
 }
+// Problem No. translation
+function getnoname() {
+    return localmessage({
+        en: 'No.',
+        ja: '問題番号'
+    })
+}
+// Note translation
+function getnote() {
+    return localmessage({
+        en: 'note',
+        ja: 'メモ'
+    })
+}
 // Reset message
 function resetmessage() {
     return localmessage({
         en: 'Restart the problem?',
         ja: '最初からやり直しますか?'
     })
+}
+// Show message when copied
+function showcopied(current) {
+    var en = "Current position<br>" + current + "<br>copied to clipboard."
+    var ja = "現局面は<br>" + current + "<br>クリップボードにコピーしました。"
+    showmessage({
+        en: en,
+        ja: ja
+    });
 }
 // Show message when finished
 function showfinished() {
