@@ -272,7 +272,7 @@ function scancell(s, n) {
 // Highlight the matching cells
 function highlight(match) {
     var level = document.getElementById("level").value;
-    var s = localStorage.getItem("s" + level);
+    var s = document.getElementById("current").textContent;
     for (var i = 0; i < match.length; i++) {
         document.getElementById(match[i]).innerHTML = "<div class='red'>" + s[match[i]] + "</div>";
     }
