@@ -16,13 +16,13 @@ permalink: /ja/analysis
 
 デフォルトでは、その問題が正解が1つだけである有効な問題なのかどうか、そしてそうであれば難易度のレベルはいくつなのかが示される。上記の英語は「唯一解を持つ有効な問題で、難易度はレベル5（難しい）である」と表示されている。これが冗長性 (verbose) 1の表示である。`a`コマンドは引数として冗長性を1から5までの数で指定することができる。冗長性の数が大きくなるにつれて、より多くの解析メッセージが表示される。
 
-- `a` shows only the difficulty level.
-- `a 2` shows part of advanced logics.
-- `a 3` shows all of advanced logics.
-- `a 4` shows all the logics and complete procedure of solving.
-- `a 5` shows whole procedure with ascii image of the board.
+- `a` は難易度レベルのみを表示する。
+- `a 2` は上級解法の一部を表示する。
+- `a 3` はすべての上級解法を表示する。
+- `a 4` はすべての解法を表示する。
+- `a 5` はすべての解法と図面を表示する。
 
-This is an example.
+以下が例である。
 
 ```
 kaidoku-{{ site.version }}> a 4
@@ -74,7 +74,7 @@ Here is the solution.
  +-----+-----+-----+
 ```
 
-While `a` command analyzes the whole problem, `ac` command analyzes the problem from the current position. `ac` command also can have verbose level as an argument. `all` command analyzes all the problems in the current level, which can also have the verbose level as an argument.
+`a` コマンドは問題を最初から解析し、`ac`コマンドは現在の局面から解析する。`all`コマンドは現在のレベルのすべての問題を解析する。`ac`と`all`コマンドも、冗長性を引数に指定できる。
 
 - - -
 
