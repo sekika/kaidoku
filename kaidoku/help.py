@@ -39,6 +39,7 @@ def advancedhelp():
     message += 'bl              : list bookmark\n'
     message += 'bp pos          : add a specified position bookmark\n'
     message += 'br label        : read bookmark\n'
+    message += 'check pos [verb]: check a specified position\n'
     message += 'config          : show and edit configuration\n'
     message += 'create [numbers]: create new problems and append to book\n'
     message += 'giveup [sec]    : reanalyze giveup positions\n'

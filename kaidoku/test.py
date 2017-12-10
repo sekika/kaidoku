@@ -75,6 +75,40 @@ Chain of pairs. Assume that R5C8 is 7 and we have following chains.
 (1) R5C8 = 7 >> R5C5 = 5 >> R4C6 = 3 >> R6C4 = 7 >> R2C4 = 6
 (2) R5C8 = 7 >> R2C8 = 6 >> R2C4 = 7
 Now we have contradiction on R2C4. Therefore R5C8 should be 9.'''],
+        ['check 003500902082793006900201830240070003830010020617352498021039004300005200008027300 4', '''  1 2 3 4 5 6 7 8 9
+ +-----+-----+-----+
+1|    3|5    |9   2|
+2|  8 2|7 9 3|    6|
+3|9    |2   1|8 3  |
+ +-----+-----+-----+
+4|2 4  |  7  |    3|
+5|8 3  |  1  |  2  |
+6|6 1 7|3 5 2|4 9 8|
+ +-----+-----+-----+
+7|  2 1|  3 9|    4|
+8|3    |    5|2    |
+9|    8|  2 7|3    |
+ +-----+-----+-----+
+
+Pointing pair in box 4 removed 5 from R3C3 
+Pointing pair in box 4 removed 9 from R8C3 
+Pointing pair in box 9 removed 1 from R8C8 R9C8 
+Naked pair in row 3 made removal from R3C2
+Naked pair in column 9 made removal from R8C9 R9C9
+XYZ-wing of R8C5 (4, 6, 8) R7C4 (6, 8) R8C3 (4, 6) removes 6 from R8C4.
+XYZ-wing of R7C7 (5, 6, 7) R9C8 (5, 6) R7C1 (5, 7) removes 5 from R7C8.
+Trial. If R8C9 is 1,
+(1) Naked single: R9C9 = 9
+(2) Hidden single in box 7 : R8C2 = 9
+(3) Hidden single in box 7 : R7C1 = 7
+(4) Hidden single in box 8 : R9C4 = 1
+(5) Hidden single in box 9 : R8C8 = 7
+(6) Hidden single in box 3 : R3C9 = 7
+(7) Naked single: R3C2 = 5, R5C9 = 5
+(8) Naked single: R5C3 = 9, R9C2 = 6
+(9) Naked single: R1C2 = 7, R4C3 = 5, R8C3 = 4, R9C8 = 5
+(10) Contradiction: R9C1 has no candidate.
+Therefore R8C9 is 9.'''],
         ['solve 407001008105090040000570300900083000000000206040900000510000000090160800070000030', '''  1 2 3 4 5 6 7 8 9
  +-----+-----+-----+
 1|4   7|    1|    8|

@@ -536,7 +536,7 @@ def command(arg, config):
         file2 = os.path.expanduser(config["file2"])
         reanalyze(file, file2)
         return config
-    if c == 'solve':
+    if c in ['solve', 'check']:
         maxtime = int(config['maxtime'])
         if len(arg) > 2:
             verbose = int(arg[2])
@@ -558,7 +558,58 @@ def command(arg, config):
         if err:
             print(message)
             return config
-        solveprint(s, verbose, blank(s), maxtime)
+        if blank(s) == 0:
+            print('Already solved.')
+            return config
+        if c == 'solve':
+            solveprint(s, verbose, blank(s), maxtime)
+        else:
+            s2 = copy.copy(s)
+            s2, message, level2, solved, err = solve(s2, 0, blank(s), maxtime)
+            if err:
+                if solved:
+                    print('This position has multiple solutions.')
+                else:
+                    print(
+                        'There is no solution for this position. ')
+                return config
+            if verbose < 2:
+                print('This position has a unique solution.')
+                return config
+            p = possible(s)
+            b = box()
+            pb = pbox()
+            blank1 = blank(s)
+            start = datetime.datetime.now()
+            endtime = start + datetime.timedelta(seconds=maxtime)
+            s2 = copy.copy(s)
+            s2, p, message, logic, depth, found, err = solveone(
+                s2, p, 4, 0, blank1, endtime, b, pb)
+            if logic == 'Naked single' or logic == 'Hidden single':
+                if logic == 'Naked single':
+                    print('Look at {0}. What number is available?'.format(
+                        message[14:18]))
+                else:
+                    print(message[:message.index(':')] + 'can be found.')
+                return config
+            if verbose < 3:
+                print('Think candidates of the cells.')
+                return config
+            logi = [logic]
+            mes = [message]
+            while blank(s2) == blank1:
+                s2, p, message, logic, depth, found, err = solveone(
+                    s2, p, 4, 0, blank1, endtime, b, pb)
+                logi.append(logic)
+                mes.append(message)
+            if verbose == 3:
+                if len(logi) > 1:
+                    print('Following logics are successively used.')
+                for i in range(len(logi)):
+                    print(logi[i])
+            else:
+                for message in mes:
+                    print(message)
         return config
     if c == 'sp':
         config, err = show(c, 0, config)
