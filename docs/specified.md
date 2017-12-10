@@ -25,10 +25,10 @@ When you are solving the [online version of kaidoku](sudoku), you can obtain the
     kaidoku-{{ site.version }}> check 310002000000860200008003075007098350090000080053620400630200900009036000000100063
     
     This position has a unique solution.
-
+    
     kaidoku-{{ site.version }}> check 310002000000860200008003075007098350090000080053620400630200900009036000000100063 2
     
-   Look at R4C4. What number is available?
+    Look at R4C4. What number is available?
 
 `solve` command shows the procedure for solving the problem completely by
 
