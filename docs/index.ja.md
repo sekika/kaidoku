@@ -38,8 +38,9 @@ title: 解独 - 数独・ナンプレの解析プログラム
 - [使われている解法](logic)
 - [高度な解法のヒントを見る](advancedhint)
 - [問題全体の解析](analysis)
+- [指定された問題の解析](specified)
 - Bookmark management
-- Play and analyze external sudoku problems
 - Create new sudoku problems
 - Managing configuration file
+- Index of commands
 - [リンク](link)

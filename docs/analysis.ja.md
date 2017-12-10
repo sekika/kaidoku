@@ -78,6 +78,7 @@ While `a` command analyzes the whole problem, `ac` command analyzes the problem 
 
 - - -
 
+- [次: 指定された問題の解析](./specified)
 - [前: 高度な解法のヒントを見る](./advancedhint)
 - [マニュアルの目次](./#マニュアル)
 - [ホームページ](./)
