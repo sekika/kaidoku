@@ -15,10 +15,10 @@ can be expressed with
 
     310002000000860200008003075007098350090000080053620400630200900009036000000100063
 
-When you are solving the [online version of kaidoku](sudoku), you can obtain the position by typing `c`, which copies the current posiotion to a clipboard. Then this position can be checked with `check pos [verb]` where pos is the position, verb is the verbose level, which is 1 when 
+When you are solving the [online version of kaidoku](sudoku), you can obtain the position by typing `c`, which copies the current posiotion to a clipboard. Then this position can be checked with `check pos [verb]` where pos is the position, verb is the verbose level, which is 1 when ommitted.
 
 - `check pos` shows if the position has a unique solution, multiple solutions or no solution.
-- `check pos 2` shows a hint for basic logic.
+- `check pos 2` shows a hint for basic logics (naked single and hidden single).
 - `check pos 3` shows hints for advanced logics to determine a cell.
 - `check pos 4` shows a procedure to determine a cell.
 
