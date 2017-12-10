@@ -15,12 +15,12 @@ permalink: /ja/specified
 
     310002000000860200008003075007098350090000080053620400630200900009036000000100063
 
-When you are solving the [online version of kaidoku](sudoku), you can obtain the position by typing `c`, which copies the current position to the clipboard. Then the position can be checked with `check pos [verb]` where pos is the position, verb is the verbose level, which is 1 when ommitted.
+オンラインで[ナンプレ問題集](sudoku)を解いているのであれば、キーボードから`c`と入力することで、現局面がクリップボードにコピーされる。その局面は `check pos [verb]` コマンドでチェックすることができる。ここで pos は局面で verb は冗長性レベル（省略時は 1）である。
 
-- `check pos` shows if the position has a unique solution.
-- `check pos 2` shows a hint for basic logics (naked single and hidden single).
-- `check pos 3` shows hints for advanced logics to determine a certain cell.
-- `check pos 4` shows a procedure to determine a certain cell.
+- `check pos` はその局面が唯一解を持つかどうかを表示する。
+- `check pos 2` は基本解法 (naked single と hidden single) のヒントを表示する。
+- `check pos 3` はあるセルが決定するまでの上級解法のヒントを表示する。
+- `check pos 4` はあるセルが決定するまでの手順を表示する。
 
 ```
 kaidoku-{{ site.version }}> check 310002000000860200008003075007098350090000080053620400630200900009036000000100063
@@ -32,26 +32,28 @@ kaidoku-{{ site.version }}> check 3100020000008602000080030750070983500900000800
 Look at R4C4. What number is available?
 ```
 
-`solve` command shows the procedure for solving the problem completely by
+`solve` コマンドによってその問題を解くための手順がすべて表示される。このコマンドの使い方は
 
     solve pos [verb]
  
-- `solve pos` shows only the difficulty level.
-- `solve pos 2` shows part of advanced logics.
-- `solve pos 3` shows all of advanced logics.
-- `solve pos 4` shows all the logics and complete procedure of solving.
-- `solve pos 5` shows whole procedure with ascii image of the board.
+であり、
+ 
+- `solve pos` は難易度レベルのみを表示する。
+- `solve pos 2` は上級解法の一部を表示する。
+- `solve pos 3` はすべての上級解法を表示する。
+- `solve pos 4` はすべての解法を表示する。
+- `solve pos 5` はすべての解法と図面を表示する。
 
-# Alternative way to express a position
+# 図面を表現する他の方法
 
-- Numbers can be separated with commas `,`. In this case, 9 numbers should be between the commas.
-- 0 can be replaced with other ascii characters such as -.
+- 数字を列ごとにコンマ`,`で区切ることができる。この場合は、コンマの間に9個の数字がなければならない。
+- 0 は - のような他のアスキー文字に変えることができる。
 
-Therefore following command is also available.
+したがって、次のようなコマンドが可能となる。
 
     kaidoku-{{ site.version }}> check 31---2---,---86-2--,--8--3-75,--7-9835-,-9-----8-,-5362-4--,63-2--9--,--9-36---,---1---63
 
-When you are typing a position from a printed material, this is useful because the input error is shown as to which row is invalid.
+印刷物から図面を入力するときには、入力ミスをしたときにどの列が間違えているのかが表示されるため、この方法は便利である。
 
 - - -
 
