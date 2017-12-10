@@ -20,4 +20,4 @@ Arrow| Move active cell
 Del, BS, x| Delete all numbers in the cell
 b| Take back a move
 r| Restart the problem
-c| Copy current position to clipboard to analyze with Kaidoku
+c| Copy current position to clipboard to [analyze](specified) with Kaidoku
