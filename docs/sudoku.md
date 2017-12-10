@@ -11,13 +11,8 @@ permalink: /sudoku
 - [Rule of sudoku](./rule)
 - Multiple numbers in a cell are regarded as notes.
 - Retyping the same number erases the number.
+- X deletes all numbers in the cell.
+- B is to take back a move.
+- R is to restart the problem.
 - Current position is always saved in your browser.
-
-## Keyboard
-
-Arrow| Move active cell
-0-9| Place or erase a number in the cell
-Del, BS, x| Delete all numbers in the cell
-b| Take back a move
-r| Restart the problem
-c| Copy current position to clipboard to [analyze](specified) with Kaidoku
+- Keyboard can be used from PC. From the keyboard, c copies the current position to clipboard to [analyze](specified) with Kaidoku.
