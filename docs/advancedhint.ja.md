@@ -20,18 +20,18 @@ permalink: /ja/advancedhint
 
 ![]({{'/img/5-1-9.jpg' | relative_url}})
 
-Now let us get a hint with `i` command and we get this message.
+ここで `i` コマンドによって次のようなヒントを得ることができる。
 
     kaidoku-{{ site.version }}> i
     Think candidates of the cells.
     See image by "html".
     For more hints, type ii.
 
-This is the message that was briefly described [previously](basichint.md). It means that there is nothing we can do with basic logics. Now the image file is updated like this.
+「マスの候補を考えてください。画像は "html" で見ることができる。さらにヒントを見るには、ii と入力してください。」という意味である。このメッセージについては[簡単に触れた](basichint.md)。これは、基本解法ではこれ以上なにもできないことを意味している。ここで、画像ファイルが次のようにアップデートされている。
 
 ![]({{'/img/5-1-9p.jpg' | relative_url}})
 
-Candidates of each cell is written automatically in this image, and you can think which logic can be applied to solve this problem. If you need further hints, type `ii` and we get this message.
+それぞれのマスの候補が自動的に書かれるので、どの解法を使えば解けるのかを考えることができる。さらにヒントが必要であれば、`ii`と入力することで次のようなメッセージを得る。
 
     kaidoku-{{ site.version }}> ii
     Following logics are successively used.
@@ -39,19 +39,19 @@ Candidates of each cell is written automatically in this image, and you can thin
     Pointing pair
     See full explanation by typing iii.
 
-Now the logic which can be applied is shown. This hint means that after using pointing pair logic twice, we can determine a certain cell.
+どの解法を使えば良いのかが順番に示される。このヒントの意味は、pointing pair を2回連続して使うことで、あるセルが決まるということである。
 
-If you want to know how the logics are applied, type `iii` and you will get the full explanation like this.
+どのように解法を使うのかを知りたければ、`iii`と入力することで、次のような説明を見ることができる。
 
     kaidoku-{{ site.version }}> iii
     Pointing pair in box 1 removed 5 from R9C3 R7C3 
     Pointing pair in box 8 removed 5 from R8C4 (=7) R9C5 
 
-There is a pointing pair of 5 in box 1 (R1C3 and R2C3), which removes 5 from R9C3 and R7C3. After that, there is a pointing pair of 5 in box 8 (R7C5 and R7C6), which removes 5 from R8C4 R9C5. After removing 5 from R8C4, R8C4 is determined to be 7, and we can make move of `847`. After that, this problem can be solved with only basic logics.
+ボックス1に 5 の pointing pair があり(R1C3 と R2C3)、R9C3 と R7C3 から 5 が消される。それから、ボックス8に 5 の pointing pair があり(R7C5 と R7C6)、R8C4 と R9C5 から 5 が消される。R8C4 から 5 が消されると、R8C4 は 7 に決まる。これで、`847`と進めることができる。ここから先は、この問題は基本解法のみで解くことができる。
 
-## Solve partially
+## 部分的に解く
 
-Sometimes you may just want to concentrate on analyzing the advanced logics, rather than solving the whole problem. In such situation, you want to directly go to the position where advanced logic is applied. Go back to the initial position of the above problem by `initial` and use "solve partially" command, `sp`.
+問題を全部解くのではなく、上級解法の解析のみに集中したいときがある。そのようなときには、上級解法が使われる場面にすぐに行きたいと思うであろう。上記の図面から、`initial` コマンドで初期配置に戻ってから、「部分的に解く (solve partially)」コマンド `sp` を使うと、次のようになる。
 
     kaidoku-{{ site.version }}> sp
     Naked single: R4C4 = 4
@@ -66,7 +66,7 @@ Sometimes you may just want to concentrate on analyzing the advanced logics, rat
 
 ![]({{'/img/5-1-9.jpg' | relative_url}})
 
-Now basic logics of naked single and hidden single are applied repeatedly as long as they can be used. `sp` command directly leads us to the position where advanced logic has to be used. You can use `i` command or `jm` command to show the image with candidates if you want.
+基本解法の naked single と hidden single が使える間は使い続けて、上級解法が必要とされる場面まで進む。ここで`i`コマンドまたは`jm`コマンドを使うことで、候補の図を見ることができる。
 
 - - -
 

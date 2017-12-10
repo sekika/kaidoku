@@ -47,7 +47,7 @@ If you want to know how the logics are applied, type `iii` and you will get the 
     Pointing pair in box 1 removed 5 from R9C3 R7C3 
     Pointing pair in box 8 removed 5 from R8C4 (=7) R9C5 
 
-There is a pointing pair of 5 in box 1 (R1C3 and R2C3), which removes 5 from R9C3 and R7C3. After that, there is a pointing pair of 5 in box 8 (R7C5 and R7C6), which removes 5 from R8C4 R9C5. After removing 5 from R8C4, R8C4 is determined to be 7, and we can make move of `847`. After that, this problem can be solved with only basic logics.
+There is a pointing pair of 5 in box 1 (R1C3 and R2C3), which removes 5 from R9C3 and R7C3. After that, there is a pointing pair of 5 in box 8 (R7C5 and R7C6), which removes 5 from R8C4 abd R9C5. After removing 5 from R8C4, R8C4 is determined to be 7, and we can make move of `847`. After that, this problem can be solved with only basic logics.
 
 ## Solve partially
 
