@@ -37,8 +37,8 @@ Kaidoku is a program in development. Document is not complete and what is writte
 - [Logics for solving sudoku puzzles used in this program](logic)
 - [Getting a hint on advanced logics](advancedhint)
 - [Analysis of a whole problem](analysis)
+- [Analyze a specified sudoku problem](specified)
 - Bookmark management
-- Play and analyze external sudoku problems
 - Create new sudoku problems
 - Managing configuration file
 - [Random note](note)

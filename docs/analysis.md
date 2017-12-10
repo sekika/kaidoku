@@ -79,5 +79,6 @@ While `a` command analyzes the whole problem, `ac` command analyzes the problem 
 - - -
 
 - [Previous: Getting a hint on advanced logics](advancedhint)
+- [Next: Analyze a specified sudoku problem](specified)
 - [Document index](./#document)
 - [Home Page](./)
