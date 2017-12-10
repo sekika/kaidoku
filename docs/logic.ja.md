@@ -42,11 +42,11 @@ permalink: /ja/logic
 
 試行錯誤は、探索アルゴリズムによって再帰的に実行することができる。このページの最初の例において、R2C3 = 2 の仮定を探索している途中で、他のマス目で他の仮定をする。それで十分でなければ、さらに別の仮定をする。空白セルの数は有限であり、仮定を1つするたびに空白セルの数が1つ減るため、これは無限ループとはならない。したがって、この再帰的な探索アルゴリズムによって必ず最終的な結論を得ることができる。あるマスに3つの候補があってそれぞれの候補に対して5回の試行をすれば、合計で15回の試行をすることとなる。このように、試行回数はかけ算される。コンピュータは、このような多くの回数の試行を探索アルゴリズムによって簡単に実行できる。このように多くの試行が必要とされるような問題は普通の人間には難しすぎるが、少ない回数の試行であれば実行可能である。また、運によって解けてしまうこともある。いずれにしても、平均的な数独プレイヤーにとっては、試行錯誤が要求されるような問題は難しすぎるであろう。このような難しい問題を解くような上級者のために、解独ではレベル7よりも上のレベルで探索が必要となるような問題を出題する。
 
-## Logics implemented in Kaidoku
+## 解独に実装されている解法
 
-Actually the easiest way for the computers to solve sudoku is to use only the naked single logic and search algorithm, because the computers can make so many times of trials and errors quite easily. However, kaidoku uses many logics to find the best way for humans to solve a sudoku puzzle, and use the search algorithm as a last resort.
+コンピューターは、多くの試行錯誤を簡単に実行できるため、コンピューターに数独を解かせるためには、単独候補数字と探索アルゴリズムだけで十分である。しかし、解独は人間が数独を解くための最善の方法を見つけるために多くの解法を使い、探索アルゴリズムは最終手段として使われる。
 
-Following logics are currently implemented in Kaidoku. These logics are applied in this order.
+解独では、現在次の解法が実装されている。これらの解法は、この順番に適用可能性が確かめられる。
 
 - Naked single
 - Hidden single
@@ -68,9 +68,9 @@ Following logics are currently implemented in Kaidoku. These logics are applied 
 - Trial
 - Search
 
-Unique rectangle is not implmented. It is valid when we know that the sudoku has a unique solution. However, testing the validity of sudoku is one of the purpose in kaidoku. If it is implemented, kaidoku may not correctly evaluate if a sudoku has a unique solution.
+Unique rectangle (UR) は実装されていない。URは、数独が唯一の解を持っていることがわかっている時には有効である。しかし、数独が唯一解を持っているかどうかを確かめることも、解独の目的の1つとなっている。URを実装してしまったら、数独が唯一解を持っているか否かを正しく判定できなくなってしまう。
 
-Trial and search is basically doing the same thing, but it is distinguished in kaidoku. Search performs a complete search in many depths. Here depth means the numbers of successive assumptions. We make first assumption in a certain cell, keep on solving with logics, and make another assumption; this is depth 2. Trial is the search within depth 1, starting from a pair candidate cell, within certain steps. Here step means the numbers of cells eliminated with naked single or hidden single logic. In short, trial is the search algorithm restricted within human ability. Trial may not get to final conclusion, but search always reaches the final conclusion.
+試行 (trial) と探索 (search) は、基本的には同じことをしているが、解独の中では区別している。探索は多くの深さ (depth) の完全な探索を実行する。ここで深さは仮定の数である。あるマスで仮定をして、上記の解法によって解き進め、また次の仮定をしたとすれば、この2回目の仮定で深さ2となる。試行は深さ1の探索で、候補が2つのマスから開始し、論理によってある程度のステップで矛盾が生じるような場合である。ここで、ステップは naked single か hidden single によって決定したマスの数である。つまり、試行は探索アルゴリズムを人間の能力程度に限定したものである。試行では結論に達しないかもしれないが、探索によって必ず最終的な結論に達する。
 
 - - -
 
