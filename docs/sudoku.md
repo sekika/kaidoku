@@ -20,4 +20,4 @@ permalink: /sudoku
 
 ## Comments
 
-- [Send your comments](comment)
+- [Leave your comments](comment)
