@@ -125,6 +125,28 @@ Therefore R8C9 is 9.'''],
  +-----+-----+-----+
 
 Valid sudoku with unique solution'''],
+        ['solve 034020000800001700000050620000000907001409800409000000098040000002500006000030410 2', '''  1 2 3 4 5 6 7 8 9
+ +-----+-----+-----+
+1|  3 4|  2  |     |
+2|8    |    1|7    |
+3|     |  5  |6 2  |
+ +-----+-----+-----+
+4|     |     |9   7|
+5|    1|4   9|8    |
+6|4   9|     |     |
+ +-----+-----+-----+
+7|  9 8|  4  |     |
+8|    2|5    |    6|
+9|     |  3  |4 1  |
+ +-----+-----+-----+
+
+X-wing can be found.
+X-wing can be found.
+Naked triple in column 4
+Hidden pair in column 8
+Determine R9C1 by trial.
+Search with depth 1 shows that R1C8 should be 8
+Valid sudoku with unique solution of level 8 (extreme).'''],
         ['solve 427001008105090040000570300900083000000000206040900000510000000090160800070000030', '''  1 2 3 4 5 6 7 8 9
  +-----+-----+-----+
 1|4 2 7|    1|    8|
