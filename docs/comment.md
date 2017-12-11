@@ -8,9 +8,4 @@ permalink: /comment
 
 # Comments
 
-Leave your comments on [Kaidoku](./) and [online player](sudoku).
-
-- - -
-
-- [Document index](./#document)
-- [Home Page](./)
+Leave your comments on the [live sudoku book](sudoku) and [Kaidoku](./).
