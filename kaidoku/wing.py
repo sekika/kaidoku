@@ -28,7 +28,7 @@ def xwing(s, p, wings, wing, verbose):
                             s[j] = p[j].index(1) + 1
                     if verbose > 1:
                         if verbose == 2:
-                            message = logic = + ' can be found.'
+                            message = logic + ' can be found.'
                         else:
                             message = logic + ' of ' + str(n + 1) + ' in '
                             for j in position:
