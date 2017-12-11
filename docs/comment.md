@@ -8,7 +8,7 @@ permalink: /comment
 
 # Comments
 
-Leave your comments on Kaidoku and online player.
+Leave your comments on [Kaidoku](./) and [online player](sudoku).
 
 - - -
 

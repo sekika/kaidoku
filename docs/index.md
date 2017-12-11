@@ -44,3 +44,7 @@ Kaidoku is a program in development. Document is not complete and what is writte
 - [Random note](note)
 - Index of commands
 - [External sudoku sites](link)
+
+## Comments
+
+- [Send your comments](comment)
