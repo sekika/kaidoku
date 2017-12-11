@@ -11,13 +11,6 @@ To do, or not to do?
 - Write document
 - Finalize the sudoku book to contain
 
-Online player
------------------
-- Take back move
-- Free textarea
-- Document
-- Feedback
-
 Debug commands
 -----------------
 
