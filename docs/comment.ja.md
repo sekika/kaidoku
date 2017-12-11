@@ -1,11 +1,11 @@
 ---
 layout: default.ja
-lang: “ú–{Œê
+lang: æ—¥æœ¬èª
 ref: comment
 comments: true
 permalink: /ja/comment
 ---
 
-# ƒRƒƒ“ƒg
+# ã‚³ãƒ¡ãƒ³ãƒˆ
 
-[ƒiƒ“ƒvƒŒ–â‘èW](sudoku)‚Æ[‰ğ“Æ](./)‚Ö‚ÌƒRƒƒ“ƒg‚ğ‚Ç‚¤‚¼B
+[ãƒŠãƒ³ãƒ—ãƒ¬å•é¡Œé›†](sudoku)ã¨[è§£ç‹¬](./)ã¸ã®ã‚³ãƒ¡ãƒ³ãƒˆã‚’ã©ã†ãã€‚
