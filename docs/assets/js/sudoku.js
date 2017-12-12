@@ -436,6 +436,7 @@ function boardhtml(s) {
         var w = 2;
     } else {
         board += "<p></p>";
+        board += "<div id='buttons'>";
         var w = 5;
     }
     board += "<table class='invisible'>";
@@ -469,6 +470,8 @@ function boardhtml(s) {
     board += "</tr></table>";
     if (window.innerWidth > 640) {
         board += "</table>";
+    } else {
+        board += "</div>";
     }
     return board;
 }
