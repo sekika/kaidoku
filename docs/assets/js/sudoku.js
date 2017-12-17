@@ -405,9 +405,11 @@ function sudoku(data, level, no) {
 }
 // HTML of board
 function boardhtml(s) {
-    if (window.innerWidth > 640) {
+    if (window.innerWidth > 600) {
+        var ButtonRight = true;
         var board = "<table class='invisible'><tr class='invisible'><td class='invisible'>";
     } else {
+        var ButtonRight = false;
         var board = '';
     }
     board += "<table class='external'>"
@@ -430,7 +432,7 @@ function boardhtml(s) {
         }
     }
     board += "</table>";
-    if (window.innerWidth > 640) {
+    if (ButtonRight) {
         board += "<td class='invisible' style='width: 20px'>";
         board += "<td id='buttons' class='invisible'>";
         var w = 2;
@@ -456,7 +458,7 @@ function boardhtml(s) {
         "<tr><td class='invisible' id='back'><button type='button' class='command' id='back' onClick='back()'>B</button>";
     board +=
         "<td class='invisible' id='reset'><button type='button' class='command' id='reset' onClick='reset()'>R</button>";
-    if (window.innerWidth > 640) {
+    if (ButtonRight) {
         board += "<tr><td class='invisible'>" + getnote();
         var note = localStorage.getItem("note");
         if (note == null) {
@@ -468,7 +470,7 @@ function boardhtml(s) {
         board += "<div class='hidden' id='note'></div>";
     }
     board += "</tr></table>";
-    if (window.innerWidth > 640) {
+    if (ButtonRight) {
         board += "</table>";
     } else {
         board += "</div>";
