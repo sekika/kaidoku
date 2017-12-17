@@ -405,7 +405,7 @@ function sudoku(data, level, no) {
 }
 // HTML of board
 function boardhtml(s) {
-    if (window.innerWidth > 600) {
+    if (screen.width > 640) {
         var ButtonRight = true;
         var board = "<table class='invisible'><tr class='invisible'><td class='invisible'>";
     } else {
