@@ -18,8 +18,8 @@ can be expressed with
 When you are solving the [online version of kaidoku](sudoku), you can obtain the position by typing `c`, which copies the current position to the clipboard. Then the position can be checked with `check pos [verb]` where pos is the position, verb is the verbose level, which is 1 when ommitted.
 
 - `check pos` shows if the position has a unique solution.
-- `check pos 2` shows a hint for basic logics (naked single and hidden single).
-- `check pos 3` shows hints for advanced logics to determine a certain cell.
+- `check pos 2` shows a hint for [basic logics](basichint) (naked single and hidden single).
+- `check pos 3` shows hints for [advanced logics](logic) to determine a certain cell.
 - `check pos 4` shows a procedure to determine a certain cell.
 
 ```

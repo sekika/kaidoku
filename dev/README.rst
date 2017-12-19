@@ -6,8 +6,6 @@ This directory contains tools for development.
 To do, or not to do?
 -----------------
 
-- Check in different environment
-- Font selection
 - Write document
 - Finalize the sudoku book to contain
 

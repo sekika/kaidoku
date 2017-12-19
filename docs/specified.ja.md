@@ -18,8 +18,8 @@ permalink: /ja/specified
 オンラインで[ナンプレ問題集](sudoku)を解いているのであれば、キーボードから`c`と入力することで、現局面がクリップボードにコピーされる。その局面は `check pos [verb]` コマンドでチェックすることができる。ここで pos は局面で verb は冗長性レベル（省略時は 1）である。
 
 - `check pos` はその局面が唯一解を持つかどうかを表示する。
-- `check pos 2` は基本解法 (naked single と hidden single) のヒントを表示する。
-- `check pos 3` はあるセルが決定するまでの上級解法のヒントを表示する。
+- `check pos 2` は[基本解法](basichint) (naked single と hidden single) のヒントを表示する。
+- `check pos 3` はあるセルが決定するまでの[上級解法](logic)のヒントを表示する。
 - `check pos 4` はあるセルが決定するまでの手順を表示する。
 
 ```

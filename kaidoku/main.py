@@ -56,9 +56,27 @@ def main(argv=sys.argv[1:]):
 
 def readconfig(ConfFile):
     """Read configuration."""
+    from PIL import ImageFont
+
+    # Read configuration
     config = ConfigObj(os.path.expanduser(ConfFile), encoding='utf-8')
+
+    # Return if it has redirect
     if 'redirect' in config:
         return config
+
+    # Read system default configuration from data/system.ini
+    inifile = configparser.ConfigParser()
+    here = os.path.abspath(os.path.dirname(__file__))
+    inifile.read(os.path.join(here, 'data/system.ini'))
+    defaultLevel = inifile.get('default', 'level')
+    defaultMaxtime = inifile.get('default', 'maxtime')
+    defaultSymmetry = inifile.get('default', 'symmetry')
+    defaultMincell = inifile.get('default', 'mincell')
+    defaultAxis = inifile.get('default', 'axis')
+    fonts = inifile.get('default', 'font').split()
+
+    # Set default configuration
     if 'datadir' in config:
         datadir = os.path.expanduser(config['datadir'])
         if not os.path.isdir(datadir) and datadir != '':
@@ -107,12 +125,12 @@ def readconfig(ConfFile):
     if 'level' in config:
         level = config["level"]
     else:
-        level = 2
+        level = defaultLevel
         config["level"] = level
     if 'maxtime' in config:
         maxtime = config["maxtime"]
     else:
-        maxtime = 60
+        maxtime = defaultMaxtime
         config["maxtime"] = maxtime
     if 'pointer' in config:
         pointer = config["pointer"]
@@ -129,7 +147,7 @@ def readconfig(ConfFile):
     if 'create' not in config:
         config['create'] = {}
     if 'symmetry' not in config['create']:
-        config['create']['symmetry'] = 'y'
+        config['create']['symmetry'] = defaultSymmetry
     if 'minlevel' not in config['create']:
         config['create']['minlevel'] = 1
     if int(config['create']['minlevel']) < 1:
@@ -137,11 +155,18 @@ def readconfig(ConfFile):
     if int(config['create']['minlevel']) > 9:
         config['create']['minlevel'] = 1
     if 'mincell' not in config['create']:
-        config['create']['mincell'] = 17
+        config['create']['mincell'] = defaultMincell
     if 'figure' not in config:
         config['figure'] = {}
     if 'font' not in config['figure']:
-        config['figure']['font'] = 'Arial'
+        for font in fonts:
+            try:
+                tfont = ImageFont.truetype(font, int(16))
+                config['figure']['font'] = font + '.ttf'
+                break
+            except Exception:
+                continue
+            config['figure']['font'] = 'NotFound'
     if 'color' not in config['figure']:
         config['figure']['color'] = 'black'
     if 'lastcolor' not in config['figure']:
@@ -151,6 +176,6 @@ def readconfig(ConfFile):
     if 'markedsize' not in config['figure']:
         config['figure']['markedsize'] = 'large'
     if 'axis' not in config['figure']:
-        config['figure']['axis'] = 'none'
+        config['figure']['axis'] = defaultAxis
     config.write()
     return config

@@ -33,7 +33,7 @@ def drawimage(s, p, lastmove, label, imgfile, figure, mark):
         tfont = ImageFont.truetype(font, int(16 * scale))
     except Exception:
         print('Font file cannot be loaded: ', font)
-        print('Rewrite font variable in the configuration file.')
+        print('Rewrite configuration of "figure: font" with config command.')
         return True
     nfont = ImageFont.truetype(font, int(24 * scale))
     sfont = ImageFont.truetype(font, int(9 * scale))

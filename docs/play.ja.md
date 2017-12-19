@@ -48,6 +48,8 @@ See image by "html".
 kaidoku-{{ site.version }}>
 ```
 
+`OSError: Unable to locate Ghostscript on paths` のようなエラーメッセージが表示されるときには、[Ghostscrip](https://www.ghostscript.com/download/gsdnld.html)をインストールしてパスの設定をしてください（[参考](https://stackoverflow.com/questions/44587376/oserror-unable-to-locate-ghostscript-on-paths)）。
+
 これで、このような画像ファイルが、データディレクトリの下に current.jpg として生成される。
 
 ![]({{'/img/2-1.jpg' | relative_url}})
