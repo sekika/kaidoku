@@ -197,8 +197,9 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     # Trial
     # Maximum steps of scan distinguished from full search of 1 depth
     maxstep = 15
+    mincell = 100
     if depth == 0 and maxdepth < 999:
-        s, p, step, message, found, err = trial(
+        s, p, step, mincell, message, found, err = trial(
             s, p, linescan, maxstep, verbose, b, pair)
         if step < 10:
             logic = 'Trial'
@@ -216,24 +217,24 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     if depth == 0:
         if maxdepth > 2 and bla < 60:
             s, p, message, logic, depth2, found, err = search(
-                s, p, verbose, 1, 2, endtime, b, pb)
+                s, p, verbose, 1, 2, endtime, b, pb, mincell)
             if found or err:
                 return (s, p, message, logic, depth2, found, err)
         if maxdepth > 3 and bla < 45:
             s, p, message, logic, depth2, found, err = search(
-                s, p, verbose, 1, 3, endtime, b, pb)
+                s, p, verbose, 1, 3, endtime, b, pb, mincell)
             if found or err:
                 return (s, p, message, logic, depth2, found, err)
         if maxdepth > 4 and bla < 35:
             s, p, message, logic, depth2, found, err = search(
-                s, p, verbose, 1, 4, endtime, b, pb)
+                s, p, verbose, 1, 4, endtime, b, pb, mincell)
             if found or err:
                 return (s, p, message, logic, depth2, found, err)
 
     # Full search
     if maxdepth > depth:
         s, p, message, logic, depth, found, err = search(
-            s, p, verbose, depth + 1, maxdepth, endtime, b, pb)
+            s, p, verbose, depth + 1, maxdepth, endtime, b, pb, mincell)
         if found or err:
             return (s, p, message, logic, depth, found, err)
 

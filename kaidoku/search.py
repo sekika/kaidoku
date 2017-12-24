@@ -10,8 +10,11 @@ def trial(s, p, linescan, maxstep, verbose, b, pair):
     """Trial."""
     if len(pair) == 0:
         return (s, p, 0, '', False, False)
+    mincell = 100
+    minbla = 100
     for x in pair:
         i = x[0]
+        bla = 0
         for j in x[1:]:
             s2 = copy.deepcopy(s)
             p2 = copy.deepcopy(p)
@@ -27,6 +30,7 @@ def trial(s, p, linescan, maxstep, verbose, b, pair):
                 s2, p2, message3, found, err = scan(s2, p2, linescan, 4, b)
                 message2 += '(' + str(line) + ') ' + message3 + '\n'
                 line += 1
+            bla += blank(s2)
             if err:
                 message = ''
                 if verbose > 1:
@@ -42,8 +46,11 @@ def trial(s, p, linescan, maxstep, verbose, b, pair):
                 if verbose > 2:
                     message += 'Therefore ' + \
                         cell(i) + ' is ' + str(s[i]) + '.'
-                return (s, p, step, message, True, False)
-    return (s, p, 0, '', False, False)
+                return (s, p, step, i, message, True, False)
+        if bla < minbla:
+            minbla = bla
+            mincell = i
+    return (s, p, 0, mincell, '', False, False)
 
 
 def scan(s, p, linescan, verbose, b):
@@ -61,7 +68,7 @@ def scan(s, p, linescan, verbose, b):
     return (s, p, message, found, err)
 
 
-def search(s, p, verbose, depth, maxdepth, endtime, b, pb):
+def search(s, p, verbose, depth, maxdepth, endtime, b, pb, mincell):
     """Full search."""
     from kaidoku.calc import (solveone)
 
@@ -72,24 +79,27 @@ def search(s, p, verbose, depth, maxdepth, endtime, b, pb):
         return (s, p, message, 9 + depth, depth, False, False)
 
     message = ''
-    smallest = 10
-    pair = []
-    pairnum = [[], [], [], [], [], [], [], [], []]
-    for j in range(81):
-        if s[j] == 0:
-            if sum(p[j]) == 2:
-                pair.append(j)
-                for k in range(9):
-                    if p[j][k] == 1:
-                        pairnum[k].append([j])
-            if sum(p[j]) < smallest:
-                i = j
-                smallest = sum(p[j])
-    if len(pair) > 1:
-        m = 0
-        for j in range(9):
-            if len(pairnum[j]) > m:
-                i = int(pairnum[j][0][0])
+    if mincell < 81:
+        i = mincell
+    else:
+        smallest = 10
+        pair = []
+        pairnum = [[], [], [], [], [], [], [], [], []]
+        for j in range(81):
+            if s[j] == 0:
+                if sum(p[j]) == 2:
+                    pair.append(j)
+                    for k in range(9):
+                        if p[j][k] == 1:
+                            pairnum[k].append([j])
+                if sum(p[j]) < smallest:
+                    i = j
+                    smallest = sum(p[j])
+        if len(pair) > 1:
+            m = 0
+            for j in range(9):
+                if len(pairnum[j]) > m:
+                    i = int(pairnum[j][0][0])
 
     solution = []
     removed = []
