@@ -161,7 +161,7 @@ def readconfig(ConfFile):
     if 'font' not in config['figure']:
         for font in fonts:
             try:
-                tfont = ImageFont.truetype(font, int(16))
+                ImageFont.truetype(font, int(16))
                 config['figure']['font'] = font + '.ttf'
                 break
             except Exception:

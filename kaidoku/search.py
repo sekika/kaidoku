@@ -64,7 +64,8 @@ def scan(s, p, linescan, verbose, b):
     message, err = check(s)
     if err:
         return (s, p, message, False, True)
-    s, p, message, found, err = hidsing(s, p, linescan, verbose)  # Hidden single
+    s, p, message, found, err = hidsing(
+        s, p, linescan, verbose)  # Hidden single
     return (s, p, message, found, err)
 
 
