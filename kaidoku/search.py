@@ -9,7 +9,7 @@ from kaidoku.misc import cell
 def trial(s, p, linescan, maxstep, verbose, b, pair):
     """Trial."""
     if len(pair) == 0:
-        return (s, p, 0, '', False, False)
+        return (s, p, 0, 100, '', False, False)
     mincell = 100
     minbla = 100
     for x in pair:
