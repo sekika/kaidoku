@@ -6,3 +6,4 @@ google_analytics:
 theme: jekyll-theme-merlot
 version: 0.3.2
 jquery-version: "3.2.1" # jQuery https://jquery.com/download/
+problems: 24,100
