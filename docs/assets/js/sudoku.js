@@ -4,7 +4,7 @@ $.ajax({
     success: function (data) {
         var level = localStorage.getItem("level");
         if (level == null) {
-            level = 3
+            level = 3;
             localStorage.setItem("level", level);
         }
         var no = localStorage.getItem("level" + level);
@@ -25,7 +25,7 @@ $.ajax({
         }
         var levelname = getlevelname();
         var noname = getnoname();
-        var problem = "<select id='level' onChange='updatelevel()'>"
+        var problem = "<select id='level' onChange='updatelevel()'>";
         for (var i = 1; i <= 9; i++) {
             problem += "<option value='" + i + "'";
             if (i == level) {
