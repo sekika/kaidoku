@@ -75,5 +75,6 @@ It show how extensive the search is. You can show the complete process by
 - - -
 
 - [Previous: Analysis of a whole problem](analysis)
+- [Next: Bookmark management](bookmark)
 - [Document index](./#document)
 - [Home Page](./)
