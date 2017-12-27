@@ -77,5 +77,6 @@ Look at R4C4. What number is available?
 - - -
 
 - [前: 問題全体の解析](./analysis)
+- [次: ブックマークの管理](./bookmark)
 - [マニュアルの目次](./#マニュアル)
 - [ホームページ](./)
