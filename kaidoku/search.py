@@ -158,10 +158,13 @@ def search(s, p, verbose, depth, maxdepth, endtime, b, pb, mincell):
             return (s, p, message, logic, depth, False, True)
         if sum(p[i]) == 1:
             s[i] = p[i].index(1) + 1
-            if verbose > 1:
+            if verbose == 2:
+                message = 'Search with depth ' + \
+                    str(depth) + ' from ' + cell(i) + '.'
+            if verbose > 2:
                 message = 'Search with depth ' + \
                     str(depth) + ' shows that ' + \
-                    cell(i) + ' should be ' + str(s[i])
+                    cell(i) + ' should be ' + str(s[i]) + '.'
             return (s, p, message, logic, depth, True, False)
         if verbose > 1:
             message = 'Search with depth ' + \

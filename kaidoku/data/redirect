@@ -1,0 +1,22 @@
+  1 2 3 4 5 6 7 8 9
+ +-----+-----+-----+
+1|  3 4|  2  |     |
+2|8    |    1|7    |
+3|     |  5  |6 2  |
+ +-----+-----+-----+
+4|     |     |9   7|
+5|    1|4   9|8    |
+6|4   9|     |     |
+ +-----+-----+-----+
+7|  9 8|  4  |     |
+8|    2|5    |    6|
+9|     |  3  |4 1  |
+ +-----+-----+-----+
+
+X-wing can be found.
+X-wing can be found.
+Naked triple in column 4
+Hidden pair in column 8
+Determine R9C1 by trial.
+Search with depth 1 from R5C5.
+Valid sudoku with unique solution of level 8 (extreme).
