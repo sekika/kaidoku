@@ -140,12 +140,8 @@ Valid sudoku with unique solution'''],
 9|     |  3  |4 1  |
  +-----+-----+-----+
 
-X-wing can be found.
-X-wing can be found.
-Naked triple in column 4
-Hidden pair in column 8
 Determine R9C1 by trial.
-Search with depth 1 shows that R5C5 should be 6
+Search with depth 1 from R5C5.
 Valid sudoku with unique solution of level 8 (extreme).'''],
         ['solve 427001008105090040000570300900083000000000206040900000510000000090160800070000030', '''  1 2 3 4 5 6 7 8 9
  +-----+-----+-----+
