@@ -26,8 +26,8 @@ def xwing(s, p, wings, wing, verbose):
                         p[j][n] = 0
                         if p[j].count(1) == 1:
                             s[j] = p[j].index(1) + 1
-                    if verbose > 1:
-                        if verbose == 2:
+                    if verbose > 2:
+                        if verbose == 3:
                             message = logic + ' can be found.'
                         else:
                             message = logic + ' of ' + str(n + 1) + ' in '
@@ -70,8 +70,8 @@ def xywing(s, p, b, pair, verbose):
                         for bb in b[x[0]]:
                             if bb in b[y[0]]:
                                 if s[bb] == 0 and p[bb][x[1] - 1] == 1 and i not in p[bb]:
-                                    if verbose > 1:
-                                        if verbose == 2:
+                                    if verbose > 2:
+                                        if verbose == 3:
                                             message = 'XY-wing can be found.'
                                         else:
                                             message = 'XY-wing of ' + \
@@ -89,7 +89,7 @@ def xywing(s, p, b, pair, verbose):
                                     p[bb][x[1] - 1] = 0
                                     if sum(p[bb]) == 1:
                                         s[bb] = p[bb].index(1) + 1
-                                        if verbose > 2:
+                                        if verbose > 3:
                                             message += '\nTherefore ' + \
                                                 cell(bb) + ' = ' + \
                                                 str(s[bb]) + '.'
@@ -137,7 +137,7 @@ def xyzwing(s, p, b, boxl, comb, pb, verbose):
                                                             if sum(p[a[j]]) == 1:
                                                                 s[a[j]] = p[a[j]].index(
                                                                     1) + 1
-                                                                if verbose > 2:
+                                                                if verbose > 3:
                                                                     message += '\nTherefore ' + \
                                                                         cell(a[j]) + ' = ' + \
                                                                         str(s[a[j]]
@@ -169,7 +169,7 @@ def xyzwing(s, p, b, boxl, comb, pb, verbose):
                                                             if sum(p[a[j]]) == 1:
                                                                 s[a[j]] = p[a[j]].index(
                                                                     1) + 1
-                                                                if verbose > 2:
+                                                                if verbose > 3:
                                                                     message += '\nTherefore ' + \
                                                                         cell(a[j]) + ' = ' + \
                                                                         str(s[a[j]]
@@ -181,8 +181,8 @@ def xyzwing(s, p, b, boxl, comb, pb, verbose):
 def xyzmessage(xa, x, ya, y, za, z, Z, a, verbose):
     from kaidoku.misc import (cell)
     message = ''
-    if verbose > 1:
-        if verbose == 2:
+    if verbose > 2:
+        if verbose == 3:
             message = 'XYZ-wing can be found.'
         else:
             message = 'XYZ-wing of ' + cell(xa) + ' ' + str(x) + ' ' + \

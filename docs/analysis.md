@@ -17,9 +17,9 @@ When you want to show the process of solving a whole problem, you can use `a` co
 By default, it shows if the sudoku is valid sudoku with unique solution, and if it is, the difficulty of the problem. It is the analysis of verbose level 1. `a` command can have a parameter of verbose level as an argument. Output of the analysis can have 5 level of verboseness. As the number increases, the message will increase.
 
 - `a` shows only the difficulty level.
-- `a 2` shows part of advanced logics.
-- `a 3` shows all of advanced logics.
-- `a 4` shows all the logics and complete procedure of solving.
+- `a 2` shows hints for trial and search.
+- `a 3` shows hints of advanced logics and result of trial and search.
+- `a 4` shows complete procedure of solving.
 - `a 5` shows whole procedure with ascii image of the board.
 
 This is an example.

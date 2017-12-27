@@ -52,32 +52,32 @@ def remotepair(s, p, b, pair, pairdict, verbose):
                                     if p[f][i1] + p[f][i2] > 0:
                                         rpair.append([d, e, f])
                 if len(rpair) > 0:
-                    if verbose > 1:
-                        if verbose == 2:
+                    if verbose > 2:
+                        if verbose == 3:
                             message = 'Remote pairs.'
                         else:
                             message = 'Remote pairs of (' + str(i1+1) + \
                                 ', ' + str(i2+1) + ') are found.'
                     for rp in rpair:
-                        if verbose > 2:
+                        if verbose > 3:
                             message += '\n' + \
                                 cell(rp[0]) + ' and ' + \
                                 cell(rp[1]) + ' are remote pairs.'
                         p[rp[2]][i1] = 0
                         p[rp[2]][i2] = 0
                         if sum(p[rp[2]]) == 0:
-                            if verbose > 2:
+                            if verbose > 3:
                                 message += '\nNow ' + \
                                     cell(
                                         rp[2]) + ' has no candidate. This sudoku is unsolvable.'
                             return (s, p, message, False, True)
                         if sum(p[rp[2]]) == 1:
                             s[rp[2]] = p[rp[2]].index(1) + 1
-                            if verbose > 2:
+                            if verbose > 3:
                                 message += ' ' + \
                                     cell(rp[2]) + ' is ' + str(s[rp[2]]) + '.'
                         else:
-                            if verbose > 2:
+                            if verbose > 3:
                                 message += ' Candidates of ' + \
                                     cell(rp[2]) + ' changes.'
                     return (s, p, message, True, False)
@@ -139,8 +139,8 @@ def pairchain(s, p, b, pair, paircomb, verbose):
                                             s[i[0]] = n
                                             chainlength = len(
                                                 path1) + len(path2)
-                                            if verbose > 1:
-                                                if verbose == 2:
+                                            if verbose > 2:
+                                                if verbose == 3:
                                                     message = 'Chain of pairs. Start from ' + \
                                                         cell(i[0]) + '.'
                                                 else:

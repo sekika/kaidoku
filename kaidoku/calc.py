@@ -405,11 +405,11 @@ def naked(s, p, length, boxl, comb, verbose):
         if len(list) >= length * 2:
             nk, c, position, f = naklist(length, list)
             if nk:
-                if verbose > 1:
+                if verbose > 2:
                     message = 'Naked ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + \
                         ['box ', 'row ', 'column '][i // 9] + \
                         str(i % 9 + 1)
-                if verbose > 2:
+                if verbose > 3:
                     message = message + ' made removal from'
                 for j in f:
                     k = boxl[i][j]
@@ -441,11 +441,11 @@ def hidden(s, p, length, boxl, mirror, verbose):
                     for m in rem:
                         p[boxl[i][c[k]]][m - 1] = 0
                 message = ''
-                if verbose > 1:
+                if verbose > 2:
                     message = 'Hidden ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + \
                         ['box ', 'row ', 'column '][i // 9] + \
                         str(i % 9 + 1)
-                if verbose > 2:
+                if verbose > 3:
                     message = 'Hidden ' + ['single', 'pair', 'triple', 'quad'][length - 1] + ' in ' + [
                         'box ', 'row ', 'column '][i // 9] + str(
                         i % 9 + 1) + ': '

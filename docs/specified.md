@@ -37,9 +37,9 @@ Look at R4C4. What number is available?
     solve pos [verb]
  
 - `solve pos` shows only the difficulty level.
-- `solve pos 2` shows part of advanced logics.
-- `solve pos 3` shows all of advanced logics.
-- `solve pos 4` shows all the logics and complete procedure of solving.
+- `solve pos 2` shows hints for trial and search.
+- `solve pos 3` shows hints of advanced logics and result of trial and search.
+- `solve pos 4` shows complete procedure of solving.
 - `solve pos 5` shows whole procedure with ascii image of the board.
 
 # Alternative way to express a position

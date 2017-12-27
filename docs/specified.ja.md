@@ -39,8 +39,8 @@ Look at R4C4. What number is available?
 であり、
  
 - `solve pos` は難易度レベルのみを表示する。
-- `solve pos 2` は上級解法の一部を表示する。
-- `solve pos 3` はすべての上級解法を表示する。
+- `solve pos 2` は探索のヒントを表示する。
+- `solve pos 3` は探索の結果と上級解法のヒントを表示する。
 - `solve pos 4` はすべての解法を表示する。
 - `solve pos 5` はすべての解法と図面を表示する。
 
