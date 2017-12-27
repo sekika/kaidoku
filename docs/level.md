@@ -52,8 +52,6 @@ The problems shipped with the latest kaidoku can also be played with the [online
 
 The levels are determined by the numbers of initial blank cells, the difficulty of the logics, and the complexity of seach. Up to level 3 the numbers of blank cells are the dominant factor, up to level 6 the difficulty of the logics is the dominant factor, and from level 7 complexity of the search is the dominant factor.
 
-Current status of kaidoku is in development, and the algorithm to determine the level is not fixed yet. As more logics will be implemented, the level of a certain problem will change. Therefore, the problem book shipped now is a tentative one.
-
 - - -
 
 - [Next: Logics for solving sudoku puzzles used in this program](./logic)

@@ -52,8 +52,6 @@ permalink: /ja/level
 
 難易度レベルは、問題図面における空白セルの数、使われる解法の難易度、検索の複雑さによって決められる。レベル3までは空白セルの数が支配的要因であり、レベル6までは解法の難易度が支配的要因であり、レベル7以降は検索の複雑さが支配的要因となる。
 
-Current status of kaidoku is in development, and the algorithm to determine the level is not fixed yet. As more logics will be implemented, the level of a certain problem will change. Therefore, the problem book shipped now is a tentative one.
-
 - - -
 
 - [次: 使われている解法](./logic)
