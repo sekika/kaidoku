@@ -55,6 +55,25 @@ Look at R4C4. What number is available?
 
 印刷物から図面を入力するときには、入力ミスをしたときにどの列が間違えているのかが表示されるため、この方法は便利である。
 
+# 例
+
+[数独の最難問](http://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html)を解析する。PCの性能にもよるが、解析には数秒かかる。
+
+    kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 2
+    
+    Search with depth 3 from R8C7.
+    Search with depth 3 from R7C7.
+    Search with depth 2 from R7C5.
+    Search with depth 3 from R8C9.
+    Search with depth 3 from R9C4.
+    Search with depth 1 from R6C7.
+    Search with depth 2 from R1C7.
+    Valid sudoku with unique solution of level 9 (ultimate).
+    
+いかに深い探索がなされているかが分かる。完全な解法を見るには、このようにする。
+
+    kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 5
+
 - - -
 
 - [前: 問題全体の解析](./analysis)

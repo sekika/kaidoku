@@ -55,7 +55,7 @@ When you are typing a position from a printed material, this is useful because t
 
 # Example
 
-Let us analyze this [hardest sudoku](http://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html) as
+Let us analyze this [hardest sudoku](http://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html). It takes several seconds to solve, depending on the power of your PC.
 
     kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 2
     
@@ -70,7 +70,7 @@ Let us analyze this [hardest sudoku](http://www.telegraph.co.uk/news/science/sci
     
 You can show the complete process by
 
-    kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 4
+    kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 5
 
 - - -
 
