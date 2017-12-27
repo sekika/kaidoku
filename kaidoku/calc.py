@@ -37,7 +37,7 @@ def solve(s, verbose, maxdepth, maxtime):
                 print(message)
             if verbose > 4 and blank(s) < bl:
                 print(output(s))
-            LevelPoint += {
+            point = {
                 'Naked single': 0,
                 'Hidden single':  3,
                 'Pointing pair': 25,
@@ -61,6 +61,9 @@ def solve(s, verbose, maxdepth, maxtime):
                 'Search': 1500,
                 'Deep search': 2500
             }[logic]
+            if point > 800:
+                point = point * (0.5 + 0.02 * blank(s))
+            LevelPoint += point
         else:
             return (s, 'Give up', 0, False, False)
         if blank(s) == 0:
@@ -68,7 +71,7 @@ def solve(s, verbose, maxdepth, maxtime):
         else:
             solved = False
     for i in range(9):
-        if [0, 8, 45, 70, 120, 320, 1000, 2000, 5500][i] <= LevelPoint:
+        if [0, 8, 45, 70, 120, 320, 1000, 2000, 5000][i] <= LevelPoint:
             level = i + 1
     return (s, 'Solved', level, True, False)
 
