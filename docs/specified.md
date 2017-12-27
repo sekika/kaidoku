@@ -68,7 +68,7 @@ Let us analyze this [hardest sudoku](http://www.telegraph.co.uk/news/science/sci
     Search with depth 2 from R1C7.
     Valid sudoku with unique solution of level 9 (ultimate).
     
-You can show the complete process by
+It show how extensive the search is. You can show the complete process by
 
     kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 5
 
