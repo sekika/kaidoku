@@ -53,6 +53,25 @@ Therefore following command is also available.
 
 When you are typing a position from a printed material, this is useful because the input error is shown as to which row is invalid.
 
+# Example
+
+Let us analyze this [hardest sudoku](http://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html) as
+
+    kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 2
+    
+    Search with depth 3 from R8C7.
+    Search with depth 3 from R7C7.
+    Search with depth 2 from R7C5.
+    Search with depth 3 from R8C9.
+    Search with depth 3 from R9C4.
+    Search with depth 1 from R6C7.
+    Search with depth 2 from R1C7.
+    Valid sudoku with unique solution of level 9 (ultimate).
+    
+You can show the complete process by
+
+    kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 4
+
 - - -
 
 - [Previous: Analysis of a whole problem](analysis)
