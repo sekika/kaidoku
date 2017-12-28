@@ -74,6 +74,8 @@ Look at R4C4. What number is available?
 
     kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 5
 
+[結果](https://github.com/sekika/kaidoku/blob/master/docs/solution-Inkala-2012.txt)はこのようになる。
+
 - - -
 
 - [前: 問題全体の解析](./analysis)

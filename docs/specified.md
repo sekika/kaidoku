@@ -72,6 +72,8 @@ It shows how extensive the search is. You can show the complete process by
 
     kaidoku-{{ site.version }}> solve 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4-- 5
 
+Here is the [result](https://github.com/sekika/kaidoku/blob/master/docs/solution-Inkala-2012.txt).
+
 - - -
 
 - [Previous: Analysis of a whole problem](analysis)
