@@ -15,18 +15,20 @@ from kaidoku.output import output
 def solve(s, verbose, maxdepth, maxtime):
     """Solve a problem."""
     from kaidoku.misc import box
+    from kaidoku.misc import line
     from kaidoku.misc import pbox
     solved = False
     p = possible(s)
     b = box()
     pb = pbox()
+    linescan = line()
     start = datetime.datetime.now()
     endtime = start + datetime.timedelta(seconds=maxtime)
     LevelPoint = int((blank(s) / 15.0)**3)  # 30 -> 8, 64 -> 77
     while (not solved):
         bl = blank(s)
         s, p, message, logic, depth, found, err = solveone(
-            s, p, verbose, 0, maxdepth, endtime, b, pb)
+            s, p, verbose, 0, maxdepth, endtime, b, pb, linescan)
         if err:
             if found:
                 return (s, message, 0, True, True)
@@ -76,13 +78,12 @@ def solve(s, verbose, maxdepth, maxtime):
     return (s, 'Solved', level, True, False)
 
 
-def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
+def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb, linescan):
     """Solve one move."""
     from kaidoku.chain import pairchain
     from kaidoku.chain import remotepair
     from kaidoku.misc import boxlist
     from kaidoku.misc import combmir
-    from kaidoku.misc import line
     from kaidoku.misc import pairs
     from kaidoku.misc import wingpos
     from kaidoku.search import search
@@ -102,7 +103,6 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     s, p, message, found, err = naksing(s, p, b, verbose)  # Naked single
     if found or err:
         return (s, p, message, 'Naked single', depth, found, err)
-    linescan = line()
     s, p, message, found, err = hidsing(
         s, p, linescan, verbose)  # Hidden single
     if found or err:
@@ -220,17 +220,17 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb):
     if depth == 0:
         if maxdepth > 2 and bla < 60:
             s, p, message, logic, depth2, found, err = search(
-                s, p, verbose, 1, 2, endtime, b, pb, mincell)
+                s, p, verbose, 1, 2, endtime, b, pb, linescan, mincell)
             if found or err:
                 return (s, p, message, logic, depth2, found, err)
         if maxdepth > 3 and bla < 45:
             s, p, message, logic, depth2, found, err = search(
-                s, p, verbose, 1, 3, endtime, b, pb, mincell)
+                s, p, verbose, 1, 3, endtime, b, pb, linescan, mincell)
             if found or err:
                 return (s, p, message, logic, depth2, found, err)
         if maxdepth > 4 and bla < 35:
             s, p, message, logic, depth2, found, err = search(
-                s, p, verbose, 1, 4, endtime, b, pb, mincell)
+                s, p, verbose, 1, 4, endtime, b, pb, linescan, mincell)
             if found or err:
                 return (s, p, message, logic, depth2, found, err)
 

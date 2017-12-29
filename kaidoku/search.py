@@ -69,7 +69,7 @@ def scan(s, p, linescan, verbose, b):
     return (s, p, message, found, err)
 
 
-def search(s, p, verbose, depth, maxdepth, endtime, b, pb, mincell):
+def search(s, p, verbose, depth, maxdepth, endtime, b, pb, linescan, mincell):
     """Full search."""
     from kaidoku.calc import (solveone)
 
@@ -113,7 +113,7 @@ def search(s, p, verbose, depth, maxdepth, endtime, b, pb, mincell):
         s2[i] = n + 1
         while (True):
             s2, p2, message, logic, depth2, found, err = solveone(
-                s2, p2, 0, depth, maxdepth, endtime, b, pb)
+                s2, p2, 0, depth, maxdepth, endtime, b, pb, linescan)
             if found:
                 if err:  # Multiple solutions
                     if depth2 > depth:

@@ -224,11 +224,12 @@ def test_calc():
     assert b[0] == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18,
                     19, 20, 27, 36, 45, 54, 63, 72], 'Error in box'
     pb = pbox()
+    linescan = line()
     assert pb[(0, 0)] == {3, 4, 5, 6, 7, 8}, 'Error in pbox'
     start = datetime.datetime.now()
     endtime = start + datetime.timedelta(seconds=3)
     s, p, message, logic, depth, found, err = solveone(
-        s, p, 4, 0, 3, endtime, b, pb)
+        s, p, 4, 0, 3, endtime, b, pb, linescan)
     assert message == 'Hidden single in box 2 : R2C6 = 9', 'Error in solveone'
     s, p, message, found, err = naksing(s, p, b, 4)
     assert message == 'Naked single: R2C8 = 7', 'Error in naksing'

@@ -25,6 +25,7 @@ from kaidoku.misc import conv
 from kaidoku.misc import current
 from kaidoku.misc import duplicate
 from kaidoku.misc import lev
+from kaidoku.misc import line
 from kaidoku.misc import openappend
 from kaidoku.misc import pbox
 from kaidoku.output import output
@@ -186,8 +187,8 @@ def command(arg, config):
             else:
                 if c == 'append':  # Append to book
                     infile = open(file)
-                    for line in infile:
-                        data = line.strip().split(' ')
+                    for lin in infile:
+                        data = lin.strip().split(' ')
                         s3 = conv(data[1])[0]
                         if s2 == s3:
                             print('This sudoku is already in the book.')
@@ -377,8 +378,8 @@ def command(arg, config):
             infile = open(file, 'r')
             no = 0
             problem = ''
-            for line in infile:
-                data = line.strip().split(' ')
+            for lin in infile:
+                data = lin.strip().split(' ')
                 if int(data[0]) == level:
                     no += 1
                     if no == n:
@@ -579,12 +580,13 @@ def command(arg, config):
             p = possible(s)
             b = box()
             pb = pbox()
+            linescan = line()
             blank1 = blank(s)
             start = datetime.datetime.now()
             endtime = start + datetime.timedelta(seconds=maxtime)
             s2 = copy.copy(s)
             s2, p, message, logic, depth, found, err = solveone(
-                s2, p, 4, 0, blank1, endtime, b, pb)
+                s2, p, 4, 0, blank1, endtime, b, pb, linescan)
             if logic == 'Naked single' or logic == 'Hidden single':
                 if logic == 'Naked single':
                     print('Look at {0}. What number is available?'.format(
@@ -599,7 +601,7 @@ def command(arg, config):
             mes = [message]
             while blank(s2) == blank1:
                 s2, p, message, logic, depth, found, err = solveone(
-                    s2, p, 4, 0, blank1, endtime, b, pb)
+                    s2, p, 4, 0, blank1, endtime, b, pb, linescan)
                 logi.append(logic)
                 mes.append(message)
             if verbose == 3:
@@ -657,8 +659,8 @@ def show(c, verbose, config):
         infile = open(file, 'r')
         no = 0
         problem = ''
-        for line in infile:
-            data = line.strip().split(' ')
+        for lin in infile:
+            data = lin.strip().split(' ')
             if int(data[0]) == level:
                 no += 1
                 if no == n:
@@ -758,12 +760,13 @@ def show(c, verbose, config):
         b = box()
         pb = pbox()
         blank1 = blank(s)
+        linescan = line()
         start = datetime.datetime.now()
         endtime = start + datetime.timedelta(seconds=maxtime)
     if c == 'i' or c == 'ii' or c == 'iii':  # show hint
         s2 = copy.copy(s)
         s2, p, message, logic, depth, found, err = solveone(
-            s2, p, 4, 0, blank1, endtime, b, pb)
+            s2, p, 4, 0, blank1, endtime, b, pb, linescan)
         if logic == 'Naked single' or logic == 'Hidden single':
             if logic == 'Naked single':
                 print('Look at {0}. What number is available?'.format(
@@ -797,7 +800,7 @@ def show(c, verbose, config):
                 mes = [message]
                 while blank(s2) == blank1:
                     s2, p, message, logic, depth, found, err = solveone(
-                        s2, p, 4, 0, blank1, endtime, b, pb)
+                        s2, p, 4, 0, blank1, endtime, b, pb, linescan)
                     logi.append(logic)
                     mes.append(message)
                 if c == 'ii':
@@ -814,7 +817,7 @@ def show(c, verbose, config):
         while (logic == 'Naked single' or logic == 'Hidden single') and blank(s) > 0:
             s2 = copy.copy(s)
             s, p, message, logic, depth, found, err = solveone(
-                s, p, 4, 0, blank(s), endtime, b, pb)
+                s, p, 4, 0, blank(s), endtime, b, pb, linescan)
             if logic == 'Naked single' or logic == 'Hidden single':
                 print(message)
                 for i in range(81):
