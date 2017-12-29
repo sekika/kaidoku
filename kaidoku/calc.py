@@ -305,12 +305,15 @@ def hidsing(s, p, linescan, verbose):
     """Hidden single."""
 
     for sc in linescan:
+        mat = []
+        for i in sc:
+            if s[i] == 0:
+                mat.append(p[i])
+        if mat == []:
+            continue
+        matrix = list(zip(*mat))
         for n in range(9):
-            sum = 0
-            for i in sc:
-                if s[i] == 0:
-                    sum = sum + p[i][n]
-            if sum == 1:
+            if matrix[n].count(1) == 1:
                 for i in sc:
                     if (s[i] == 0) and (p[i][n]) == 1:
                         s[i] = n + 1
