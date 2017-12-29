@@ -237,7 +237,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb, linescan):
     # Full search
     if maxdepth > depth:
         s, p, message, logic, depth, found, err = search(
-            s, p, verbose, depth + 1, maxdepth, endtime, b, pb, mincell)
+            s, p, verbose, depth + 1, maxdepth, endtime, b, pb, linescan, mincell)
         if found or err:
             return (s, p, message, logic, depth, found, err)
 
