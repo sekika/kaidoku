@@ -202,8 +202,8 @@ def command(arg, config):
                     out.write(str(level) + ' ' + short(s2) + '\n')
                     out.close
                     print(
-                        'Valid sudoku. Appended to the book by level' +
-                        +str(level))
+                        'Valid sudoku. Appended to the book by level ' +
+                        str(level))
                 else:  # Add to bookmark
                     problem = short(s2)
                     comment = ''
