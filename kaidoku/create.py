@@ -110,7 +110,7 @@ def reanalyze(file, file2):
 def append_database(file, datadir, giveup, n, creation):
     """Create new problems and append to database."""
     minlevel = int(creation['minlevel'])
-    maxtime = 3
+    maxtime = 2
     maxdepth = 25
 
     outfile = openappend(file)
