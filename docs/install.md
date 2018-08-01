@@ -9,20 +9,43 @@ permalink: /install
 
 ## Install Python 3
 
-Python 3 should be installed before installing kaidoku. Install Python 3 by
+Python 3 should be installed before installing kaidoku. Install Python 3 by either of the following.
 
 - Download and install from [Python official page](https://www.python.org/).
+- If you are using Ubuntu or Debian of [Windows subsystem on Linux](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux), just run `sudo apt install python3`
 - If you are using [Homebrew](https://brew.sh/) on macOS, just run `brew install python3`
 
 You can check your installed version of Python 3 by
 
     python3 -V
 
+## Install pip
+
+Just run
+
+    python3 -m ensurepip
+
+then pip is installed if it is not installed on your system.
+
+On Windows subsystems on Linux, pip distributed with apt package may not properly work (it does not properly execute the entry points). Therefore, if python3-pip is already installed by apt, remove it with
+
+    sudo apt remove python3-pip
+
+and then install pip properly by
+
+    sudo apt install wget
+    wget https://bootstrap.pypa.io/get-pip.py
+    sudo python3 get-pip.py
+
 ## Install Kaidoku
 
-After installing Python 3, install kaidoku by running
+After installing Python 3 and pip, install kaidoku by running
 
     pip3 install kaidoku
+
+or, on Windows subsystem on Linux,
+
+    sudo pip install kaidoku
 
 from terminal emulator.
 
@@ -37,7 +60,7 @@ You can check the latest version of kaidoku by
 and update to the latest version by
 
     pip3 install -U kaidoku
- 
+
 ## Getting started
 
 Just run
@@ -64,7 +87,7 @@ q   : Quit kaidoku
 
 (continues)
 
-kaidoku-{{ site.version }}> 
+kaidoku-{{ site.version }}>
 ```
 
 You can quit from the kaidoku prompt by typing `q`.

@@ -9,20 +9,42 @@ permalink: /ja/install
 
 ## Python 3 のインストール
 
-解独をインストールするためには、まず Python 3 をインストールする必要がある。Python 3 のインストールについては、以下のようにする。
+解独をインストールするためには、まず Python 3 をインストールする必要がある。Python 3 は以下のいずれかの方法でインストールする。
 
-- [Python オフィシャルホームページ](https://www.python.org/)からダウンロードとインスストールをする。
+- [Python オフィシャルホームページ](https://www.python.org/)からダウンロードとインストールをする。
+- Windows で [Windows subsystem on Linux](https://ja.wikipedia.org/wiki/Windows_Subsystem_for_Linux) の Ubuntu あるいは Debian を
+使っているのであれば `sudo apt install python3` を実行する。
 - macOS で [Homebrew](https://brew.sh/) を使っているのであれば  `brew install python3` を実行する。
 
 インストールされている Python 3 のバージョンは、次のコマンドで確認できる。
 
     python3 -V
 
+## Pip のインストール
+
+    python3 -m ensurepip
+
+とすることで、pip がインストールされていなければインストールされる。
+
+Windows subsystems on Linux では、apt で配布されている pip はうまく動かない（エントリーポイントを正しく実行できない）。したがってすでに apt によって python3-pip がインストールされているのであれば、
+
+    sudo apt remove python3-pip
+
+としてそれをアンインストールしてから、次のように正しく pip をインストールし直す。
+
+    sudo apt install wget
+    wget https://bootstrap.pypa.io/get-pip.py
+    sudo python3 get-pip.py
+
 ## 解独のインストール
 
 Python 3 のインストールができたら、ターミナルエミュレーターから次のコマンドで解独をインストールする。
 
     pip3 install kaidoku
+
+Windows subsystem on Linux からは
+
+    sudo pip install kaidoku
 
 ## 解独のアップデート
 
@@ -35,7 +57,7 @@ Python 3 のインストールができたら、ターミナルエミュレー�
 で確認できる。最新バージョンへのアップデートは
 
     pip3 install -U kaidoku
- 
+
 とする。
 
 ## 解独の実行
@@ -64,7 +86,7 @@ q   : Quit kaidoku
 
 (中略)
 
-kaidoku-{{ site.version }}> 
+kaidoku-{{ site.version }}>
 ```
 
 解独のコマンドプロンプトから抜けるためには `q` と入力する。
