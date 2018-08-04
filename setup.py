@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import setup
 from codecs import open
 from os import path
 import configparser
@@ -25,19 +25,28 @@ setup(
     author='Katsutoshi Seki',
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: End Users/Desktop',
         'Environment :: Console',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: JavaScript',
         'License :: OSI Approved :: MIT License',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Microsoft :: Windows :: Windows 10',
+        'Operating System :: POSIX',
+        'Operating System :: POSIX :: BSD',
+        'Operating System :: POSIX :: Linux',
+        'Natural Language :: English',
+        'Natural Language :: Japanese',
         'Topic :: Games/Entertainment :: Puzzle Games'
     ],
     packages=['kaidoku'],
     package_data={'kaidoku': ['data/*']},
     install_requires=['ConfigObj', 'pillow', 'pyx'],
-    entry_points={  
-        'console_scripts':  
-            'kaidoku = kaidoku.main:main'  
+    entry_points={
+        'console_scripts':
+            'kaidoku = kaidoku.main:main'
     },
 )
