@@ -3,6 +3,10 @@ Kaidoku: Player, solver and creater of sudoku puzzles
 
 Kaidoku can solve sudoku puzzles as shown in the figure, play with the puzzles and create sudoku puzzles with a command-line interface.
 
+.. figure:: https://sekika.github.io/kaidoku/img/3-1.jpg
+   :align: center
+   :alt: sudoku
+
 Kaidoku is a
 
 - player of sudoku. You can play original sudoku puzzles of various level of difficulty with command line interface. You can get hints when you want.

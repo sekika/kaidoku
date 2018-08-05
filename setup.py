@@ -33,6 +33,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: JavaScript',
         'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: Microsoft :: Windows :: Windows 10',
         'Operating System :: POSIX',
