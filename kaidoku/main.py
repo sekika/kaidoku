@@ -103,8 +103,9 @@ def readconfig(ConfFile):
             config["file"] = file
         else:
             print(file + ' does not exist.')
-            file = ''
-            config['file'] = ''
+            file = os.path.abspath(os.path.dirname(__file__)) + '/data/sudoku.txt'
+            print('Chaging to default fille: ' +file)
+            config['file'] = file
     else:
         file = os.path.abspath(os.path.dirname(__file__)) + '/data/sudoku.txt'
         config["file"] = file
