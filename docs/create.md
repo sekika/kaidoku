@@ -12,6 +12,7 @@ permalink: /create
 As explained in [selection of level and problem](./level), kaidoku is shipped with certain numbers of problems classified with difficulty level, and `book` command shows the numbers of problems in each level like this.
 
 ```
+kaidoku-{{ site.version }}> book
 Level 1 trivial   :   3000 (12.00 %)
 Level 2 very easy :   3000 (12.00 %)
 Level 3 easy      :   3000 (12.00 %)
@@ -35,6 +36,13 @@ Level 1 trivial   :   3003 (12.01 %)
 Level 2 very easy :   3002 (12.00 %)
 :
 Total numbers     :  25010
+```
+
+Now the problems are added to the system default file. When the system default file is not writable, it is copied to data directory, such as
+
+```
+Unable to write a file: /usr/local/lib/python3.7/dist-packages/kaidoku/data/sudoku.txt
+Copying the system default file to /home/seki/kaidoku/sudoku.txt
 ```
 
 Now new problems were appended to the problem book. The appended problems are brand-new puzzles that are not found anywhere else.
@@ -94,7 +102,7 @@ If you do not want to change the file location, you can just press return. All t
 ```
 kaidoku-{{ site.version }}> config
 :
-file = /Users/seki/kaidoku/sudoku.txt
+file = /usr/local/lib/python3.7/site-packages/kaidoku/data/sudoku.txt
 :
 Entry to edit: file
 file = ~/kaidoku/sudoku.txt
@@ -107,6 +115,8 @@ Now you changed the location of the problem book to `~/kaidoku/sudoku.txt`, but 
 ```
 touch ~/kaidoku/sudoku.txt
 ```
+
+Now you can create new problems to the new file location with `create` command.
 
 - - -
 
