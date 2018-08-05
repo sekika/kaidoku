@@ -26,6 +26,7 @@ By `br` command, followed by a label, the bookmark is read.
 
 - - -
 
+- [Next: Create new sudoku problems](create)
 - [Previous: Analyze a specified sudoku problem](specified)
 - [Document index](./#document)
 - [Home Page](./)

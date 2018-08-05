@@ -39,7 +39,7 @@ Kaidoku is a program in development. Document is not complete and what is writte
 - [Analysis of a whole problem](analysis)
 - [Analyze a specified sudoku problem](specified)
 - [Bookmark management](bookmark)
-- Create new sudoku problems
+- [Create new sudoku problems](create)
 - Managing configuration file
 - [Random note](note)
 - Index of commands
