@@ -16,11 +16,11 @@ Kaidoku is a
 Online player
 ---------------------
 
-2500 sudoku puzzles classified with 9 difficulty levels are available online.
+25000 sudoku puzzles classified with 9 difficulty levels are available online.
 
 https://sekika.github.io/kaidoku/sudoku
 
-Full Document
+Full document
 ---------------------
 
 Document is availabe in English and Japanese.
