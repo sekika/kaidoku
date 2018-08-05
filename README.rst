@@ -1,5 +1,5 @@
 Kaidoku: Player, solver and creater of sudoku puzzles
-=======================
+=====================================================
 
 Kaidoku can solve sudoku puzzles as shown in the figure, play with the puzzles and create sudoku puzzles with a command-line interface.
 
