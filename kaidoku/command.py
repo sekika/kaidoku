@@ -625,7 +625,6 @@ def command(arg, config):
         from kaidoku.image import blankimages
         blankimages()
         return config
-
     print('Invalid command. Type h for help.')
     return config
 
@@ -873,6 +872,7 @@ def solveprint(s, verbose, maxdepth, maxtime):
         else:
             if verbose > 0:
                 print("Invalid sudoku with no solution.")
+        return
     if solved:
         if verbose > 0:
             print('Valid sudoku with unique solution of level {0} ({1}).'.format(
@@ -883,5 +883,4 @@ def solveprint(s, verbose, maxdepth, maxtime):
     else:
         print('\nGive up with {0} blank cells.'.format(blank(s)))
         print(output(s))
-
     return
