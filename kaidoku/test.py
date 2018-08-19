@@ -75,6 +75,23 @@ Chain of pairs. Assume that R5C8 is 7 and we have following chains.
 (1) R5C8 = 7 >> R5C5 = 5 >> R4C6 = 3 >> R6C4 = 7 >> R2C4 = 6
 (2) R5C8 = 7 >> R2C8 = 6 >> R2C4 = 7
 Now we have contradiction on R2C4. Therefore R5C8 should be 9.'''],
+        ['solve -4-3---9-,---------,-----4236,7924--3--,----8----,--1--3627,1385-----,--------4,-7---9-6-','''  1 2 3 4 5 6 7 8 9
+ +-----+-----+-----+
+1|  4  |3    |  9  |
+2|     |     |     |
+3|     |    4|2 3 6|
+ +-----+-----+-----+
+4|7 9 2|4    |3    |
+5|     |  8  |     |
+6|    1|    3|6 2 7|
+ +-----+-----+-----+
+7|1 3 8|5    |     |
+8|     |     |    4|
+9|  7  |    9|  6  |
+ +-----+-----+-----+
+
+
+Invalid sudoku with multiple solutions.'''],
         ['check 003500902082793006900201830240070003830010020617352498021039004300005200008027300 4', '''  1 2 3 4 5 6 7 8 9
  +-----+-----+-----+
 1|    3|5    |9   2|
@@ -159,9 +176,7 @@ Valid sudoku with unique solution of level 8 (extreme).'''],
  +-----+-----+-----+
 
 This sudoku has no solution because R8C1 has no candidate.
-Invalid sudoku with no solution.
-
-Give up with 7 blank cells.''']
+Invalid sudoku with no solution.''']
     ]:
         com = c[0].split()
         sys.stdout = open(redirect, 'w')
