@@ -49,9 +49,51 @@ Look at R4C4. What number is available?
 
 Therefore following command is also available.
 
-    kaidoku-{{ site.version }}> check 31---2---,---86-2--,--8--3-75,--7-9835-,-9-----8-,-5362-4--,63-2--9--,--9-36---,---1---63
+    kaidoku-{{ site.version }}> solve 31---2---,---86-2--,--8--3-75,--7-9835-,-9-----8-,-5362-4--,63-2--9--,--9-36---,---1---63
 
-When you are typing a position from a printed material, this is useful because the input error is shown as to which row is invalid.
+When you are typing a position from a printed material, this is useful because the input error is shown as to which row is invalid. For example, if you enter
+
+    kaidoku-{{ site.version }}> solve 31---2---,---86-2--,--8--3-75,--7-9835-,-9----8-,-5362-4--,63-2--9--,--9-36---,---1---63
+
+you get the message
+
+    Error in input: -9----8-
+
+and you can just check this row and find that there is only 8 cells in this row. If you enter
+
+    kaidoku-{{ site.version }}> solve 31---2---,---86-2--,--8--3-75,--7-9835-,-8-----8-,-5362-4--,63-2--9--,--9-36---,---1---63
+
+you get a diagram and the message
+
+    Both R5C2 and R5C8 have the same value of 8.
+
+# Validity check
+
+Sudoku is valid only when the solution is unique. If there are multiple solutions, kaidoku shows that it is invalid. For example, if you enter
+
+    kaidoku-{{ site.version }}> solve -4-3---9-,---------,-----4236,7924--3--,----8----,--1--3627,1385-----,--------4,-7---9-6-
+
+you get a message
+
+    Invalid sudoku with multiple solutions.
+
+If you just want to know if the problem is valid, you can use `check` command and enter
+
+    kaidoku-{{ site.version }}> check -4-3---9-,---------,-----4236,7924--3--,----8----,--1--3627,1385-----,--------4,-7---9-6-
+
+If you want to show the multiple solutions, use `solve pos 5`. For example,
+
+    kaidoku-{{ site.version }}> solve -4-3---9-,---------,-----4236,7924--3--,----8----,--1--3627,1385-----,--------4,-7---9-6- 5
+
+It will show 2 possible solutions and common number in the 2 solutions at the end. Note that kaidoku stops looking for solutions after it finds 2 solutions. Therefore there can be more than 2 solutions. If there is no solution, for example,
+
+    kaidoku-{{ site.version }}> solve -4-3---9-,---------,-----4236,7924--3--,4---8----,--1--3627,1385-----,--------4,-7---9-6-
+
+then it will finally show that
+
+    Invalid sudoku with no solution.
+
+If you want to know why there is no solution, use `solve pos 5`.
 
 # Example
 

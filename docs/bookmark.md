@@ -20,6 +20,8 @@ When you want to add a specified position to the bookmark, use `bp` command foll
 
     kaidoku-{{ site.version }}> bp 8--------,--36-----,-7--9-2--,-5---7---,----457--,---1---3-,--1----68,--85---1-,-9----4--
 
+Note that only valid sudoku with unique solution can be added to bookmark. If the position has multiple solutions or no solution, a message is shown and the position is not added to bookmark.
+
 `bl` command lists the date added, label, and comment of the bookmarks.
  
 By `br` command, followed by a label, the bookmark is read.
