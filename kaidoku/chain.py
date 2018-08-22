@@ -144,15 +144,37 @@ def pairchain(s, p, b, pair, paircomb, verbose):
                                                     message = 'Chain of pairs. Start from ' + \
                                                         cell(i[0]) + '.'
                                                 else:
-                                                    message = 'Chain of pairs. Assume that ' + \
+                                                    # We have path1 and path2 conctradicting chain, and make path circulating chain
+                                                    for i in reversed(path2):
+                                                        if (i != path2[0]) and (i != path2[-1]):
+                                                            for j in pair:
+                                                                if i[0] == j[0]:
+                                                                    if i[1] == j[1]:
+                                                                        k = j[2]
+                                                                    else:
+                                                                        k = j[1]
+                                                                    path1.append(
+                                                                        [i[0], k])
+                                                                    break
+                                                    message = 'Chain of pairs. If ' + \
                                                         cell(i[0]) + ' is ' + str(i[1]) + \
-                                                        ' and we have following chains.\n'
-                                                    message += '(1) ' + chainpath(path1) + \
-                                                        '\n' + \
-                                                        '(2) ' + \
-                                                        chainpath(path2) + '\n'
-                                                    message += 'Now we have contradiction on ' + \
-                                                        cell(j2[0]) + '. Therefore ' + cell(i[0]) + \
+                                                        ' there is no solution because of following chain.\n'
+                                                    for i in path1:
+                                                        message += cell(i[0]
+                                                                        ) + ' ('
+                                                        for j in pair:
+                                                            if i[0] == j[0]:
+                                                                message += str(j[1]) + \
+                                                                    ',' + \
+                                                                    str(j[2])
+                                                                break
+                                                        message += ') = '
+                                                        if i == path1[-1]:
+                                                            message += 'no candidate\n'
+                                                        else:
+                                                            message += str(i[1]
+                                                                           ) + '\n'
+                                                    message += 'Therefore ' + cell(path1[0][0]) + \
                                                         ' should be ' + \
                                                         str(n) + '. '
                                             return (s, p, message, chainlength, True, False)
@@ -176,14 +198,3 @@ def findchain(pair, i, b):
             else:
                 chain.append([j[0], j[1]])
     return chain
-
-
-def chainpath(path):
-    """Get path of chain."""
-    from kaidoku.misc import cell
-    chainpath = ''
-    for i in path:
-        if i != path[0]:
-            chainpath += ' >> '
-        chainpath += cell(i[0]) + ' = ' + str(i[1])
-    return chainpath

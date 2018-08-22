@@ -71,11 +71,15 @@ Hidden pair in box 7: R7C3 R9C3
 XYZ-wing of R3C4 (3, 5, 7) R3C6 (3, 5) R6C4 (3, 7) removes 3 from R1C4.
 Pointing triple in box 1 removed 3 from R3C2 
 Hidden pair in box 2: R3C4 R3C6
-Chain of pairs. Assume that R5C8 is 7 and we have following chains.
-(1) R5C8 = 7 >> R5C5 = 5 >> R4C6 = 3 >> R6C4 = 7 >> R2C4 = 6
-(2) R5C8 = 7 >> R2C8 = 6 >> R2C4 = 7
-Now we have contradiction on R2C4. Therefore R5C8 should be 9.'''],
-        ['solve -4-3---9-,---------,-----4236,7924--3--,----8----,--1--3627,1385-----,--------4,-7---9-6-','''  1 2 3 4 5 6 7 8 9
+Chain of pairs. If R5C8 is 7 there is no solution because of following chain.
+R5C8 (7,9) = 7
+R5C5 (5,7) = 5
+R4C6 (3,5) = 3
+R6C4 (3,7) = 7
+R2C4 (6,7) = 6
+R2C8 (6,7) = no candidate
+Therefore R5C8 should be 9. '''],
+        ['solve -4-3---9-,---------,-----4236,7924--3--,----8----,--1--3627,1385-----,--------4,-7---9-6-', '''  1 2 3 4 5 6 7 8 9
  +-----+-----+-----+
 1|  4  |3    |  9  |
 2|     |     |     |
@@ -411,5 +415,5 @@ def test_calc():
     s, p, message, chainlength, found, err = pairchain(
         s, p, b, pair, paircomb, 4)
     assert (
-        message[:37]) == 'Chain of pairs. Assume that R3C8 is 7', 'Error in pairchain'
+        message[:28]) == 'Chain of pairs. If R3C8 is 7', 'Error in pairchain'
     return
