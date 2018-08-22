@@ -138,7 +138,7 @@ def pairchain(s, p, b, pair, paircomb, verbose):
                                             n = p[i[0]].index(1) + 1
                                             s[i[0]] = n
                                             chainlength = len(
-                                                path1) + len(path2)
+                                                path1) + len(path2) - 2
                                             if verbose > 2:
                                                 if verbose == 3:
                                                     message = 'Chain of pairs. Start from ' + \

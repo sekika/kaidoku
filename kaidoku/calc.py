@@ -190,7 +190,7 @@ def solveone(s, p, verbose, depth, maxdepth, endtime, b, pb, linescan):
         if len(pair) > 3:
             s, p, message, chainlength, found, err = pairchain(
                 s, p, b, pair, paircomb, verbose)  # Chain of pairs
-            if chainlength < 8:
+            if chainlength < 6:
                 logic = 'Chain of pairs'  # Short chain
             else:
                 logic = 'Chain of pairs (long)'  # Long chain
