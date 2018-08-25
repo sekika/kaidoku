@@ -418,10 +418,10 @@ def naked(s, p, length, boxl, comb, verbose):
                     k = boxl[i][j]
                     for m in range(length):
                         p[k][c[m] - 1] = 0
-                    if verbose > 2:
+                    if verbose > 3:
                         message = message + ' ' + cell(k)
                     if p[k].count(1) == 1:
-                        if verbose > 2:
+                        if verbose > 3:
                             message = message + \
                                 '(=' + str(p[k].index(1) + 1) + ') '
                         s[k] = p[k].index(1) + 1
