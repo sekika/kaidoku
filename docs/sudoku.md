@@ -17,6 +17,7 @@ permalink: /sudoku
 - R is to restart the problem.
 - Current position is always saved in your browser.
 - Keyboard can be used from PC. From the keyboard, c copies the current position to clipboard to [analyze](specified) with Kaidoku.
+- You can also [download PDF](book) of some of the problems.
 
 ## Comments
 
