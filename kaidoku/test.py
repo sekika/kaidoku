@@ -407,7 +407,7 @@ def test_calc():
     s, p, message, found, err = remotepair(
         s, p, b, pair, pairdict, 4)
     assert (
-        message[:33]) == 'Remote pairs of (1, 9) are found.', 'Error in remotepair'
+        message[:32]) == 'Remote pairs of (1,9) are found.', 'Error in remotepair'
     s, err = conv(
         '300957800074368015050142000005271639163894050792536100000703590507689420009405006')
     p = possible(s)

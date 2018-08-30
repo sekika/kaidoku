@@ -57,7 +57,7 @@ def remotepair(s, p, b, pair, pairdict, verbose):
                             message = 'Remote pairs.'
                         else:
                             message = 'Remote pairs of (' + str(i1+1) + \
-                                ', ' + str(i2+1) + ') are found.'
+                                ',' + str(i2+1) + ') are found.'
                     for rp in rpair:
                         if verbose > 3:
                             message += '\n' + \
