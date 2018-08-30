@@ -76,6 +76,7 @@ def remotepair(s, p, b, pair, pairdict, verbose):
                             if verbose > 3:
                                 message += ' ' + \
                                     cell(rp[2]) + ' is ' + str(s[rp[2]]) + '.'
+                            return (s, p, message, True, False)
                         else:
                             if verbose > 3:
                                 message += ' Candidates of ' + \
