@@ -136,7 +136,7 @@ def command(arg, config):
         move = config["move"]
         row = int(c) // 100
         if row < 1 or row > 9:
-            print('Invalid move. If you want to fill Row 3' +
+            print('Invalid move. If you want to fill Row 3 ' +
                   'Column 5 with 7, type 357.')
             return config
         column = int(int(c) - row * 100) // 10

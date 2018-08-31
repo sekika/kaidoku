@@ -64,6 +64,7 @@ def test_command():
         ['br b1', ''],
         ['c', 'XYZ-wing'],
         ['sp', 'Naked single: R8C6 = 7'],
+        ['1234', 'Invalid move. If you want to fill'],
         ['iii', '''Pointing pair in box 4 removed 5 from R4C3 
 Pointing pair in box 6 removed 6 from R5C8 R6C8 
 Naked pair in row 7 made removal from R7C3
