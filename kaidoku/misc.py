@@ -13,7 +13,14 @@ def conv(problem):
             else:
                 s = s + [0]
         if len(s) != 81:
-            return ('Error in input.', True)
+            digit = str(abs(len(s)-81)) + ' digit'
+            if digit != '1 digit':
+                digit += 's'
+            if len(s) > 81:
+                message = 'Too many digits. Remove ' + digit + '.'
+            else:
+                message = 'Insufficient digits. Add ' + digit + '.'
+            return ('Error in input. ' + message, True)
     else:
         for line in problem.split(","):
             if (len(line)) == 9:
