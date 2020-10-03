@@ -72,13 +72,13 @@ class GUIBord(tkinter.Tk):
         submitButton = tkinter.Button(
             buttonFrame,
             text="save",
-            command=self.submitClick,
+            command=self.saveClick,
         )
         submitButton.pack()
         self.mainloop()
 
-    """When user click submit-button"""
-    def submitClick(self):
+    """When user click save-button"""
+    def saveClick(self):
         numList = [[None]*9 for i in range(9)]
         self.move = []
         for i in range(9):
