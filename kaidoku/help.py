@@ -16,6 +16,7 @@ def helpmessage():
     message += 'b   : take Back one move\n'
     message += 'c   : show Current position\n'
     message += 'i   : show hInt for current position\n'
+    message += 'bord: show GUI board\n'
     message += 'q   : Quit kaidoku\n\n'
     message += '[Select problem]\n'
     message += 'j num  : Jump to problem num\n'
