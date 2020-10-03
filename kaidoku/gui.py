@@ -71,7 +71,7 @@ class GUIBord(tkinter.Tk):
         buttonFrame.grid(row=1, column=0)
         submitButton = tkinter.Button(
             buttonFrame,
-            text="submit",
+            text="save",
             command=self.submitClick,
         )
         submitButton.pack()
