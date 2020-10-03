@@ -31,6 +31,7 @@ from kaidoku.misc import pbox
 from kaidoku.output import output
 from kaidoku.output import short
 from kaidoku.output import url
+from kaidoku.gui import GUIBord
 
 
 def command(arg, config):
@@ -62,7 +63,7 @@ def command(arg, config):
         config, err = show(c, 0, config)
         config = command(['c'], config)
         return config
-    if c == 'c' or c == 'u' or c == 'jpg' or c == 'jm':
+    if c == 'c' or c == 'u' or c == 'jpg' or c == 'jm' or c == 'bord':
         config, err = show(c, 0, config)
         if err:
             print('Going back to problem No. 1.')
@@ -685,6 +686,10 @@ def show(c, verbose, config):
             label = str(n)
     else:
         label = 'Level ' + str(level) + ' No. ' + str(n)
+    if c == 'bord':
+        app = GUIBord()
+        app.display(s,move)
+        config['move'] = app.move
     if len(move) > 0:
         s, move, message, err = current(s, move)
         if err:
