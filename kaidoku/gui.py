@@ -1,5 +1,4 @@
 import tkinter
-from tkinter import W,E,N,S
 import copy
 
 class GUIBord(tkinter.Tk):
