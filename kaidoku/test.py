@@ -345,7 +345,7 @@ def test_calc():
     wing = wingpos(boxl, mirror)
     s, p, message, found, err = xwing(s, p, 2, wing, 4)
     assert (
-        message) == 'X-wing of 8 in C1, C8 and R4, R8 removes 8 from R8C3, R8C7', 'Error in xwing'
+        message) == 'X-wing of 8 in C1, C8 and R4, R8 removes 8 from R8C7, R8C3', 'Error in xwing'
     s, err = conv(
         '589312746236740005714006023362987050847135269951264387478603500603001078105070630')
     p = possible(s)
