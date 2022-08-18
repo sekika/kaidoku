@@ -47,7 +47,7 @@ setup(
     keywords='sudoku',
     packages=['kaidoku'],
     package_data={'kaidoku': ['data/*']},
-    install_requires=['ConfigObj', 'pillow', 'pyx'],
+    install_requires=['ConfigObj', 'pillow', 'pyx', 'tk'],
     python_requires=">=3.5",
     entry_points={
         'console_scripts':
