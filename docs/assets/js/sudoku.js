@@ -2,6 +2,7 @@
 var hints = 0;
 var hint2 = "";
 var hint3 = "";
+var pyodide = "";
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
     success: function (data) {
@@ -45,11 +46,18 @@ $.ajax({
         $('#problem').html(problem);
         $('#data').text(data);
         drawboard();
+        loadpyodide();
     },
     error: function () {
         $('#board').html('Could not load sudoku problems.');
     }
 });
+async function loadpyodide() {
+    pyodide = await loadPyodide();
+    await pyodide.loadPackage("micropip");
+    const micropip = await pyodide.pyimport("micropip");
+    await micropip.install("kaidoku", false, false);
+}
 // Change the level
 function updatelevel() {
     hints = 0;
@@ -254,20 +262,18 @@ function next() {
 // Show hint
 async function hint() {
     if ( hints > 0 ) {
-        document.getElementById("message").innerHTML = (hint2);
-        if ( hints > 2 ) {
-            hint2 = hint3;
+        if ( hints > 1 ) {
+            document.getElementById("message").innerHTML = (hint2);
+            if ( hints > 2 ) {
+                hint2 = hint3;
+            }
         }
         return;
     }
     showmessage({
-        en: 'Loading Kaidoku ...',
-        ja: '解独を読み込み中 ...'
+        en: 'Loading program ...',
+        ja: 'プログラムを読み込み中 ...'
     });
-    let pyodide = await loadPyodide();
-    await pyodide.loadPackage("micropip");
-    const micropip = pyodide.pyimport("micropip");
-    await micropip.install("kaidoku", false, false);
     let current = document.getElementById("current").textContent;
     let js_namespace = { pos : current };
     pyodide.registerJsModule("js_namespace", js_namespace);
@@ -571,8 +577,11 @@ function boardhtml(s) {
         "<tr><td class='invisible' id='back'><button type='button' class='command' id='back' onClick='back()'>B</button>";
     board +=
         "<td class='invisible' id='reset'><button type='button' class='command' id='reset' onClick='reset()'>R</button>";
+    if (ButtonRight) {
+        board += "<tr>";
+    }
     board +=
-        "<tr><td class='invisible' id='hint'><button type='button' class='command' id='hint' onClick='hint()'>H</button>";
+        "<td class='invisible' id='hint'><button type='button' class='command' id='hint' onClick='hint()'>H</button>";
     if (ButtonRight) {
         board += "<tr><td class='invisible'>" + getnote();
         var note = localStorage.getItem("note");
