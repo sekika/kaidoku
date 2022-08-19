@@ -1,4 +1,7 @@
 "use strict";
+var hints = 0;
+var hint2 = "";
+var hint3 = "";
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
     success: function (data) {
@@ -49,6 +52,7 @@ $.ajax({
 });
 // Change the level
 function updatelevel() {
+    hints = 0;
     var data = document.getElementById("data").textContent;
     var level = document.getElementById("level").value;
     localStorage.setItem("level", level);
@@ -81,6 +85,7 @@ function updatelevel() {
 };
 // Change the problem number
 function updatenum() {
+    hints = 0;
     var data = document.getElementById("data").textContent;
     var level = document.getElementById("level").value;
     var no = document.getElementById("no").value - 0;
@@ -122,6 +127,7 @@ function btn(i) {
 };
 // Place a number
 function num(n) {
+    hints = 0;
     n -= 0;
     if (n > 9) {
         n = n - 10;
@@ -212,6 +218,7 @@ function num(n) {
 };
 // Back
 function back() {
+    hints = 0;
     var move = getmove();
     if (move.length > 0) {
         move.pop();
@@ -221,6 +228,7 @@ function back() {
 }
 // Reset
 function reset() {
+    hints = 0;
     if (getmove().length > 0) {
         if (window.confirm(resetmessage())) {
             savemove([]);
@@ -235,6 +243,7 @@ function savenote() {
 }
 // Next problem
 function next() {
+    hints = 0;
     var no = document.getElementById("no").value - 0;
     var last = document.getElementById("last").textContent - 0;
     if (no < last) {
@@ -242,6 +251,100 @@ function next() {
         updatenum();
     }
 }
+// Show hint
+async function hint() {
+    if ( hints > 0 ) {
+        document.getElementById("message").innerHTML = (hint2);
+        if ( hints > 2 ) {
+            hint2 = hint3;
+        }
+        return;
+    }
+    showmessage({
+        en: 'Loading Kaidoku ...',
+        ja: '解独を読み込み中 ...'
+    });
+    let pyodide = await loadPyodide();
+    await pyodide.loadPackage("micropip");
+    const micropip = pyodide.pyimport("micropip");
+    await micropip.install("kaidoku", false, false);
+    let current = document.getElementById("current").textContent;
+    let js_namespace = { pos : current };
+    pyodide.registerJsModule("js_namespace", js_namespace);
+    try {
+        pyodide.runPython(`
+            from js_namespace import pos
+            import kaidoku
+            k = kaidoku.Kaidoku(pos)
+            if not k.valid:
+                result = k.mes
+            else:
+                result = k.hint
+            hints = k.hints
+            if hints == 0:
+                hints = 1
+            hint2 = hint3 = ''
+            if hints > 1:
+                hint2 = k.hint2
+            if hints > 2:
+                hint3 = k.hint3
+        `);
+    } catch (err) {
+        // showmessage(err);
+        showmessage({
+            en: 'Pyodide error: ' + err,
+            ja: 'Pyodide エラー: ' + err
+        });
+        return
+    }
+    let result = pyodide.globals.get("result");
+    hint2 = pyodide.globals.get("hint2");
+    console.log(hint2);
+    hint3 = pyodide.globals.get("hint3");
+    hints = parseInt(pyodide.globals.get("hints"));
+    var lang = document.getElementById("lang").textContent;
+    if ( lang == 'ja' ) {
+        if ( result == 'No solution to this position' ) {
+            result = 'この状態では解はありません。どこかで間違えました。Bで戻れます。';
+        }
+        if ( result.indexOf("Look at Row") > -1 ) {
+            result = result.replace("Look at Row:", "上から");
+            result = result.replace(" Column:", "行目、左から");
+            result = result.replace(". What number is available?", "列目には何が入りますか？");
+        }
+        if ( result.indexOf("Hidden single") > -1 ) {
+            result = result.replace("Hidden single in ", "");
+            result = result.replace("row", "（上から数えて）row");
+            result = result.replace("column", "（左から数えて）column");
+            result = result.replace("box", "（左上から右に数えて）box");
+            result = result.replace("can be found.", "に単独候補マスがあるよ。");
+        }
+        if ( hint2.indexOf("Hidden single") > -1 ) {
+            hint2 = hint2.replace("Hidden single in ", "");
+            hint2 = hint2.replace("for", "に単独候補マスの") + " があるよ。";
+        }
+        if ( result.indexOf("Think candidates") > -1 ) {
+            result = result.replace("Think candidates of the cells.", "数字の候補を考えよう。");
+        }
+        if ( hint2.indexOf("successively") > -1 ) {
+            hint2 = hint2.replace("Use", "次の戦略を順番に使うと1マス確定するよ。<br>");
+            hint2 = hint2.replace("successively.", "");
+        }
+    }
+    var add = "<br>Push H for additional hint.";
+    if ( lang == 'ja' ) {
+        add = "<br>Hでさらにヒントを表示します。";
+    }
+    if ( hints > 1 ) {
+        result += add;
+    }
+    if ( hints > 2 ) {
+        hint2 += add;
+        hint3 = hint3.replace("\n", "<br>");
+    }
+    document.getElementById("message").innerHTML = (result);
+}
+
 // Scan duplicated numbers
 function scancell(s, n) {
     var matched = 0;
@@ -306,6 +409,12 @@ function keydown(key) {
     // get keycode and char
     var keycode = key.keyCode;
     var char = String.fromCharCode(keycode);
+    // h: show hint
+    if (char == "H") {
+        hint();
+        return;
+    }
+    hints = 0;
     // numeric key
     if (keycode > 48 && keycode < 58) {
         num(keycode - 48);
@@ -334,6 +443,10 @@ function keydown(key) {
     var activecell = document.getElementById("activecell").textContent;
     var level = document.getElementById("level").value;
     var s = localStorage.getItem("s" + level);
+    if (activecell.length == 0) {
+        return;
+    }
+    activecell = activecell - 0;
     if (activecell.length == 0) {
         return;
     }
@@ -458,6 +571,8 @@ function boardhtml(s) {
         "<tr><td class='invisible' id='back'><button type='button' class='command' id='back' onClick='back()'>B</button>";
     board +=
         "<td class='invisible' id='reset'><button type='button' class='command' id='reset' onClick='reset()'>R</button>";
+    board +=
+        "<tr><td class='invisible' id='hint'><button type='button' class='command' id='hint' onClick='hint()'>H</button>";
     if (ButtonRight) {
         board += "<tr><td class='invisible'>" + getnote();
         var note = localStorage.getItem("note");

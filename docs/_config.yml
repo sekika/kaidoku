@@ -6,4 +6,5 @@ google_analytics:
 theme: jekyll-theme-merlot
 version: 1.0.0
 jquery-version: "3.2.1" # jQuery https://jquery.com/download/
+pyodide-version: "0.21.0" # Pyodide https://pyodide.org/en/stable/project/changelog.html
 problems: 25000
