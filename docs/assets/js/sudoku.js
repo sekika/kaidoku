@@ -55,7 +55,7 @@ $.ajax({
 async function loadpyodide() {
     pyodide = await loadPyodide();
     await pyodide.loadPackage("micropip");
-    const micropip = pyodide.pyimport("micropip");
+    const micropip = await pyodide.pyimport("micropip");
     await micropip.install("kaidoku", false, false);
 }
 // Change the level
@@ -270,6 +270,10 @@ async function hint() {
         }
         return;
     }
+    if ( pyodide == "" ) {
+        showwait();
+        return;
+    }
     let current = document.getElementById("current").textContent;
     let js_namespace = { pos : current };
     pyodide.registerJsModule("js_namespace", js_namespace);
@@ -295,10 +299,15 @@ async function hint() {
         `);
     } catch (err) {
         // showmessage(err);
-        showmessage({
-            en: 'Pyodide error: ' + err,
-            ja: 'Pyodide エラー: ' + err
-        });
+        if ( err.message.indexOf("ModuleNotFoundError") > -1 ) {
+            showwait();
+        } else {
+            let mes = err.message.replace("\n","<br>");
+            showmessage({
+                en: 'Pyodide error: ' + mes,
+                ja: 'Pyodide エラー: ' + mes
+            });
+        }
         return
     }
     // pyodide.unregisterJsModule("js_namespace");
@@ -332,11 +341,14 @@ async function hint() {
             result = result.replace("Think candidates of the cells.", "数字の候補を考えよう。");
         }
         if ( hint2.indexOf("successively") > -1 ) {
-            hint2 = hint2.replace("Use", "次の戦略を順番に使うと1マス確定するよ。<br>");
+            hint2 = hint2.replace("Use", '次の<a href="https://sekika.github.io/kaidoku/ja/logic">解法</a>を順番に使うと1マス確定するよ。<br>');
             hint2 = hint2.replace("successively.", "");
         }
     }
-    var add = "<br>Push H for additional hint.";
+    if ( hint2.indexOf("Use") == 0 ) {
+        hint2 = hint2.replace("Use", '<a href="https://sekika.github.io/kaidoku/logic">Use</a>');
+    }
+var add = "<br>Push H for additional hint.";
     if ( lang == 'ja' ) {
         add = "<br>Hでさらにヒントを表示します。";
     }
@@ -742,5 +754,12 @@ function showfinished() {
     showmessage({
         en: 'This is the solution. Push Next button for next problem.',
         ja: 'これが正解です。Next ボタンで次の問題となります。'
+    });
+}
+// Show message when pyodide is not loaded yet
+function showwait() {
+    showmessage({
+        en: 'Not ready to show hint yet. Wait for a moment and press H again.',
+        ja: 'まだヒント表示の準備ができていません。少し待ってからもう一度 H ボタンを押してください。'
     });
 }

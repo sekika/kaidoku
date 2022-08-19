@@ -16,10 +16,11 @@ permalink: /sudoku
 - B is to take back a move.
 - R is to restart the problem.
 - H is to show hint.
-- Current position is always saved in your browser.
+- You can close the web browzer and restart the game anytime by using the same browzer. Current position is always saved in your browser.
+- <a href="./">Kaidoku</a> created the problems and classified by the difficulty.
 - Keyboard can be used from PC. From the keyboard, c copies the current position to clipboard to [analyze](specified) with Kaidoku.
 - You can also [download PDF](book) of some of the problems.
 
-## Comments
+## Feedback
 
-- [Leave your comments](comment)
+- [Discussions](https://github.com/sekika/kaidoku/discussions)
