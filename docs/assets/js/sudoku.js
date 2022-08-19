@@ -55,7 +55,7 @@ $.ajax({
 async function loadpyodide() {
     pyodide = await loadPyodide();
     await pyodide.loadPackage("micropip");
-    const micropip = await pyodide.pyimport("micropip");
+    const micropip = pyodide.pyimport("micropip");
     await micropip.install("kaidoku", false, false);
 }
 // Change the level
@@ -270,10 +270,6 @@ async function hint() {
         }
         return;
     }
-    showmessage({
-        en: 'Loading program ...',
-        ja: 'プログラムを読み込み中 ...'
-    });
     let current = document.getElementById("current").textContent;
     let js_namespace = { pos : current };
     pyodide.registerJsModule("js_namespace", js_namespace);
@@ -281,7 +277,9 @@ async function hint() {
         pyodide.runPython(`
             from js_namespace import pos
             import kaidoku
+            import sys
             k = kaidoku.Kaidoku(pos)
+            del sys.modules["js_namespace"]
             if not k.valid:
                 result = k.mes
             else:
@@ -303,9 +301,10 @@ async function hint() {
         });
         return
     }
+    // pyodide.unregisterJsModule("js_namespace");
+    // js_namespace = '';
     let result = pyodide.globals.get("result");
     hint2 = pyodide.globals.get("hint2");
-    console.log(hint2);
     hint3 = pyodide.globals.get("hint3");
     hints = parseInt(pyodide.globals.get("hints"));
     var lang = document.getElementById("lang").textContent;
