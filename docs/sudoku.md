@@ -15,6 +15,7 @@ permalink: /sudoku
 - X deletes all numbers in the cell.
 - B is to take back a move.
 - R is to restart the problem.
+- H is to show hint.
 - Current position is always saved in your browser.
 - Keyboard can be used from PC. From the keyboard, c copies the current position to clipboard to [analyze](specified) with Kaidoku.
 - You can also [download PDF](book) of some of the problems.
