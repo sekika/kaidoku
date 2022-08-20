@@ -1,4 +1,6 @@
 "use strict";
+const startTime = Date.now();
+const timeout = 60;
 var hints = 0;
 var hint2 = "";
 var hint3 = "";
@@ -758,8 +760,15 @@ function showfinished() {
 }
 // Show message when pyodide is not loaded yet
 function showwait() {
-    showmessage({
-        en: 'Not ready to show hint yet. Wait for a moment and press H again.',
-        ja: 'まだヒント表示の準備ができていません。少し待ってからもう一度 H ボタンを押してください。'
-    });
+    if ( Date.now() - startTime < timeout * 1000 ) {
+        showmessage({
+            en: 'Not ready to show hint yet. Wait for a moment and press H again.',
+            ja: 'まだヒント表示の準備ができていません。少し待ってからもう一度 H ボタンを押してください。'
+        });
+    } else {
+        showmessage({
+            en: 'Could not load <a href="https://pyodide.org/en/stable/">pyodide</a> for showing hint. You can try different web browser. See <a href="https://pyodide.org/en/stable/usage/index.html">supported browsers</a>.',
+            ja: 'ヒント表示に必要な <a href="https://pyodide.org/en/stable/">pyodide</a> を読み込めませんでした。他のWebブラウザを試してみてください。<a href="https://pyodide.org/en/stable/usage/index.html">Pyodide がサポートするブラウザ</a>を参考にしてください。'
+        });
+    }
 }
