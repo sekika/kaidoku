@@ -319,7 +319,21 @@ async function hint() {
     hint3 = pyodide.globals.get("hint3");
     hints = parseInt(pyodide.globals.get("hints"));
     var lang = document.getElementById("lang").textContent;
-    if ( lang == 'ja' ) {
+    if ( result.indexOf("Think candidates") > -1 ) {
+        let strategy = ['Search', 'Trial', 'Chain of pairs', 'Jellyfish', 'Swordfish', 'Hidden quad', 'Naked quad', 'Remote pairs', 'XYZ-wing', 'XY-wing', 'X-wing', 'Hidden triple', 'Hidden pair', 'Naked triple', 'Naked pair', 'Pointing triple', 'Pointing pair'];
+        for (let s in strategy) {
+            console.log(s)
+            if ( hint2.indexOf(strategy[s]) > -1 ) {
+                if ( lang == 'ja' ) {
+                    result = '<a href="https://sekika.github.io/kaidoku/ja/logic">' + strategy[s] + '</a> を使います。';
+                } else {
+                    result = '<a href="https://sekika.github.io/kaidoku/logic">' + strategy[s] + '</a> is used.';
+                }
+                break;
+            }
+        }
+    }
+if ( lang == 'ja' ) {
         if ( result == 'No solution to this position' ) {
             result = 'この状態では解はありません。どこかで間違えました。Bで戻れます。';
         }
