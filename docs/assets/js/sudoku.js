@@ -1,6 +1,7 @@
 "use strict";
 const startTime = Date.now();
 const timeout = 60;
+var modePencil = false;
 var hints = 0;
 var hint2 = "";
 var hint3 = "";
@@ -8,6 +9,13 @@ var pyodide = "";
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
     success: function (data) {
+        var pencil = localStorage.getItem("modePencil");
+        if ( pencil == null || pencil != 'on' ) {
+            modePencil = false;
+            localStorage.setItem("modePencil", 'off');
+        } else {
+            modePencil = true;
+        }
         var level = localStorage.getItem("level");
         if (level == null) {
             level = 3;
@@ -153,7 +161,7 @@ function num(n) {
     var content = document.getElementById(activecell).innerHTML;
     content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
     // Check if available
-    if (n != 0 && !content.includes(n)) {
+    if (!modePencil && n != 0 && !content.includes(n)) {
         var match = scancell(s, n);
         if (match.length > 0) {
             highlight(match);
@@ -191,7 +199,7 @@ function num(n) {
         }
         if (mark.length == 1) {
             n = mark;
-            if (n - 0 != 0) {
+            if (!modePencil && n - 0 != 0) {
                 match = scancell(s, n);
                 if (match.length > 0) {
                     highlight(match);
@@ -211,6 +219,43 @@ function num(n) {
     $('#' + activecell).html(button(activecell, n, 'selected'));
     document.getElementById("message").innerHTML = "";
     if (numblank(s) == 0) {
+        // No blank cell
+        // Check if finished
+        var match = new Array();
+        var box = [0, 1, 2, 9, 10, 11, 18, 19, 20];
+        for (var i = 0; i < 9; i++) {
+            var array = [];
+            for ( col = 0; col < 9; col++ ) {
+                array.push(s[i * 9 + col]);
+            }
+            if ( duplicate(array) > 0 ) {
+                notSolved('row ' + (i+1).toString(), duplicate(array))
+                return;
+            }
+            var array = [];
+            for ( row = 0; row < 9; row++ ) {
+                array.push(s[row * 9 + i]);
+            }
+            if ( duplicate(array) > 0 ) {
+                notSolved('column ' + (i+1).toString(), duplicate(array))
+                return;
+            }
+        }
+        for (var row = 0; row < 3; row++) {
+            for (var col = 0; col < 3; col++) {
+                var numBox = row * 3 + col + 1;
+                var begin = row * 27 + col * 3;
+                var array = [];
+                for (let b in box) {
+                    array.push(s[begin + box[b]]);
+                }
+                if ( duplicate(array) > 0 ) {
+                    notSolved('box ' + numBox.toString(), duplicate(array))
+                    return;
+                }
+            }
+        }
+
         // Solved
         var start = localStorage.getItem("s" + level);
         document.getElementById(activecell).className = 'internal';
@@ -226,8 +271,28 @@ function num(n) {
         showfinished();
     }
 };
+// Check duplicate
+function duplicate(arr) {
+    for ( var i = 1; i < 10; i++ ) {
+        let num = i.toString();
+        if ( arr.indexOf(num) != arr.lastIndexOf(num) )  {
+            return i;
+        }
+    }
+    return 0;
+}
+// Not solved
+function notSolved(where, num) {
+    showmessage({
+        en: 'Not solved. Duplicate ' + num.toString() + ' in ' + where + '.',
+        ja: '解けていません。' + where + 'に' + num.toString() + 'が重複しています。'
+    });
+}
 // Back
 function back() {
+    if ( modePencil ) {
+        return;
+    }
     hints = 0;
     var move = getmove();
     if (move.length > 0) {
@@ -238,6 +303,9 @@ function back() {
 }
 // Reset
 function reset() {
+    if ( modePencil ) {
+        return;
+    }
     hints = 0;
     if (getmove().length > 0) {
         if (window.confirm(resetmessage())) {
@@ -263,6 +331,9 @@ function next() {
 }
 // Show hint
 async function hint() {
+    if ( modePencil ) {
+        return;
+    }
     if ( hints > 0 ) {
         if ( hints > 1 ) {
             document.getElementById("message").innerHTML = (hint2);
@@ -466,8 +537,16 @@ function keydown(key) {
         reset();
         return;
     }
+    // p: pencil mode
+    if (char == "P") {
+        pencil();
+        return;
+    }
     // c: copyt to clipboard
     if (char == "C") {
+        if ( modePencil ) {
+            return;
+        }
         var current = document.getElementById("current").textContent;
         copyText(current);
         showcopied(current);
@@ -601,12 +680,14 @@ function boardhtml(s) {
     board +=
         "<td class='invisible' id='del'><button type='button' class='command' id='del' onClick='num(0)'>X</button>";
     board +=
-        "<tr><td class='invisible' id='back'><button type='button' class='command' id='back' onClick='back()'>B</button>";
+        "<tr><td class='invisible' id='pencil'><button type='button' class='command' id='pencil' onClick='pencil()'>P</button>";
     board +=
-        "<td class='invisible' id='reset'><button type='button' class='command' id='reset' onClick='reset()'>R</button>";
+        "<td class='invisible' id='back'><button type='button' class='command' id='back' onClick='back()'>B</button>";
     if (ButtonRight) {
         board += "<tr>";
     }
+    board +=
+        "<td class='invisible' id='reset'><button type='button' class='command' id='reset' onClick='reset()'>R</button>";
     board +=
         "<td class='invisible' id='hint'><button type='button' class='command' id='hint' onClick='hint()'>H</button>";
     if (ButtonRight) {
@@ -656,6 +737,9 @@ function drawboard() {
     putmove(move);
     $('#message').text('');
     $('#activecell').text('');
+    if ( modePencil ) {
+        hideButtons();
+    }
 }
 // Copy text to clipboard
 function copyText(text) {
@@ -667,6 +751,37 @@ function copyText(text) {
     document.execCommand("copy");
     ta.parentElement.removeChild(ta);
 }
+// Pencil mode
+function pencil() {
+    if ( modePencil ) {
+        pencilOff();
+    } else {
+        pencilOn();
+    }
+}
+// Pencil mode off
+function pencilOff() {
+    modePencil = false;
+    localStorage.setItem('modePencil', 'off');
+    showPencilOff();
+    document.getElementById('back').style.visibility = 'visible';
+    document.getElementById('reset').style.visibility = 'visible';
+    document.getElementById('hint').style.visibility = 'visible';
+}
+// Pencil mode on
+function pencilOn() {
+    modePencil = true;
+    localStorage.setItem('modePencil', 'on');
+    showPencilOn();
+    hideButtons();
+}
+// Hide bottuns
+function hideButtons() {
+    document.getElementById('back').style.visibility = 'hidden';
+    document.getElementById('reset').style.visibility = 'hidden';
+    document.getElementById('hint').style.visibility = 'hidden';
+}
+
 // Count numbers of blank cells
 function numblank(s) {
     var blank = 0;
@@ -770,6 +885,20 @@ function showfinished() {
     showmessage({
         en: 'This is the solution. Push Next button for next problem.',
         ja: 'これが正解です。Next ボタンで次の問題となります。'
+    });
+}
+// Show message for pencil mode on
+function showPencilOn() {
+    showmessage({
+        en: 'Now we are in pencil mode. In pencil mode, checking duplicate of numbers and giving hints are disabled. It is same as solving with a pencil. Pencil mode can be turned off by pushing P button again.',
+        ja: '鉛筆モードに入ります。鉛筆モードでは、数字の重複自動チェックやヒント機能などは使えません。紙と鉛筆で解く状態と同じとなります。再度Pボタンを押すと通常モードに戻ります。'
+    });
+}
+// Show message for pencil mode off
+function showPencilOff() {
+    showmessage({
+        en: 'Pencil mode is turned off.',
+        ja: '鉛筆モードをオフにします。'
     });
 }
 // Show message when pyodide is not loaded yet
