@@ -2,6 +2,7 @@
 const startTime = Date.now();
 const timeout = 60;
 var modePencil = false;
+var rendering = false;
 var hints = 0;
 var hint2 = "";
 var hint3 = "";
@@ -161,7 +162,7 @@ function num(n) {
     var content = document.getElementById(activecell).innerHTML;
     content = content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
     // Check if available
-    if (!modePencil && n != 0 && !content.includes(n)) {
+    if (!rendering && !modePencil && n != 0 && !content.includes(n)) {
         var match = scancell(s, n);
         if (match.length > 0) {
             highlight(match);
@@ -199,7 +200,7 @@ function num(n) {
         }
         if (mark.length == 1) {
             n = mark;
-            if (!modePencil && n - 0 != 0) {
+            if (!rendering && !modePencil && n - 0 != 0) {
                 match = scancell(s, n);
                 if (match.length > 0) {
                     highlight(match);
@@ -728,6 +729,7 @@ function deselect(i) {
 }
 // Draw board
 function drawboard() {
+    rendering = true;
     var level = document.getElementById("level").value;
     var s = localStorage.getItem("s" + level);
     document.getElementById("current").textContent = s;
@@ -740,6 +742,7 @@ function drawboard() {
     if ( modePencil ) {
         hideButtons();
     }
+    rendering = false;
 }
 // Copy text to clipboard
 function copyText(text) {
