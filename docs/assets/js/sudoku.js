@@ -9,9 +9,9 @@ var hint3 = "";
 var pyodide = "";
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
-    success: function (data) {
+    success: function(data) {
         var pencil = localStorage.getItem("modePencil");
-        if ( pencil == null || pencil != 'on' ) {
+        if (pencil == null || pencil != 'on') {
             modePencil = false;
             localStorage.setItem("modePencil", 'off');
         } else {
@@ -59,7 +59,7 @@ $.ajax({
         drawboard();
         loadpyodide();
     },
-    error: function () {
+    error: function() {
         $('#board').html('Could not load sudoku problems.');
     }
 });
@@ -226,19 +226,19 @@ function num(n) {
         var box = [0, 1, 2, 9, 10, 11, 18, 19, 20];
         for (var i = 0; i < 9; i++) {
             var array = [];
-            for ( col = 0; col < 9; col++ ) {
-                array.push(s[i * 9 + col]);
+            for (col = 0; col < 9; col++) {
+                array.push(i * 9 + col);
             }
-            if ( duplicate(array) > 0 ) {
-                notSolved('row ' + (i+1).toString(), duplicate(array))
+            if (duplicate(array) > 0) {
+                notSolved('row ' + (i + 1).toString(), array);
                 return;
             }
             var array = [];
-            for ( row = 0; row < 9; row++ ) {
-                array.push(s[row * 9 + i]);
+            for (row = 0; row < 9; row++) {
+                array.push(row * 9 + i);
             }
-            if ( duplicate(array) > 0 ) {
-                notSolved('column ' + (i+1).toString(), duplicate(array))
+            if (duplicate(array) > 0) {
+                notSolved('column ' + (i + 1).toString(), array);
                 return;
             }
         }
@@ -248,10 +248,10 @@ function num(n) {
                 var begin = row * 27 + col * 3;
                 var array = [];
                 for (let b in box) {
-                    array.push(s[begin + box[b]]);
+                    array.push(begin + box[b]);
                 }
-                if ( duplicate(array) > 0 ) {
-                    notSolved('box ' + numBox.toString(), duplicate(array))
+                if (duplicate(array) > 0) {
+                    notSolved('box ' + numBox.toString(), array);
                     return;
                 }
             }
@@ -274,24 +274,40 @@ function num(n) {
 };
 // Check duplicate
 function duplicate(arr) {
-    for ( var i = 1; i < 10; i++ ) {
+    let s = document.getElementById("current").textContent;
+    let array = [];
+    for (let i in arr) {
+        array.push(s[arr[i]]);
+    }
+    for (let i = 1; i < 10; i++) {
         let num = i.toString();
-        if ( arr.indexOf(num) != arr.lastIndexOf(num) )  {
+        if (array.indexOf(num) != array.lastIndexOf(num)) {
             return i;
         }
     }
     return 0;
 }
 // Not solved
-function notSolved(where, num) {
+function notSolved(where, array) {
+    let s = document.getElementById("current").textContent;
+    let i = duplicate(array);
+    if (!rendering) {
+        let match = [];
+        for (let j = 0; j < 9; j++) {
+            if (s[array[j]] == i) {
+                match.push(array[j]);
+            }
+        }
+        highlight(match);
+    }
     showmessage({
-        en: 'Not solved. Duplicate ' + num.toString() + ' in ' + where + '.',
-        ja: '解けていません。' + where + 'に' + num.toString() + 'が重複しています。'
+        en: 'Not solved. Duplicate ' + i.toString() + ' in ' + where + '.',
+        ja: '解けていません。' + where + 'に' + i.toString() + 'が重複しています。'
     });
 }
 // Back
 function back() {
-    if ( modePencil ) {
+    if (modePencil) {
         return;
     }
     hints = 0;
@@ -304,7 +320,7 @@ function back() {
 }
 // Reset
 function reset() {
-    if ( modePencil ) {
+    if (modePencil) {
         return;
     }
     hints = 0;
@@ -332,24 +348,26 @@ function next() {
 }
 // Show hint
 async function hint() {
-    if ( modePencil ) {
+    if (modePencil) {
         return;
     }
-    if ( hints > 0 ) {
-        if ( hints > 1 ) {
+    if (hints > 0) {
+        if (hints > 1) {
             document.getElementById("message").innerHTML = (hint2);
-            if ( hints > 2 ) {
+            if (hints > 2) {
                 hint2 = hint3;
             }
         }
         return;
     }
-    if ( pyodide == "" ) {
+    if (pyodide == "") {
         showwait();
         return;
     }
     let current = document.getElementById("current").textContent;
-    let js_namespace = { pos : current };
+    let js_namespace = {
+        pos: current
+    };
     pyodide.registerJsModule("js_namespace", js_namespace);
     try {
         pyodide.runPython(`
@@ -373,10 +391,10 @@ async function hint() {
         `);
     } catch (err) {
         // showmessage(err);
-        if ( err.message.indexOf("ModuleNotFoundError") > -1 ) {
+        if (err.message.indexOf("ModuleNotFoundError") > -1) {
             showwait();
         } else {
-            let mes = err.message.replace("\n","<br>");
+            let mes = err.message.replace("\n", "<br>");
             showmessage({
                 en: 'Pyodide error: ' + mes,
                 ja: 'Pyodide エラー: ' + mes
@@ -391,12 +409,12 @@ async function hint() {
     hint3 = pyodide.globals.get("hint3");
     hints = parseInt(pyodide.globals.get("hints"));
     var lang = document.getElementById("lang").textContent;
-    if ( result.indexOf("Think candidates") > -1 ) {
+    if (result.indexOf("Think candidates") > -1) {
         let strategy = ['Search', 'Trial', 'Chain of pairs', 'Jellyfish', 'Swordfish', 'Hidden quad', 'Naked quad', 'Remote pairs', 'XYZ-wing', 'XY-wing', 'X-wing', 'Hidden triple', 'Hidden pair', 'Naked triple', 'Naked pair', 'Pointing triple', 'Pointing pair'];
         for (let s in strategy) {
             console.log(s)
-            if ( hint2.indexOf(strategy[s]) > -1 ) {
-                if ( lang == 'ja' ) {
+            if (hint2.indexOf(strategy[s]) > -1) {
+                if (lang == 'ja') {
                     result = '<a href="https://sekika.github.io/kaidoku/ja/logic">' + strategy[s] + '</a> を使います。';
                 } else {
                     result = '<a href="https://sekika.github.io/kaidoku/logic">' + strategy[s] + '</a> is used.';
@@ -405,45 +423,61 @@ async function hint() {
             }
         }
     }
-if ( lang == 'ja' ) {
-        if ( result == 'No solution to this position' ) {
+    if (result.indexOf("same value of") > -1) {
+        let match = [];
+        let i = -1;
+        for (let j = 0; j < 2; j++) {
+            i = result.indexOf("R", i + 1);
+            match.push(parseInt(result[i + 1] - 1) * 9 + parseInt(result[i + 3]) - 1);
+            console.log(match);
+            highlight(match);
+        }
+    }
+    if (lang == 'ja') {
+        if (result.indexOf("same value of") > -1) {
+            result = result.replace("Both ", "");
+            result = result.replace("and", "と");
+            result = result.replace("have the same value of", "で");
+            result = result.replace(".", " が重複しています。");
+        }
+        if (result == 'No solution to this position') {
             result = 'この状態では解はありません。どこかで間違えました。Bで戻れます。';
         }
-        if ( result.indexOf("Look at Row") > -1 ) {
+        if (result.indexOf("Look at Row") > -1) {
             result = result.replace("Look at Row:", "上から");
             result = result.replace(" Column:", "行目、左から");
             result = result.replace(". What number is available?", "列目には何が入りますか？");
         }
-        if ( result.indexOf("Hidden single") > -1 ) {
+        if (result.indexOf("Hidden single") > -1) {
             result = result.replace("Hidden single in ", "");
             result = result.replace("row", "（上から数えて）row");
             result = result.replace("column", "（左から数えて）column");
             result = result.replace("box", "（左上から右に数えて）box");
             result = result.replace("can be found.", "に単独候補マスがあるよ。");
         }
-        if ( hint2.indexOf("Hidden single") > -1 ) {
+        if (hint2.indexOf("Hidden single") > -1) {
             hint2 = hint2.replace("Hidden single in ", "");
             hint2 = hint2.replace("for", "に単独候補マスの") + " があるよ。";
         }
-        if ( result.indexOf("Think candidates") > -1 ) {
+        if (result.indexOf("Think candidates") > -1) {
             result = result.replace("Think candidates of the cells.", "数字の候補を考えよう。");
         }
-        if ( hint2.indexOf("successively") > -1 ) {
+        if (hint2.indexOf("successively") > -1) {
             hint2 = hint2.replace("Use", '次の<a href="https://sekika.github.io/kaidoku/ja/logic">解法</a>を順番に使うと1マス確定するよ。<br>');
             hint2 = hint2.replace("successively.", "");
         }
     }
-    if ( hint2.indexOf("Use") == 0 ) {
+    if (hint2.indexOf("Use") == 0) {
         hint2 = hint2.replace("Use", '<a href="https://sekika.github.io/kaidoku/logic">Use</a>');
     }
-var add = "<br>Push H for additional hint.";
-    if ( lang == 'ja' ) {
+    var add = "<br>Push H for additional hint.";
+    if (lang == 'ja') {
         add = "<br>Hでさらにヒントを表示します。";
     }
-    if ( hints > 1 ) {
+    if (hints > 1) {
         result += add;
     }
-    if ( hints > 2 ) {
+    if (hints > 2) {
         hint2 += add;
         hint3 = hint3.replace("\n", "<br>");
     }
@@ -493,7 +527,8 @@ function restorenumber() {
     var s = localStorage.getItem("s" + level);
     var c = document.getElementById("current").textContent;
     for (var i = 0; i < 81; i++) {
-        if (c[i] != 0 && i != activecell) {
+        // if (c[i] != 0 && i != activecell) {
+        if (c[i] != 0) {
             if (s[i] == 0) {
                 document.getElementById(i).innerHTML = button(i, c[i], 'cell');
             } else {
@@ -545,7 +580,7 @@ function keydown(key) {
     }
     // c: copyt to clipboard
     if (char == "C") {
-        if ( modePencil ) {
+        if (modePencil) {
             return;
         }
         var current = document.getElementById("current").textContent;
@@ -739,7 +774,7 @@ function drawboard() {
     putmove(move);
     $('#message').text('');
     $('#activecell').text('');
-    if ( modePencil ) {
+    if (modePencil) {
         hideButtons();
     }
     rendering = false;
@@ -756,7 +791,7 @@ function copyText(text) {
 }
 // Pencil mode
 function pencil() {
-    if ( modePencil ) {
+    if (modePencil) {
         pencilOff();
     } else {
         pencilOn();
@@ -822,8 +857,8 @@ function putmove(move) {
 }
 // Button
 function button(cell, num, btnclass) {
-   return "<button type='button' class='" + btnclass + "' id='b" + cell +
-       "' onClick='btn(" + cell + ")'>" + num + "</button></td>";
+    return "<button type='button' class='" + btnclass + "' id='b" + cell +
+        "' onClick='btn(" + cell + ")'>" + num + "</button></td>";
 }
 // Show mesage
 function showmessage(message) {
@@ -906,7 +941,7 @@ function showPencilOff() {
 }
 // Show message when pyodide is not loaded yet
 function showwait() {
-    if ( Date.now() - startTime < timeout * 1000 ) {
+    if (Date.now() - startTime < timeout * 1000) {
         showmessage({
             en: 'Not ready to show hint yet. Wait for a moment and press H again.',
             ja: 'まだヒント表示の準備ができていません。少し待ってからもう一度 H ボタンを押してください。'
