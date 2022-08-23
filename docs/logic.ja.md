@@ -30,9 +30,11 @@ permalink: /ja/logic
 - Remote pairs
 - Analysis of chain of pairs
 
-このような難しい問題を解くためには、通常候補数字をメモする。紙と鉛筆を使うときには、それぞれの数字をセル内の位置に対応させたペンシルマークで候補数字を簡易的にメモする技法もある。このような高度な解法について、詳細ではこのサイトでは踏み込まない。以下のサイトを参照。
+このような難しい問題を解くためには、通常候補数字をメモする。紙と鉛筆を使うときには、それぞれの数字をセル内の位置に対応させたペンシルマークで候補数字を簡易的にメモする技法もある。
 
-- [ナンバープレース、数独 解法まとめ](http://www.geocities.jp/master_mishichan/)
+それぞれの解法について、詳細は以下のサイトを参照してください。
+
+- [【ルール＆解き方】ナンバープレース](http://www10.big.or.jp/~morm-e/puzzle/techniques/number_place/index.html)
 - [数独の解き方](http://www.sudokugame.org/solv/)
 - [SudokuWiki.org - Strategy Families](http://www.sudokuwiki.org/Strategy_Families)
 

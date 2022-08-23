@@ -27,10 +27,12 @@ For solving harder puzzles, some advanced logics need to be used, such as
 - X-wing, XY-wing, XYZ-wing
 - Analysis of chain of pairs
 
-To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied. Detail of each logic is not discussed in this page. Please refer to these sites.
+To solve such difficult problems, usually people write candidates of the numbers in the cells to think which logic can be applied.
+
+Detail of each logic is not discussed in this page. Please refer to these sites.
 
 - [SudokuWiki.org - Strategy Families](http://www.sudokuwiki.org/Strategy_Families)
-- [sudoku-solutions.com - Background](http://www.sudoku-solutions.com/index.php?page=background)
+- [sudoku-solutions.com - Background](https://www.sudoku-solutions.com/index.php?section=background)
 
 ## Trial and search
 
