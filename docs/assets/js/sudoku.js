@@ -166,6 +166,10 @@ function num(n) {
         var match = scancell(s, n);
         if (match.length > 0) {
             highlight(match);
+            showmessage({
+                en: n.toString() + ' is a duplicate.',
+                ja: n.toString() + 'は重複します。'
+            });
             return;
         }
     }
@@ -364,6 +368,7 @@ async function hint() {
         showwait();
         return;
     }
+    showthinking();
     let current = document.getElementById("current").textContent;
     let js_namespace = {
         pos: current
@@ -412,7 +417,6 @@ async function hint() {
     if (result.indexOf("Think candidates") > -1) {
         let strategy = ['Search', 'Trial', 'Chain of pairs', 'Jellyfish', 'Swordfish', 'Hidden quad', 'Naked quad', 'Remote pairs', 'XYZ-wing', 'XY-wing', 'X-wing', 'Hidden triple', 'Hidden pair', 'Naked triple', 'Naked pair', 'Pointing triple', 'Pointing pair'];
         for (let s in strategy) {
-            console.log(s)
             if (hint2.indexOf(strategy[s]) > -1) {
                 if (lang == 'ja') {
                     result = '<a href="https://sekika.github.io/kaidoku/ja/logic">' + strategy[s] + '</a> を使います。';
@@ -432,6 +436,11 @@ async function hint() {
             console.log(match);
             highlight(match);
         }
+    }
+    if (result.indexOf("Look at Row") > -1) {
+        let row = parseInt(result[result.indexOf("Row:") + 4]);
+        let col = parseInt(result[result.indexOf("Column:") + 7]);
+        btn((row-1) * 9 + col-1);
     }
     if (lang == 'ja') {
         if (result.indexOf("same value of") > -1) {
@@ -479,7 +488,7 @@ async function hint() {
     }
     if (hints > 2) {
         hint2 += add;
-        hint3 = hint3.replace("\n", "<br>");
+        hint3 = hint3.replace(/\n/g, "<br>");
     }
     document.getElementById("message").innerHTML = (result);
 }
@@ -771,8 +780,12 @@ function drawboard() {
     var board = boardhtml(s);
     $('#board').html(board);
     var move = getmove();
-    putmove(move);
-    $('#message').text('');
+    if (move.length == 0) {
+        showstart();
+    } else {
+        $('#message').text('');
+        putmove(move);
+    }
     $('#activecell').text('');
     if (modePencil) {
         hideButtons();
@@ -918,6 +931,13 @@ function showcopied(current) {
         ja: ja
     });
 }
+// Show message when starting
+function showstart() {
+    showmessage({
+        en: 'Starting a new game. You can select another problem from the level and number.',
+        ja: 'ゲームを開始します。レベルと番号から他の問題を選ぶことができます。'
+    });
+}
 // Show message when finished
 function showfinished() {
     showmessage({
@@ -952,4 +972,11 @@ function showwait() {
             ja: 'ヒント表示に必要な <a href="https://pyodide.org/en/stable/">pyodide</a> を読み込めませんでした。他のWebブラウザを試してみてください。<a href="https://pyodide.org/en/stable/usage/index.html">Pyodide がサポートするブラウザ</a>を参考にしてください。'
         });
     }
+}
+// Show thinking
+function showthinking() {
+    showmessage({
+        en: 'Thinking...',
+        ja: '思考中...'
+    });
 }
