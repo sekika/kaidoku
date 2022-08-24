@@ -7,6 +7,8 @@ var hints = 0;
 var hint2 = "";
 var hint3 = "";
 var pyodide = "";
+const special = ['800000000003600000070090200050007000000045700000100030001000068008500010090000400|Arto Inkala (2012)<br><br>As described in the <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">article at sudoku.org</a>, this problem was described as the <strong>hardest sudoku</strong> in various news sites. You can enjoy solving this problem or seeing how to solve it with the help of hints.', 
+'600008940900006100070040000200610000000000200089002000000060005000000030800001600|David Filmer #26<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: This is a benchmark problem. <strong>Your browser may not respond with H button</strong> at the initial position. Put 5 on R3C6 and then you can start to get hints. It is still very difficult and you can enjoy solving with help of hints. This problem can be solved with a commandline version of Kaidoku.']
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
     success: function(data) {
@@ -41,12 +43,15 @@ $.ajax({
         var levelname = getlevelname();
         var noname = getnoname();
         var problem = "<select id='level' onChange='updatelevel()'>";
-        for (var i = 1; i <= 9; i++) {
+        for (var i = 1; i <= 10; i++) {
             problem += "<option value='" + i + "'";
             if (i == level) {
                 problem += " selected";
             }
-            problem += ">" + levelname[0] + i + ": ";
+            problem += ">"
+            if (i<10) {
+                problem += levelname[0] + i + ": ";
+            }
             problem += levelname[i];
             problem += "</option>";
         }
@@ -351,7 +356,7 @@ function next() {
     }
 }
 // Show hint
-async function hint() {
+function hint() {
     if (modePencil) {
         return;
     }
@@ -395,7 +400,6 @@ async function hint() {
                 hint3 = k.hint3
         `);
     } catch (err) {
-        // showmessage(err);
         if (err.message.indexOf("ModuleNotFoundError") > -1) {
             showwait();
         } else {
@@ -407,15 +411,13 @@ async function hint() {
         }
         return
     }
-    // pyodide.unregisterJsModule("js_namespace");
-    // js_namespace = '';
     let result = pyodide.globals.get("result");
     hint2 = pyodide.globals.get("hint2");
     hint3 = pyodide.globals.get("hint3");
     hints = parseInt(pyodide.globals.get("hints"));
     var lang = document.getElementById("lang").textContent;
     if (result.indexOf("Think candidates") > -1) {
-        let strategy = ['Search', 'Trial', 'Chain of pairs', 'Jellyfish', 'Swordfish', 'Hidden quad', 'Naked quad', 'Remote pairs', 'XYZ-wing', 'XY-wing', 'X-wing', 'Hidden triple', 'Hidden pair', 'Naked triple', 'Naked pair', 'Pointing triple', 'Pointing pair'];
+        let strategy = ['Deep search', 'Search', 'Trial', 'Chain of pairs', 'Jellyfish', 'Swordfish', 'Hidden quad', 'Naked quad', 'Remote pairs', 'XYZ-wing', 'XY-wing', 'X-wing', 'Hidden triple', 'Hidden pair', 'Naked triple', 'Naked pair', 'Pointing triple', 'Pointing pair'];
         for (let s in strategy) {
             if (hint2.indexOf(strategy[s]) > -1) {
                 if (lang == 'ja') {
@@ -490,7 +492,7 @@ async function hint() {
         hint2 += add;
         hint3 = hint3.replace(/\n/g, "<br>");
     }
-    document.getElementById("message").innerHTML = (result);
+    document.getElementById("message").innerHTML = result;
 }
 
 // Scan duplicated numbers
@@ -655,6 +657,14 @@ function keydown(key) {
 };
 // Read sudoku data
 function sudoku(data, level, no) {
+    if (level == 10) {
+        let last = special.length;
+        if (no > last) {
+            no = last;
+        }
+        s = special[no - 1].split("|")[0];
+        return [s, last];
+    }
     var lines = data.split("\n");
     var n = 0;
     var found = false;
@@ -893,10 +903,10 @@ function localmessage(message) {
 function getlevelname() {
     var lang = document.getElementById("lang").textContent;
     if (lang == 'ja') {
-        var levelname = ['レベル', '簡単すぎ', '超簡単', '簡単', '普通', '難しい', 'とても難しい', '意地悪', '難しすぎ', '究極'];
+        var levelname = ['レベル', '簡単すぎ', '超簡単', '簡単', '普通', '難しい', 'とても難しい', '意地悪', '難しすぎ', '究極', '特別問題'];
     } else {
         var levelname = ['Level ', 'trivial', 'very easy', 'easy', 'normal', 'hard', 'very hard', 'evil', 'extreme',
-            'ultimate'
+            'ultimate', 'Special problem'
         ];
     }
     return levelname;
@@ -933,6 +943,16 @@ function showcopied(current) {
 }
 // Show message when starting
 function showstart() {
+    let level = document.getElementById("level").value;
+    let no = document.getElementById("no").value - 0;
+    if (level == 10) {
+        let description = special[no - 1].split("|")[1];
+        showmessage({
+            en: 'Special problem No. ' + no.toString() + '<br>' + description,
+            ja: '特別問題 No. ' + no.toString() + '<br>' + description
+        });
+        return;
+    }
     showmessage({
         en: 'Starting a new game. You can select another problem from the level and number.',
         ja: 'ゲームを開始します。レベルと番号から他の問題を選ぶことができます。'
