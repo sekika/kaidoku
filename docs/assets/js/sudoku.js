@@ -7,8 +7,8 @@ var hints = 0;
 var hint2 = "";
 var hint3 = "";
 var pyodide = "";
-const special = ['800000000003600000070090200050007000000045700000100030001000068008500010090000400|Arto Inkala (2012)<br><br>As described in the <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">article at sudoku.org</a>, this problem was described as the <strong>hardest sudoku</strong> in various news sites. You can enjoy solving this problem or seeing how to solve it with the help of hints.', 
-'600008940900006100070040000200610000000000200089002000000060005000000030800001600|David Filmer #26<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: This is a benchmark problem. <strong>Your browser may not respond with H button</strong> at the initial position. Put 5 on R3C6 and then you can start to get hints. It is still very difficult and you can enjoy solving with help of hints. This problem can be solved with a commandline version of Kaidoku.']
+const special = ['800000000003600000070090200050007000000045700000100030001000068008500010090000400|Arto Inkala (2012)<br><br>As described in the <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">article at sudoku.org</a>, this problem was described as the <strong>hardest sudoku</strong> in various news sites.|Arto Inkala (2012)<br><br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>に書かれているように、<strong>最も難しい数独</strong>として色々なニュースサイトで紹介されました。', 
+'600008940900006100070040000200610000000000200089002000000060005000000030800001600|David Filmer #26<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: This is a benchmark problem. <strong>Your browser may not respond with H button</strong> at the initial position. Put 5 on R3C6 and then you can start to get hints. It is still very difficult and you can enjoy solving with help of hints. This problem can be solved with a commandline version of Kaidoku.|David Filmer #26<br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>を参照。<br><br><strong>警告</strong>: 初期画面で<strong>Hボタンを押すとブラウザが反応しなくなる</strong>かもしれません。R3C6に5を入れるとヒント表示が可能になります。それでも大変難しく、ヒントを見ながら解き進めることができます。解独のコマンドライン版で解くことが可能です。']
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
     success: function(data) {
@@ -356,7 +356,7 @@ function next() {
     }
 }
 // Show hint
-function hint() {
+async function hint() {
     if (modePencil) {
         return;
     }
@@ -373,7 +373,7 @@ function hint() {
         showwait();
         return;
     }
-    showthinking();
+    await showthinking();
     let current = document.getElementById("current").textContent;
     let js_namespace = {
         pos: current
@@ -946,7 +946,11 @@ function showstart() {
     let level = document.getElementById("level").value;
     let no = document.getElementById("no").value - 0;
     if (level == 10) {
-        let description = special[no - 1].split("|")[1];
+        let lang = {
+            en: 1,
+            ja: 2
+        }[document.getElementById("lang").textContent];
+        let description = special[no - 1].split("|")[lang];
         showmessage({
             en: 'Special problem No. ' + no.toString() + '<br>' + description,
             ja: '特別問題 No. ' + no.toString() + '<br>' + description
@@ -999,4 +1003,13 @@ function showthinking() {
         en: 'Thinking...',
         ja: '思考中...'
     });
+    // Wait 0.01 seconds for drawing if level>7 and blankcell>45
+    let level = document.getElementById("level").value;
+    let s = document.getElementById("current").textContent;
+    if (level>7 && numblank(s) > 45) {
+        let milliseconds = 10;
+        return new Promise(resolve => {
+            setTimeout(resolve, milliseconds);
+        });
+    }
 }
