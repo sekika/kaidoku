@@ -7,8 +7,8 @@ var hints = 0;
 var hint2 = "";
 var hint3 = "";
 var pyodide = "";
-const special = ['800000000003600000070090200050007000000045700000100030001000068008500010090000400|Arto Inkala (2012)<br><br>As described in the <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">article at sudoku.org</a>, this problem was described as the <strong>hardest sudoku</strong> in various news sites.|Arto Inkala (2012)<br><br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>に書かれているように、<strong>最も難しい数独</strong>として色々なニュースサイトで紹介されました。', 
-'600008940900006100070040000200610000000000200089002000000060005000000030800001600|David Filmer #26<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: This is a benchmark problem. <strong>Your browser may not respond with H button</strong> at the initial position. Put 5 on R3C6 and then you can start to get hints. It is still very difficult and you can enjoy solving with help of hints. This problem can be solved with a commandline version of Kaidoku.|David Filmer #26<br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>を参照。<br><br><strong>警告</strong>: 初期画面で<strong>Hボタンを押すとブラウザが反応しなくなる</strong>かもしれません。R3C6に5を入れるとヒント表示が可能になります。それでも大変難しく、ヒントを見ながら解き進めることができます。解独のコマンドライン版で解くことが可能です。']
+const special = ['800000000003600000070090200050007000000045700000100030001000068008500010090000400|Arto Inkala (2012)<br><br>As described in the <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">article at sudoku.org</a>, this problem was described as the <strong>hardest sudoku</strong> in various news sites. Wait for several seconds to show hints.|Arto Inkala (2012)<br><br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>に書かれているように、<strong>最も難しい数独</strong>として色々なニュースサイトで紹介されました。ヒント表示には数秒待ってください。', 
+'600008940900006100070040000200610000000000200089002000000060005000000030800001600|David Filmer #26<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: This is a benchmark problem. You may have to <strong>wait a few minutes</strong> for getting hint at the initial position. Browser will not respond in the period.|David Filmer #26<br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>を参照。<br><br><strong>警告</strong>: 初期画面でHボタンを押すと<strong>思考時間が数分間</strong>かかり、その間ブラウザが反応しなくなります。']
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
     success: function(data) {
@@ -374,6 +374,7 @@ async function hint() {
         return;
     }
     await showthinking();
+    let start = Date.now();
     let current = document.getElementById("current").textContent;
     let js_namespace = {
         pos: current
@@ -411,6 +412,7 @@ async function hint() {
         }
         return
     }
+    let time = Date.now() - start;
     let result = pyodide.globals.get("result");
     hint2 = pyodide.globals.get("hint2");
     hint3 = pyodide.globals.get("hint3");
@@ -491,6 +493,13 @@ async function hint() {
     if (hints > 2) {
         hint2 += add;
         hint3 = hint3.replace(/\n/g, "<br>");
+    }
+    if (time > 1000) {
+        let sec = (Math.floor(time / 100) / 10).toString();
+        result += {
+            en: '<br>(Thinking time: ' + sec + 'seconds',
+            ja: '<br>(思考時間 ' + sec + '秒)'
+        }[document.getElementById("lang").textContent];
     }
     document.getElementById("message").innerHTML = result;
 }
