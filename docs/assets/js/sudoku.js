@@ -7,8 +7,10 @@ var hints = 0;
 var hint2 = "";
 var hint3 = "";
 var pyodide = "";
-const special = ['800000000003600000070090200050007000000045700000100030001000068008500010090000400|Arto Inkala (2012)<br><br>As described in the <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">article at sudoku.org</a>, this problem was described as the <strong>hardest sudoku</strong> in various news sites. Wait for several seconds to show hints.|Arto Inkala (2012)<br><br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>に書かれているように、<strong>最も難しい数独</strong>として色々なニュースサイトで紹介されました。ヒント表示には数秒待ってください。', 
-'600008940900006100070040000200610000000000200089002000000060005000000030800001600|David Filmer #26<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: This is a benchmark problem. You may have to <strong>wait a few minutes</strong> for getting hint at the initial position. Browser will not respond in the period.|David Filmer #26<br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>を参照。<br><br><strong>警告</strong>: 初期画面でHボタンを押すと<strong>思考時間が数分間</strong>かかり、その間ブラウザが反応しなくなります。']
+const special = ['800000000003600000070090200050007000000045700000100030001000068008500010090000400|Arto Inkala (2012)<br><br>As described in the <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">article at sudoku.org</a>, this problem was described as the <strong>hardest sudoku</strong> in various news sites. Wait for several seconds to show hints.|Arto Inkala (2012)<br><br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>に書かれているように、<strong>最も難しい数独</strong>として色々なニュースサイトで紹介されました。ヒント表示には数秒待ってください。',
+    '002800000030060007100000040600090000050600009000057060000300100070006008400000020|David Filmer (2012) The Weekly Extreme "Unsolveable" Sudoku Puzzle #49<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: You may have to <strong>wait a minute</strong> for getting hint at the initial position. Browser will not respond in the period.|David Filmer (2012) The Weekly Extreme "Unsolveable" Sudoku Puzzle #49<br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>を参照。<br><br><strong>警告</strong>: 初期画面でHボタンを押すと<strong>思考時間が1分程度</strong>かかり、その間ブラウザが反応しなくなります。',
+    '600008940900006100070040000200610000000000200089002000000060005000000030800001600|David Filmer (2011) The Weekly Extreme "Unsolveable" Sudoku Puzzle #28<br>See <a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">this article</a>.<br><br><strong>Warning</strong>: You may have to <strong>wait a few minutes</strong> for getting hint at the initial position. Browser will not respond in the period.|David Filmer (2011) The Weekly Extreme "Unsolveable" Sudoku Puzzle #28<br><a href="https://www.sudokuwiki.org/Print_Arto_Inkala_Sudoku">この記事</a>を参照。<br><br><strong>警告</strong>: 初期画面でHボタンを押すと<strong>思考時間が数分間</strong>かかり、その間ブラウザが反応しなくなります。'
+]
 $.ajax({
     url: 'https://raw.githubusercontent.com/sekika/kaidoku/master/kaidoku/data/sudoku.txt',
     success: function(data) {
@@ -49,7 +51,7 @@ $.ajax({
                 problem += " selected";
             }
             problem += ">"
-            if (i<10) {
+            if (i < 10) {
                 problem += levelname[0] + i + ": ";
             }
             problem += levelname[i];
@@ -444,7 +446,7 @@ async function hint() {
     if (result.indexOf("Look at Row") > -1) {
         let row = parseInt(result[result.indexOf("Row:") + 4]);
         let col = parseInt(result[result.indexOf("Column:") + 7]);
-        btn((row-1) * 9 + col-1);
+        btn((row - 1) * 9 + col - 1);
     }
     if (lang == 'ja') {
         if (result.indexOf("same value of") > -1) {
@@ -497,9 +499,9 @@ async function hint() {
     if (time > 1000) {
         let sec = (Math.floor(time / 100) / 10).toString();
         result += {
-            en: '<br>(Thinking time: ' + sec + 'seconds',
+            en: '<br>(Thinking time: ' + sec + ' seconds)',
             ja: '<br>(思考時間 ' + sec + '秒)'
-        }[document.getElementById("lang").textContent];
+        } [document.getElementById("lang").textContent];
     }
     document.getElementById("message").innerHTML = result;
 }
@@ -958,7 +960,7 @@ function showstart() {
         let lang = {
             en: 1,
             ja: 2
-        }[document.getElementById("lang").textContent];
+        } [document.getElementById("lang").textContent];
         let description = special[no - 1].split("|")[lang];
         showmessage({
             en: 'Special problem No. ' + no.toString() + '<br>' + description,
@@ -1015,7 +1017,7 @@ function showthinking() {
     // Wait 0.01 seconds for drawing if level>7 and blankcell>45
     let level = document.getElementById("level").value;
     let s = document.getElementById("current").textContent;
-    if (level>7 && numblank(s) > 45) {
+    if (level > 7 && numblank(s) > 45) {
         let milliseconds = 10;
         return new Promise(resolve => {
             setTimeout(resolve, milliseconds);
