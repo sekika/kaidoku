@@ -448,6 +448,36 @@ async function hint() {
         let col = parseInt(result[result.indexOf("Column:") + 7]);
         btn((row - 1) * 9 + col - 1);
     }
+    if (result.indexOf("Hidden single") > -1) {
+        let array = [];
+        if (result.indexOf("row") > -1) {
+            let row = parseInt(result[result.indexOf("row") + 4]) - 1;
+            for (let i = 0; i < 9; i++) {
+                array.push(row * 9 + i);
+            }
+        }
+        if (result.indexOf("column") > -1) {
+            let col = parseInt(result[result.indexOf("column ") + 7]) - 1;
+            for (let i = 0; i < 9; i++) {
+                array.push(i * 9 + col);
+            }
+        }
+        if (result.indexOf("box") > -1) {
+            let box = parseInt(result[result.indexOf("box") + 4]) - 1;
+            let b = (Math.floor(box / 3)) * 27 + (box % 3) * 3;
+            array = [b, b + 1, b + 2, b + 9, b + 10, b + 11, b + 18, b + 19, b + 20];
+        }
+        let blank = [];
+        for (let i in array) {
+            if (current[array[i]] == 0) {
+                blank.push(array[i]);
+            }
+        }
+        for (let i in blank) {
+            document.getElementById(blank[i]).style.backgroundColor = 'lightgreen';
+        }
+        let timeout_id = setTimeout(restoreblank, 150);
+    }
     if (lang == 'ja') {
         if (result.indexOf("same value of") > -1) {
             result = result.replace("Both ", "");
@@ -505,6 +535,16 @@ async function hint() {
     }
     document.getElementById("message").innerHTML = result;
 }
+
+// Restore blank cell
+function restoreblank() {
+    var c = document.getElementById("current").textContent;
+    for (var i = 0; i < 81; i++) {
+        if (c[i] == 0) {
+            document.getElementById(i).style.backgroundColor = '';
+        }
+    }
+};
 
 // Scan duplicated numbers
 function scancell(s, n) {
