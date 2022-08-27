@@ -2,7 +2,9 @@
 const startTime = Date.now();
 const timeout = 60;
 var modePencil = false;
+var modeTime = false;
 var rendering = false;
+var startGame = Date.now();
 var hints = 0;
 var hint2 = "";
 var hint3 = "";
@@ -84,8 +86,10 @@ function updatelevel() {
     localStorage.setItem("level", level);
     var no = localStorage.getItem("level" + level);
     localStorage.setItem("note", '');
-    if (no == null) {
-        no = 1;
+    if (no == null || no == 0) {
+        if (no == null) {
+            no = 1;
+        }
         document.getElementById("no").value = no;
         [s, last] = sudoku(data, level, no);
         if (no > last) {
@@ -114,9 +118,9 @@ function updatenum() {
     hints = 0;
     var data = document.getElementById("data").textContent;
     var level = document.getElementById("level").value;
-    var no = document.getElementById("no").value - 0;
+    var no = parseInt(document.getElementById("no").value);
     localStorage.setItem("note", '');
-    if (isFinite(no) && no > "") {
+    if (isFinite(no) && no > -1) {
         localStorage.setItem("level", level);
         var s, last;
         [s, last] = sudoku(data, level, no);
@@ -352,10 +356,14 @@ function next() {
     hints = 0;
     var no = document.getElementById("no").value - 0;
     var last = document.getElementById("last").textContent - 0;
-    if (no < last) {
-        document.getElementById("no").value = no + 1;
-        updatenum();
+    if (no > 0) {
+        no = no + 1;
+        if (no > last) {
+            no = 1;
+        }
     }
+    document.getElementById("no").value = no;
+    updatenum();
 }
 // Show hint
 async function hint() {
@@ -710,6 +718,9 @@ function keydown(key) {
 function sudoku(data, level, no) {
     if (level == 10) {
         let last = special.length;
+        if (no == 0) {
+            no = 1;
+        }
         if (no > last) {
             no = last;
         }
@@ -732,7 +743,49 @@ function sudoku(data, level, no) {
             }
         }
     }
+    if (no == 0) {
+        no = Math.floor(Math.random() * n) + 1;
+        [s, n] = sudoku(data, level, no);
+        s = shuffle(s);
+        if (modePencil) {
+            modeTime = true;
+            startGame = Date.now();
+        }
+    }
     return [s, n];
+}
+// Shuffle number and rotation
+function shuffle(s) {
+    let rot = Math.floor(Math.random() * 8);
+    // Fisher–Yates shuffle
+    let shuffle = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    for (let i = 8; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [shuffle[i], shuffle[j]] = [shuffle[j], shuffle[i]];
+    }
+    let flipRow = ((rot & 4) == 4);
+    let flipCol = ((rot & 2) == 2);
+    let flipRC = ((rot & 1) == 1);
+    let flip = '';
+    for (let i = 0; i < 81; i++) {
+        let row = Math.floor(i / 9);
+        let col = i % 9;
+        if (flipRow) {
+            row = 8 - row;
+        }
+        if (flipCol) {
+            col = 8 - col;
+        }
+        if (flipRC) {
+            [row, col] = [col, row];
+        }
+        let cell = parseInt(s[row * 9 + col]);
+        if (cell > 0) {
+            cell = shuffle[cell - 1];
+        }
+        flip += cell.toString();
+    }
+    return flip;
 }
 // HTML of board
 function boardhtml(s) {
@@ -874,6 +927,7 @@ function pencil() {
 // Pencil mode off
 function pencilOff() {
     modePencil = false;
+    modeTime = false;
     localStorage.setItem('modePencil', 'off');
     showPencilOff();
     document.getElementById('back').style.visibility = 'visible';
@@ -1001,6 +1055,9 @@ function showstart() {
             en: 1,
             ja: 2
         } [document.getElementById("lang").textContent];
+        if (no == 0) {
+            no = 1;
+        }
         let description = special[no - 1].split("|")[lang];
         showmessage({
             en: 'Special problem No. ' + no.toString() + '<br>' + description,
@@ -1008,17 +1065,62 @@ function showstart() {
         });
         return;
     }
+    if (no == 0) {
+        showrandom();
+        return;
+    }
     showmessage({
         en: 'Starting a new game. You can select another problem from the level and number.',
         ja: 'ゲームを開始します。レベルと番号から他の問題を選ぶことができます。'
     });
 }
+// Starting a random problem
+function showrandom() {
+    let level = document.getElementById("level").value;
+    if (modeTime) {
+        showmessage({
+            en: 'Starting a time trial mode in level ' + level + '. When you turn off the pencil mode, time trial is finished.',
+            ja: 'レベル' + level + 'のタイムトライアルを開始します。鉛筆モードをオフにすると、タイムトライアルが終わります。'
+        });
+        return;
+    }
+    showmessage({
+        en: 'Starting a random game in level ' + level + '.',
+        ja: 'レベル' + level + 'のランダムな問題を開始します。'
+    });
+}
 // Show message when finished
 function showfinished() {
-    showmessage({
-        en: 'This is the solution. Push Next button for next problem.',
-        ja: 'これが正解です。Next ボタンで次の問題となります。'
-    });
+    if (modeTime) {
+        let level = document.getElementById("level").value;
+        let time = parseInt((Date.now() - startGame) / 1000);
+        let min = Math.floor(time / 60);
+        let sec = time % 60;
+        showmessage({
+            en: 'Level ' + level + ' solved in ' + enTime(min, sec) + '.',
+            ja: 'レベル' + level + 'を' + jpTime(min, sec) + 'で解きました。'
+        });
+    } else {
+        showmessage({
+            en: 'This is the solution. Push Next button for next problem.',
+            ja: 'これが正解です。Next ボタンで次の問題となります。'
+        });
+    }
+}
+
+function enTime(min, sec) {
+    if (min == 0) {
+        return sec.toString() + ' seconds';
+    }
+    return min.toString() + '°' + sec.toString() + "′";
+}
+
+function jpTime(min, sec) {
+    let s = '';
+    if (min > 0) {
+        s = min.toString() + '分';
+    }
+    return s + sec.toString() + "秒";
 }
 // Show message for pencil mode on
 function showPencilOn() {
