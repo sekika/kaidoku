@@ -5,6 +5,7 @@ var modePencil = false;
 var modeTime = false;
 var rendering = false;
 var startGame = Date.now();
+var timer = null;
 var hints = 0;
 var hint2 = "";
 var hint3 = "";
@@ -36,6 +37,10 @@ $.ajax({
         } else {
             var s = localStorage.getItem("s" + level);
             var last = localStorage.getItem("last" + level);
+            var move = getmove();
+            if (no == 0 && move.length == 0) {
+                s = null;
+            }
             if (s == null || last == null || s.length < 81) {
                 [s, last] = sudoku(data, level, no);
                 if (no > last) {
@@ -86,6 +91,8 @@ function updatelevel() {
     localStorage.setItem("level", level);
     var no = localStorage.getItem("level" + level);
     localStorage.setItem("note", '');
+    modeTime = false;
+    clearInterval(timer);
     if (no == null || no == 0) {
         if (no == null) {
             no = 1;
@@ -233,7 +240,9 @@ function num(n) {
         n = ' '
     }
     $('#' + activecell).html(button(activecell, n, 'selected'));
-    document.getElementById("message").innerHTML = "";
+    if (!modeTime) {
+        document.getElementById("message").innerHTML = "";
+    }
     if (numblank(s) == 0) {
         // No blank cell
         // Check if finished
@@ -716,6 +725,8 @@ function keydown(key) {
 };
 // Read sudoku data
 function sudoku(data, level, no) {
+    modeTime = false;
+    clearInterval(timer);
     if (level == 10) {
         let last = special.length;
         if (no == 0) {
@@ -748,11 +759,16 @@ function sudoku(data, level, no) {
         [s, n] = sudoku(data, level, no);
         s = shuffle(s);
         if (modePencil) {
-            modeTime = true;
-            startGame = Date.now();
+            startTimer();
         }
     }
     return [s, n];
+}
+// Start timer
+function startTimer() {
+    modeTime = true;
+    startGame = Date.now();
+    timer = setInterval("showTime()", 1000)
 }
 // Shuffle number and rotation
 function shuffle(s) {
@@ -928,6 +944,7 @@ function pencil() {
 function pencilOff() {
     modePencil = false;
     modeTime = false;
+    clearInterval(timer);
     localStorage.setItem('modePencil', 'off');
     showPencilOff();
     document.getElementById('back').style.visibility = 'visible';
@@ -1094,11 +1111,9 @@ function showfinished() {
     if (modeTime) {
         let level = document.getElementById("level").value;
         let time = parseInt((Date.now() - startGame) / 1000);
-        let min = Math.floor(time / 60);
-        let sec = time % 60;
         showmessage({
-            en: 'Level ' + level + ' solved in ' + enTime(min, sec) + '.',
-            ja: 'レベル' + level + 'を' + jpTime(min, sec) + 'で解きました。'
+            en: 'Level ' + level + ' solved in ' + enTime(time) + '.',
+            ja: 'レベル' + level + 'を' + jpTime(time) + 'で解きました。'
         });
     } else {
         showmessage({
@@ -1107,15 +1122,30 @@ function showfinished() {
         });
     }
 }
+// Show time
+function showTime() {
+    let time = parseInt((Date.now() - startGame) / 1000);
+    if (time < 10) {
+        return;
+    }
+    showmessage({
+        en: 'Time trial: ' + enTime(time),
+        ja: 'タイムトライアル: ' + jpTime(time)
+    });
+}
 
-function enTime(min, sec) {
+function enTime(time) {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
     if (min == 0) {
-        return sec.toString() + ' seconds';
+        return sec.toString() + '′';
     }
     return min.toString() + '°' + sec.toString() + "′";
 }
 
-function jpTime(min, sec) {
+function jpTime(time) {
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
     let s = '';
     if (min > 0) {
         s = min.toString() + '分';
