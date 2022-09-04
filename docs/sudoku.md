@@ -3,25 +3,18 @@ layout: sudoku
 lang: English
 ref: sudoku
 title: Live Sudoku book by Kaidoku
-comments: true
 permalink: /sudoku
 ---
 
 ## How to play
 
-- [Rule of sudoku](./rule)
-- Multiple numbers in a cell are regarded as notes.
-- Retyping the same number erases the number.
-- X deletes all numbers in the cell.
-- B is to take back a move.
-- R is to restart the problem.
-- H is to show hint.
-- P is for pencil mode.
-- You can close the web browzer and restart the game anytime by using the same browzer. Current position is always saved in your browser.
+{::nomarkdown}
+{% include help.html %}
+{:/nomarkdown}
+
+## About sudoku and kaidoku
+
+- <a href="rule">Rule of sudoku</a>
 - <a href="./">Kaidoku</a> created the problems and classified by the difficulty.
-- Keyboard can be used from PC. From the keyboard, c copies the current position to clipboard to [analyze](specified) with Kaidoku.
-- You can also [download PDF](book) of some of the problems.
-
-## Feedback
-
-- [Discussions](https://github.com/sekika/kaidoku/discussions)
+- You can also <a href="book">download PDF</a> of some of the problems.
+- <a href="https://github.com/sekika/kaidoku/discussions">Send your feedback here</a>.

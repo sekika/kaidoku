@@ -8,20 +8,13 @@ permalink: /ja/sudoku
 
 ## 遊び方
 
+{::nomarkdown}
+{% include help.ja.html %}
+{:/nomarkdown}
+
+## ナンプレと解独について
+
 - [数独・ナンプレのルール](./rule)
-- 同じマスに2つ以上の数字を入れると、メモになります。
-- 同じ数字を入れるとその数字が消えます。
-- X ですべての数字が消えます。
-- B で直前の手を取り消します。
-- R で最初からやり直します。
-- H で解き方のヒントを表示します。
-- P で鉛筆モードになります。
-- ブラウザを閉じても立ち上げ直せば続きができます。現局面はブラウザに保存されています。
 - <a href="./">解独</a>が作成して難易度を分類したものです。
-- PCからキーボードを使うこともできます。キーボードでは c で現局面をクリップボードにコピーして解独で[解析](specified)できます。
 - 一部の問題の[PDF本](book)をダウンロードできます。
-- [Python 実行の技術メモ](https://sekika.github.io/2022/08/19/sudoku/)
-
-## コメント
-
-- [コメントをどうぞ](https://github.com/sekika/kaidoku/discussions)
+- [コメントはこちらにどうぞ](https://github.com/sekika/kaidoku/discussions)
