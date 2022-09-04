@@ -1109,6 +1109,7 @@ function showrandom() {
 // Show message when finished
 function showfinished() {
     if (modeTime) {
+        clearInterval(timer);
         let level = document.getElementById("level").value;
         let time = parseInt((Date.now() - startGame) / 1000);
         showmessage({
