@@ -15,6 +15,6 @@ permalink: /ja/sudoku
 ## ナンプレと解独について
 
 - [数独・ナンプレのルール](./rule)
-- <a href="./">解独</a>が作成して難易度を分類したものです。
+- <a href="./">解独</a>が作成して[難易度を分類](level)したものです。
 - 一部の問題の[PDF本](book)をダウンロードできます。
 - [コメントはこちらにどうぞ](https://github.com/sekika/kaidoku/discussions)

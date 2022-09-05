@@ -7,7 +7,7 @@ permalink: /level
 
 # Select a problem of a specified difficulty level
 
-## Selection of level and problem
+## Determination of level
 
 Kaidoku classifies sudoku problems with 9 difficulty levels.
 
@@ -21,7 +21,15 @@ Kaidoku classifies sudoku problems with 9 difficulty levels.
 |Level 8| extreme |
 |Level 9| ultimate |
 
-You can select the level with `l level`. For example, to select level 5,
+The levels are determined by the numbers of initial blank cells, the difficulty of the logics, and the complexity of seach. Up to level 3 the numbers of blank cells are the dominant factor, up to level 6 the difficulty of the logics is the dominant factor, and from level 7 complexity of the search is the dominant factor.
+
+10 random problems of "evel" level in [web sudoku](https://www.websudoku.com/) were checked and all of them were classified as level 5 (hard) in Kaidoku.
+
+## Selection of level and problem
+
+In the [sudoku](online version), you can select the level from the pulldown menu and number from the textbox.
+
+In the commandline version of kaidoku, you can select the level with `l level`. For example, to select level 5,
 
     kaidoku-{{ site.version }}> l 5
     Level 5 No. 1
@@ -47,10 +55,6 @@ Therefore, recommended way is to start from no. 1 in each level, and after solvi
 You can show the index of the problem book by `book` command, which shows the numbers of problems in each level. Kaidoku is shipped with certain numbers of problems in each level. It can increase the numbers of problems by creating new problems. The rate of creating a new problem is faster than a human to solve the problem. Therefore, you can inifinitely enjoy new problems.
 
 The problems shipped with the latest kaidoku can also be played with the [online version](sudoku) of kaidoku.
-
-## Determination of level
-
-The levels are determined by the numbers of initial blank cells, the difficulty of the logics, and the complexity of seach. Up to level 3 the numbers of blank cells are the dominant factor, up to level 6 the difficulty of the logics is the dominant factor, and from level 7 complexity of the search is the dominant factor.
 
 - - -
 

@@ -15,6 +15,6 @@ permalink: /sudoku
 ## About sudoku and kaidoku
 
 - <a href="rule">Rule of sudoku</a>
-- <a href="./">Kaidoku</a> created the problems and classified by the difficulty.
+- <a href="./">Kaidoku</a> created the problems and [classified by the difficulty](level).
 - You can also <a href="book">download PDF</a> of some of the problems.
 - <a href="https://github.com/sekika/kaidoku/discussions">Send your feedback here</a>.
