@@ -4,7 +4,7 @@ description: Player, solver and creater of sudoku puzzles
 show_downloads: false
 google_analytics:
 theme: jekyll-theme-merlot
-version: 1.0.0
+version: 1.0.1
 jquery-version: "3.2.1" # jQuery https://jquery.com/download/
 pyodide-version: "0.21.0" # Pyodide https://pyodide.org/en/stable/project/changelog.html
 problems: 25000
