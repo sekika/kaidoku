@@ -31,7 +31,6 @@ from kaidoku.misc import pbox
 from kaidoku.output import output
 from kaidoku.output import short
 from kaidoku.output import url
-from kaidoku.gui import GUIBord
 
 
 def command(arg, config):
@@ -687,6 +686,7 @@ def show(c, verbose, config):
     else:
         label = 'Level ' + str(level) + ' No. ' + str(n)
     if c == 'bord':
+        from kaidoku.gui import GUIBord
         app = GUIBord()
         app.display(s,move)
         config['move'] = app.move

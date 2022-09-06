@@ -1,5 +1,6 @@
-import tkinter
 import copy
+
+import tkinter
 
 class GUIBord(tkinter.Tk):
     def __init__(self):

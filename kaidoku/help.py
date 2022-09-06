@@ -44,6 +44,7 @@ def advancedhelp():
     message += 'config          : show and edit configuration\n'
     message += 'create [numbers]: create new problems and append to book\n'
     message += 'giveup [sec]    : reanalyze giveup positions\n'
+    message += 'bord            : show graphical board (requires Tcl/Tk)\n'
     message += 'html            : see image in web browzer as html\n'
     message += 'jpg             : draw jpeg image\n'
     message += 'jm              : draw jpeg image with mark\n'
