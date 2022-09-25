@@ -4,6 +4,7 @@ const timeout = 60;
 var modePencil = false;
 var modeTime = false;
 var rendering = false;
+var loading = false;
 var startGame = Date.now();
 var timer = null;
 var hints = 0;
@@ -78,10 +79,17 @@ $.ajax({
     }
 });
 async function loadpyodide() {
+    if (pyodide != "" || loading) {
+        return;
+    }
+    loading = true;
+    console.log('Loading pyodide')
     pyodide = await loadPyodide();
     await pyodide.loadPackage("micropip");
     const micropip = await pyodide.pyimport("micropip");
     await micropip.install("kaidoku", false, false);
+    console.log('Pyodide loaded')
+    loading = false;
 }
 // Change the level
 function updatelevel() {
@@ -146,6 +154,7 @@ function updatenum() {
 // Click a cell
 function btn(i) {
     var activecell = document.getElementById("activecell").textContent;
+    loadpyodide();
     if (activecell == 'solved') {
         return;
     }
