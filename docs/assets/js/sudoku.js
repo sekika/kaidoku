@@ -293,6 +293,11 @@ function num(n) {
             $('#buttons').html("");
         }
         document.getElementById("activecell").textContent = 'solved';
+        for (let i = 0; i < 81; i++) {
+            if (document.getElementById(i).innerHTML.indexOf('button') > -1) {
+                $('#' + i).html('<em><font color="blue">' + s[i] + '</font></em>');
+            }
+        }
         showfinished();
     }
 };
