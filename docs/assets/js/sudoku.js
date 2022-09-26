@@ -214,14 +214,19 @@ function num(n) {
                 content = content.replace(' ', '');
             }
             var mark = content.slice(0, 5);
-            if (mark.length > 5) {
-                mark += content.slice(6, 9);
+            if (content.length > 5) {
+                mark += ' ' + content.slice(5);
             }
         } else {
-            if (content.length == 5) {
-                content += ' ';
+            var mark = '';
+            for (let i = 1; i < 10; i++) {
+                if (content.indexOf(i) > -1 || n + 0 == i) {
+                    if (mark.length == 5) {
+                        mark += ' ';
+                    }
+                    mark += i.toString();
+                }
             }
-            var mark = content + '' + n;
         }
         if (mark.length > 1) {
             $('#' + activecell).html(button(activecell, mark, 'selectedmark'));
