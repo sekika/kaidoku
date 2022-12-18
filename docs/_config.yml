@@ -2,7 +2,7 @@ url: "https://sekika.github.io/kaidoku/"
 title: Kaidoku
 description: Player, solver and creater of sudoku puzzles
 show_downloads: false
-google_analytics:
+google_analytics: G-1JRPK4WZ2B
 theme: jekyll-theme-merlot
 version: 1.0.1
 jquery-version: "3.2.1" # jQuery https://jquery.com/download/
