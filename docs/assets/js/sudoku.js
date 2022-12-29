@@ -521,7 +521,7 @@ async function hint() {
             result = result.replace("have the same value of", "で");
             result = result.replace(".", " が重複しています。");
         }
-        if (result == 'No solution to this position') {
+        if (result == 'No solution to this position. There should be a mistake up to here. You can take back a move with B.') {
             result = 'この状態では解はありません。どこかで間違えました。Bで戻れます。';
         }
         if (result.indexOf("Look at Row") > -1) {
