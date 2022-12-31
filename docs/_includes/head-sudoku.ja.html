@@ -1,15 +1,19 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen">
     <link rel="stylesheet" href="{{ '/assets/css/mobile.css' | relative_url }}" media="handheld, only screen and (max-device-width:640px)">
     <link rel="stylesheet" href="{{ '/assets/css/non-screen.css' | relative_url }}" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="{{'/assets/css/sudoku.css'  | relative_url }}" media="all">
+    <link rel="stylesheet" href="{{'/assets/css/sudoku-mobile.css'  | relative_url }}" media="handheld, only screen and (max-device-width:640px)">
     <link rel="stylesheet" href="{{ '/assets/css/personal.css' | relative_url }}" media="all">
 
     <script type="text/javascript" src="{{ '/assets/js/modernizr.js' | relative_url }}"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/{{ site.jquery-version }}/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v{{ site.pyodide-version }}/full/pyodide.js"></script>
+    <script type="text/javascript" src="{{ '/assets/js/sudoku.js' | relative_url }}"></script>
     <script type="text/javascript" src="{{ '/assets/js/headsmart.min.js' | relative_url }}"></script>
     <script type="text/javascript">
       $(document).ready(function () {
@@ -17,8 +21,10 @@
       })
     </script>
 
+{% include readmore.html %}
+
 {% seo %}
 <!-- Facebook share button -->
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="JopwEURf"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v15.0" nonce="JopwEURf"></script>
 {% include google.html %}
   </head>

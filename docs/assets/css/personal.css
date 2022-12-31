@@ -16,3 +16,8 @@ ul.selector li {
 table {
   width: auto;
 }
+.fb-share-button { /* https://blog.lqd.jp/css/css/ */
+  display: inline-block;
+  height: 20px;
+  overflow: hidden;
+}
