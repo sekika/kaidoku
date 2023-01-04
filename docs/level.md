@@ -27,7 +27,7 @@ The levels are determined by the numbers of initial blank cells, the difficulty 
 
 ## Selection of level and problem
 
-In the [sudoku](online version), you can select the level from the pulldown menu and number from the textbox.
+In the [online version](sudoku), you can select the level from the pulldown menu and number from the textbox.
 
 In the commandline version of kaidoku, you can select the level with `l level`. For example, to select level 5,
 
