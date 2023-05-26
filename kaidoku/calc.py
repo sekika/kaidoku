@@ -11,6 +11,30 @@ from kaidoku.misc import cell
 from kaidoku.misc import check
 from kaidoku.output import output
 
+POINT = {'Naked single': 0,
+         'Hidden single':  3,
+         'Pointing pair': 25,
+         'Pointing triple': 25,
+         'Naked pair': 25,
+         'Naked triple': 40,
+         'Hidden pair': 50,
+         'Hidden triple': 70,
+         'X-wing': 70,
+         'XY-wing': 70,
+         'XYZ-wing': 100,
+         'Remote pairs': 100,
+         'Naked quad': 120,
+         'Hidden quad': 150,
+         'Swordfish': 150,
+         'Jellyfish': 200,
+         'Chain of pairs': 200,
+         'Chain of pairs (long)': 300,
+         'Trial': 500,
+         'Trial (deep)': 1000,
+         'Search': 1500,
+         'Deep search': 2500
+         }
+
 
 def solve(s, verbose, maxdepth, maxtime):
     """Solve a problem."""
@@ -39,35 +63,63 @@ def solve(s, verbose, maxdepth, maxtime):
                 print(message)
             if verbose > 4 and blank(s) < bl:
                 print(output(s))
-            point = {
-                'Naked single': 0,
-                'Hidden single':  3,
-                'Pointing pair': 25,
-                'Pointing triple': 25,
-                'Naked pair': 25,
-                'Naked triple': 40,
-                'Hidden pair': 50,
-                'Hidden triple': 70,
-                'X-wing': 70,
-                'XY-wing': 70,
-                'XYZ-wing': 100,
-                'Remote pairs': 100,
-                'Naked quad': 120,
-                'Hidden quad': 150,
-                'Swordfish': 150,
-                'Jellyfish': 200,
-                'Chain of pairs': 200,
-                'Chain of pairs (long)': 300,
-                'Trial': 500,
-                'Trial (deep)': 1000,
-                'Search': 1500,
-                'Deep search': 2500
-            }[logic]
+            point = POINT[logic]
             if point > 800:
                 point = point * (0.5 + 0.02 * blank(s))
             LevelPoint += point
         else:
             return (s, 'Give up', 0, False, False)
+        if blank(s) == 0:
+            solved = True
+        else:
+            solved = False
+    for i in range(9):
+        if [0, 8, 45, 70, 120, 320, 1000, 2000, 5000][i] <= LevelPoint:
+            level = i + 1
+    return (s, 'Solved', level, True, False)
+
+
+def solveUR(s, verbose, maxdepth, maxtime):
+    """Solve a problem with unique rectangle after confirming unique solution"""
+    import copy
+    from kaidoku.misc import box
+    from kaidoku.misc import line
+    from kaidoku.misc import pbox
+    from kaidoku.misc import pairs
+    from kaidoku.chain import uniqueRec
+    s2 = copy.deepcopy(s)
+    s2, message, level, solved, err = solve(s2, verbose, maxdepth, maxtime)
+    if not solved or err or level < 6:
+        return (s2, message, level, solved, err)
+    # When the sudoku has unique solution and higher than level 5, modify the level with the unique rectangle
+    solved = False
+    p = possible(s)
+    b = box()
+    pb = pbox()
+    linescan = line()
+    start = datetime.datetime.now()
+    endtime = start + datetime.timedelta(seconds=maxtime)
+    LevelPoint = int((blank(s) / 15.0)**3)  # 30 -> 8, 64 -> 77
+    while (not solved):
+        pair, paircomb, pairdict = pairs(s, p)
+        bl = blank(s)
+        s2 = copy.deepcopy(s)
+        p2 = copy.deepcopy(p)
+        s, p, message, logic, depth, found, err = solveone(
+            s, p, verbose, 0, maxdepth, endtime, b, pb, linescan)
+        assert found and not err
+        point = POINT[logic]
+        if point > 50:
+            s2, p2, found = uniqueRec(s2, p2, pairdict)
+            if found:
+                s = s2
+                p = p2
+                point = 50
+                if verbose > 2:
+                    print('Note: Unique rectangle makes solution easier.')
+        if point > 800:
+            point = point * (0.5 + 0.02 * blank(s))
+        LevelPoint += point
         if blank(s) == 0:
             solved = True
         else:

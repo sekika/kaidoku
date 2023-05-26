@@ -7,6 +7,7 @@ from statistics import mean
 
 from kaidoku.calc import possible
 from kaidoku.calc import solve
+from kaidoku.calc import solveUR
 from kaidoku.misc import blank
 from kaidoku.misc import box
 from kaidoku.misc import check
@@ -80,7 +81,7 @@ def reanalyze(file, file2):
         data = line.strip().split(' ')
         s = conv(data[1])[0]
         s2 = copy.copy(s)
-        s2, message, level, solved, err = solve(s2, 0, 20, 10)
+        s2, message, level, solved, err = solveUR(s2, 0, 20, 10)
         if not solved and err:
             print('\nNo solution {0}'.format(data[1]))
             continue
@@ -209,7 +210,7 @@ def create(maxdepth, maxtime, creation):
                     p.remove(s[j])
             if len(p) == 0:
                 continue
-            s[order2[i]] = int(random.sample(p, 1)[0])
+            s[order2[i]] = int(random.sample(list(p), 1)[0])
         message, err = check(s)
         # if err: print ('err ', end='', flush=True) ##############
         if not err:
@@ -275,7 +276,7 @@ def make_easy(s, minlevel):
     s2 = copy.copy(s)
     sol, message, level, solved, err = solve(s2, 0, 1, 1)
     if not solved or err:
-        return(s)
+        return (s)
     if blank(s) < 25:
         return s
     if blank(s) < 43:
@@ -369,7 +370,7 @@ def countproblem(file):
         if not conv(data[1])[1]:
             n += 1
     input.close
-    return(n)
+    return (n)
 
 
 def reanalyze_giveup(giveup, t):
@@ -460,7 +461,7 @@ def givedata(giveup, t):
         invalid.append(line)
     input.close
     g = [uniq, no, long, short, invalid]
-    return(g)
+    return (g)
 
 
 def writegive(giveup, g):

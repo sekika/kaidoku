@@ -199,3 +199,51 @@ def findchain(pair, i, b):
             else:
                 chain.append([j[0], j[1]])
     return chain
+
+
+def uniqueRec(s, p, pairdict):
+    for i in pairdict.keys():
+        if len(pairdict[i]) > 2:
+            for j in pairdict[i]:
+                begin = (j // 27) * 27 + ((j % 9) // 3) * 3
+                b_rel = j - begin
+                b_row = b_rel // 9
+                b_col = b_rel % 3
+                assert j == begin + b_row * 9 + b_col
+                same_box = [
+                    begin + b_row * 9 + (b_col + 1) % 3,
+                    begin + b_row * 9 + (b_col + 2) % 3,
+                    begin + b_col + ((b_row + 1) % 3) * 9,
+                    begin + b_col + ((b_row + 2) % 3) * 9,
+                ]
+                for k in same_box:
+                    if k in pairdict[i]:
+                        if abs(k - j) < 3:
+                            col = j % 9
+                            for m in pairdict[i]:
+                                if j != m and m % 9 == col:
+                                    target = m + k - j
+                                    if s[target] == 0 and (
+                                        p[target][i // 10 - 1] == 1 or
+                                        p[target][i % 10 - 1] == 1
+                                    ):
+                                        p[target][i // 10 - 1] = 0
+                                        p[target][i % 10 - 1] = 0
+                                        if p[target].count(1) == 1:
+                                            s[target] = p[target].index(1) + 1
+                                        return (s, p, True)
+                        else:
+                            row = j // 9
+                            for m in pairdict[i]:
+                                if j != m and m // 9 == row:
+                                    target = m + k - j
+                                    if s[target] == 0 and (
+                                        p[target][i // 10 - 1] == 1 or
+                                        p[target][i % 10 - 1] == 1
+                                    ):
+                                        p[target][i // 10 - 1] = 0
+                                        p[target][i % 10 - 1] = 0
+                                        if p[target].count(1) == 1:
+                                            s[target] = p[target].index(1) + 1
+                                        return (s, p, True)
+    return (s, p, False)

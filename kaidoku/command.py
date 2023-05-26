@@ -8,6 +8,7 @@ from configobj import ConfigObj
 
 from kaidoku.calc import possible
 from kaidoku.calc import solve
+from kaidoku.calc import solveUR
 from kaidoku.calc import solveone
 from kaidoku.create import analyze
 from kaidoku.create import append_database
@@ -170,7 +171,7 @@ def command(arg, config):
             verbose = 1
         if len(arg) == 1:
             print('Position not specified.')
-            return(config)
+            return (config)
         try:
             s, err = conv(arg[1])
         except Exception:
@@ -545,7 +546,7 @@ def command(arg, config):
             verbose = 1
         if len(arg) == 1:
             print('Position not specified.')
-            return(config)
+            return (config)
         try:
             s, err = conv(arg[1])
         except Exception:
@@ -688,7 +689,7 @@ def show(c, verbose, config):
     if c == 'bord':
         from kaidoku.gui import GUIBord
         app = GUIBord()
-        app.display(s,move)
+        app.display(s, move)
         config['move'] = app.move
     if len(move) > 0:
         s, move, message, err = current(s, move)
@@ -859,7 +860,7 @@ def checkdatadir(datadir):
 
 def solveprint(s, verbose, maxdepth, maxtime):
     """Analyze a problem (from a command through show)."""
-    s, message, level, solved, err = solve(s, verbose, maxdepth, maxtime)
+    s, message, level, solved, err = solveUR(s, verbose, maxdepth, maxtime)
     if err:
         if verbose > 0:
             print(message)
