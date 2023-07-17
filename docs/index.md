@@ -19,6 +19,7 @@ permalink: /
 
 * [Free sudoku book](book) of PDF files.
 * [Online player](sudoku) with 2500 problems.
+* {% include mobile.html %}
 
 ## Update
 

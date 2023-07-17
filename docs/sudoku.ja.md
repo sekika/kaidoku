@@ -17,4 +17,5 @@ permalink: /ja/sudoku
 - [数独・ナンプレのルール](./rule)
 - <a href="./">解独</a>が作成して[難易度を分類](level)したものです。
 - 一部の問題の[PDF本](book)をダウンロードできます。
+- {% include mobile-ja.html %}
 - [コメントはこちらにどうぞ](https://github.com/sekika/kaidoku/discussions)

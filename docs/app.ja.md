@@ -12,6 +12,10 @@ permalink: /ja/app
 ヒントを見ないでクリアすると、さらに難易度の高い問題に挑戦できます。
 問題のヒントは、基本的な解法だけでなく、N国同盟、Xウィングなどの様々な解法に対応していて、付属の戦術書で解説されています。
 
+{% include mobile-ja.html %}
+
+<iframe width="240" height="420" src="https://www.youtube.com/embed/CaXOoZ05Rk0" title="Sudoku app" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## <a name="privacy">プライバシーポリシー</a>
 
 ### 1. はじめに

@@ -9,6 +9,10 @@ permalink: /app
 
 It is a Sudoku app. When you select a difficulty level, it randomly presents a problem from a wide range of puzzles. Pressing the hint button will provide you with hints on how to solve it. If you can solve it without using hints, you can challenge yourself with even more difficult problems. The hints for the puzzles cover not only basic solving techniques but also various advanced strategies such as Naked Pairs and X-Wing, which are explained in the accompanying tutorial book.
 
+{% include mobile.html %}
+
+<iframe width="240" height="420" src="https://www.youtube.com/embed/CaXOoZ05Rk0" title="Sudoku app" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## Privacy policy
 
 ### 1. Introduction
