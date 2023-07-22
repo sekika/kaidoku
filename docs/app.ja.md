@@ -16,6 +16,9 @@ permalink: /ja/app
 
 <iframe width="240" height="420" src="https://www.youtube.com/embed/CaXOoZ05Rk0" title="Sudoku app" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+- [オンライン版](sudoku)
+- [PDF版](book)
+
 ## <a name="privacy">プライバシーポリシー</a>
 
 ### 1. はじめに
