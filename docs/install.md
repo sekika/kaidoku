@@ -92,9 +92,13 @@ kaidoku-{{ site.version }}>
 
 You can quit from the kaidoku prompt by typing `q`.
 
+## For Debian / Ubuntu users
+Alternatively, you can set up [Seki's APT repository](https://sekika.github.io/apt/) and install kaidoku by running `sudo apt install python3-kaidoku`.
+
 - - -
 
 - [Next: How to play with a sudoku puzzle](./play)
 - [Previous: Rule of sudoku](./rule)
 - [Document index](./#document)
 - [Home Page](./)
+

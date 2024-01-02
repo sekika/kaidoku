@@ -91,6 +91,9 @@ kaidoku-{{ site.version }}>
 
 解独のコマンドプロンプトから抜けるためには `q` と入力する。
 
+## Debian / Ubuntu ユーザーへ
+[APTリポジトリ](https://sekika.github.io/apt/)をセットアップして`sudo apt install python3-kaidoku`によって解独をインストールすることもできます。
+
 - - -
 
 - [次: ナンプレで遊ぶ](./play)
