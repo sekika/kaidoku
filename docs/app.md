@@ -4,10 +4,37 @@ lang: English
 ref: app
 permalink: /app
 ---
-
 # Sudoku Kaidoku
+It is a Sudoku app that randomly presents problems from a wide range of puzzles when you select a difficulty level. Pressing the hint button provides hints on how to solve it, covering not only basic solving techniques but also various advanced strategies such as Naked Pairs and X-Wing, which are explained in the accompanying tutorial book.
 
-It is a Sudoku app. When you select a difficulty level, it randomly presents a problem from a wide range of puzzles. Pressing the hint button will provide you with hints on how to solve it. If you can solve it without using hints, you can challenge yourself with even more difficult problems. The hints for the puzzles cover not only basic solving techniques but also various advanced strategies such as Naked Pairs and X-Wing, which are explained in the accompanying tutorial book.
+{% capture markdown_content %}
+- Free download with no ads. In the Free version, once you clear level 4, you can play level 5, and after clearing level 5, you can proceed to level 6. Level 6 is very difficult for most people. For challenging users, by upgrading to the Pro version, you can always play up to level 9.
+- You can use "pencil marks" to note multiple candidate numbers in a cell, which is a standard way of solving Sudoku puzzles.
+- There are over 78 billion combinations of puzzles at each level, making it virtually endless for human solvers.
+- The tutorial book comprises a total of 65 pages, including figures of Sudoku positions.
+
+Using hints:
+- In hint mode, a hint is always provided for thinking tips. If there are duplicate numbers or numbers different from the correct answer, the hint will alert you. If there are no mistakes on the board, a hint is shown based on various Sudoku tactics.
+- In hint mode, all candidate numbers are automatically filled as pencil marks when required.
+- Initially, solve Sudoku puzzles by referring to hints to learn solving tips. Then attempt solving the puzzle without hints. You can always refer to a hint when you get stuck.
+- When you solve a puzzle without referring to a hint, you have "cleared" the puzzle, and the numbers of clear and best time for clearing each level are recorded in your app.
+- If you attempt to solve a puzzle, refer to a hint, and find mistakes, you can easily backtrack to the situation where the mistake was made. The hint will explain how the mistake occurred. You can then analyze the cause and resume solving from that point. By repeating this process, you can always solve a puzzle with the help of hints.
+{% endcapture %}
+
+{::nomarkdown}
+<script>
+function showMore(btn) {
+   var targetId = btn.getAttribute("href").slice(1);
+   document.getElementById(targetId).style.display = "block";
+   btn.parentNode.style.display = "none";
+   return false;
+}
+</script>
+<p><a href="#readmore1" onclick="return showMore(this);">&gt;&gt;&gt; Read more</a></p>
+<div id="readmore1" style="display: none";>
+{:/nomarkdown}
+{{ markdown_content | markdownify }}
+{::nomarkdown}</div>{:/nomarkdown}
 
 {% include mobile.html %}
 
