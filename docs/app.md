@@ -36,12 +36,13 @@ function showMore(btn) {
 {{ markdown_content | markdownify }}
 {::nomarkdown}</div>{:/nomarkdown}
 
+## Download
 {% include mobile.html %}
 
-<iframe width="240" height="420" src="https://www.youtube.com/embed/CaXOoZ05Rk0" title="Sudoku app" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+## Web version
+A [web version](sudoku/) is also available. In the app version, the language is selected based on the system preference. In the web version, language can be selected from the following options.
 
-- [Online player](sudoku)
-- [PDF book](book)
+{% include mobile-lang.html %}
 
 ## Privacy policy
 
