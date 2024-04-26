@@ -24,8 +24,8 @@ Free sudoku books created with [Kaidoku](./).
 
 * Download PDF file and play it with **PDF editor** which allows handwriting. For example, Notability, GoodNotes, GoodReader or OneNote for iPad.
 * You can also **print** the PDF file and solve it with your pencil.
-- {% include mobile.html %}
-* [Online player](sudoku) is available to play it with your **PC, tablet or smartphone**.
+* [Mobile and web version](sudoku/) is available.
+* {% include mobile.html %}
 
 - - -
 

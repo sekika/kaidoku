@@ -24,8 +24,8 @@ permalink: /ja/book
 
 * PDFファイルをダウンロードして手書きメモができる**PDF 編集アプリ**で遊ぶことができます。たとえば、iPad であれば Notability, GoodNotes, GoodReader, OneNote のようなアプリがあります。
 * PDFファイルを**印刷**して鉛筆を使って解くこともできます。
-- {% include mobile-ja.html %}
-* [オンラインプレイヤー](sudoku)を使うと、**PC、タブレット、スマートフォン**で直接遊ぶことができます。
+* [モバイル・ウェブ版](../sudoku/)もあります。
+* {% include mobile-ja.html %}
 
 - - -
 
