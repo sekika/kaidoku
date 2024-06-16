@@ -16,9 +16,9 @@ Kaidoku is a
 Online player
 ---------------------
 
-25000 sudoku puzzles classified with 9 difficulty levels are available online. Hints can be shown by running kaidoku with pyodide.
+Sudoku puzzles with various dfficulty levels are available online. Hints are available.
 
-https://sekika.github.io/kaidoku/sudoku
+https://sekika.github.io/kaidoku/sudoku/
 
 Full document
 ---------------------
