@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Download Sudoku Kaidoku</title>
+    <script>
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (/iPhone|iPad/i.test(userAgent)) {
+        window.location.href = "https://apps.apple.com/app/id6450177207";
+    }
+    else if (/android/i.test(userAgent)) {
+        window.location.href = "https://play.google.com/store/apps/details?id=io.github.sekika.sudoku";
+    }
+    else {
+        window.location.href = "./";
+    }
+    </script>
+  </head>
+  <body>
+    <a href="/">Sudoku Kaidoku</a>
+  </body>
+</html>
