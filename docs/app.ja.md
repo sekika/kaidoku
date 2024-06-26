@@ -1,6 +1,5 @@
 ---
-layout: default.ja
-lang: 日本語
+layout: app
 ref: app
 permalink: /ja/app
 ---

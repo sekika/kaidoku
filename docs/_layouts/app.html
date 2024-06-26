@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en" }}">
+{% include head-default.html %}
+  <body>
+      <header>
+        <img src="{{'/img/header.jpg' | relative_url}}" alt="header" style="max-width:100%; height:auto; margin-bottom: 20px;">
+      </header>
+      <section id="main_content">
+        {{ content }}
+      </section>
+        {% include footer.html %}
+    </div>
+  </body>
+</html>

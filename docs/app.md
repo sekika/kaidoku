@@ -1,6 +1,5 @@
 ---
-layout: default
-lang: English
+layout: app
 ref: app
 permalink: /app
 ---
