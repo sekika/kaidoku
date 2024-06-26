@@ -37,6 +37,7 @@ function showMore(btn) {
 
 ## Download
 {% include mobile.html %}
+<img src="{{'/img/qr.png' | relative_url}}" alt="QR code" style="display: block; margin-top: 30px;">
 
 ## Web version
 A [web version](sudoku/) is also available. In the app version, the language is selected based on the system preference. In the web version, language can be selected from the following options.

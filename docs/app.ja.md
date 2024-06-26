@@ -13,6 +13,7 @@ permalink: /ja/app
 
 ## ダウンロード
 {% include mobile.html %}
+<img src="{{'/img/qr.png' | relative_url}}" alt="QR code" style="display: block; margin-top: 30px;">
 
 ## ウェブ版
 [ウェブ版](../sudoku/)も利用可能です。アプリ版では、言語はシステムの設定に基づいて選択されます。ウェブ版では、以下から言語を選択できます。
