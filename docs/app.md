@@ -7,7 +7,7 @@ permalink: /app
 It is a Sudoku app that randomly presents problems from a wide range of puzzles when you select a difficulty level. Pressing the hint button provides hints on how to solve it, covering not only basic solving techniques but also various advanced strategies such as Naked Pairs and X-Wing, which are explained in the accompanying tutorial book.
 
 {% capture markdown_content %}
-- Free download with no ads. In the Free version, once you clear level 4, you can play level 5, and after clearing level 5, you can proceed to level 6. Level 6 is very difficult for most people. For challenging users, by upgrading to the Pro version, you can always play up to level 9.
+- Free download with no ads. In the Free version, once you clear level 4, you can play level 5, and after clearing level 5, you can proceed to level 6. Level 6 is very difficult for most people. For challenging users, by upgrading to the Pro version, which is available only on the iOS version, you can always play up to level 9.
 - You can use "pencil marks" to note multiple candidate numbers in a cell, which is a standard way of solving Sudoku puzzles.
 - There are over 78 billion combinations of puzzles at each level, making it virtually endless for human solvers.
 - The tutorial book comprises a total of 65 pages, including figures of Sudoku positions.
