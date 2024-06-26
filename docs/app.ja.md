@@ -19,6 +19,10 @@ permalink: /ja/app
 
 {% include mobile-lang.html %}
 
+## その他のバージョン
+- [PDF 本](book)
+- [コマンドライン](./)
+
 ## <a name="privacy">プライバシーポリシー</a>
 
 ### 1. はじめに

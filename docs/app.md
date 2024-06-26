@@ -43,6 +43,10 @@ A [web version](sudoku/) is also available. In the app version, the language is 
 
 {% include mobile-lang.html %}
 
+## Other versions
+- [PDF books](book)
+- [Command-line](./)
+
 ## Privacy policy
 
 ### 1. Introduction
