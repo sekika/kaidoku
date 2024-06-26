@@ -2,6 +2,11 @@ p {
   text-align: justify;
   text-indent: 1em;
 }
+strong {
+	color: red;
+  font-size: 110%; 
+	font-weight: bold;
+}
 ul.selector {
   text-align: right;
 }
