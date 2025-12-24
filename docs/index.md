@@ -50,3 +50,5 @@ Kaidoku is a program in development. Document is not complete and what is writte
 ## Comments
 
 - [Send your comments](comment)
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sekika/kaidoku)

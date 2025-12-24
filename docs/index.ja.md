@@ -50,3 +50,5 @@ title: 解独 - 数独・ナンプレの解析プログラム
 ## コメント
 
 - [コメントをどうぞ](comment)
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/sekika/kaidoku)
